@@ -1,0 +1,122 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+    [SerializeField] private GameObject parentObject;
+    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float timeBeforeStartWalking = 2f;
+    [SerializeField] private float timeBetweenWaypoints = 2f;
+    [SerializeField] Animator animator;
+    [SerializeField] bool facingRight = true;
+    [SerializeField] GameObject heyTextCanvas;
+
+    [SerializeField] Rigidbody2D rigidbody2D;
+    [SerializeField] Collider2D[] collidersToDisable;
+    [SerializeField] GameObject flashlight;
+    [SerializeField] InventoryItem[] items;
+
+    private int waypointIndex;
+    [SerializeField] bool isDead = false;
+    bool caughtPlayer = false;
+
+    void Start()
+    {
+        StartCoroutine(Move());
+    }
+
+    IEnumerator Move()
+    {
+        yield return new WaitForSeconds(timeBeforeStartWalking);
+        while (!isDead && !caughtPlayer)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, speed * Time.deltaTime);
+
+            if (transform.position.x < waypoints[waypointIndex].transform.position.x && !facingRight) Flip(); 
+            if (transform.position.x > waypoints[waypointIndex].transform.position.x && facingRight) Flip(); 
+
+            animator.SetBool("IsWalking", transform.position != waypoints[waypointIndex].transform.position);
+
+            if (transform.position == waypoints[waypointIndex].transform.position)
+            {
+                waypointIndex++;
+
+                if (waypointIndex > waypoints.Length - 1)
+                {
+                    waypointIndex = 0;
+                }
+                yield return new WaitForSeconds(timeBetweenWaypoints);
+            }
+
+            yield return null;
+        }
+    }
+
+    public void OnGameOver()
+    {
+        caughtPlayer = true;
+        animator.SetBool("IsWalking", false);
+        heyTextCanvas.SetActive(true);
+    }
+
+    /*private void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
+        if (player != null && !player.disableMovement)
+        {
+            Die();
+        }
+    }*/
+
+    public void Die()
+    {
+        isDead = true;
+        //Destroy(parentObject);
+        rigidbody2D.velocity = new Vector2(0, 0);
+        rigidbody2D.isKinematic = true;
+        foreach (Collider2D collider in collidersToDisable)
+        {
+            collider.isTrigger = true;
+        }
+        flashlight.SetActive(false);
+        animator.SetBool("IsDead", true);
+    }
+
+    public List<InventoryItem> GetItems()
+    {
+        List<InventoryItem> tempItems = new List<InventoryItem>();
+        if (items != null && items.Length > 0)
+        {
+            foreach (InventoryItem item in items)
+            {
+                tempItems.Add(item);
+            }
+        }
+
+        if (tempItems.Count <= 0)
+        {
+            Inventory.instance.ShowInventoryMessage("Enemy has no items");
+        }
+
+        items = null;
+        return tempItems;
+    }
+
+    void Flip()
+    {
+        facingRight = !facingRight;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
+    }
+
+    public bool isFacingRight()
+    {
+        return facingRight;
+    }
+}
