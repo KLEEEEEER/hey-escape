@@ -10,10 +10,15 @@ public class InfoUI : MonoBehaviour
     [SerializeField] GameObject InfoTextPrefab;
     private float parentWidth;
 
+    bool deletingMessagesRunning = true;
+
+    Coroutine deletingCoroutine;
+
     private void Start()
     {
         RectTransform rect = transform.GetComponent<RectTransform>();
         parentWidth = rect.rect.width;
+        deletingCoroutine = StartCoroutine(DeleteLastMessage());
     }
 
     private void OnEnable()
@@ -30,17 +35,44 @@ public class InfoUI : MonoBehaviour
         GameManager.instance.PlayerComponent.OnPlayerInteractEvent -= AppearText;
     }
 
-    public void AppearText(string text)
+    IEnumerator DeleteLastMessage()
     {
-        StartCoroutine(ShowTextLine(text));
+        if (transform.childCount <= 0) yield return 0;
+
+        deletingMessagesRunning = true;
+        yield return new WaitForSeconds(appearingTime);
+        while (transform.childCount > 0) 
+        {
+            Transform child = transform.GetChild(0);
+            Destroy(child.gameObject);
+            yield return new WaitForSeconds(appearingTime);
+        }
+        deletingMessagesRunning = false;
     }
 
-    IEnumerator ShowTextLine(string text)
+    public void AppearText(string text)
+    {
+        GameObject newText = Instantiate(InfoTextPrefab, transform);
+        Text textComponent = newText.GetComponent<Text>();
+        textComponent.text = text;
+
+        if (!deletingMessagesRunning) 
+        {
+            deletingCoroutine = StartCoroutine(DeleteLastMessage());
+        }
+        else
+        {
+            StopCoroutine(deletingCoroutine);
+            deletingCoroutine = StartCoroutine(DeleteLastMessage());
+        }
+    }
+
+    /*IEnumerator ShowTextLine(string text)
     {
         GameObject newText = Instantiate(InfoTextPrefab, transform);
         Text textComponent = newText.GetComponent<Text>();
         textComponent.text = text;
         yield return new WaitForSeconds(appearingTime);
         Destroy(newText);
-    }
+    }*/
 }
