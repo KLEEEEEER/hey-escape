@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+enum WindowEnterState{Closed, Opened, OpenedWithRope}
+
 public class WindowEnter : MonoBehaviour
 {
     [SerializeField] WindowExit windowExit;
-    [SerializeField] bool isClosed = true;
     [SerializeField] Sprite openedSprite;
     [SerializeField] Sprite openedWithRopeSprite;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -15,27 +16,82 @@ public class WindowEnter : MonoBehaviour
     [SerializeField] Transform pointB;
 
     [SerializeField] Player playerNear;
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] WindowEnterState windowEnterState = WindowEnterState.Closed;
+
+    private void Start()
     {
-        
+        switch (windowEnterState)
+        {
+            case WindowEnterState.Closed:
+                break;
+            case WindowEnterState.Opened:
+                OpenWindow();
+                break;
+            case WindowEnterState.OpenedWithRope:
+                SetRope();
+                break;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerNear != null && !isClosed && Input.GetKeyDown(KeyCode.E) && Inventory.instance.HasItem(typeof(Rope)))
-        {
-            spriteRenderer.sprite = openedWithRopeSprite;
-            windowExit.DropRope();
-            return;
-        }
+        if (playerNear == null) return;
 
-        if (playerNear != null && isClosed && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            isClosed = false;
-            spriteRenderer.sprite = openedSprite;
+            switch (windowEnterState)
+            {
+                case WindowEnterState.Closed:
+                    OpenWindow();
+                    windowEnterState = WindowEnterState.Opened;
+                    break;
+                case WindowEnterState.Opened:
+                    if (Inventory.instance.HasItem(typeof(Rope)))
+                    {
+                        SetRope();
+                        windowEnterState = WindowEnterState.OpenedWithRope;
+                    }
+                    break;
+                case WindowEnterState.OpenedWithRope:
+                    StartCoroutine(EnterWindowAnimation());
+                    break;
+            }
         }
+    }
+
+    IEnumerator EnterWindowAnimation()
+    {
+        SpriteRenderer spriteRenderer = playerNear.gameObject.GetComponent<SpriteRenderer>();
+        GameManager.instance.PlayerMovement.disableMovement = true;
+
+        if (spriteRenderer != null) spriteRenderer.enabled = false;
+
+        yield return new WaitForSeconds(0.5f);
+
+        GameManager.instance.Player.position = windowExit.GetExitPointPosition();
+
+        yield return new WaitForSeconds(0.5f);
+
+        windowExit.OpenWindow();
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (spriteRenderer != null) spriteRenderer.enabled = true;
+        GameManager.instance.PlayerMovement.disableMovement = false;
+    }
+
+    void OpenWindow()
+    {
+        spriteRenderer.sprite = openedSprite;
+    }
+
+    void SetRope()
+    {
+        Inventory.instance.UseItem(typeof(Rope));
+        spriteRenderer.sprite = openedWithRopeSprite;
+        windowExit.DropRope();
     }
 
     private void FixedUpdate()
