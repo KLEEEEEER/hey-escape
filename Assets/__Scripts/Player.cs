@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator animator;
 
-    [SerializeField] Enemy enemyNear;
     [SerializeField] bool isHidden = false;
 
     Collider2D[] colliders;
@@ -21,32 +20,43 @@ public class Player : MonoBehaviour
     //public bool nearHidePlace = false;
     //private IHidePlace hidePlace;
     List<IInteractable> interactables;
+    List<ISearchable> searchables;
+    List<IKillable> killables;
 
     public event Action<string> OnPlayerInteractEvent;
 
     private void Start()
     {
         interactables = new List<IInteractable>();
+        searchables = new List<ISearchable>();
+        killables = new List<IKillable>();
     }
 
     void Update()
     {
-        if (enemyNear != null && !enemyNear.IsDead() && !playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.Q))
+        if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.Q))
         {
             animator.SetTrigger("Kill");
-            enemyNear.Die();
+            foreach (IKillable killable in killables)
+            {
+                killable.Kill();
+            }
         }
 
-        if (enemyNear != null && enemyNear.IsDead() && !playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.E))
+        if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.E))
         {
             animator.SetTrigger("Search");
-            List<InventoryItem> enemyItems = enemyNear.GetItems();
-            if (enemyItems.Count > 0)
+
+            //List<InventoryItem> enemyItems = new List<InventoryItem>();
+            foreach (ISearchable searchable in searchables)
             {
-                foreach (InventoryItem item in enemyItems)
+                List<InventoryItem> enemyItems = searchable.Search();
+                if (enemyItems.Count > 0)
                 {
-                    //Debug.Log("Enemy have " + item.Name);
-                    Inventory.instance.AddItem(item);
+                    foreach (InventoryItem item in enemyItems)
+                    {
+                        Inventory.instance.AddItem(item);
+                    }
                 }
             }
         }
@@ -62,31 +72,40 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        interactables.Clear();
+        killables.Clear();
+        searchables.Clear();
+
         colliders = Physics2D.OverlapCircleAll(enemyDetectionPosition.position, enemyDetectionRadius);
-        enemyNear = null;
         foreach (Collider2D collider in colliders)
         {
-            Enemy enemyNearTemp = collider.gameObject.GetComponent<Enemy>();
-            if (enemyNearTemp != null)
+            IKillable killable = collider.GetComponent<IKillable>();
+            if (killable != null)
             {
-                enemyNear = enemyNearTemp;
-                break;
+                killables.Add(killable);
+            }
+
+            ISearchable searchable = collider.GetComponent<ISearchable>();
+            if (searchable != null)
+            {
+                Debug.Log("Found searchable");
+                searchables.Add(searchable);
             }
         }
 
-        interactables.Clear();
         colliders = Physics2D.OverlapCircleAll(transform.position, interactibleDetectionRadius);
         foreach (Collider2D collider in colliders)
         {
             if (collider.gameObject == gameObject) continue;
+
             IInteractable interactable = collider.GetComponent<IInteractable>();
             if (interactable != null)
             {
                 interactables.Add(interactable);
-                break;
             }
         }
-        Debug.Log("Found " + interactables.Count + " interactables");
+
+        Debug.Log("Found " + searchables.Count + " ISearchable");
     }
 
     public bool isPlayerHidden()

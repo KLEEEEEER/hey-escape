@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IKillable, ISearchable
 {
     [SerializeField] private GameObject parentObject;
     [SerializeField] private Transform[] waypoints;
@@ -17,6 +17,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] Collider2D[] collidersToDisable;
     [SerializeField] GameObject flashlight;
     [SerializeField] InventoryItem[] items;
+
+    [SerializeField] BoxCollider2D aliveCollider;
+    [SerializeField] BoxCollider2D deadCollider;
 
     private int waypointIndex;
     [SerializeField] bool isDead = false;
@@ -61,31 +64,43 @@ public class Enemy : MonoBehaviour
         heyTextCanvas.SetActive(true);
     }
 
-    /*private void OnCollisionEnter2D(Collision2D collision)
+    void Flip()
     {
-        PlayerMovement player = collision.gameObject.GetComponent<PlayerMovement>();
-        if (player != null && !player.disableMovement)
-        {
-            Die();
-        }
-    }*/
+        facingRight = !facingRight;
+        transform.Rotate(0f, 180f, 0f);
+    }
 
-    public void Die()
+    public bool IsDead()
+    {
+        return isDead;
+    }
+
+    public bool isFacingRight()
+    {
+        return facingRight;
+    }
+
+    public void Kill()
     {
         isDead = true;
         //Destroy(parentObject);
         rigidbody2D.velocity = new Vector2(0, 0);
         rigidbody2D.isKinematic = true;
-        foreach (Collider2D collider in collidersToDisable)
+        /*foreach (Collider2D collider in collidersToDisable)
         {
             collider.isTrigger = true;
-        }
+        }*/
+        aliveCollider.enabled = false;
+        deadCollider.enabled = true;
+
         flashlight.SetActive(false);
         animator.SetBool("IsDead", true);
     }
 
-    public List<InventoryItem> GetItems()
+    public List<InventoryItem> Search()
     {
+        if (!isDead) return new List<InventoryItem>();
+
         List<InventoryItem> tempItems = new List<InventoryItem>();
         if (items != null && items.Length > 0)
         {
@@ -102,21 +117,5 @@ public class Enemy : MonoBehaviour
 
         items = null;
         return tempItems;
-    }
-
-    void Flip()
-    {
-        facingRight = !facingRight;
-        transform.Rotate(0f, 180f, 0f);
-    }
-
-    public bool IsDead()
-    {
-        return isDead;
-    }
-
-    public bool isFacingRight()
-    {
-        return facingRight;
     }
 }

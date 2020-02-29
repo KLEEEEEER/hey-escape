@@ -4,18 +4,14 @@ using UnityEngine;
 
 enum WindowEnterState{Closed, Opened, OpenedWithRope}
 
-public class WindowEnter : MonoBehaviour
+public class WindowEnter : MonoBehaviour, IInteractable
 {
     [SerializeField] WindowExit windowExit;
     [SerializeField] Sprite openedSprite;
     [SerializeField] Sprite openedWithRopeSprite;
     [SerializeField] SpriteRenderer spriteRenderer;
 
-    [Header("Rect Collider")]
-    [SerializeField] Transform pointA;
-    [SerializeField] Transform pointB;
-
-    [SerializeField] Player playerNear;
+    //[SerializeField] Player playerNear;
 
     [SerializeField] WindowEnterState windowEnterState = WindowEnterState.Closed;
 
@@ -34,36 +30,9 @@ public class WindowEnter : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (playerNear == null) return;
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            switch (windowEnterState)
-            {
-                case WindowEnterState.Closed:
-                    OpenWindow();
-                    windowEnterState = WindowEnterState.Opened;
-                    break;
-                case WindowEnterState.Opened:
-                    if (Inventory.instance.HasItem(typeof(Rope)))
-                    {
-                        SetRope();
-                        windowEnterState = WindowEnterState.OpenedWithRope;
-                    }
-                    break;
-                case WindowEnterState.OpenedWithRope:
-                    StartCoroutine(EnterWindowAnimation());
-                    break;
-            }
-        }
-    }
-
     IEnumerator EnterWindowAnimation()
     {
-        SpriteRenderer spriteRenderer = playerNear.gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
         GameManager.instance.PlayerMovement.disableMovement = true;
 
         if (spriteRenderer != null) spriteRenderer.enabled = false;
@@ -94,18 +63,24 @@ public class WindowEnter : MonoBehaviour
         windowExit.DropRope();
     }
 
-    private void FixedUpdate()
+    public void Interact()
     {
-        Collider2D[] colliders = Physics2D.OverlapAreaAll(pointA.position, pointB.position);
-        playerNear = null;
-        foreach (Collider2D collider in colliders)
+        switch (windowEnterState)
         {
-            if (collider.gameObject == gameObject) continue;
-            playerNear = collider.GetComponent<Player>();
-            if (playerNear != null)
-            {
+            case WindowEnterState.Closed:
+                OpenWindow();
+                windowEnterState = WindowEnterState.Opened;
                 break;
-            }
+            case WindowEnterState.Opened:
+                if (Inventory.instance.HasItem(typeof(Rope)))
+                {
+                    SetRope();
+                    windowEnterState = WindowEnterState.OpenedWithRope;
+                }
+                break;
+            case WindowEnterState.OpenedWithRope:
+                StartCoroutine(EnterWindowAnimation());
+                break;
         }
     }
 }
