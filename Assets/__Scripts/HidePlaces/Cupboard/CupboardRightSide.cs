@@ -2,44 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CupboardRightSide : MonoBehaviour, IHidePlace
+public class CupboardRightSide : MonoBehaviour, IHidePlace, IInteractable
 {
     [SerializeField] private Color HideColor;
 
     [SerializeField] private bool isHidden = false;
-    [SerializeField] private GameObject playerObj;
     [SerializeField] private Vector3 currentVelocity;
     [SerializeField]private float smoothTime;
     private void Update()
     {
-        if (isHidden && playerObj != null && playerObj.transform.position != transform.position)
+        if (isHidden && GameManager.instance.Player.gameObject != null && GameManager.instance.Player.gameObject.transform.position != transform.position)
         {
-            playerObj.transform.position = Vector3.SmoothDamp(playerObj.transform.position, transform.position, ref currentVelocity, smoothTime);
+            GameManager.instance.Player.gameObject.transform.position = Vector3.SmoothDamp(GameManager.instance.Player.gameObject.transform.position, transform.position, ref currentVelocity, smoothTime);
         }
     }
-    public void Hide(GameObject player)
+    public void Hide()
     {
-        playerObj = player;
         GameManager.instance.PlayerMovement.isVisibleRight = true;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.disableMovement = true;
         GameManager.instance.PlayerRenderer.color = HideColor;
         isHidden = true;
     }
-    
-    public bool IsAccessible()
-    {
-        return true;
-    }
 
-    public void Unhide(GameObject player)
+    public void Unhide()
     {
-        playerObj = null;
         GameManager.instance.PlayerMovement.isVisibleRight = false;
-        player.transform.position = transform.position;
+        GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.disableMovement = false;
         GameManager.instance.PlayerRenderer.color = GameManager.instance.PlayerInitialColor;
         isHidden = false;
+    }
+
+    public void Interact()
+    {
+        if (!isHidden)
+        {
+            Hide();
+        }
+        else
+        {
+            Unhide();
+        }
     }
 }

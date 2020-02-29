@@ -18,10 +18,16 @@ public class Player : MonoBehaviour
 
     Collider2D[] colliders;
 
-    public bool nearHidePlace = false;
-    private IHidePlace hidePlace;
+    //public bool nearHidePlace = false;
+    //private IHidePlace hidePlace;
+    List<IInteractable> interactables;
 
     public event Action<string> OnPlayerInteractEvent;
+
+    private void Start()
+    {
+        interactables = new List<IInteractable>();
+    }
 
     void Update()
     {
@@ -45,24 +51,11 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (hidePlace != null && nearHidePlace && Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (hidePlace.IsAccessible())
+            foreach (IInteractable interactable in interactables)
             {
-                if (!isHidden)
-                {
-                    hidePlace.Hide(gameObject);
-                    isHidden = true;
-                }
-                else
-                {
-                    hidePlace.Unhide(gameObject);
-                    isHidden = false;
-                }
-            }
-            else
-            {
-                OnPlayerInteractEvent.Invoke("Hiding place is not accessible");
+                interactable.Interact();
             }
         }
     }
@@ -81,18 +74,19 @@ public class Player : MonoBehaviour
             }
         }
 
-        nearHidePlace = false;
+        interactables.Clear();
         colliders = Physics2D.OverlapCircleAll(transform.position, interactibleDetectionRadius);
         foreach (Collider2D collider in colliders)
         {
             if (collider.gameObject == gameObject) continue;
-            hidePlace = collider.GetComponent<IHidePlace>();
-            if (hidePlace != null)
+            IInteractable interactable = collider.GetComponent<IInteractable>();
+            if (interactable != null)
             {
-                nearHidePlace = true;
+                interactables.Add(interactable);
                 break;
             }
         }
+        Debug.Log("Found " + interactables.Count + " interactables");
     }
 
     public bool isPlayerHidden()

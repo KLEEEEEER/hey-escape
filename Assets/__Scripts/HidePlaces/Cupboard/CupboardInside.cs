@@ -2,34 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CupboardInside : MonoBehaviour, IHidePlace
+public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
 {
     [SerializeField] private bool isOpened = false;
-    public void Hide(GameObject player)
+    [SerializeField] private bool isHidden = false;
+    public void Hide()
     {
-        if (!isOpened) return;
-        player.transform.position = transform.position;
+        GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.disableMovement = true;
         GameManager.instance.PlayerRenderer.enabled = false;
+        isHidden = true;
     }
 
-    public bool IsAccessible()
+    public void Interact()
     {
-        if (Inventory.instance.HasItem(typeof(CupboardKey)))
+        if (!isOpened)
         {
-            Inventory.instance.UseItem(typeof(CupboardKey));
-            isOpened = true;
+            if (Inventory.instance.HasItem(typeof(CupboardKey)))
+            {
+                Inventory.instance.UseItem(typeof(CupboardKey));
+                isOpened = true;
+            }
+            return;
         }
 
-        return isOpened;
+        if (!isHidden)
+        {
+            Hide();
+        }
+        else
+        {
+            Unhide();
+        }
     }
 
-    public void Unhide(GameObject player)
+    public void Unhide()
     {
-        player.transform.position = transform.position;
+        GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.disableMovement = false;
         GameManager.instance.PlayerRenderer.enabled = true;
+        isHidden = false;
     }
 }

@@ -1403,7 +1403,6 @@ MonoBehaviour:
   animator: {fileID: 1443288901}
   enemyNear: {fileID: 0}
   isHidden: 0
-  nearHidePlace: 0
 --- !u!1 &1500272684
 GameObject:
   m_ObjectHideFlags: 0

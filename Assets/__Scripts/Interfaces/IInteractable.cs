@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface IHidePlace
+public interface IInteractable
 {
-    void Hide();
-    void Unhide();
+    void Interact();
 }
