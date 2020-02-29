@@ -7,6 +7,7 @@ public class InfoUI : MonoBehaviour
 {
     [SerializeField] Font textFont;
     [SerializeField] float appearingTime = 4f;
+    [SerializeField] GameObject InfoTextPrefab;
     private float parentWidth;
 
     private void Start()
@@ -36,26 +37,9 @@ public class InfoUI : MonoBehaviour
 
     IEnumerator ShowTextLine(string text)
     {
-        GameObject newText = new GameObject("InfoText");
-
-        Text textComponent = newText.AddComponent<Text>();
+        GameObject newText = Instantiate(InfoTextPrefab, transform);
+        Text textComponent = newText.GetComponent<Text>();
         textComponent.text = text;
-        textComponent.font = textFont;
-        textComponent.alignment = TextAnchor.MiddleLeft;
-        textComponent.color = Color.white;
-        textComponent.fontSize = 40;
-
-        newText.transform.localScale = new Vector3(1, 1, 1);
-        newText.transform.SetParent(transform);
-
-        RectTransform rect = transform.GetComponent<RectTransform>();
-        rect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, parentWidth);
-        rect.localScale = new Vector3(1, 1, 1);
-
-        //ContentSizeFitter sizeFitter = newText.AddComponent<ContentSizeFitter>();
-        //sizeFitter.horizontalFit = ContentSizeFitter.FitMode.PreferredSize;
-        //sizeFitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
-
         yield return new WaitForSeconds(appearingTime);
         Destroy(newText);
     }
