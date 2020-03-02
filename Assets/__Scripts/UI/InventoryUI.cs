@@ -81,4 +81,9 @@ public class InventoryUI : MonoBehaviour
             Destroy(t.gameObject);
         }
     }
+
+    public void OnGameOver()
+    {
+        gameObject.SetActive(false);
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -48,8 +49,14 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadFirstLevel()
     {
+        SceneManager.LoadScene("LevelLoader");
         currentLevelIndex = 0;
         LoadLevel();
+    }
+
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void LoadLevel()

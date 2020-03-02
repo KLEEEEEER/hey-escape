@@ -88,7 +88,6 @@ public class Player : MonoBehaviour
             ISearchable searchable = collider.GetComponent<ISearchable>();
             if (searchable != null)
             {
-                Debug.Log("Found searchable");
                 searchables.Add(searchable);
             }
         }
@@ -104,8 +103,6 @@ public class Player : MonoBehaviour
                 interactables.Add(interactable);
             }
         }
-
-        Debug.Log("Found " + searchables.Count + " ISearchable");
     }
 
     public void HidePlayer()

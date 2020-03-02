@@ -68,6 +68,11 @@ public class InfoUI : MonoBehaviour
         }
     }
 
+    public void OnGameOver()
+    {
+        gameObject.SetActive(false);
+    }
+
     /*IEnumerator ShowTextLine(string text)
     {
         GameObject newText = Instantiate(InfoTextPrefab, transform);
