@@ -37,9 +37,9 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        if (currentLevelIndex + 1 >= levels.Length) 
+        if (currentLevelIndex + 1 >= levels.Length)
         {
-            //Debug.Log("currentLevelIndex  + 1 (" + currentLevelIndex + 1 + ") > levels.Length (" + levels.Length + ")");
+            GameManager.instance.GameWon();
             return; 
         }
         currentLevelIndex++;
@@ -69,5 +69,15 @@ public class LevelLoader : MonoBehaviour
             Transform child = currentLevel.transform.GetChild(i);
             Destroy(child.gameObject);
         }
+    }
+
+    public int GetCurrentLevelNumber()
+    {
+        return currentLevelIndex + 1;
+    }
+
+    public int GetLevelsCount()
+    {
+        return levels.Length;
     }
 }

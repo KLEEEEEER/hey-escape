@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class InfoUI : MonoBehaviour
 {
     [SerializeField] Font textFont;
-    [SerializeField] float appearingTime = 4f;
+    [SerializeField] float newTextAppearingTime = 4f;
+    [SerializeField] float fadeAwayTime = 4f;
     [SerializeField] GameObject InfoTextPrefab;
     private float parentWidth;
 
@@ -40,12 +41,12 @@ public class InfoUI : MonoBehaviour
         if (transform.childCount <= 0) yield return 0;
 
         deletingMessagesRunning = true;
-        yield return new WaitForSeconds(appearingTime);
+        yield return new WaitForSeconds(newTextAppearingTime);
         while (transform.childCount > 0) 
         {
             Transform child = transform.GetChild(0);
             Destroy(child.gameObject);
-            yield return new WaitForSeconds(appearingTime);
+            yield return new WaitForSeconds(fadeAwayTime);
         }
         deletingMessagesRunning = false;
     }

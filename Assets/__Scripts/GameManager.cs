@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -15,12 +16,21 @@ public class GameManager : MonoBehaviour
     public Color PlayerInitialColor;
     public Camera MainCamera;
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject youWonScreen;
+    [SerializeField] private Text currentTimeText;
+    [SerializeField] private Text CountDownTimer;
+    [SerializeField] private Text HighscoreText;
+    [SerializeField] private int startCountdownTime = 3;
 
     private bool isGameOver = false;
     public bool IsGameOver {
         get => isGameOver;
     }
+
     public UnityEvent OnGameOverEvent;
+    public UnityEvent OnGameWonEvent;
+
+    private float currentTime;
 
     private void Start()
     {
@@ -31,18 +41,32 @@ public class GameManager : MonoBehaviour
 
         if (OnGameOverEvent == null)
             OnGameOverEvent = new UnityEvent();
+        if (OnGameWonEvent == null)
+            OnGameWonEvent = new UnityEvent();
 
         MainCamera = Camera.main;
+
+        StartCoroutine(StartingCountdown());
+    }
+
+    IEnumerator StartingCountdown()
+    {
+        isGameOver = true;
+        for (int i = startCountdownTime; i > 0; i--)
+        {
+            CountDownTimer.text = i.ToString();
+            yield return new WaitForSeconds(1f);
+        }
+        CountDownTimer.gameObject.SetActive(false);
+        isGameOver = false;
     }
 
     private void Update()
     {
-        if (!isGameOver) return;
+        if (isGameOver) return;
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene(0);
-        }
+        currentTime += Time.deltaTime;
+        currentTimeText.text = GetCurrentTimeString();
     }
 
     private static GameManager s_Instance = null;
@@ -53,11 +77,9 @@ public class GameManager : MonoBehaviour
         {
             if (s_Instance == null)
             {
-                // FindObjectOfType() returns the first AManager object in the scene.
                 s_Instance = FindObjectOfType(typeof(GameManager)) as GameManager;
             }
 
-            // If it is still null, create a new instance
             if (s_Instance == null)
             {
                 var obj = new GameObject("GameManager");
@@ -71,12 +93,36 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
-        OnGameOverEvent.Invoke();
         gameOverScreen.SetActive(true);
+        currentTimeText.gameObject.SetActive(false);
+        OnGameOverEvent.Invoke();
+    }
+
+    public void GameWon()
+    {
+        isGameOver = true;
+        youWonScreen.SetActive(true);
+        currentTimeText.gameObject.SetActive(false);
+        if (PlayerPrefs.GetFloat("BestTime", float.PositiveInfinity) > currentTime)
+        {
+            PlayerPrefs.SetFloat("BestTime", currentTime);
+        }
+        HighscoreText.text = PlayerPrefs.GetFloat("BestTime").ToString("f3");
+        OnGameWonEvent.Invoke();
+    }
+
+    public string GetCurrentTimeString()
+    {
+        return currentTime.ToString("f3");
     }
 
     void OnApplicationQuit()
     {
         s_Instance = null;
+    }
+
+    public int GetStartCountdownTime()
+    {
+        return startCountdownTime;
     }
 }

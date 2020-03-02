@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        if (GameManager.instance.IsGameOver) return;
+
 #if UNITY_ANDROID || UNITY_IPHONE
         Horizontal = joystick.Horizontal * speed;
         Vertical = joystick.Vertical * climbingSpeed;
@@ -143,6 +145,12 @@ public class PlayerMovement : MonoBehaviour
     }*/
 
     public void OnGameOver()
+    {
+        disableMovement = true;
+        rigidbodyToDisable.velocity = new Vector2(0, 0);
+    }
+
+    public void OnGameWon()
     {
         disableMovement = true;
         rigidbodyToDisable.velocity = new Vector2(0, 0);
