@@ -19,6 +19,7 @@ public class CupboardLeftSide : MonoBehaviour, IHidePlace, IInteractable
     }
     public void Hide()
     {
+        GameManager.instance.PlayerComponent.HidePlayer();
         GameManager.instance.PlayerMovement.isVisibleLeft = true;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.disableMovement = true;
@@ -28,6 +29,7 @@ public class CupboardLeftSide : MonoBehaviour, IHidePlace, IInteractable
 
     public void Unhide()
     {
+        GameManager.instance.PlayerComponent.UnhidePlayer();
         GameManager.instance.PlayerMovement.isVisibleLeft = false;
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRenderer.color = GameManager.instance.PlayerInitialColor;

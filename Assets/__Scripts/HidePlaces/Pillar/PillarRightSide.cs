@@ -20,6 +20,7 @@ public class PillarRightSide : MonoBehaviour, IHidePlace, IInteractable
 
     public void Hide()
     {
+        GameManager.instance.PlayerComponent.HidePlayer();
         GameManager.instance.PlayerMovement.isVisibleRight = true;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.disableMovement = true;
@@ -29,6 +30,7 @@ public class PillarRightSide : MonoBehaviour, IHidePlace, IInteractable
 
     public void Unhide()
     {
+        GameManager.instance.PlayerComponent.UnhidePlayer();
         GameManager.instance.PlayerMovement.isVisibleRight = false;
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRenderer.color = GameManager.instance.PlayerInitialColor;

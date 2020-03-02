@@ -21,6 +21,7 @@ public class Door : MonoBehaviour, IHidePlace, IInteractable
 
     public void Hide()
     {
+        GameManager.instance.PlayerComponent.HidePlayer();
         //player.transform.position = transform.position;
         GameManager.instance.Player.gameObject.transform.localScale = PlayerHideScale;
         GameManager.instance.PlayerRenderer.color = HideColor;
@@ -31,6 +32,7 @@ public class Door : MonoBehaviour, IHidePlace, IInteractable
 
     public void Unhide()
     {
+        GameManager.instance.PlayerComponent.UnhidePlayer();
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.Player.gameObject.transform.localScale = GameManager.instance.PlayerInitialScale;
         GameManager.instance.PlayerRenderer.color = GameManager.instance.PlayerInitialColor;

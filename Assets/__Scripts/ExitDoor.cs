@@ -38,7 +38,7 @@ public class ExitDoor : MonoBehaviour
 
             if (!isClosed)
             {
-                Debug.Log("Loading new level");
+                LevelLoader.instance.LoadNextLevel();
             }
         }
         

@@ -34,11 +34,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.Q))
+        if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.Q) && killables.Count > 0)
         {
-            animator.SetTrigger("Kill");
             foreach (IKillable killable in killables)
             {
+                animator.SetTrigger("Kill");
                 killable.Kill();
             }
         }
@@ -106,6 +106,16 @@ public class Player : MonoBehaviour
         }
 
         Debug.Log("Found " + searchables.Count + " ISearchable");
+    }
+
+    public void HidePlayer()
+    {
+        isHidden = true;
+    }
+
+    public void UnhidePlayer()
+    {
+        isHidden = false;
     }
 
     public bool isPlayerHidden()
