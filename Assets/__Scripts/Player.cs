@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator animator;
 
+    [SerializeField] private GameObject eButton;
+    [SerializeField] private GameObject qButton;
+
     [SerializeField] bool isHidden = false;
 
     Collider2D[] colliders;
@@ -34,6 +37,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        
+
         if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.Q) && killables.Count > 0)
         {
             foreach (IKillable killable in killables)
@@ -82,7 +87,16 @@ public class Player : MonoBehaviour
             IKillable killable = collider.GetComponent<IKillable>();
             if (killable != null)
             {
-                killables.Add(killable);
+                Enemy enemy = collider.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    if (!enemy.IsDead())
+                        killables.Add(killable);
+                }
+                else
+                {
+                    killables.Add(killable);
+                }
             }
 
             ISearchable searchable = collider.GetComponent<ISearchable>();
@@ -102,6 +116,26 @@ public class Player : MonoBehaviour
             {
                 interactables.Add(interactable);
             }
+        }
+
+        if (interactables.Count > 0 || searchables.Count > 0)
+        {
+            if (!eButton.activeSelf)
+                eButton.SetActive(true);
+        }
+        else
+        {
+            eButton.SetActive(false);
+        }
+
+        if (killables.Count > 0)
+        {
+            if (!qButton.activeSelf)
+                qButton.SetActive(true);
+        }
+        else
+        {
+            qButton.SetActive(false);
         }
     }
 

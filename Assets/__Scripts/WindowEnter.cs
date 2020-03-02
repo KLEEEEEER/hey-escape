@@ -37,9 +37,13 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
         if (spriteRenderer != null) spriteRenderer.enabled = false;
 
+        GameManager.instance.Player.position = transform.position;
+        GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
+
         yield return new WaitForSeconds(0.5f);
 
         GameManager.instance.Player.position = windowExit.GetExitPointPosition();
+        GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
 
         yield return new WaitForSeconds(0.5f);
 

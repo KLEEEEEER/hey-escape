@@ -6,6 +6,14 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
 {
     [SerializeField] private bool isOpened = false;
     [SerializeField] private bool isHidden = false;
+
+    private void Update()
+    {
+        if (isHidden && GameManager.instance.Player.gameObject != null && GameManager.instance.Player.gameObject.transform.position != transform.position)
+        {
+            GameManager.instance.Player.gameObject.transform.position = transform.position;
+        }
+    }
     public void Hide()
     {
         GameManager.instance.PlayerComponent.HidePlayer();
