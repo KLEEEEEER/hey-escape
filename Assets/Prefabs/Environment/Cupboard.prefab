@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HideColor: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+  isHidden: 0
+  currentVelocity: {x: 0, y: 0, z: 0}
   smoothTime: 0.1
 --- !u!1 &5877445157843153282
 GameObject:
@@ -150,7 +152,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 3}
+  m_Size: {x: 0.32, y: 0.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -273,6 +275,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpened: 0
+  isHidden: 0
+  spriteRenderer: {fileID: 5877445157843153292}
+  closed: {fileID: 21300000, guid: 7221f9d55f4a3404d99d8322a3306a66, type: 3}
+  opened: {fileID: 21300000, guid: 6b3114195c7e5a6479ad29c8e2cf3fb7, type: 3}
+  openedWithPlayer: {fileID: 21300000, guid: 325036cb924e61e4a86ff375345a7e20, type: 3}
 --- !u!61 &5877445159068385959
 BoxCollider2D:
   m_ObjectHideFlags: 0

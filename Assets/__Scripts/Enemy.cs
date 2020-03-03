@@ -100,6 +100,13 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
         flashlight.SetActive(false);
         animator.SetBool("IsDead", true);
+        StartCoroutine(disableAnimator(4));
+    }
+
+    IEnumerator disableAnimator(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        animator.enabled = false;
     }
 
     public List<InventoryItem> Search()

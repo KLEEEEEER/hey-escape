@@ -34,6 +34,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
     {
         SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
         GameManager.instance.PlayerMovement.disableMovement = true;
+        GameManager.instance.PlayerComponent.HidePlayer();
 
         if (spriteRenderer != null) spriteRenderer.enabled = false;
 
@@ -53,6 +54,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
         if (spriteRenderer != null) spriteRenderer.enabled = true;
         GameManager.instance.PlayerMovement.disableMovement = false;
+        GameManager.instance.PlayerComponent.UnhidePlayer();
     }
 
     void OpenWindow()

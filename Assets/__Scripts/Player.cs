@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.instance.IsGameOver) return;
         
 
         if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.Q) && killables.Count > 0)
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.E))
+        if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.E) && searchables.Count > 0)
         {
             animator.SetTrigger("Search");
 
@@ -118,16 +119,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (interactables.Count > 0 || searchables.Count > 0)
-        {
-            if (!eButton.activeSelf)
-                eButton.SetActive(true);
-        }
-        else
-        {
-            eButton.SetActive(false);
-        }
-
         if (killables.Count > 0)
         {
             if (!qButton.activeSelf)
@@ -137,6 +128,18 @@ public class Player : MonoBehaviour
         {
             qButton.SetActive(false);
         }
+
+        if ((interactables.Count > 0 || searchables.Count > 0) && !qButton.activeSelf)
+        {
+            if (!eButton.activeSelf)
+                eButton.SetActive(true);
+        }
+        else
+        {
+            eButton.SetActive(false);
+        }
+
+        
     }
 
     public void HidePlayer()

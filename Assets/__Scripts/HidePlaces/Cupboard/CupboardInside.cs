@@ -7,6 +7,16 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
     [SerializeField] private bool isOpened = false;
     [SerializeField] private bool isHidden = false;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite closed;
+    [SerializeField] private Sprite opened;
+    [SerializeField] private Sprite openedWithPlayer;
+
+    private void Start()
+    {
+        spriteRenderer.sprite = (isOpened) ? opened : closed;
+    }
+
     private void Update()
     {
         if (isHidden && GameManager.instance.Player.gameObject != null && GameManager.instance.Player.gameObject.transform.position != transform.position)
@@ -21,6 +31,7 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.disableMovement = true;
         GameManager.instance.PlayerRenderer.enabled = false;
+        spriteRenderer.sprite = openedWithPlayer;
         isHidden = true;
     }
 
@@ -32,6 +43,7 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
             {
                 Inventory.instance.UseItem(typeof(CupboardKey));
                 isOpened = true;
+                spriteRenderer.sprite = opened;
             }
             return;
         }
@@ -53,6 +65,7 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.disableMovement = false;
         GameManager.instance.PlayerRenderer.enabled = true;
+        spriteRenderer.sprite = opened;
         isHidden = false;
     }
 }

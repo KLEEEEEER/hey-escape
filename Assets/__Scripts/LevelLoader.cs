@@ -61,10 +61,17 @@ public class LevelLoader : MonoBehaviour
 
     private void LoadLevel()
     {
+        LevelFader.instance.FadeOut();
         CleanCurrentLevelObject();
-        GameObject newLoadedLevel = Instantiate(levels[currentLevelIndex], currentLevel.transform);
-        Transform startPosition = newLoadedLevel.transform.Find("StartPosition");
-        GameManager.instance.Player.position = startPosition.position;
+        Level levelComponent = levels[currentLevelIndex].GetComponent<Level>();
+        if (levelComponent != null)
+        {
+            GameManager.instance.Player.gameObject.SetActive(false);
+            GameManager.instance.Player.position = levelComponent.startPlayerPosition.position;
+            Instantiate(levels[currentLevelIndex], currentLevel.transform);
+            GameManager.instance.Player.gameObject.SetActive(true);
+        }
+        LevelFader.instance.FadeIn();
     }
 
     private void CleanCurrentLevelObject()
