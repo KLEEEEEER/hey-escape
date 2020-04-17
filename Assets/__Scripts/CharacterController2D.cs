@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+/*
 public class CharacterController2D : MonoBehaviour
 {
     [SerializeField] private float jumpForce = 400f;
@@ -150,9 +150,9 @@ public class CharacterController2D : MonoBehaviour
     {
         facingRight = !facingRight;
 
-        /*Vector3 tempScale = transform.localScale;
+        *//*Vector3 tempScale = transform.localScale;
         tempScale.x *= -1;
-        transform.localScale = tempScale;*/
+        transform.localScale = tempScale;*//*
         transform.Rotate(0f, 180f, 0f);
     }
 
@@ -164,4 +164,4 @@ public class CharacterController2D : MonoBehaviour
     }
 
 
-}
+}*/

@@ -62,23 +62,23 @@ public class PlayerMovement : MonoBehaviour
         Horizontal = joystick.Horizontal * speed;
         Vertical = joystick.Vertical * climbingSpeed;
 #else
-        Horizontal = Input.GetAxisRaw("Horizontal") * speed;
-        Vertical = Input.GetAxisRaw("Vertical") * climbingSpeed;
+        //Horizontal = Input.GetAxisRaw("Horizontal") * speed;
+        //Vertical = Input.GetAxisRaw("Vertical") * climbingSpeed;
 #endif
-        animator.SetFloat("Speed", Mathf.Abs(Horizontal));
+        //animator.SetFloat("Speed", Mathf.Abs(Horizontal));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            controller.Jump();
+            //controller.Jump();
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            controller.crouchButtonPressed = true;
+            //controller.crouchButtonPressed = true;
         }
         else if (Input.GetKeyUp(KeyCode.S))
         {
-            controller.crouchButtonPressed = false;
+            //controller.crouchButtonPressed = false;
         }
     }
 
@@ -109,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Speed", 0);
             return;
         };
-        controller.Move(Horizontal * Time.fixedDeltaTime, Vertical * Time.fixedDeltaTime);
+        //controller.Move(Horizontal * Time.fixedDeltaTime, Vertical * Time.fixedDeltaTime);
     }
 
     private void ToggleColliders(bool enabled)

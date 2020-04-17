@@ -4049,7 +4049,7 @@ PrefabInstance:
     - target: {fileID: 4489188543606127493, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.68
+      value: 11.85
       objectReference: {fileID: 0}
     - target: {fileID: 4489188543759824916, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
@@ -4114,7 +4114,7 @@ PrefabInstance:
     - target: {fileID: 4489188544890793787, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.83
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4489188544918607405, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
@@ -4241,6 +4241,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1524863894804804450, guid: 51a2c49686ab60447bece19d7fb69b59,
         type: 3}
+    - target: {fileID: 4489188544918607405, guid: 85b0379a1c053a94d9950afaf59239a6,
+        type: 3}
+      propertyPath: timeBeforeStartWalking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4489188544918607443, guid: 85b0379a1c053a94d9950afaf59239a6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.89
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b0379a1c053a94d9950afaf59239a6, type: 3}
 --- !u!4 &3766786153014529442 stripped
@@ -4764,7 +4774,7 @@ PrefabInstance:
     - target: {fileID: 4489188543606127493, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.34
+      value: -1.69
       objectReference: {fileID: 0}
     - target: {fileID: 4489188543759824916, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
@@ -4829,7 +4839,7 @@ PrefabInstance:
     - target: {fileID: 4489188544890793787, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 11.11
       objectReference: {fileID: 0}
     - target: {fileID: 4489188544918607405, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
@@ -4847,6 +4857,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1524863894804804450, guid: 51a2c49686ab60447bece19d7fb69b59,
         type: 3}
+    - target: {fileID: 4489188544918607405, guid: 85b0379a1c053a94d9950afaf59239a6,
+        type: 3}
+      propertyPath: timeBetweenWaypoints
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85b0379a1c053a94d9950afaf59239a6, type: 3}
 --- !u!4 &723563582134995461 stripped

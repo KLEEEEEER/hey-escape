@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public Transform Player;
     public PlayerMovement PlayerMovement;
+    public CharacterController2D CharacterController2D;
     public Player PlayerComponent;
     public SpriteRenderer PlayerRenderer;
     public Rigidbody2D PlayerRigidbody;

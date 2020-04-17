@@ -20,6 +20,7 @@ public class PillarLeftSide : MonoBehaviour, IHidePlace, IInteractable
 
     public void Hide()
     {
+        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.DisableState);
         GameManager.instance.PlayerComponent.HidePlayer();
         GameManager.instance.PlayerMovement.isVisibleLeft = true;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
@@ -30,6 +31,7 @@ public class PillarLeftSide : MonoBehaviour, IHidePlace, IInteractable
 
     public void Unhide()
     {
+        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.IdleState);
         GameManager.instance.PlayerComponent.UnhidePlayer();
         GameManager.instance.PlayerMovement.isVisibleLeft = false;
         GameManager.instance.Player.gameObject.transform.position = transform.position;

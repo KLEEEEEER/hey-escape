@@ -71,6 +71,9 @@ public class Player : MonoBehaviour
         {
             foreach (IInteractable interactable in interactables)
             {
+                animator.SetBool("IsJumping", false);
+                animator.SetBool("IsRunning", false);
+                animator.SetBool("IsGrounded", true);
                 interactable.Interact();
             }
         }

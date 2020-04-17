@@ -10,13 +10,13 @@ public class Ladder : MonoBehaviour
     {
         CharacterController2D characterController2D = collision.GetComponent<CharacterController2D>();
         if (characterController2D == null) return;
-        characterController2D.isOnLadder = true;
+        //characterController2D.isOnLadder = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         CharacterController2D characterController2D = collision.GetComponent<CharacterController2D>();
         if (characterController2D == null) return;
-        characterController2D.isOnLadder = false;
+        //characterController2D.isOnLadder = false;
     }
 }
