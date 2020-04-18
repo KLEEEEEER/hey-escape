@@ -32,6 +32,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
     IEnumerator EnterWindowAnimation()
     {
+        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.DisableState);
         SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
         GameManager.instance.PlayerMovement.disableMovement = true;
         GameManager.instance.PlayerComponent.HidePlayer();
@@ -53,6 +54,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(0.5f);
 
         if (spriteRenderer != null) spriteRenderer.enabled = true;
+        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.IdleState);
         GameManager.instance.PlayerMovement.disableMovement = false;
         GameManager.instance.PlayerComponent.UnhidePlayer();
     }
