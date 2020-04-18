@@ -47,9 +47,12 @@ public class CharacterControllerJumpingState : CharacterControllerBaseState
         }
     }
 
-    public override void OnCollisionEnter(CharacterController2D player)
+    public override void OnTriggerEnter2D(CharacterController2D player, Collider2D collision)
     {
-        
+        if (collision.CompareTag("Climbable"))
+        {
+            player.TransitionToState(player.LadderState);
+        }
     }
 
     public override void Update(CharacterController2D player)
@@ -81,5 +84,9 @@ public class CharacterControllerJumpingState : CharacterControllerBaseState
         }*/
 
         timer += Time.deltaTime;
+    }
+    public override void OnTriggerExit2D(CharacterController2D player, Collider2D collision)
+    {
+
     }
 }

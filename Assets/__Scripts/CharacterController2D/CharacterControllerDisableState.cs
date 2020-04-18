@@ -20,7 +20,12 @@ public class CharacterControllerDisableState : CharacterControllerBaseState
 
     }
 
-    public override void OnCollisionEnter(CharacterController2D player)
+    public override void OnTriggerEnter2D(CharacterController2D player, Collider2D collision)
+    {
+        
+    }
+
+    public override void OnTriggerExit2D(CharacterController2D player, Collider2D collision)
     {
         
     }

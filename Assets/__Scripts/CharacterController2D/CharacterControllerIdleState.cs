@@ -20,25 +20,32 @@ public class CharacterControllerIdleState : CharacterControllerBaseState
 
     }
 
-    public override void OnCollisionEnter(CharacterController2D player)
+    public override void OnTriggerEnter2D(CharacterController2D player, Collider2D collision)
     {
-        
+        if (collision.CompareTag("Climbable"))
+        {
+            player.TransitionToState(player.LadderState);
+        }
+    }
+    public override void OnTriggerExit2D(CharacterController2D player, Collider2D collision)
+    {
+
     }
 
     public override void Update(CharacterController2D player)
     {
         if (GameManager.instance.IsGameOver) return;
 
-        if (player.Horizontal != 0)
-        {
-            player.TransitionToState(player.RunningState);
-            return;
-        }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             player.Rigidbody2D.AddForce(new Vector2(0f, player.JumpForce));
             player.TransitionToState(player.JumpingState);
+            return;
+        }
+
+        if (player.Horizontal != 0)
+        {
+            player.TransitionToState(player.RunningState);
             return;
         }
 

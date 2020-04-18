@@ -19,6 +19,9 @@ public class CharacterController2D : MonoBehaviour
     public Transform CeilingCheck;
     public float CeilingRadius = .25f;
     [HideInInspector] public bool IsGrounded = true;
+    public float HorizontalMove = 10f;
+    public float VerticalMove = 5f;
+    [HideInInspector] public float DefaultGravityScale;
 
 
     [Header("Components")]
@@ -45,6 +48,7 @@ public class CharacterController2D : MonoBehaviour
     public readonly CharacterControllerRunningState RunningState = new CharacterControllerRunningState();
     public readonly CharacterControllerDuckingState DuckingState = new CharacterControllerDuckingState();
     public readonly CharacterControllerDisableState DisableState = new CharacterControllerDisableState();
+    public readonly CharacterControllerOnLadderState LadderState = new CharacterControllerOnLadderState();
 
     private float horizontal;
     private float vertical;
@@ -73,6 +77,8 @@ public class CharacterController2D : MonoBehaviour
     private void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+
+        DefaultGravityScale = rigidbody2D.gravityScale;
 
         Application.targetFrameRate = 60;
 
@@ -103,9 +109,15 @@ public class CharacterController2D : MonoBehaviour
     {
         currentState.LateUpdate(this);
     }
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        currentState.OnCollisionEnter(this);
+        currentState.OnTriggerEnter2D(this, collision);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        currentState.OnTriggerExit2D(this, collision);
     }
 
     void checkCharacterRotation()

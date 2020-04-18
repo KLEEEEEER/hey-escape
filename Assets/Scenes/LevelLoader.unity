@@ -2480,6 +2480,9 @@ MonoBehaviour:
   CeilingCheck: {fileID: 1022182343}
   CeilingRadius: 0.25
   IsGrounded: 1
+  HorizontalMove: 5
+  VerticalMove: 10
+  DefaultGravityScale: 0
   Animator: {fileID: 1443288901}
   OnJumpEvent:
     m_PersistentCalls:
