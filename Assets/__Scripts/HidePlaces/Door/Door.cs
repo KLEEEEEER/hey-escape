@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour, IHidePlace, IInteractable
+public class Door : MonoBehaviour, IHidePlace
 {
     [SerializeField] private Vector3 PlayerHideScale = new Vector3(0.9f, 0.9f, 0.9f);
     [SerializeField] private Color HideColor;
@@ -41,17 +41,5 @@ public class Door : MonoBehaviour, IHidePlace, IInteractable
         GameManager.instance.PlayerMovement.disableMovement = false;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         isHidden = false;
-    }
-
-    public void Interact()
-    {
-        if (!isHidden)
-        {
-            Hide();
-        }
-        else
-        {
-            Unhide();
-        }
     }
 }
