@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PillarRightSide : MonoBehaviour, IHidePlace, IInteractable
+public class PillarRightSide : MonoBehaviour, IHidePlace
 {
     [SerializeField] private Color HideColor;
 
@@ -39,17 +39,5 @@ public class PillarRightSide : MonoBehaviour, IHidePlace, IInteractable
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.disableMovement = false;
         isHidden = false;
-    }
-
-    public void Interact()
-    {
-        if (!isHidden)
-        {
-            Hide();
-        }
-        else
-        {
-            Unhide();
-        }
     }
 }

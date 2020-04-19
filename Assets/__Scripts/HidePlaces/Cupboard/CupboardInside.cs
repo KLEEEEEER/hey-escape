@@ -48,15 +48,6 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
             }
             return;
         }
-
-        if (!isHidden)
-        {
-            Hide();
-        }
-        else
-        {
-            Unhide();
-        }
     }
 
     public void Unhide()
