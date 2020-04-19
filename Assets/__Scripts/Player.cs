@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
     List<IInteractable> interactables;
     List<ISearchable> searchables;
     List<IKillable> killables;
+    List<IHidePlace> hideplaces;
+    IHidePlace currentHidePlace = null;
 
     public event Action<string> OnPlayerInteractEvent;
 
@@ -33,12 +35,13 @@ public class Player : MonoBehaviour
         interactables = new List<IInteractable>();
         searchables = new List<ISearchable>();
         killables = new List<IKillable>();
+        hideplaces = new List<IHidePlace>();
     }
 
     void Update()
     {
         if (GameManager.instance.IsGameOver) return;
-        
+
 
         if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.Q) && killables.Count > 0)
         {
@@ -77,6 +80,22 @@ public class Player : MonoBehaviour
                 interactable.Interact();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.W) && !isHidden && hideplaces.Count > 0)
+        {
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsRunning", false);
+            animator.SetBool("IsGrounded", true);
+            hideplaces[0].Hide();
+            currentHidePlace = hideplaces[0];
+            isHidden = true;
+        }
+        if (Input.GetKeyDown(KeyCode.S) && isHidden && currentHidePlace != null)
+        {
+            currentHidePlace.Unhide();
+            currentHidePlace = null;
+            isHidden = false;
+        }
     }
 
     private void FixedUpdate()
@@ -84,6 +103,7 @@ public class Player : MonoBehaviour
         interactables.Clear();
         killables.Clear();
         searchables.Clear();
+        hideplaces.Clear();
 
         colliders = Physics2D.OverlapCircleAll(enemyDetectionPosition.position, enemyDetectionRadius);
         foreach (Collider2D collider in colliders)
@@ -120,6 +140,12 @@ public class Player : MonoBehaviour
             {
                 interactables.Add(interactable);
             }
+
+            IHidePlace hideplace = collider.GetComponent<IHidePlace>();
+            if (hideplace != null)
+            {
+                hideplaces.Add(hideplace);
+            }
         }
 
         if (killables.Count > 0)
@@ -132,7 +158,7 @@ public class Player : MonoBehaviour
             qButton.SetActive(false);
         }
 
-        if ((interactables.Count > 0 || searchables.Count > 0) && !qButton.activeSelf)
+        if ((searchables.Count > 0) && !qButton.activeSelf)   // interactables.Count > 0 || 
         {
             if (!eButton.activeSelf)
                 eButton.SetActive(true);

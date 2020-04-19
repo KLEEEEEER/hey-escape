@@ -7,7 +7,7 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
 
     public override void EnterState(CharacterController2D player)
     {
-
+        player.Animator.SetBool("IsJumping", false);
     }
 
     public override void OnTriggerEnter2D(CharacterController2D player, Collider2D collision)
@@ -29,7 +29,7 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
     {
         player.Rigidbody2D.gravityScale = 0f;
         player.Rigidbody2D.velocity = new Vector2(0, 0);
-        player.transform.position = new Vector2(player.transform.position.x + player.Horizontal * Time.deltaTime, player.transform.position.y + player.Vertical * Time.deltaTime);
+        player.transform.position = new Vector2(player.transform.position.x + player.Horizontal * player.ClimbingSpeedMultiplier * Time.deltaTime, player.transform.position.y + player.Vertical * player.ClimbingSpeedMultiplier * Time.deltaTime);
     }
     public override void OnTriggerExit2D(CharacterController2D player, Collider2D collision)
     {

@@ -8,7 +8,7 @@ public class CharacterController2D : MonoBehaviour
 {
     [Header("Character Attributes")]
     public float speed;
-    public float climbingSpeed;
+    public float ClimbingSpeedMultiplier;
     public Vector2 currentVelocity; //[HideInInspector] 
     public float MovementSmoothing;
     public float JumpForce;
@@ -92,7 +92,7 @@ public class CharacterController2D : MonoBehaviour
         vertical = joystick.Vertical * climbingSpeed;
 #else
         horizontal = Input.GetAxisRaw("Horizontal") * speed;
-        vertical = Input.GetAxisRaw("Vertical") * climbingSpeed;
+        vertical = Input.GetAxisRaw("Vertical") * speed;
 #endif
         checkCharacterRotation();
         checkCharacterGrounded();
@@ -160,5 +160,10 @@ public class CharacterController2D : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(CeilingCheck.position, CeilingRadius);
         Gizmos.DrawWireSphere(GroundCheck.position, GroundedRadius);
+    }
+
+    public void OnGameOver()
+    {
+        TransitionToState(DisableState);
     }
 }
