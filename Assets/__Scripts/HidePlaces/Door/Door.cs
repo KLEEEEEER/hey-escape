@@ -42,4 +42,8 @@ public class Door : MonoBehaviour, IHidePlace
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         isHidden = false;
     }
+    public bool IsAccessible()
+    {
+        return true;
+    }
 }

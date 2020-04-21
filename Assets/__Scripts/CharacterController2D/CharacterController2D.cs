@@ -49,6 +49,7 @@ public class CharacterController2D : MonoBehaviour
     public readonly CharacterControllerDuckingState DuckingState = new CharacterControllerDuckingState();
     public readonly CharacterControllerDisableState DisableState = new CharacterControllerDisableState();
     public readonly CharacterControllerOnLadderState LadderState = new CharacterControllerOnLadderState();
+    public readonly CharacterControllerInWindowState InWindowState = new CharacterControllerInWindowState();
 
     private float horizontal;
     private float vertical;

@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.E))
         {
             foreach (IInteractable interactable in interactables)
             {
@@ -86,9 +86,12 @@ public class Player : MonoBehaviour
             animator.SetBool("IsJumping", false);
             animator.SetBool("IsRunning", false);
             animator.SetBool("IsGrounded", true);
-            hideplaces[0].Hide();
-            currentHidePlace = hideplaces[0];
-            isHidden = true;
+            if (hideplaces[0].IsAccessible())
+            {
+                hideplaces[0].Hide();
+                currentHidePlace = hideplaces[0];
+                isHidden = true;
+            }
         }
         if (Input.GetKeyDown(KeyCode.S) && isHidden && currentHidePlace != null)
         {

@@ -28,6 +28,7 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
     void Start()
     {
         StartCoroutine(Move());
+        if (!facingRight) transform.Rotate(0f, 180f, 0f);
     }
 
     IEnumerator Move()
@@ -40,22 +41,25 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
         yield return new WaitForSeconds(timeBeforeStartWalking);
         while (!isDead && !caughtPlayer)
         {
-            transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, speed * Time.deltaTime);
-
-            if (transform.position.x < waypoints[waypointIndex].transform.position.x && !facingRight) Flip(); 
-            if (transform.position.x > waypoints[waypointIndex].transform.position.x && facingRight) Flip(); 
-
-            animator.SetBool("IsWalking", transform.position != waypoints[waypointIndex].transform.position);
-
-            if (transform.position == waypoints[waypointIndex].transform.position)
+            if (waypoints.Length > 0)
             {
-                waypointIndex++;
+                transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, speed * Time.deltaTime);
 
-                if (waypointIndex > waypoints.Length - 1)
+                if (transform.position.x < waypoints[waypointIndex].transform.position.x && !facingRight) Flip();
+                if (transform.position.x > waypoints[waypointIndex].transform.position.x && facingRight) Flip();
+
+                animator.SetBool("IsWalking", transform.position != waypoints[waypointIndex].transform.position);
+
+                if (transform.position == waypoints[waypointIndex].transform.position)
                 {
-                    waypointIndex = 0;
+                    waypointIndex++;
+
+                    if (waypointIndex > waypoints.Length - 1)
+                    {
+                        waypointIndex = 0;
+                    }
+                    yield return new WaitForSeconds(timeBetweenWaypoints);
                 }
-                yield return new WaitForSeconds(timeBetweenWaypoints);
             }
 
             yield return null;

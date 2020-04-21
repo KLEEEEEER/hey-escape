@@ -38,4 +38,8 @@ public class CupboardRightSide : MonoBehaviour, IHidePlace
         GameManager.instance.PlayerRenderer.color = GameManager.instance.PlayerInitialColor;
         isHidden = false;
     }
+    public bool IsAccessible()
+    {
+        return true;
+    }
 }

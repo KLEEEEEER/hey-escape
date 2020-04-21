@@ -39,4 +39,9 @@ public class CupboardLeftSide : MonoBehaviour, IHidePlace
         GameManager.instance.PlayerMovement.disableMovement = false;
         isHidden = false;
     }
+
+    public bool IsAccessible()
+    {
+        return true;
+    }
 }

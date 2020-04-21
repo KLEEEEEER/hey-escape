@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class CharacterControllerOnLadderState : CharacterControllerBaseState
 {
+    int currentLadders = 0;
+
 
     public override void EnterState(CharacterController2D player)
     {
         player.Animator.SetBool("IsJumping", false);
+        currentLadders = 1;
     }
 
     public override void OnTriggerEnter2D(CharacterController2D player, Collider2D collision)
     {
-
+        if (collision.CompareTag("Climbable"))
+        {
+            currentLadders++;
+        }
     }
 
     public override void LateUpdate(CharacterController2D player)
@@ -36,7 +42,9 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
         player.Rigidbody2D.gravityScale = player.DefaultGravityScale;
         if (collision.CompareTag("Climbable"))
         {
-            player.TransitionToState(player.IdleState);
+            currentLadders--;
+            if (currentLadders <= 0)
+                player.TransitionToState(player.IdleState);
         }
     }
 }

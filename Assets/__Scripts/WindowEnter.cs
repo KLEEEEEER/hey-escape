@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-enum WindowEnterState{Closed, Opened, OpenedWithRope}
+
 
 public class WindowEnter : MonoBehaviour, IInteractable
 {
     [SerializeField] WindowExit windowExit;
+    [SerializeField] WindowExit[] windowsExitToDropRope;
     [SerializeField] Sprite openedSprite;
     [SerializeField] Sprite openedWithRopeSprite;
+    [SerializeField] Sprite openedWithRopeAndPlayerSprite;
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Transform ExitPoint;
 
     //[SerializeField] Player playerNear;
+    enum WindowEnterState { Closed, Opened, OpenedWithRope, PlayerInside }
 
     [SerializeField] WindowEnterState windowEnterState = WindowEnterState.Closed;
 
@@ -53,10 +58,8 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
         yield return new WaitForSeconds(0.5f);
 
-        if (spriteRenderer != null) spriteRenderer.enabled = true;
-        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.IdleState);
         GameManager.instance.PlayerMovement.disableMovement = false;
-        GameManager.instance.PlayerComponent.UnhidePlayer();
+        windowExit.PlayerWait();
     }
 
     void OpenWindow()
@@ -69,6 +72,13 @@ public class WindowEnter : MonoBehaviour, IInteractable
         Inventory.instance.UseItem(typeof(Rope));
         spriteRenderer.sprite = openedWithRopeSprite;
         windowExit.DropRope();
+        if (windowsExitToDropRope.Length > 0)
+        {
+            foreach (WindowExit window in windowsExitToDropRope)
+            {
+                window.DropRope();
+            }
+        }
     }
 
     public void Interact()
@@ -86,9 +96,27 @@ public class WindowEnter : MonoBehaviour, IInteractable
                     windowEnterState = WindowEnterState.OpenedWithRope;
                 }
                 break;
+            case WindowEnterState.PlayerInside:
+                break;
             case WindowEnterState.OpenedWithRope:
                 StartCoroutine(EnterWindowAnimation());
                 break;
         }
     }
+
+    public void PlayerWait()
+    {
+        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.InWindowState);
+        spriteRenderer.sprite = openedWithRopeAndPlayerSprite;
+        windowEnterState = WindowEnterState.PlayerInside;
+        GameManager.instance.CharacterController2D.InWindowState.OnWindowExit.AddListener(ExitWindow);
+    }
+
+    public void ExitWindow()
+    {
+        windowEnterState = WindowEnterState.OpenedWithRope;
+        spriteRenderer.sprite = openedWithRopeSprite;
+    }
+
+    public Vector3 GetExitPointPosition() => ExitPoint.position;
 }

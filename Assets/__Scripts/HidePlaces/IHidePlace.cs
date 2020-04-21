@@ -6,4 +6,5 @@ interface IHidePlace
 {
     void Hide();
     void Unhide();
+    bool IsAccessible();
 }

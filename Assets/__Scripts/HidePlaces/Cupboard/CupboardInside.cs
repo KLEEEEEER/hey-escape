@@ -26,6 +26,7 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
     }
     public void Hide()
     {
+        Interact();
         GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.DisableState);
         GameManager.instance.PlayerComponent.HidePlayer();
         GameManager.instance.Player.gameObject.transform.position = transform.position;
@@ -60,5 +61,10 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
         GameManager.instance.PlayerRenderer.enabled = true;
         spriteRenderer.sprite = opened;
         isHidden = false;
+    }
+
+    public bool IsAccessible()
+    {
+        return isOpened || Inventory.instance.HasItem(typeof(CupboardKey));
     }
 }
