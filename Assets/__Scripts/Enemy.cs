@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
     [SerializeField] bool isDead = false;
     bool caughtPlayer = false;
 
+    [SerializeField] EnemyHeySound heySound;
+
     void Start()
     {
         StartCoroutine(Move());
@@ -68,6 +70,7 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
     public void OnGameOver()
     {
+        heySound.PlayHeySound();
         caughtPlayer = true;
         animator.SetBool("IsWalking", false);
         heyTextCanvas.SetActive(true);

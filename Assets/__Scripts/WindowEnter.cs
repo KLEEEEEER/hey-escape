@@ -14,6 +14,8 @@ public class WindowEnter : MonoBehaviour, IInteractable
     [SerializeField] Sprite openedWithRopeAndPlayerSprite;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Transform ExitPoint;
+    [SerializeField] AudioSource openingSound;
+
 
     //[SerializeField] Player playerNear;
     enum WindowEnterState { Closed, Opened, OpenedWithRope, PlayerInside }
@@ -65,6 +67,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
     void OpenWindow()
     {
         spriteRenderer.sprite = openedSprite;
+        openingSound.Play();
     }
 
     void SetRope()

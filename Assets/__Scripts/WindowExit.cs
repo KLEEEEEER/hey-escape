@@ -10,6 +10,7 @@ public class WindowExit : MonoBehaviour, IInteractable
     [SerializeField] Sprite openedWithRopeSprite;
     [SerializeField] Sprite openedWithRopeWithPlayerSprite;
     [SerializeField] Transform ExitPoint;
+    [SerializeField] AudioSource openingSound;
     bool isClosed = true;
     WindowExitState currentWindowExitState = WindowExitState.Closed;
 
@@ -22,6 +23,7 @@ public class WindowExit : MonoBehaviour, IInteractable
 
     public void OpenWindow()
     {
+        openingSound.Play();
         spriteRenderer.sprite = openedWithRopeSprite;
         currentWindowExitState = WindowExitState.OpenedWithRope;
     }

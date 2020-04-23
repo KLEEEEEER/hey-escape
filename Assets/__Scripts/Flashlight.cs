@@ -26,7 +26,7 @@ public class Flashlight : MonoBehaviour
             }
         }
 
-        if (playerMovement != null)
+        if (playerMovement != null && !GameManager.instance.IsGameOver)
         {
             if (GameManager.instance.PlayerComponent.isPlayerHidden()) return;
 

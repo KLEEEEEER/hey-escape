@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    enum State { GameOver, Playing, Paused }
+    State currentState = State.GameOver;
+
     public Transform Player;
     public PlayerMovement PlayerMovement;
     public CharacterController2D CharacterController2D;
@@ -18,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Camera MainCamera;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject youWonScreen;
+    [SerializeField] private GameObject pauseScreen;
     [SerializeField] private Text currentTimeText;
     [SerializeField] private Text CountDownTimer;
     [SerializeField] private Text HighscoreText;
@@ -25,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private bool isGameOver = false;
     public bool IsGameOver {
-        get => isGameOver;
+        get => currentState == State.GameOver;
     }
 
     public UnityEvent OnGameOverEvent;
@@ -35,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         PlayerInitialScale = Player.localScale;
         PlayerRenderer = Player.GetComponent<SpriteRenderer>();
         PlayerRigidbody = Player.GetComponent<Rigidbody2D>();
@@ -60,6 +65,7 @@ public class GameManager : MonoBehaviour
         }
         CountDownTimer.gameObject.SetActive(false);
         isGameOver = false;
+        currentState = State.Playing;
     }
 
     private void Update()
@@ -67,7 +73,30 @@ public class GameManager : MonoBehaviour
         if (isGameOver) return;
 
         currentTime += Time.deltaTime;
-        currentTimeText.text = GetCurrentTimeString();
+
+        if (currentTimeText != null)
+            currentTimeText.text = GetCurrentTimeString();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePauseMenu();
+        }
+    }
+
+    private void TogglePauseMenu()
+    {
+        if (currentState == State.Paused)
+        {
+            pauseScreen.SetActive(false);
+            currentState = State.Playing;
+            Time.timeScale = 1;
+        }
+        else
+        {
+            pauseScreen.SetActive(true);
+            currentState = State.Paused;
+            Time.timeScale = 0;
+        }
     }
 
     private static GameManager s_Instance = null;
@@ -93,6 +122,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        currentState = State.GameOver;
         isGameOver = true;
         gameOverScreen.SetActive(true);
         currentTimeText.gameObject.SetActive(false);
@@ -101,6 +131,7 @@ public class GameManager : MonoBehaviour
 
     public void GameWon()
     {
+        currentState = State.GameOver;
         isGameOver = true;
         youWonScreen.SetActive(true);
         currentTimeText.gameObject.SetActive(false);

@@ -8,6 +8,10 @@ public class ExitDoor : MonoBehaviour, IInteractable
     [SerializeField] private Sprite openedDoor;
     [SerializeField] private bool isClosed = false;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip doorOpen;
+    [SerializeField] private AudioClip doorClosed;
+
     public void Interact()
     {
         if (isClosed && Inventory.instance.HasItem(typeof(ExitKey)))
@@ -15,7 +19,14 @@ public class ExitDoor : MonoBehaviour, IInteractable
             Inventory.instance.UseItem(typeof(ExitKey));
             spriteRenderer.sprite = openedDoor;
             isClosed = false;
+            audioSource.clip = doorOpen;
+            audioSource.Play();
             return;
+        }
+        else
+        {
+            audioSource.clip = doorClosed;
+            audioSource.Play();
         }
 
         if (!isClosed)
