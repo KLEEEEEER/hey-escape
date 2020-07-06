@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 
 namespace KleeeeeerUI
 {
     public class SettingsBehaviour : MonoBehaviour
     {
         [SerializeField] private Slider masterVolumeSlider;
+        [SerializeField] private EventTrigger masterVolumeSliderDrag;
         [SerializeField] private Slider musicVolumeSlider;
+        [SerializeField] private EventTrigger musicVolumeSliderDrag;
         [SerializeField] private Slider fxVolumeSlider;
+        [SerializeField] private EventTrigger fxVolumeSliderDrag;
         [SerializeField] private Toggle mutedToggle;
 
         [SerializeField] private AudioMixer masterMixer;
@@ -29,6 +33,8 @@ namespace KleeeeeerUI
         private void OnEnable()
         {
             masterVolumeSlider.onValueChanged.AddListener(masterVolumeChanged);
+            
+
             musicVolumeSlider.onValueChanged.AddListener(musicVolumeChanged);
             fxVolumeSlider.onValueChanged.AddListener(fxVolumeChanged);
             mutedToggle.onValueChanged.AddListener(muteSoundToggle);

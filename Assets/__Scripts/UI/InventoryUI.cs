@@ -24,7 +24,8 @@ public class InventoryUI : MonoBehaviour
     }
     private void OnDisable()
     {
-        Inventory.instance.OnInventoryChanged -= UpdateUI;
+        if (Inventory.instance != null)
+            Inventory.instance.OnInventoryChanged -= UpdateUI;
     }
 
     private void Update()

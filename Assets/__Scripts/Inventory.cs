@@ -21,14 +21,20 @@ public class Inventory : MonoBehaviour
                 s_Instance = FindObjectOfType(typeof(Inventory)) as Inventory;
             }
 
-            if (s_Instance == null)
+            /*if (s_Instance == null)
             {
                 var obj = new GameObject("Inventory");
                 s_Instance = obj.AddComponent<Inventory>();
-            }
+            }*/
 
             return s_Instance;
         }
+    }
+
+    private void OnDestroy()
+    {
+        s_Instance = null;
+        Destroy(gameObject);
     }
 
     private void Start()

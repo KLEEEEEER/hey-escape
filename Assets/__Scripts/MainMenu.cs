@@ -4,12 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : MenuPageChanger
 {
-    [SerializeField] private GameObject mainMenuScreen;
-    [SerializeField] private GameObject settingsScreen;
-    [SerializeField] private GameObject[] allScreens;
-
     [SerializeField] private SettingsBehaviour settingsBehaviour;
     private void Start()
     {
@@ -27,26 +23,6 @@ public class MainMenu : MonoBehaviour
         LevelFader.instance.FadeOut();
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("LevelLoader");
-    }
-
-    public void OpenSettingsPage()
-    {
-        closeAllScreens();
-        settingsScreen.SetActive(true);
-    }
-
-    public void OpenMainMenu()
-    {
-        closeAllScreens();
-        mainMenuScreen.SetActive(true);
-    }
-
-    private void closeAllScreens()
-    {
-        foreach (GameObject screen in allScreens)
-        {
-            screen.SetActive(false);
-        }
     }
 
     public void Exit() 

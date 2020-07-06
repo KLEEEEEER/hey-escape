@@ -31,9 +31,15 @@ public class InfoUI : MonoBehaviour
 
     private void OnDisable()
     {
-        Inventory.instance.OnInventoryChanged -= AppearText;
-        Inventory.instance.OnInventoryUIText -= AppearText;
-        GameManager.instance.PlayerComponent.OnPlayerInteractEvent -= AppearText;
+        if (Inventory.instance != null)
+        {
+            Inventory.instance.OnInventoryChanged -= AppearText;
+            Inventory.instance.OnInventoryUIText -= AppearText;
+        }
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.PlayerComponent.OnPlayerInteractEvent -= AppearText;
+        }
     }
 
     IEnumerator DeleteLastMessage()
