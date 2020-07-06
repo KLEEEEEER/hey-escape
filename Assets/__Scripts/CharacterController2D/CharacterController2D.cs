@@ -9,7 +9,7 @@ public class CharacterController2D : MonoBehaviour
     [Header("Character Attributes")]
     public float speed;
     public float ClimbingSpeedMultiplier;
-    public Vector2 currentVelocity; //[HideInInspector] 
+    public Vector2 currentVelocity;
     public float MovementSmoothing;
     public float JumpForce;
     public bool airControl = true;
