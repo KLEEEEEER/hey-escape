@@ -21,17 +21,17 @@ public class LevelLoader : MonoBehaviour
                 s_Instance = FindObjectOfType(typeof(LevelLoader)) as LevelLoader;
             }
 
-            if (s_Instance == null)
+            /*if (s_Instance == null)
             {
                 var obj = new GameObject("LevelLoader");
                 s_Instance = obj.AddComponent<LevelLoader>();
-            }
+            }*/
 
             return s_Instance;
         }
     }
 
-    private void Start()
+    public void StartLoading()
     {
         LoadLevel();
     }
@@ -49,9 +49,8 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadFirstLevel()
     {
-        SceneManager.LoadScene("LevelLoader");
         currentLevelIndex = 0;
-        LoadLevel();
+        SceneManager.LoadScene("LevelLoader");
     }
 
     public void ToMainMenu()
@@ -61,15 +60,18 @@ public class LevelLoader : MonoBehaviour
 
     private void LoadLevel()
     {
-        LevelFader.instance.FadeOut();
+        //LevelFader.instance.FadeOut();
         CleanCurrentLevelObject();
         Level levelComponent = levels[currentLevelIndex].GetComponent<Level>();
         if (levelComponent != null)
         {
-            GameManager.instance.Player.gameObject.SetActive(false);
-            GameManager.instance.Player.position = levelComponent.startPlayerPosition.position;
             Instantiate(levels[currentLevelIndex], currentLevel.transform);
-            GameManager.instance.Player.gameObject.SetActive(true);
+            if (GameManager.instance.Player != null)
+            {
+                GameManager.instance.Player.gameObject.SetActive(false);
+                GameManager.instance.Player.position = levelComponent.startPlayerPosition.position;
+                GameManager.instance.Player.gameObject.SetActive(true);
+            }
         }
         LevelFader.instance.FadeIn();
     }

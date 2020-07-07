@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent OnGameOverEvent;
     public UnityEvent OnGameWonEvent;
+    public UnityEvent OnGameManagerLoaded;
 
     private float currentTime;
 
@@ -49,8 +50,11 @@ public class GameManager : MonoBehaviour
             OnGameOverEvent = new UnityEvent();
         if (OnGameWonEvent == null)
             OnGameWonEvent = new UnityEvent();
+        if (OnGameManagerLoaded == null)
+            OnGameManagerLoaded = new UnityEvent();
 
         MainCamera = Camera.main;
+        OnGameManagerLoaded.Invoke();
 
         StartCoroutine(StartingCountdown());
     }
@@ -108,12 +112,6 @@ public class GameManager : MonoBehaviour
             if (s_Instance == null)
             {
                 s_Instance = FindObjectOfType(typeof(GameManager)) as GameManager;
-            }
-
-            if (s_Instance == null)
-            {
-                var obj = new GameObject("GameManager");
-                s_Instance = obj.AddComponent<GameManager>();
             }
 
             return s_Instance;
