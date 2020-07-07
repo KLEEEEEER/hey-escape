@@ -18,14 +18,17 @@ public class WindowExit : MonoBehaviour, IInteractable
     public void DropRope()
     {
         spriteRenderer.sprite = closedWithRopeSprite;
-        isClosed = false;
     }
 
     public void OpenWindow()
     {
-        openingSound.Play();
-        spriteRenderer.sprite = openedWithRopeSprite;
-        currentWindowExitState = WindowExitState.OpenedWithRope;
+        if (isClosed)
+        {
+            openingSound.Play();
+            spriteRenderer.sprite = openedWithRopeSprite;
+            currentWindowExitState = WindowExitState.OpenedWithRope;
+            isClosed = false;
+        }
     }
 
     public void PlayerWait()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class CharacterController2D : MonoBehaviour
@@ -22,6 +23,9 @@ public class CharacterController2D : MonoBehaviour
     public float HorizontalMove = 10f;
     public float VerticalMove = 5f;
     [HideInInspector] public float DefaultGravityScale;
+    [SerializeField] Joystick joystick;
+    [SerializeField] float climbingSpeed = 5;
+    public bool IsMobileJumpPressed = false;
 
 
     [Header("Components")]
@@ -166,5 +170,29 @@ public class CharacterController2D : MonoBehaviour
     public void OnGameOver()
     {
         TransitionToState(DisableState);
+    }
+
+
+
+
+    public void OnMobileJumpButtonHold(BaseEventData data)
+    {
+        IsMobileJumpPressed = true;
+    }
+    public void OnMobileJumpButtonRelease(BaseEventData data)
+    {
+        IsMobileJumpPressed = false;
+    }
+    public void OnMobileUseButtonClicked(BaseEventData data)
+    {
+        if (CurrentState == InWindowState)
+        {
+            if (GameManager.instance.PlayerRenderer != null) GameManager.instance.PlayerRenderer.enabled = true;
+            GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.IdleState);
+            GameManager.instance.PlayerMovement.disableMovement = false;
+            GameManager.instance.PlayerComponent.UnhidePlayer();
+            InWindowState.OnWindowExit.Invoke();
+            InWindowState.OnWindowExit.RemoveAllListeners();
+        }
     }
 }

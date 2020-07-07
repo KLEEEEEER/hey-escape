@@ -87,8 +87,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void TogglePauseMenu()
+    public void TogglePauseMenu()
     {
+        if (isGameOver) return;
+
         if (currentState == State.Paused)
         {
             pauseScreen.SetActive(false);

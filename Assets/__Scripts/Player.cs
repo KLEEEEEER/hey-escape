@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     {
         if (GameManager.instance.IsGameOver) return;
 
+#if UNITY_STANDALONE
 
         if (!playerMovement.isPlayerMovingDisabled() && Input.GetKeyDown(KeyCode.Q) && killables.Count > 0)
         {
@@ -99,6 +100,29 @@ public class Player : MonoBehaviour
             currentHidePlace = null;
             isHidden = false;
         }
+#endif
+
+
+        #if UNITY_ANDROID || UNITY_IPHONE
+        if (GameManager.instance.CharacterController2D.Vertical > 0 && !isHidden && hideplaces.Count > 0)
+        {
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsRunning", false);
+            animator.SetBool("IsGrounded", true);
+            if (hideplaces[0].IsAccessible())
+            {
+                hideplaces[0].Hide();
+                currentHidePlace = hideplaces[0];
+                isHidden = true;
+            }
+        }
+        if (GameManager.instance.CharacterController2D.Vertical < 0 && isHidden && currentHidePlace != null)
+        {
+            currentHidePlace.Unhide();
+            currentHidePlace = null;
+            isHidden = false;
+        }
+#endif
     }
 
     private void FixedUpdate()
@@ -172,6 +196,52 @@ public class Player : MonoBehaviour
         }
 
         
+    }
+
+    public void KillButtonPressed()
+    {
+        if (playerMovement.isPlayerMovingDisabled() || GameManager.instance.IsGameOver) return;
+
+        if (killables.Count > 0)
+        {
+            foreach (IKillable killable in killables)
+            {
+                animator.SetTrigger("Kill");
+                killable.Kill();
+            }
+        }
+    }
+    public void UsingButtonPressed()
+    {
+        if (playerMovement.isPlayerMovingDisabled() || GameManager.instance.IsGameOver) return;
+
+        if (searchables.Count > 0)
+        {
+            animator.SetTrigger("Search");
+
+            foreach (ISearchable searchable in searchables)
+            {
+                List<InventoryItem> enemyItems = searchable.Search();
+                if (enemyItems.Count > 0)
+                {
+                    foreach (InventoryItem item in enemyItems)
+                    {
+                        Inventory.instance.AddItem(item);
+                    }
+                }
+            }
+        }
+
+        if (interactables.Count > 0)
+        {
+            foreach (IInteractable interactable in interactables)
+            {
+                animator.SetBool("IsJumping", false);
+                animator.SetBool("IsRunning", false);
+                animator.SetBool("IsGrounded", true);
+                interactable.Interact();
+            }
+        }
     }
 
     public void HidePlayer()

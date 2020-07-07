@@ -36,7 +36,11 @@ public class CharacterControllerIdleState : CharacterControllerBaseState
     {
         if (GameManager.instance.IsGameOver) return;
 
+#if UNITY_ANDROID || UNITY_IPHONE
+        if (player.IsMobileJumpPressed)
+#else
         if (Input.GetKeyDown(KeyCode.Space))
+#endif
         {
             player.Rigidbody2D.AddForce(new Vector2(0f, player.JumpForce));
             player.TransitionToState(player.JumpingState);

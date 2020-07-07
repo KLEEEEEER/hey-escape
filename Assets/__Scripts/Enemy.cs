@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
     IEnumerator Move()
     {
-        if (GameManager.instance.IsGameOver)
+        if (GameManager.instance != null && GameManager.instance.IsGameOver)
         {
             yield return new WaitForSeconds(GameManager.instance.GetStartCountdownTime());
         }
