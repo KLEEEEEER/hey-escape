@@ -4716,7 +4716,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4897,7 +4897,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4942,10 +4942,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowExit: {fileID: 0}
+  windowsExitToDropRope: []
   openedSprite: {fileID: 21300000, guid: 3046676065dee7347933789d6c24aa1e, type: 3}
   openedWithRopeSprite: {fileID: 21300000, guid: ba7b78d2a28a7c44f9d379375d801a67,
     type: 3}
+  openedWithRopeAndPlayerSprite: {fileID: 0}
   spriteRenderer: {fileID: 6236145524760743919}
+  ExitPoint: {fileID: 0}
+  openingSound: {fileID: 0}
   windowEnterState: 0
 --- !u!61 &1600843854378678011
 BoxCollider2D:

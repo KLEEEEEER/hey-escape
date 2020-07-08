@@ -40,8 +40,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 5000;
         QualitySettings.vSyncCount = 0;
+        Screen.SetResolution(Mathf.RoundToInt(Screen.width * 0.75f), Mathf.RoundToInt(Screen.height * 0.75f), true);
         Time.timeScale = 1;
         PlayerInitialScale = Player.localScale;
         PlayerRenderer = Player.GetComponent<SpriteRenderer>();
@@ -80,8 +81,8 @@ public class GameManager : MonoBehaviour
 
         currentTime += Time.deltaTime;
 
-        if (currentTimeText != null)
-            currentTimeText.text = GetCurrentTimeString();
+        /*if (currentTimeText != null)
+            currentTimeText.text = GetCurrentTimeString();*/
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

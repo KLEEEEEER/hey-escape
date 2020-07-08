@@ -31,6 +31,11 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        s_Instance = null;
+    }
+
     public void StartLoading()
     {
         LoadLevel();

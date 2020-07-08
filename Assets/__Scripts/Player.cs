@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
 
 
         #if UNITY_ANDROID || UNITY_IPHONE
-        if (GameManager.instance.CharacterController2D.Vertical > 0 && !isHidden && hideplaces.Count > 0)
+        if (GameManager.instance.CharacterController2D.Vertical > 0.8f && !isHidden && hideplaces.Count > 0)
         {
             animator.SetBool("IsJumping", false);
             animator.SetBool("IsRunning", false);
@@ -116,7 +116,7 @@ public class Player : MonoBehaviour
                 isHidden = true;
             }
         }
-        if (GameManager.instance.CharacterController2D.Vertical < 0 && isHidden && currentHidePlace != null)
+        if (GameManager.instance.CharacterController2D.Vertical < 0.8f && isHidden && currentHidePlace != null)
         {
             currentHidePlace.Unhide();
             currentHidePlace = null;
@@ -175,7 +175,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (killables.Count > 0)
+        /*if (killables.Count > 0)
         {
             if (!qButton.activeSelf)
                 qButton.SetActive(true);
@@ -193,7 +193,7 @@ public class Player : MonoBehaviour
         else
         {
             eButton.SetActive(false);
-        }
+        }*/
 
         
     }
