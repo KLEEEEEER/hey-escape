@@ -4399,7 +4399,7 @@ MonoBehaviour:
   VerticalMove: 10
   DefaultGravityScale: 0
   joystick: {fileID: 1597213855}
-  climbingSpeed: 5
+  climbingSpeed: 13
   IsMobileJumpPressed: 0
   Animator: {fileID: 1443288901}
   OnJumpEvent:
@@ -4573,7 +4573,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1443288893}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -6013,7 +6013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 723563582897465662, guid: 6d2a0f9f48e735049904335ec223b4de, type: 3}
+  - {fileID: 723563582897465662, guid: b8b025dcc440dc74cbe94bca3525d7a3, type: 3}
   - {fileID: 723563582897465662, guid: 52eb3c4645561dd459161d5fb4cc4de2, type: 3}
   - {fileID: 723563582897465662, guid: 1abef4170d1817c4ca88392328c8a5e4, type: 3}
   - {fileID: 723563582897465662, guid: e2fa00d4fde15384c8cad19a7d35cc24, type: 3}

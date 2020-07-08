@@ -35,7 +35,7 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
     {
         player.Rigidbody2D.gravityScale = 0f;
         player.Rigidbody2D.velocity = new Vector2(0, 0);
-        player.transform.position = new Vector2(player.transform.position.x + player.Horizontal * player.ClimbingSpeedMultiplier * Time.deltaTime, player.transform.position.y + player.Vertical * player.ClimbingSpeedMultiplier * Time.deltaTime);
+        player.transform.position = new Vector2(player.transform.position.x + player.Horizontal * player.ClimbingSpeedMultiplier * Time.deltaTime, player.transform.position.y + Mathf.Ceil(player.Vertical) * player.ClimbingSpeedMultiplier * Time.deltaTime);
     }
     public override void OnTriggerExit2D(CharacterController2D player, Collider2D collision)
     {

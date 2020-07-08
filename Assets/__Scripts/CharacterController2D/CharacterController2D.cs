@@ -24,7 +24,7 @@ public class CharacterController2D : MonoBehaviour
     public float VerticalMove = 5f;
     [HideInInspector] public float DefaultGravityScale;
     [SerializeField] Joystick joystick;
-    [SerializeField] float climbingSpeed = 5;
+    public float climbingSpeed = 10;
     public bool IsMobileJumpPressed = false;
 
 
