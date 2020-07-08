@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
         Time.timeScale = 1;
         PlayerInitialScale = Player.localScale;
         PlayerRenderer = Player.GetComponent<SpriteRenderer>();
