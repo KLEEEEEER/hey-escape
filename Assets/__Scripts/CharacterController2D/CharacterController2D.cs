@@ -85,8 +85,6 @@ public class CharacterController2D : MonoBehaviour
 
         DefaultGravityScale = rigidbody2D.gravityScale;
 
-        Application.targetFrameRate = 60;
-
         TransitionToState(IdleState);
     }
 

@@ -9,6 +9,8 @@ public class MainMenu : MenuPageChanger
     [SerializeField] private SettingsBehaviour settingsBehaviour;
     private void Start()
     {
+        StartupObject.SetSettings();
+
         LevelFader.instance.FadeIn();
         settingsBehaviour.setStartMixerPosition();
     }

@@ -40,9 +40,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 5000;
-        QualitySettings.vSyncCount = 0;
-        Screen.SetResolution(Mathf.RoundToInt(Screen.width * 0.75f), Mathf.RoundToInt(Screen.height * 0.75f), true);
         Time.timeScale = 1;
         PlayerInitialScale = Player.localScale;
         PlayerRenderer = Player.GetComponent<SpriteRenderer>();
