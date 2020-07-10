@@ -26,6 +26,10 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] Joystick joystick;
     public float climbingSpeed = 10;
     public bool IsMobileJumpPressed = false;
+    public float jumpFromLadderForce = 1000f;
+
+    public Transform CheckForGroundHead;
+    public Transform CheckForGroundFeet;
 
 
     [Header("Components")]
@@ -163,6 +167,7 @@ public class CharacterController2D : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(CeilingCheck.position, CeilingRadius);
         Gizmos.DrawWireSphere(GroundCheck.position, GroundedRadius);
+        Gizmos.DrawLine(CheckForGroundFeet.position, CheckForGroundHead.position);
     }
 
     public void OnGameOver()
@@ -191,6 +196,15 @@ public class CharacterController2D : MonoBehaviour
             GameManager.instance.PlayerComponent.UnhidePlayer();
             InWindowState.OnWindowExit.Invoke();
             InWindowState.OnWindowExit.RemoveAllListeners();
+        } 
+        else if (CurrentState == LadderState)
+        {
+            //LadderState.playerCanControlHorizontal();
+            if (!LadderState.IsGroundAhead())
+            {
+                float forceFromLadder = (isLookingRight) ? jumpFromLadderForce : (jumpFromLadderForce * -1f);
+                rigidbody2D.AddForce(new Vector2(forceFromLadder, 0f));
+            }
         }
     }
 }
