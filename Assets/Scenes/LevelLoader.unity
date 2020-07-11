@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4474,6 +4474,7 @@ MonoBehaviour:
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
+  isLookingRight: 1
 --- !u!114 &1443288896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6078,7 +6079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 723563582897465662, guid: b8b025dcc440dc74cbe94bca3525d7a3, type: 3}
+  - {fileID: 723563582897465662, guid: 154622e915fe77140ac08a011f0b7c1f, type: 3}
   - {fileID: 723563582897465662, guid: 52eb3c4645561dd459161d5fb4cc4de2, type: 3}
   - {fileID: 723563582897465662, guid: 1abef4170d1817c4ca88392328c8a5e4, type: 3}
   - {fileID: 723563582897465662, guid: e2fa00d4fde15384c8cad19a7d35cc24, type: 3}
