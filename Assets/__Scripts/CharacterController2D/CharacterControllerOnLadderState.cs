@@ -15,6 +15,7 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
         OnUseButtonPressed.AddListener(useButtonPressed);
 #endif
         player.Animator.SetBool("IsJumping", false);
+        player.Animator.SetBool("IsClimbing", true);
         currentLadders = 1;
         canControlHorizontal = false;
     }
@@ -56,6 +57,7 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
         {
             player.transform.position = new Vector2(player.transform.position.x + player.Horizontal * player.ClimbingSpeedMultiplier * Time.deltaTime, player.transform.position.y + Mathf.Ceil(player.Vertical) * player.ClimbingSpeedMultiplier * Time.deltaTime);
         }
+        player.Animator.SetFloat("ClimbDirection", Mathf.Clamp(player.joystick.Vertical, -1f, 1f));
     }
     public override void OnTriggerExit2D(CharacterController2D player, Collider2D collision)
     {
@@ -66,6 +68,8 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
             if (currentLadders <= 0)
             {
                 OnUseButtonPressed.RemoveListener(useButtonPressed);
+                player.Animator.SetBool("IsClimbing", false);
+                player.Animator.speed = 1f;
                 player.TransitionToState(player.IdleState);
             }
         }
