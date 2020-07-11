@@ -23,9 +23,13 @@ public class CharacterController2D : MonoBehaviour
     public float HorizontalMove = 10f;
     public float VerticalMove = 5f;
     [HideInInspector] public float DefaultGravityScale;
-    [SerializeField] Joystick joystick;
+    public Joystick joystick;
     public float climbingSpeed = 10;
     public bool IsMobileJumpPressed = false;
+    public float jumpFromLadderForce = 1000f;
+
+    public Transform CheckForGroundHead;
+    public Transform CheckForGroundFeet;
 
 
     [Header("Components")]
@@ -59,7 +63,7 @@ public class CharacterController2D : MonoBehaviour
     private float vertical;
     public float Horizontal { get => horizontal; }
     public float Vertical { get => vertical; }
-    private bool isLookingRight = true;
+    public bool isLookingRight = true;
 
     public void TransitionToState(CharacterControllerBaseState state)
     {
@@ -163,15 +167,13 @@ public class CharacterController2D : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(CeilingCheck.position, CeilingRadius);
         Gizmos.DrawWireSphere(GroundCheck.position, GroundedRadius);
+        Gizmos.DrawLine(CheckForGroundFeet.position, CheckForGroundHead.position);
     }
 
     public void OnGameOver()
     {
         TransitionToState(DisableState);
     }
-
-
-
 
     public void OnMobileJumpButtonHold(BaseEventData data)
     {
@@ -183,14 +185,6 @@ public class CharacterController2D : MonoBehaviour
     }
     public void OnMobileUseButtonClicked(BaseEventData data)
     {
-        if (CurrentState == InWindowState)
-        {
-            if (GameManager.instance.PlayerRenderer != null) GameManager.instance.PlayerRenderer.enabled = true;
-            GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.IdleState);
-            GameManager.instance.PlayerMovement.disableMovement = false;
-            GameManager.instance.PlayerComponent.UnhidePlayer();
-            InWindowState.OnWindowExit.Invoke();
-            InWindowState.OnWindowExit.RemoveAllListeners();
-        }
+        CharacterControllerBaseState.OnUseButtonPressed.Invoke();
     }
 }
