@@ -11,6 +11,9 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
 
     public override void EnterState(CharacterController2D player)
     {
+#if UNITY_ANDROID || UNITY_IPHONE
+        OnUseButtonPressed.AddListener(useButtonPressed);
+#endif
         player.Animator.SetBool("IsJumping", false);
         currentLadders = 1;
         canControlHorizontal = false;
@@ -61,7 +64,10 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
         {
             currentLadders--;
             if (currentLadders <= 0)
+            {
+                OnUseButtonPressed.RemoveListener(useButtonPressed);
                 player.TransitionToState(player.IdleState);
+            }
         }
     }
 
@@ -74,4 +80,16 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
     {
         return isGroundAhead;
     }
+
+#if UNITY_ANDROID || UNITY_IPHONE
+    private void useButtonPressed()
+    {
+        if (!IsGroundAhead())
+        {
+            CharacterController2D player = GameManager.instance.CharacterController2D;
+            float forceFromLadder = (player.isLookingRight) ? player.jumpFromLadderForce : (player.jumpFromLadderForce * -1f);
+            player.Rigidbody2D.AddForce(new Vector2(forceFromLadder, 0f));
+        }
+    }
+#endif
 }

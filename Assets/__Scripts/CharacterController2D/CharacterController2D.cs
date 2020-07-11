@@ -63,7 +63,7 @@ public class CharacterController2D : MonoBehaviour
     private float vertical;
     public float Horizontal { get => horizontal; }
     public float Vertical { get => vertical; }
-    private bool isLookingRight = true;
+    public bool isLookingRight = true;
 
     public void TransitionToState(CharacterControllerBaseState state)
     {
@@ -175,9 +175,6 @@ public class CharacterController2D : MonoBehaviour
         TransitionToState(DisableState);
     }
 
-
-
-
     public void OnMobileJumpButtonHold(BaseEventData data)
     {
         IsMobileJumpPressed = true;
@@ -188,23 +185,6 @@ public class CharacterController2D : MonoBehaviour
     }
     public void OnMobileUseButtonClicked(BaseEventData data)
     {
-        if (CurrentState == InWindowState)
-        {
-            if (GameManager.instance.PlayerRenderer != null) GameManager.instance.PlayerRenderer.enabled = true;
-            GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.IdleState);
-            GameManager.instance.PlayerMovement.disableMovement = false;
-            GameManager.instance.PlayerComponent.UnhidePlayer();
-            InWindowState.OnWindowExit.Invoke();
-            InWindowState.OnWindowExit.RemoveAllListeners();
-        } 
-        else if (CurrentState == LadderState)
-        {
-            //LadderState.playerCanControlHorizontal();
-            if (!LadderState.IsGroundAhead())
-            {
-                float forceFromLadder = (isLookingRight) ? jumpFromLadderForce : (jumpFromLadderForce * -1f);
-                rigidbody2D.AddForce(new Vector2(forceFromLadder, 0f));
-            }
-        }
+        CharacterControllerBaseState.OnUseButtonPressed.Invoke();
     }
 }
