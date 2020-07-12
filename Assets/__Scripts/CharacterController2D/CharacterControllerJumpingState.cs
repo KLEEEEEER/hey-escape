@@ -51,6 +51,7 @@ public class CharacterControllerJumpingState : CharacterControllerBaseState
     {
         if (collision.CompareTag("Climbable"))
         {
+            player.transform.position = new Vector2(collision.transform.position.x, player.transform.position.y);
             player.TransitionToState(player.LadderState);
         }
     }
