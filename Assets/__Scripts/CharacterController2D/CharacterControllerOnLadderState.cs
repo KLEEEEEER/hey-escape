@@ -42,6 +42,16 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
             player.GroundLayers
         );
         isGroundAhead = (hits.Length > 0);
+        if (isGroundAhead)
+        {
+            if (player.arrow.activeSelf)
+                player.arrow.SetActive(false);
+        }
+        else
+        {
+            if (!player.arrow.activeSelf)
+                player.arrow.SetActive(true);
+        }
         Debug.Log("isGroundAhead = " + isGroundAhead);
     }
 
@@ -70,6 +80,7 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
                 OnUseButtonPressed.RemoveListener(useButtonPressed);
                 player.Animator.SetBool("IsClimbing", false);
                 player.Animator.speed = 1f;
+                player.arrow.SetActive(false);
                 player.TransitionToState(player.IdleState);
             }
         }

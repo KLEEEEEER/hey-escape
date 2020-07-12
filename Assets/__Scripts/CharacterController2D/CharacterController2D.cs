@@ -65,6 +65,8 @@ public class CharacterController2D : MonoBehaviour
     public float Vertical { get => vertical; }
     public bool isLookingRight = true;
 
+    [SerializeField] public GameObject arrow;
+
     public void TransitionToState(CharacterControllerBaseState state)
     {
         currentState = state;

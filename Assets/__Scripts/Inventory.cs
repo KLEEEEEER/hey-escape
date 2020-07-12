@@ -44,7 +44,7 @@ public class Inventory : MonoBehaviour
     public void AddItem(InventoryItem item)
     {
         items.Add(item);
-        OnInventoryChanged.Invoke("Added " + item.Name);
+        OnInventoryChanged.Invoke("You found " + item.Name);
     }
 
     public InventoryItem HasItem(System.Type type)
