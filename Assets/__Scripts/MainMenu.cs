@@ -8,8 +8,18 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MenuPageChanger
 {
     [SerializeField] private SettingsBehaviour settingsBehaviour;
+    [SerializeField] private GameObject startWithTutorialButton;
     private void Start()
     {
+        if (PlayerPrefs.GetInt("tutorial", 0) == 0)
+        {
+            startWithTutorialButton.SetActive(true);
+        }
+        else
+        {
+            startWithTutorialButton.SetActive(false);
+        }
+
         StartupObject.SetSettings();
 
         LevelFader.instance.FadeIn();
@@ -18,6 +28,12 @@ public class MainMenu : MenuPageChanger
 
     public void LoadLevelLoader()
     {
+        StartCoroutine(LoadLevelLoaderCoroutine());
+    }
+
+    public void LoadLevelLoaderWithTutorial()
+    {
+        PlayerPrefs.SetInt("tutorial", 1);
         StartCoroutine(LoadLevelLoaderCoroutine());
     }
 

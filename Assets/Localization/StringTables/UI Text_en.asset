@@ -104,6 +104,10 @@ MonoBehaviour:
     m_Localized: 'Best time:'
     m_Metadata:
       m_Items: []
+  - m_Id: 22
+    m_Localized: Start with tutorial
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:

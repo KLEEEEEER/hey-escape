@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     enum State { GameOver, Playing, Paused }
-    State currentState = State.GameOver;
+    State currentState = State.Playing;
 
     public Transform Player;
     public PlayerMovement PlayerMovement;
@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnGameManagerLoaded;
 
     private float currentTime;
+    private bool countingTime = false;
+    private bool isCountdownCalled = false;
+    public bool IsCountdownCalled { get => isCountdownCalled; }
 
     private void Start()
     {
@@ -55,13 +58,19 @@ public class GameManager : MonoBehaviour
 
         MainCamera = Camera.main;
         OnGameManagerLoaded.Invoke();
+    }
 
+    public void StartCountdown()
+    {
+        currentState = State.GameOver;
         StartCoroutine(StartingCountdown());
+        isCountdownCalled = true;
     }
 
     IEnumerator StartingCountdown()
     {
         isGameOver = true;
+        CountDownTimer.gameObject.SetActive(true);
         for (int i = startCountdownTime; i > 0; i--)
         {
             CountDownTimer.text = i.ToString();
@@ -70,13 +79,20 @@ public class GameManager : MonoBehaviour
         CountDownTimer.gameObject.SetActive(false);
         isGameOver = false;
         currentState = State.Playing;
+        startTimer();
+    }
+
+    private void startTimer()
+    {
+        countingTime = true;
     }
 
     private void Update()
     {
         if (isGameOver) return;
 
-        currentTime += Time.deltaTime;
+        if (countingTime)
+            currentTime += Time.deltaTime;
 
         /*if (currentTimeText != null)
             currentTimeText.text = GetCurrentTimeString();*/
