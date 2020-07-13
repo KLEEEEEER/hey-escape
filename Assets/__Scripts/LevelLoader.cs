@@ -5,12 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
+    [SerializeField] private GameObject[] tutorialLevels;
     [SerializeField] private GameObject[] levels;
     [SerializeField] private GameObject currentLevel;
 
     private int currentLevelIndex = 0;
+    private int tutorialLevelIndex = 0;
 
     private static LevelLoader s_Instance = null;
+
+    private bool isTutorialApproved = true;
+    private bool inTutorial = false;
 
     public static LevelLoader instance
     {
@@ -48,13 +53,14 @@ public class LevelLoader : MonoBehaviour
             GameManager.instance.GameWon();
             return; 
         }
-        currentLevelIndex++;
+        Debug.Log($"tutorialLevelIndex = {tutorialLevelIndex}, currentLevelIndex = {currentLevelIndex}");
         LoadLevel();
     }
 
     public void LoadFirstLevel()
     {
         currentLevelIndex = 0;
+        tutorialLevelIndex = 0;
         SceneManager.LoadScene("LevelLoader");
     }
 
@@ -66,12 +72,32 @@ public class LevelLoader : MonoBehaviour
 
     private void LoadLevel()
     {
-        //LevelFader.instance.FadeOut();
         CleanCurrentLevelObject();
-        Level levelComponent = levels[currentLevelIndex].GetComponent<Level>();
+
+        if (isTutorialApproved && tutorialLevels.Length > 0 && tutorialLevelIndex < tutorialLevels.Length)
+        {
+            Debug.Log("loading tutorial level");
+            inTutorial = true;
+            InstantiateCurrentLevel(tutorialLevels, tutorialLevelIndex);
+            tutorialLevelIndex++;
+        } 
+        else
+        {
+            Debug.Log("loading normal level");
+            inTutorial = false;
+            InstantiateCurrentLevel(levels, currentLevelIndex);
+            currentLevelIndex++;
+        }
+
+        LevelFader.instance.FadeIn();
+    }
+
+    private void InstantiateCurrentLevel(GameObject[] levelsSource, int levelIndex)
+    {
+        Level levelComponent = levelsSource[levelIndex].GetComponent<Level>();
         if (levelComponent != null)
         {
-            Instantiate(levels[currentLevelIndex], currentLevel.transform);
+            Instantiate(levelsSource[levelIndex], currentLevel.transform);
             if (GameManager.instance.Player != null)
             {
                 GameManager.instance.Player.gameObject.SetActive(false);
@@ -79,7 +105,6 @@ public class LevelLoader : MonoBehaviour
                 GameManager.instance.Player.gameObject.SetActive(true);
             }
         }
-        LevelFader.instance.FadeIn();
     }
 
     private void CleanCurrentLevelObject()

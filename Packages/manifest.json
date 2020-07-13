@@ -1,5 +1,6 @@
 {
   "dependencies": {
+	"com.unity.localization": "0.7.1-preview",
 	"com.unity.render-pipelines.universal": "7.1.8",
     "com.unity.2d.pixel-perfect": "2.0.4",
     "com.unity.2d.sprite": "1.0.0",

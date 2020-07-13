@@ -3,11 +3,20 @@ using UnityEngine.UI;
 
 public class FloorsPassedText : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        Text text = GetComponent<Text>();
-        int levelsCount = LevelLoader.instance.GetLevelsCount();
-        int currentLevel = LevelLoader.instance.GetCurrentLevelNumber();
-        text.text = $"You stopped on {currentLevel} out of {levelsCount} floors.";
+    public int current_floor_number { get 
+        {
+            if (LevelLoader.instance != null)
+                return LevelLoader.instance.GetCurrentLevelNumber();
+            else
+                return 0;
+        } 
+    }
+    public int floors_number { get
+        {
+            if (LevelLoader.instance != null)
+                return LevelLoader.instance.GetLevelsCount();
+            else
+                return 0;
+        }
     }
 }

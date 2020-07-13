@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 namespace KleeeeeerUI
 {
@@ -25,16 +26,38 @@ namespace KleeeeeerUI
         [SerializeField] private Vector2 minMaxMusicVolume = new Vector2(-60f, -17f);
         [SerializeField] private Vector2 minMaxFxVolume = new Vector2(-60f, 0f);
 
-        public void Start()
+        [SerializeField] Dropdown languageDropdown;
+
+        IEnumerator Start()
         {
-            //setStartMixerPosition();
+            Debug.Log("SettingsBehaviour Start");
+            yield return LocalizationSettings.InitializationOperation;
+
+            var options = new List<Dropdown.OptionData>();
+            int selected = 0;
+            for (int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; ++i)
+            {
+                var locale = LocalizationSettings.AvailableLocales.Locales[i];
+                if (LocalizationSettings.SelectedLocale == locale)
+                    selected = i;
+                options.Add(new Dropdown.OptionData(locale.name));
+            }
+            languageDropdown.options = options;
+
+            languageDropdown.value = selected;
+            languageDropdown.onValueChanged.AddListener(LocaleSelected);
+        }
+
+        static void LocaleSelected(int index)
+        {
+            PlayerPrefs.SetInt("language_index", index);
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
         }
 
         private void OnEnable()
         {
             masterVolumeSlider.onValueChanged.AddListener(masterVolumeChanged);
             
-
             musicVolumeSlider.onValueChanged.AddListener(musicVolumeChanged);
             fxVolumeSlider.onValueChanged.AddListener(fxVolumeChanged);
             mutedToggle.onValueChanged.AddListener(muteSoundToggle);

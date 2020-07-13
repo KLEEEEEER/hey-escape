@@ -93,7 +93,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
                 windowEnterState = WindowEnterState.Opened;
                 break;
             case WindowEnterState.Opened:
-                if (Inventory.instance.HasItem(typeof(Rope)))
+                if (Inventory.instance.HasItem(typeof(Rope)) && windowExit != null)
                 {
                     SetRope();
                     windowEnterState = WindowEnterState.OpenedWithRope;
@@ -102,7 +102,8 @@ public class WindowEnter : MonoBehaviour, IInteractable
             case WindowEnterState.PlayerInside:
                 break;
             case WindowEnterState.OpenedWithRope:
-                StartCoroutine(EnterWindowAnimation());
+                if (windowExit != null)
+                    StartCoroutine(EnterWindowAnimation());
                 break;
         }
     }
