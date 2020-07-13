@@ -4420,7 +4420,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.18
+  m_Intensity: 0.25
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000715b299dc56808ba89d5c882
   m_LightCookieSprite: {fileID: 0}
@@ -6875,7 +6875,7 @@ MonoBehaviour:
   tutorialLevels:
   - {fileID: 723563582897465662, guid: 0c48c11e7bc2cb741a54b4faedb8bd6f, type: 3}
   levels:
-  - {fileID: 723563582897465662, guid: b8b025dcc440dc74cbe94bca3525d7a3, type: 3}
+  - {fileID: 723563582897465662, guid: 6d2a0f9f48e735049904335ec223b4de, type: 3}
   - {fileID: 723563582897465662, guid: 52eb3c4645561dd459161d5fb4cc4de2, type: 3}
   - {fileID: 723563582897465662, guid: 1abef4170d1817c4ca88392328c8a5e4, type: 3}
   - {fileID: 723563582897465662, guid: e2fa00d4fde15384c8cad19a7d35cc24, type: 3}

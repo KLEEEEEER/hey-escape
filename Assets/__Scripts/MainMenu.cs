@@ -9,9 +9,15 @@ public class MainMenu : MenuPageChanger
 {
     [SerializeField] private SettingsBehaviour settingsBehaviour;
     [SerializeField] private GameObject startWithTutorialButton;
-    private void Start()
+    IEnumerator Start()
     {
-        if (PlayerPrefs.GetInt("tutorial", 0) == 0)
+        yield return LocalizationSettings.InitializationOperation;
+
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("language_index", 0)];
+
+        yield return new WaitForSeconds(0.5f);
+
+        if (PlayerPrefs.GetInt("tutorial", 1) == 0)
         {
             startWithTutorialButton.SetActive(true);
         }
