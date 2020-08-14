@@ -65,21 +65,6 @@ public class PlayerMovement : MonoBehaviour
         //Horizontal = Input.GetAxisRaw("Horizontal") * speed;
         //Vertical = Input.GetAxisRaw("Vertical") * climbingSpeed;
 #endif
-        //animator.SetFloat("Speed", Mathf.Abs(Horizontal));
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //controller.Jump();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            //controller.crouchButtonPressed = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.S))
-        {
-            //controller.crouchButtonPressed = false;
-        }
     }
 
     public void OnLanding()

@@ -104,13 +104,13 @@ public class CharacterController2D : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical") * speed;
 #endif
         checkCharacterRotation();
-        checkCharacterGrounded();
 
         currentState.Update(this);
     }
 
     private void FixedUpdate()
     {
+        checkCharacterGrounded();
         currentState.FixedUpdate(this);
     }
 

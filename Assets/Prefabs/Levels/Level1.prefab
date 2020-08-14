@@ -955,8 +955,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1658233999
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1757,9 +1757,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1173854011
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -2040,9 +2040,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2100767351
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 1a2e00dafc3e4484ea5ecbde012920d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2210,25 +2210,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4539054761081424557, guid: be27dd34ad347b449bac4fa6423a18de,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 6692408372075830811, guid: be27dd34ad347b449bac4fa6423a18de,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 7014727390754723490, guid: be27dd34ad347b449bac4fa6423a18de,
         type: 3}
       propertyPath: m_Name
       value: ReceptionDeskRight
-      objectReference: {fileID: 0}
-    - target: {fileID: 7014727390754723490, guid: be27dd34ad347b449bac4fa6423a18de,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be27dd34ad347b449bac4fa6423a18de, type: 3}
@@ -2636,6 +2621,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3265422405743725614}
     m_Modifications:
+    - target: {fileID: 6783472249403329157, guid: e93938cd060de794b9a04a18f04a3122,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6783472249403329158, guid: e93938cd060de794b9a04a18f04a3122,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2695,11 +2685,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Flower3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6783472249403329159, guid: e93938cd060de794b9a04a18f04a3122,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e93938cd060de794b9a04a18f04a3122, type: 3}
@@ -2775,21 +2760,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door
-      objectReference: {fileID: 0}
-    - target: {fileID: 587084739819053079, guid: b7174f13f628a3f469f9cb51931be53c,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858252467849966313, guid: b7174f13f628a3f469f9cb51931be53c,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: -2100767351
-      objectReference: {fileID: 0}
-    - target: {fileID: 1858252467849966313, guid: b7174f13f628a3f469f9cb51931be53c,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7174f13f628a3f469f9cb51931be53c, type: 3}
@@ -3025,11 +2995,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ExitDoor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4376348475208331839, guid: ce216b24c8639fb4dbb8c0998d4898e0,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce216b24c8639fb4dbb8c0998d4898e0, type: 3}

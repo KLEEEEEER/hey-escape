@@ -18,7 +18,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] bool isHidden = false;
 
-    Collider2D[] colliders;
+    //Collider2D[] colliders;
+    Collider2D[] colliders = new Collider2D[10];
 
     //public bool nearHidePlace = false;
     //private IHidePlace hidePlace;
@@ -131,10 +132,16 @@ public class Player : MonoBehaviour
         killables.Clear();
         searchables.Clear();
         hideplaces.Clear();
-
-        colliders = Physics2D.OverlapCircleAll(enemyDetectionPosition.position, enemyDetectionRadius);
-        foreach (Collider2D collider in colliders)
+        int collidersFounded = 0;
+        //colliders = Physics2D.OverlapCircleAll(enemyDetectionPosition.position, enemyDetectionRadius);
+        collidersFounded = Physics2D.OverlapCircleNonAlloc(enemyDetectionPosition.position, enemyDetectionRadius, colliders);
+        //foreach (Collider2D collider in colliders)
+        for (int i = 0; i < collidersFounded; i++)
         {
+            Collider2D collider = colliders[i];
+            //Debug.Log(collider.gameObject.name);
+            if (collider.gameObject == gameObject) continue;
+
             IKillable killable = collider.GetComponent<IKillable>();
             if (killable != null)
             {
@@ -157,9 +164,13 @@ public class Player : MonoBehaviour
             }
         }
 
-        colliders = Physics2D.OverlapCircleAll(transform.position, interactibleDetectionRadius);
-        foreach (Collider2D collider in colliders)
+        //colliders = Physics2D.OverlapCircleAll(transform.position, interactibleDetectionRadius);
+        collidersFounded = Physics2D.OverlapCircleNonAlloc(transform.position, interactibleDetectionRadius, colliders);
+        //foreach (Collider2D collider in colliders)
+        for (int i = 0; i < collidersFounded; i++)
         {
+            Collider2D collider = colliders[i];
+
             if (collider.gameObject == gameObject) continue;
 
             IInteractable interactable = collider.GetComponent<IInteractable>();
