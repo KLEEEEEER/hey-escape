@@ -133,6 +133,10 @@ MonoBehaviour:
       Like a key to the exit door, for example.
     m_Metadata:
       m_Items: []
+  - m_Id: 28
+    m_Localized: You used
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:

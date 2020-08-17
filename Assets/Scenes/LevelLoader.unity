@@ -701,9 +701,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2100767351
+  m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 606a005d7f479e949beb14d5b4bfd36e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.6156863}
   m_FlipX: 0
@@ -3625,6 +3625,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+  youFoundStringLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:a6ef414c8130719468d9678be7e3d1d2
+    m_TableEntryReference:
+      m_KeyId: 11
+      m_Key: 
+  youUsedStringLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:a6ef414c8130719468d9678be7e3d1d2
+    m_TableEntryReference:
+      m_KeyId: 28
+      m_Key: 
 --- !u!1 &938494523
 GameObject:
   m_ObjectHideFlags: 0
@@ -5504,7 +5516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1456043580
 RectTransform:
   m_ObjectHideFlags: 0

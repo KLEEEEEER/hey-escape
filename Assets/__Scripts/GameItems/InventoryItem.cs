@@ -1,10 +1,20 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class InventoryItem : MonoBehaviour
 {
-    public string Name;
+    public LocalizedString nameLocalized;
+    [HideInInspector] public string nameString;
     public Sprite Icon;
+
+    public void Awake()
+    {
+        nameLocalized.RegisterChangeHandler(UpdateString);
+        Debug.Log(nameString);
+    }
+
+    public void UpdateString(string s) { nameString = s; }
 }
 
 /*public class InventoryEventArgs: EventArgs 

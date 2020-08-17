@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
     [SerializeField] Collider2D[] collidersToDisable;
     [SerializeField] GameObject flashlight;
     [SerializeField] InventoryItem[] items;
+    [SerializeField] SpriteRenderer itemSpriteRenderer;
+
 
     [SerializeField] BoxCollider2D aliveCollider;
     [SerializeField] BoxCollider2D deadCollider;
@@ -29,6 +31,11 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
     void Start()
     {
+        if (items.Length > 0 && items[0].Icon != null)
+        {
+            itemSpriteRenderer.sprite = items[0].Icon;
+        }
+
         StartCoroutine(Move());
         if (!facingRight) transform.Rotate(0f, 180f, 0f);
     }
@@ -134,6 +141,7 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
             Inventory.instance.ShowInventoryMessage("Enemy has no items");
         }
 
+        itemSpriteRenderer.sprite = null;
         items = null;
         return tempItems;
     }

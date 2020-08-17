@@ -64,11 +64,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d9f03aec31ac4444a9ac1de7aa7564c1, type: 3}
-    m_FontSize: 20
+    m_Font: {fileID: 12800000, guid: 293fc4d1abe2e5f418af89b1bbb44896, type: 3}
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 3
     m_AlignByGeometry: 0

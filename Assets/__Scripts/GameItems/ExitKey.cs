@@ -3,5 +3,4 @@ using UnityEngine.UI;
 
 public class ExitKey : InventoryItem
 {
-    
 }

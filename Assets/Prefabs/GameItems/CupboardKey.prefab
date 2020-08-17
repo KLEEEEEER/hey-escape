@@ -43,5 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db5eb52852e1694cb55ee480e3bb595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Cupboard Key
-  Icon: {fileID: 21300000, guid: 41ecd1ac411e7ad4cb5da8e3694c7eb3, type: 3}
+  nameLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:a6ef414c8130719468d9678be7e3d1d2
+    m_TableEntryReference:
+      m_KeyId: 29
+      m_Key: 
+  nameString: 
+  Icon: {fileID: 21300000, guid: e25c1bba4263a0046909466bd2658465, type: 3}

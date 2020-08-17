@@ -43,5 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57fab26f370db3c49a4f134e5de2e8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Rope
-  Icon: {fileID: 21300000, guid: 84e0a87775431a7449f9329a7493fe85, type: 3}
+  nameLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:a6ef414c8130719468d9678be7e3d1d2
+    m_TableEntryReference:
+      m_KeyId: 31
+      m_Key: 
+  nameString: 
+  Icon: {fileID: 21300000, guid: fd26e0be22b64d041aa00d176fb6547f, type: 3}

@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour
             InventoryItemUI inventoryItemUI = itemUI.GetComponent<InventoryItemUI>();
             if (inventoryItemUI != null)
             {
-                inventoryItemUI.SetInfo(item.Icon, item.Name);
+                inventoryItemUI.SetInfo(item.Icon, item.nameString);
             }
         }
 
