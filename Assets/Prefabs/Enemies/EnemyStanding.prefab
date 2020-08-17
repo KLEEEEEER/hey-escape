@@ -212,8 +212,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2100767351
-  m_SortingLayer: 3
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 40e164094bda1c04fb20d13c27e37e26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -252,10 +252,17 @@ MonoBehaviour:
   flashlight: {fileID: 1241278358745804299}
   items:
   - {fileID: 2724432006572005162, guid: 76880ca2e58f6fa46b5c777bfd24625b, type: 3}
+  itemSpriteRenderer: {fileID: 0}
   aliveCollider: {fileID: 1773906630532107506}
   deadCollider: {fileID: 884362769411611197}
   isDead: 0
   heySound: {fileID: 2404555988994850124}
+  hasNoItemsStringLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:a6ef414c8130719468d9678be7e3d1d2
+    m_TableEntryReference:
+      m_KeyId: 32
+      m_Key: 
 --- !u!61 &1773906630532107506
 BoxCollider2D:
   m_ObjectHideFlags: 0

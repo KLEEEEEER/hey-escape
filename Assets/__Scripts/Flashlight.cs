@@ -28,7 +28,6 @@ public class Flashlight : MonoBehaviour
 
         if (playerMovement != null && !GameManager.instance.IsGameOver)
         {
-            Debug.Log("playerMovement != null");
             if (GameManager.instance.PlayerComponent.isPlayerHidden() && enemy.isFacingRight() && !playerMovement.isVisibleLeft) return;
             if (GameManager.instance.PlayerComponent.isPlayerHidden() && !enemy.isFacingRight() && !playerMovement.isVisibleRight) return;
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
 
 public class Enemy : MonoBehaviour, IKillable, ISearchable
 {
@@ -29,6 +30,9 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
     [SerializeField] EnemyHeySound heySound;
 
+    public LocalizedString hasNoItemsStringLocalized;
+    private string hasNoItemsString;
+
     void Start()
     {
         if (items.Length > 0 && items[0].Icon != null)
@@ -38,7 +42,11 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
         StartCoroutine(Move());
         if (!facingRight) transform.Rotate(0f, 180f, 0f);
+
+        hasNoItemsStringLocalized.RegisterChangeHandler(UpdateHasNoItemsString);
     }
+
+    private void UpdateHasNoItemsString(string s) { hasNoItemsString = s; }
 
     IEnumerator Move()
     {
@@ -138,7 +146,7 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
         if (tempItems.Count <= 0)
         {
-            Inventory.instance.ShowInventoryMessage("Enemy has no items");
+            Inventory.instance.ShowInventoryMessage(hasNoItemsString);
         }
 
         itemSpriteRenderer.sprite = null;

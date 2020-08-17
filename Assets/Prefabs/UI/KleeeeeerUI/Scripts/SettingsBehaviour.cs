@@ -30,7 +30,6 @@ namespace KleeeeeerUI
 
         IEnumerator Start()
         {
-            Debug.Log("SettingsBehaviour Start");
             yield return LocalizationSettings.InitializationOperation;
 
             var options = new List<Dropdown.OptionData>();

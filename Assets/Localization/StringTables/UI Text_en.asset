@@ -137,6 +137,22 @@ MonoBehaviour:
     m_Localized: You used
     m_Metadata:
       m_Items: []
+  - m_Id: 29
+    m_Localized: Cupboard key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30
+    m_Localized: Exit key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31
+    m_Localized: Rope
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32
+    m_Localized: Enemy has no items
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
     00000000:

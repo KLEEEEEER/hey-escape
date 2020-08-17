@@ -52,7 +52,6 @@ public class CharacterControllerOnLadderState : CharacterControllerBaseState
             if (!player.arrow.activeSelf)
                 player.arrow.SetActive(true);
         }
-        Debug.Log("isGroundAhead = " + isGroundAhead);
     }
 
     public override void Update(CharacterController2D player)

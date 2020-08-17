@@ -11,7 +11,6 @@ public class InventoryItem : MonoBehaviour
     public void Awake()
     {
         nameLocalized.RegisterChangeHandler(UpdateString);
-        Debug.Log(nameString);
     }
 
     public void UpdateString(string s) { nameString = s; }

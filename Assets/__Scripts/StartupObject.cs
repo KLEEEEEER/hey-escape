@@ -10,7 +10,6 @@ public class StartupObject
     {
         if (!IsSettingsSet)
         {
-            Debug.Log("Settings are set");
             //Application.targetFrameRate = 5000;
             //QualitySettings.vSyncCount = 0;
             //Screen.SetResolution(Mathf.RoundToInt(Screen.width * 0.6f), Mathf.RoundToInt(Screen.height * 0.6f), true);

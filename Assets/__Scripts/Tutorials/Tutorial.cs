@@ -26,7 +26,6 @@ namespace Heygame
         {
             tutorialCanvases[currentActiveCanvasIndex].SetActive(false);
             currentActiveCanvasIndex++;
-            Debug.Log("currentActiveCanvasIndex = " + currentActiveCanvasIndex);
             if (tutorialCanvases[currentActiveCanvasIndex] != null)
                 tutorialCanvases[currentActiveCanvasIndex].SetActive(true);
         }

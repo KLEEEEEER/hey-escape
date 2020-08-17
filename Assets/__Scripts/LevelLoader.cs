@@ -55,7 +55,6 @@ public class LevelLoader : MonoBehaviour
             GameManager.instance.GameWon();
             return; 
         }
-        Debug.Log($"tutorialLevelIndex = {tutorialLevelIndex}, currentLevelIndex = {currentLevelIndex}");
         LoadLevel();
     }
 
@@ -79,7 +78,6 @@ public class LevelLoader : MonoBehaviour
         if (isTutorialApproved && tutorialLevels.Length > 0 && tutorialLevelIndex < tutorialLevels.Length)
         {
             inTutorial = true;
-            Debug.Log("loading tutorial level");
             cameFromTutorial = true;
             InstantiateCurrentLevel(tutorialLevels, tutorialLevelIndex);
             tutorialLevelIndex++;
@@ -91,7 +89,6 @@ public class LevelLoader : MonoBehaviour
                 PlayerPrefs.SetInt("tutorial", 0);
                 cameFromTutorial = false;
             }
-            Debug.Log("loading normal level");
             inTutorial = false;
             InstantiateCurrentLevel(levels, currentLevelIndex);
             currentLevelIndex++;

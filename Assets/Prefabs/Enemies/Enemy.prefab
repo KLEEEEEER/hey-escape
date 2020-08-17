@@ -674,6 +674,12 @@ MonoBehaviour:
   deadCollider: {fileID: 3068922616630722787}
   isDead: 0
   heySound: {fileID: 191473363858007275}
+  hasNoItemsStringLocalized:
+    m_TableReference:
+      m_TableCollectionName: GUID:a6ef414c8130719468d9678be7e3d1d2
+    m_TableEntryReference:
+      m_KeyId: 32
+      m_Key: 
 --- !u!61 &4489188544918607404
 BoxCollider2D:
   m_ObjectHideFlags: 0

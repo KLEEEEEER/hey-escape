@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
   m_Name: UI Text Shared Data
   m_EditorClassIdentifier: 
-  m_NextAvailableId: 29
+  m_NextAvailableId: 33
   m_TableCollectionName: UI Text
   m_TableCollectionNameGuidString: a6ef414c8130719468d9678be7e3d1d2
   m_Entries:
@@ -126,6 +126,22 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 28
     m_Key: you_used
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29
+    m_Key: cupboard_key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30
+    m_Key: exit_key
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31
+    m_Key: rope
+    m_Metadata:
+      m_Items: []
+  - m_Id: 32
+    m_Key: enemy_has_no_items
     m_Metadata:
       m_Items: []
   m_Metadata:

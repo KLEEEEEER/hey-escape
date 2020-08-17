@@ -54,4 +54,19 @@ public class MainMenu : MenuPageChanger
     {
         Application.Quit();
     }
+
+    public void OpenGithub()
+    {
+        Application.OpenURL("https://github.com/KLEEEEEER");
+    }
+
+    public void OpenItchio()
+    {
+        Application.OpenURL("https://maxnitals.itch.io/");
+    }
+
+    public void OpenSoundcloud()
+    {
+        Application.OpenURL("https://soundcloud.com/maxnitals");
+    }
 }
