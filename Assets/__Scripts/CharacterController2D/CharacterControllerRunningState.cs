@@ -36,7 +36,8 @@ public class CharacterControllerRunningState : CharacterControllerBaseState
         player.Animator.SetBool("IsRunning", (Mathf.Abs(player.Rigidbody2D.velocity.x) > 0));
 
         Vector2 targetVelocity = new Vector2(player.Horizontal, player.Rigidbody2D.velocity.y);
-        player.Rigidbody2D.velocity = Vector2.SmoothDamp(player.Rigidbody2D.velocity, targetVelocity, ref player.currentVelocity, player.MovementSmoothing);
+        //player.Rigidbody2D.velocity = Vector2.SmoothDamp(player.Rigidbody2D.velocity, targetVelocity, ref player.currentVelocity, player.MovementSmoothing);
+        player.Rigidbody2D.velocity = targetVelocity;
     }
 
     public override void Update(CharacterController2D player)

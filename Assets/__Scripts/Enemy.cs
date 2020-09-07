@@ -38,9 +38,11 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
     [SerializeField] private Transform gizmoItemPosition;
 
     int delaySeconds;
-    WaitForSeconds delay;
-    WaitForSeconds delayBeforeStartWalking;
-    WaitForSeconds delayBetweenWaypoints;
+    //WaitForSeconds delay;
+    //WaitForSeconds delayBeforeStartWalking;
+    //WaitForSeconds delayBetweenWaypoints;
+
+    float timer = 0f;
 
     void Start()
     {
@@ -49,20 +51,22 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
             itemSpriteRenderer.sprite = items[0].Icon;
         }
 
-        StartCoroutine(Move());
+        //StartCoroutine(Move());
         if (!facingRight) transform.Rotate(0f, 180f, 0f);
 
         hasNoItemsStringLocalized.RegisterChangeHandler(UpdateHasNoItemsString);
 
         delaySeconds = (GameManager.instance != null) ? GameManager.instance.GetStartCountdownTime() : 0;
-        delay = new WaitForSeconds(delaySeconds);
-        delayBeforeStartWalking = new WaitForSeconds(timeBeforeStartWalking);
-        delayBetweenWaypoints = new WaitForSeconds(timeBetweenWaypoints);
+        //delay = new WaitForSeconds(delaySeconds);
+        //delayBeforeStartWalking = new WaitForSeconds(timeBeforeStartWalking);
+        //delayBetweenWaypoints = new WaitForSeconds(timeBetweenWaypoints);
+
+        timer = timeBeforeStartWalking;
     }
 
     private void UpdateHasNoItemsString(string s) { hasNoItemsString = s; }
 
-    IEnumerator Move()
+    /*IEnumerator Move()
     {
         if (GameManager.instance != null && GameManager.instance.IsGameOver)
         {
@@ -94,6 +98,35 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
             }
 
             yield return null;
+        }
+    }*/
+
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+
+        if (waypoints.Length == 0) return;
+
+        if (isDead || caughtPlayer) return;
+
+        if (timer >= 0) return;
+
+        transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, speed * Time.deltaTime);
+
+        if (transform.position.x < waypoints[waypointIndex].transform.position.x && !facingRight) Flip();
+        if (transform.position.x > waypoints[waypointIndex].transform.position.x && facingRight) Flip();
+
+        animator.SetBool("IsWalking", transform.position != waypoints[waypointIndex].transform.position);
+
+        if (transform.position == waypoints[waypointIndex].transform.position)
+        {
+            waypointIndex++;
+
+            if (waypointIndex > waypoints.Length - 1)
+            {
+                waypointIndex = 0;
+            }
+            timer = timeBetweenWaypoints;
         }
     }
 
