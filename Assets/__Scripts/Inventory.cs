@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -17,6 +18,8 @@ public class Inventory : MonoBehaviour
     private string youUsedString;
 
     private static Inventory s_Instance = null;
+
+    private StringBuilder stringBuilder;
 
     public static Inventory instance
     {
@@ -46,6 +49,7 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         items = new List<InventoryItem>();
+        stringBuilder = new StringBuilder();
 
         //youFoundStringLocalized.Arguments.Add(this); // Add our new argument
         youFoundStringLocalized.RegisterChangeHandler(UpdateFoundString);
@@ -57,9 +61,15 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(InventoryItem item)
     {
+        stringBuilder.Clear();
         item.nameLocalized.RegisterChangeHandler(item.UpdateString);
         items.Add(item);
-        OnInventoryChanged.Invoke(youFoundString + " " + item.nameString);
+
+        stringBuilder.Append(youFoundString);
+        stringBuilder.Append(" ");
+        stringBuilder.Append(item.nameString);
+
+        OnInventoryChanged.Invoke(stringBuilder.ToString());
     }
 
     public InventoryItem HasItem(System.Type type)
@@ -81,7 +91,13 @@ public class Inventory : MonoBehaviour
             if (inventoryItem.GetType() == type)
             {
                 items.Remove(inventoryItem);
-                OnInventoryChanged.Invoke(youUsedString + " " + inventoryItem.nameString);
+                stringBuilder.Clear();
+
+                stringBuilder.Append(youUsedString);
+                stringBuilder.Append(" ");
+                stringBuilder.Append(inventoryItem.nameString);
+
+                OnInventoryChanged.Invoke(stringBuilder.ToString());
                 return;
             }
         }

@@ -160,7 +160,7 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
     private void OnDrawGizmos()
     {
-        if (items.Length > 0 && items[0].Icon != null)
+        if (items != null && items.Length > 0 && items[0].Icon != null)
         {
            // Debug.Log("InventoryItems\\" + items[0].GetType().ToString() + ".png");
             Gizmos.DrawIcon(gizmoItemPosition.position, "InventoryItems\\" + items[0].GetType().ToString() + ".png", true);
