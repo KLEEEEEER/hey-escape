@@ -15,11 +15,18 @@ public class InfoUI : MonoBehaviour
 
     Coroutine deletingCoroutine;
 
+
+    private WaitForSeconds delayNewTextAppearing;
+    private WaitForSeconds delayfadeAway;
+
     private void Start()
     {
         RectTransform rect = transform.GetComponent<RectTransform>();
         parentWidth = rect.rect.width;
         deletingCoroutine = StartCoroutine(DeleteLastMessage());
+
+        delayNewTextAppearing = new WaitForSeconds(newTextAppearingTime);
+        delayfadeAway = new WaitForSeconds(fadeAwayTime);
     }
 
     private void OnEnable()
@@ -47,12 +54,12 @@ public class InfoUI : MonoBehaviour
         if (transform.childCount <= 0) yield return 0;
 
         deletingMessagesRunning = true;
-        yield return new WaitForSeconds(newTextAppearingTime);
+        yield return delayNewTextAppearing;
         while (transform.childCount > 0) 
         {
             Transform child = transform.GetChild(0);
             Destroy(child.gameObject);
-            yield return new WaitForSeconds(fadeAwayTime);
+            yield return delayfadeAway;
         }
         deletingMessagesRunning = false;
     }

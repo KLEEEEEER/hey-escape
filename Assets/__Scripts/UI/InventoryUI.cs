@@ -13,9 +13,11 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] Transform defaultPosition;
     bool isHidden = true;
 
+    private WaitForSeconds delayShowingNewItems;
     private void Start()
     {
         hidingPosition = transform.position;
+        delayShowingNewItems = new WaitForSeconds(showingNewItemsTime);
     }
 
     private void OnEnable()
@@ -69,7 +71,7 @@ public class InventoryUI : MonoBehaviour
     IEnumerator ShowNewItems()
     {
         isHidden = false;
-        yield return new WaitForSeconds(showingNewItemsTime);
+        yield return delayShowingNewItems;
         isHidden = true;
     }
 

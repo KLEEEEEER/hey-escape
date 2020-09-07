@@ -37,6 +37,11 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
     [SerializeField] private Transform gizmoItemPosition;
 
+    int delaySeconds;
+    WaitForSeconds delay;
+    WaitForSeconds delayBeforeStartWalking;
+    WaitForSeconds delayBetweenWaypoints;
+
     void Start()
     {
         if (items.Length > 0 && items[0].Icon != null)
@@ -48,6 +53,11 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
         if (!facingRight) transform.Rotate(0f, 180f, 0f);
 
         hasNoItemsStringLocalized.RegisterChangeHandler(UpdateHasNoItemsString);
+
+        delaySeconds = (GameManager.instance != null) ? GameManager.instance.GetStartCountdownTime() : 0;
+        delay = new WaitForSeconds(delaySeconds);
+        delayBeforeStartWalking = new WaitForSeconds(timeBeforeStartWalking);
+        delayBetweenWaypoints = new WaitForSeconds(timeBetweenWaypoints);
     }
 
     private void UpdateHasNoItemsString(string s) { hasNoItemsString = s; }
@@ -56,10 +66,10 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
     {
         if (GameManager.instance != null && GameManager.instance.IsGameOver)
         {
-            yield return new WaitForSeconds(GameManager.instance.GetStartCountdownTime());
+            yield return delay;
         }
 
-        yield return new WaitForSeconds(timeBeforeStartWalking);
+        yield return delayBeforeStartWalking;
         while (!isDead && !caughtPlayer)
         {
             if (waypoints.Length > 0)
@@ -79,7 +89,7 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
                     {
                         waypointIndex = 0;
                     }
-                    yield return new WaitForSeconds(timeBetweenWaypoints);
+                    yield return delayBetweenWaypoints;
                 }
             }
 

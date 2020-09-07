@@ -10,6 +10,13 @@ public class FXVolumeSliderDrag : MonoBehaviour, IBeginDragHandler, IEndDragHand
     [SerializeField] private bool isRunning = false;
     [SerializeField] private float timeBetweenSounds = 0.5f;
 
+    private WaitForSeconds delay;
+
+    private void Start()
+    {
+        delay = new WaitForSeconds(timeBetweenSounds);
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         isRunning = true;
@@ -31,7 +38,7 @@ public class FXVolumeSliderDrag : MonoBehaviour, IBeginDragHandler, IEndDragHand
                 if (!isRunning) break;
 
                 audio.PlayOneShot(clip);
-                yield return new WaitForSeconds(timeBetweenSounds);
+                yield return delay;
             }
         }
     }

@@ -14,6 +14,7 @@ public class WindowExit : MonoBehaviour, IInteractable
     bool isClosed = true;
     WindowExitState currentWindowExitState = WindowExitState.Closed;
 
+    private WaitForSeconds delay = new WaitForSeconds(0.5f);
     enum WindowExitState { Closed, OpenedWithRope, PlayerInside }
     public void DropRope()
     {
@@ -56,12 +57,12 @@ public class WindowExit : MonoBehaviour, IInteractable
         GameManager.instance.Player.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return delay;
 
         GameManager.instance.Player.position = windowEnter.GetExitPointPosition();
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return delay;
 
         GameManager.instance.PlayerMovement.disableMovement = false;
         windowEnter.PlayerWait();

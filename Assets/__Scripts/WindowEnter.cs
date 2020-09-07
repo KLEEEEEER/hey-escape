@@ -16,6 +16,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
     [SerializeField] Transform ExitPoint;
     [SerializeField] AudioSource openingSound;
 
+    private WaitForSeconds delay = new WaitForSeconds(0.5f);
 
     //[SerializeField] Player playerNear;
     enum WindowEnterState { Closed, Opened, OpenedWithRope, PlayerInside }
@@ -49,16 +50,16 @@ public class WindowEnter : MonoBehaviour, IInteractable
         GameManager.instance.Player.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return delay;
 
         GameManager.instance.Player.position = windowExit.GetExitPointPosition();
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return delay;
 
         windowExit.OpenWindow();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return delay;
 
         GameManager.instance.PlayerMovement.disableMovement = false;
         windowExit.PlayerWait();

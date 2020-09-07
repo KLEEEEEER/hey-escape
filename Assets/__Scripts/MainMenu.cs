@@ -9,13 +9,16 @@ public class MainMenu : MenuPageChanger
 {
     [SerializeField] private SettingsBehaviour settingsBehaviour;
     [SerializeField] private GameObject startWithTutorialButton;
+
+    private WaitForSeconds delayBeforeLocalization = new WaitForSeconds(0.5f);
+    private WaitForSeconds delayFadeOut = new WaitForSeconds(1f);
     IEnumerator Start()
     {
         yield return LocalizationSettings.InitializationOperation;
 
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("language_index", 0)];
 
-        yield return new WaitForSeconds(0.5f);
+        yield return delayBeforeLocalization;
 
         if (PlayerPrefs.GetInt("tutorial", 1) == 0)
         {
@@ -46,7 +49,7 @@ public class MainMenu : MenuPageChanger
     IEnumerator LoadLevelLoaderCoroutine()
     {
         LevelFader.instance.FadeOut();
-        yield return new WaitForSeconds(1f);
+        yield return delayFadeOut;
         SceneManager.LoadScene("LevelLoader");
     }
 

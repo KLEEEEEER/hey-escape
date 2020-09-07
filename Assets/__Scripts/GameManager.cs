@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     private bool isCountdownCalled = false;
     public bool IsCountdownCalled { get => isCountdownCalled; }
 
+    private WaitForSeconds secondDelay = new WaitForSeconds(1f);
     private void Start()
     {
         Time.timeScale = 1;
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
         for (int i = startCountdownTime; i > 0; i--)
         {
             CountDownTimer.text = i.ToString();
-            yield return new WaitForSeconds(1f);
+            yield return secondDelay;
         }
         CountDownTimer.gameObject.SetActive(false);
         isGameOver = false;
