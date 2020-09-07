@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
     public LocalizedString hasNoItemsStringLocalized;
     private string hasNoItemsString;
 
+    [SerializeField] private Transform gizmoItemPosition;
+
     void Start()
     {
         if (items.Length > 0 && items[0].Icon != null)
@@ -152,5 +154,14 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
         itemSpriteRenderer.sprite = null;
         items = null;
         return tempItems;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (items.Length > 0 && items[0].Icon != null)
+        {
+            Debug.Log("InventoryItems\\" + items[0].GetType().ToString() + ".png");
+            Gizmos.DrawIcon(gizmoItemPosition.position, "InventoryItems\\" + items[0].GetType().ToString() + ".png", true);
+        }
     }
 }
