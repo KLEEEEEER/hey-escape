@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -160,8 +162,16 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
     {
         if (items.Length > 0 && items[0].Icon != null)
         {
-            Debug.Log("InventoryItems\\" + items[0].GetType().ToString() + ".png");
+           // Debug.Log("InventoryItems\\" + items[0].GetType().ToString() + ".png");
             Gizmos.DrawIcon(gizmoItemPosition.position, "InventoryItems\\" + items[0].GetType().ToString() + ".png", true);
+            
+            StringBuilder items_string = new StringBuilder();
+            foreach (var item in items)
+            {
+                items_string.Append(item.name);
+                items_string.Append("\n");
+            }
+            Handles.Label(gizmoItemPosition.position, items_string.ToString());
         }
     }
 }

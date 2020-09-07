@@ -1175,6 +1175,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2294,6 +2295,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3535,13 +3537,13 @@ PrefabInstance:
         type: 3}
       propertyPath: items.Array.data[0]
       value: 
-      objectReference: {fileID: 2724432006572005162, guid: 76880ca2e58f6fa46b5c777bfd24625b,
+      objectReference: {fileID: 1524863894804804450, guid: 51a2c49686ab60447bece19d7fb69b59,
         type: 3}
     - target: {fileID: 4489188544918607405, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
       propertyPath: items.Array.data[1]
       value: 
-      objectReference: {fileID: 5514052995979494179, guid: 2d1a897bec3f8b346b31e94477f6f2c4,
+      objectReference: {fileID: 2724432006572005162, guid: 76880ca2e58f6fa46b5c777bfd24625b,
         type: 3}
     - target: {fileID: 4489188544918607405, guid: 85b0379a1c053a94d9950afaf59239a6,
         type: 3}
