@@ -3491,7 +3491,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1443288895}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: 
           m_MethodName: OnMobileUseButtonClicked
           m_Mode: 0
@@ -4691,7 +4691,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1443288895}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: 
           m_MethodName: OnMobileJumpButtonHold
           m_Mode: 0
@@ -4707,7 +4707,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1443288895}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: 
           m_MethodName: OnMobileJumpButtonRelease
           m_Mode: 0
@@ -5172,8 +5172,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1443288898}
-  - component: {fileID: 1443288897}
   - component: {fileID: 1443288895}
+  - component: {fileID: 1443288897}
   - component: {fileID: 1443288894}
   - component: {fileID: 1443288900}
   - component: {fileID: 1443288899}
@@ -5221,28 +5221,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1443288893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4e1d664a4adb0347a22b83a423d6946, type: 3}
+  m_Script: {fileID: 11500000, guid: ae6c81fb4afc2324b89e6f84bdb64d31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  ClimbingSpeedMultiplier: 0.48
+  speed: 7
+  ClimbingSpeedMultiplier: 5
   currentVelocity: {x: 0, y: 0}
   MovementSmoothing: 0
-  JumpForce: 600
+  JumpForce: 10
   airControl: 1
   GroundCheck: {fileID: 177253004}
-  GroundedRadius: 0.2
+  GroundedRadius: 0.13
   GroundLayers:
     serializedVersion: 2
     m_Bits: 256
   CeilingCheck: {fileID: 1022182343}
   CeilingRadius: 0.25
   IsGrounded: 1
-  HorizontalMove: 5
-  VerticalMove: 10
-  DefaultGravityScale: 0
+  HorizontalMove: 10
+  VerticalMove: 5
+  DefaultGravityScale: 4
   joystick: {fileID: 1597213855}
-  climbingSpeed: 13
+  climbingSpeed: 10
   IsMobileJumpPressed: 0
   jumpFromLadderForce: 1000
   CheckForGroundHead: {fileID: 1276828580}
@@ -5250,7 +5250,19 @@ MonoBehaviour:
   Animator: {fileID: 1443288901}
   OnJumpEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1443288893}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5258,7 +5270,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isLookingRight: 1
-  arrow: {fileID: 126386547}
+  arrow: {fileID: 0}
 --- !u!114 &1443288896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5271,7 +5283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade4766363198014db7fc96029e33ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1443288895}
+  controller: {fileID: 0}
   disableMovement: 0
   speed: 32
   climbingSpeed: 4
@@ -6904,7 +6916,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1443288895}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: OnGameOver
         m_Mode: 1
