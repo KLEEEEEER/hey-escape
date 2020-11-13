@@ -34,8 +34,8 @@ public class WindowExit : MonoBehaviour, IInteractable
 
     public void PlayerWait()
     {
-        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.InWindowState);
-        GameManager.instance.CharacterController2D.InWindowState.OnWindowExit.AddListener(ExitWindow);
+        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.InWindowState);
+        GameManager.instance.PlayerFSM.InWindowState.OnWindowExit.AddListener(ExitWindow);
         spriteRenderer.sprite = openedWithRopeWithPlayerSprite;
         currentWindowExitState = WindowExitState.PlayerInside;
     }
@@ -47,7 +47,7 @@ public class WindowExit : MonoBehaviour, IInteractable
 
     IEnumerator EnterWindowAnimation()
     {
-        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.DisableState);
+        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
         SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
         GameManager.instance.PlayerMovement.disableMovement = true;
         GameManager.instance.PlayerComponent.HidePlayer();

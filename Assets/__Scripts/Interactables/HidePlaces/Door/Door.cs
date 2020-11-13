@@ -21,7 +21,7 @@ public class Door : MonoBehaviour, IHidePlace
 
     public void Hide()
     {
-        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.DisableState);
+        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
         GameManager.instance.PlayerComponent.HidePlayer();
         //player.transform.position = transform.position;
         GameManager.instance.Player.gameObject.transform.localScale = PlayerHideScale;
@@ -33,7 +33,7 @@ public class Door : MonoBehaviour, IHidePlace
 
     public void Unhide()
     {
-        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.IdleState);
+        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.IdleState);
         GameManager.instance.PlayerComponent.UnhidePlayer();
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.Player.gameObject.transform.localScale = GameManager.instance.PlayerInitialScale;

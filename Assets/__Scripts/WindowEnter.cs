@@ -40,7 +40,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
     IEnumerator EnterWindowAnimation()
     {
-        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.DisableState);
+        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
         SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
         GameManager.instance.PlayerMovement.disableMovement = true;
         GameManager.instance.PlayerComponent.HidePlayer();
@@ -111,10 +111,10 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
     public void PlayerWait()
     {
-        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.InWindowState);
+        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.InWindowState);
         spriteRenderer.sprite = openedWithRopeAndPlayerSprite;
         windowEnterState = WindowEnterState.PlayerInside;
-        GameManager.instance.CharacterController2D.InWindowState.OnWindowExit.AddListener(ExitWindow);
+        GameManager.instance.PlayerFSM.InWindowState.OnWindowExit.AddListener(ExitWindow);
     }
 
     public void ExitWindow()

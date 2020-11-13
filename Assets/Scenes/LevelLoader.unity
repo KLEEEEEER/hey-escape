@@ -5221,7 +5221,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1443288893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae6c81fb4afc2324b89e6f84bdb64d31, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b1c277381d11b04986b4c32684b83dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
@@ -5231,7 +5231,7 @@ MonoBehaviour:
   JumpForce: 10
   airControl: 1
   GroundCheck: {fileID: 177253004}
-  GroundedRadius: 0.13
+  GroundedRadius: 0.2
   GroundLayers:
     serializedVersion: 2
     m_Bits: 256
@@ -5240,7 +5240,7 @@ MonoBehaviour:
   IsGrounded: 1
   HorizontalMove: 10
   VerticalMove: 5
-  DefaultGravityScale: 4
+  DefaultGravityScale: 0
   joystick: {fileID: 1597213855}
   climbingSpeed: 10
   IsMobileJumpPressed: 0
@@ -5250,19 +5250,7 @@ MonoBehaviour:
   Animator: {fileID: 1443288901}
   OnJumpEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1443288893}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5283,7 +5271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade4766363198014db7fc96029e33ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
   disableMovement: 0
   speed: 32
   climbingSpeed: 4
@@ -5294,9 +5281,6 @@ MonoBehaviour:
   - {fileID: 1443288899}
   - {fileID: 1443288900}
   rigidbodyToDisable: {fileID: 1443288894}
-  ladderLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!212 &1443288897
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6863,7 +6847,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1443288898}
   PlayerMovement: {fileID: 1443288896}
-  CharacterController2D: {fileID: 1443288895}
+  PlayerFSM: {fileID: 1443288895}
   PlayerComponent: {fileID: 1443288903}
   PlayerRenderer: {fileID: 1443288897}
   PlayerRigidbody: {fileID: 1443288894}

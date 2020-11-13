@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Core.Player.FSM;
+using Core.Player;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,8 +13,8 @@ public class GameManager : MonoBehaviour
     State currentState = State.Playing;
 
     public Transform Player;
-    public PlayerMovement PlayerMovement;
-    public CharacterController2D CharacterController2D;
+    public InputHandler PlayerMovement;
+    public PlayerFSM PlayerFSM;
     public Player PlayerComponent;
     public SpriteRenderer PlayerRenderer;
     public Rigidbody2D PlayerRigidbody;
