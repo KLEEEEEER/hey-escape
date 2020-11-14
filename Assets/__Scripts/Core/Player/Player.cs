@@ -1,4 +1,5 @@
-﻿using Core.Player.FSM;
+﻿using Core.Detectors;
+using Core.Player.FSM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +31,10 @@ namespace Core.Player
 
         //public bool nearHidePlace = false;
         //private IHidePlace hidePlace;
-        List<IInteractable> interactables;
+
+        //List<IInteractable> interactables;
+        Detector<IInteractable> interactableDetector = new InteractableDetector();
+
         List<ISearchable> searchables;
         List<IKillable> killables;
         List<IHidePlace> hideplaces;
@@ -40,7 +44,7 @@ namespace Core.Player
 
         private void Start()
         {
-            interactables = new List<IInteractable>();
+            //interactables = new List<IInteractable>();
             searchables = new List<ISearchable>();
             killables = new List<IKillable>();
             hideplaces = new List<IHidePlace>();
@@ -135,7 +139,6 @@ namespace Core.Player
 
         private void FixedUpdate()
         {
-            interactables.Clear();
             killables.Clear();
             searchables.Clear();
             hideplaces.Clear();
@@ -174,17 +177,20 @@ namespace Core.Player
             //colliders = Physics2D.OverlapCircleAll(transform.position, interactibleDetectionRadius);
             collidersFounded = Physics2D.OverlapCircleNonAlloc(transform.position, interactibleDetectionRadius, colliders);
             //foreach (Collider2D collider in colliders)
+
+            interactableDetector.CheckCollidersInArray(colliders);
+
             for (int i = 0; i < collidersFounded; i++)
             {
                 Collider2D collider = colliders[i];
 
                 if (collider.gameObject == gameObject) continue;
 
-                IInteractable interactable = collider.GetComponent<IInteractable>();
+                /*IInteractable interactable = collider.GetComponent<IInteractable>();
                 if (interactable != null)
                 {
                     interactables.Add(interactable);
-                }
+                }*/
 
                 IHidePlace hideplace = collider.GetComponent<IHidePlace>();
                 if (hideplace != null)
@@ -250,7 +256,7 @@ namespace Core.Player
                 }
             }
 
-            if (interactables.Count > 0)
+            /*if (interactables.Count > 0)
             {
                 foreach (IInteractable interactable in interactables)
                 {
@@ -259,7 +265,8 @@ namespace Core.Player
                     animator.SetBool("IsGrounded", true);
                     interactable.Interact();
                 }
-            }
+            }*/
+            interactableDetector.InteractWithFoundColliders();
         }
 
         public void HidePlayer()

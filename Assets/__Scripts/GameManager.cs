@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
         CountDownTimer.gameObject.SetActive(false);
         isGameOver = false;
         currentState = State.Playing;
+        PlayerMovement.SetEnabled(true);
         startTimer();
     }
 
