@@ -21,8 +21,8 @@ public class Flashlight : MonoBehaviour
             if (collider.gameObject == gameObject) continue;
             if (collider.CompareTag("Player") && !GameManager.instance.IsGameOver)
             {
-                if (GameManager.instance.PlayerComponent.isPlayerHidden() && enemy.isFacingRight() && !playerMovement.isVisibleLeft) return;
-                if (GameManager.instance.PlayerComponent.isPlayerHidden() && !enemy.isFacingRight() && !playerMovement.isVisibleRight) return;
+                if (GameManager.instance.PlayerComponent.isPlayerHidden() && enemy.isFacingRight() && GameManager.instance.PlayerComponent.visibility.currentState != VisibilityState.State.VisibleLeft) return;
+                if (GameManager.instance.PlayerComponent.isPlayerHidden() && !enemy.isFacingRight() && GameManager.instance.PlayerComponent.visibility.currentState != VisibilityState.State.VisibleRight) return;
 
                 GameManager.instance.GameOver();
                 enemy.OnGameOver();

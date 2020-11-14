@@ -14,16 +14,16 @@ namespace Core.Player
             Hidden
         }
 
-        State currentState = State.Visible;
+        public State currentState { get; private set; }
+
+        private void Start()
+        {
+            currentState = State.Visible;
+        }
 
         public void SetVisibilityState(State state)
         {
             currentState = state;
-        }
-
-        public State GetCurrentState()
-        {
-            return currentState;
         }
     }
 }

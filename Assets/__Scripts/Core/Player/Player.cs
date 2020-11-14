@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Player.FSM;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,14 @@ namespace Core.Player
     [RequireComponent(typeof(InputHandler))]
     public class Player : MonoBehaviour
     {
+        public VisibilityState visibility;
+        private PlayerFSM playerFSM;
+
+
         [SerializeField] float interactibleDetectionRadius = 0.4f;
         [SerializeField] private float enemyDetectionRadius = 1;
         [SerializeField] private Transform enemyDetectionPosition;
-        [SerializeField] private InputHandler playerMovement;
+        [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private Animator animator;
 
         [SerializeField] private GameObject eButton;
@@ -213,7 +218,7 @@ namespace Core.Player
 
         public void KillButtonPressed()
         {
-            if (playerMovement.IsPlayerMovingDisabled() || GameManager.instance.IsGameOver) return;
+            if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver) return;
 
             if (killables.Count > 0)
             {
@@ -226,7 +231,7 @@ namespace Core.Player
         }
         public void UsingButtonPressed()
         {
-            if (playerMovement.IsPlayerMovingDisabled() || GameManager.instance.IsGameOver) return;
+            if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver) return;
 
             if (searchables.Count > 0)
             {

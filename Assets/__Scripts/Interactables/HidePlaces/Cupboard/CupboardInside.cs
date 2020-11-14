@@ -31,7 +31,7 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
         GameManager.instance.PlayerComponent.HidePlayer();
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
-        GameManager.instance.PlayerMovement.disableMovement = true;
+        GameManager.instance.PlayerMovement.SetEnabled(true);
         GameManager.instance.PlayerRenderer.enabled = false;
         spriteRenderer.sprite = openedWithPlayer;
         isHidden = true;
@@ -57,7 +57,7 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
         GameManager.instance.PlayerComponent.UnhidePlayer();
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
-        GameManager.instance.PlayerMovement.disableMovement = false;
+        GameManager.instance.PlayerMovement.SetEnabled(false);
         GameManager.instance.PlayerRenderer.enabled = true;
         spriteRenderer.sprite = opened;
         isHidden = false;

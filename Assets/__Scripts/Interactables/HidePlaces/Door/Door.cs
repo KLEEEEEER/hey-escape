@@ -26,7 +26,7 @@ public class Door : MonoBehaviour, IHidePlace
         //player.transform.position = transform.position;
         GameManager.instance.Player.gameObject.transform.localScale = PlayerHideScale;
         GameManager.instance.PlayerRenderer.color = HideColor;
-        GameManager.instance.PlayerMovement.disableMovement = true;
+        GameManager.instance.PlayerMovement.SetEnabled(true);
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         isHidden = true;
     }
@@ -38,7 +38,7 @@ public class Door : MonoBehaviour, IHidePlace
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.Player.gameObject.transform.localScale = GameManager.instance.PlayerInitialScale;
         GameManager.instance.PlayerRenderer.color = GameManager.instance.PlayerInitialColor;
-        GameManager.instance.PlayerMovement.disableMovement = false;
+        GameManager.instance.PlayerMovement.SetEnabled(false);
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         isHidden = false;
     }

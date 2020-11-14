@@ -5173,6 +5173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443288898}
   - component: {fileID: 1443288895}
+  - component: {fileID: 1443288908}
   - component: {fileID: 1443288897}
   - component: {fileID: 1443288894}
   - component: {fileID: 1443288900}
@@ -5180,6 +5181,7 @@ GameObject:
   - component: {fileID: 1443288896}
   - component: {fileID: 1443288901}
   - component: {fileID: 1443288903}
+  - component: {fileID: 1443288907}
   - component: {fileID: 1443288902}
   - component: {fileID: 1443288904}
   - component: {fileID: 1443288906}
@@ -5271,16 +5273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade4766363198014db7fc96029e33ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableMovement: 0
-  speed: 32
-  climbingSpeed: 4
   joystick: {fileID: 1597213855}
-  isVisibleRight: 0
-  isVisibleLeft: 0
-  collidersToDisable:
-  - {fileID: 1443288899}
-  - {fileID: 1443288900}
-  rigidbodyToDisable: {fileID: 1443288894}
 --- !u!212 &1443288897
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5442,10 +5435,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f45433977cc014ea6abf55279cdfab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visibility: {fileID: 1443288907}
   interactibleDetectionRadius: 0.01
   enemyDetectionRadius: 0.52
   enemyDetectionPosition: {fileID: 832581505}
-  playerMovement: {fileID: 1443288896}
+  playerMovement: {fileID: 1443288908}
   animator: {fileID: 1443288901}
   eButton: {fileID: 1022563424}
   qButton: {fileID: 1493401414}
@@ -5577,6 +5571,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1443288907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443288893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 317affc0206a37649b2c3fc262154552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1443288908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443288893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f1dd7c51ea3f444924254b87cdcbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 7
+  verticalSpeed: 5
 --- !u!1 &1456043579
 GameObject:
   m_ObjectHideFlags: 0
@@ -6846,7 +6866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 1443288898}
-  PlayerMovement: {fileID: 1443288896}
+  PlayerMovement: {fileID: 1443288908}
   PlayerFSM: {fileID: 1443288895}
   PlayerComponent: {fileID: 1443288903}
   PlayerRenderer: {fileID: 1443288897}

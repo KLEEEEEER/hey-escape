@@ -49,7 +49,7 @@ public class WindowExit : MonoBehaviour, IInteractable
     {
         GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
         SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
-        GameManager.instance.PlayerMovement.disableMovement = true;
+        GameManager.instance.PlayerMovement.SetEnabled(true);
         GameManager.instance.PlayerComponent.HidePlayer();
 
         if (spriteRenderer != null) spriteRenderer.enabled = false;
@@ -64,7 +64,7 @@ public class WindowExit : MonoBehaviour, IInteractable
 
         yield return delay;
 
-        GameManager.instance.PlayerMovement.disableMovement = false;
+        GameManager.instance.PlayerMovement.SetEnabled(false);
         windowEnter.PlayerWait();
     }
 

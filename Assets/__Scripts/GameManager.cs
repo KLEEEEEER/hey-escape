@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     State currentState = State.Playing;
 
     public Transform Player;
-    public InputHandler PlayerMovement;
+    public PlayerMovement PlayerMovement;
     public PlayerFSM PlayerFSM;
     public Player PlayerComponent;
     public SpriteRenderer PlayerRenderer;

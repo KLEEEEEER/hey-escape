@@ -13,7 +13,7 @@ namespace Core.Player.FSM.States
 #if UNITY_ANDROID || UNITY_IPHONE
             OnUseButtonPressed.AddListener(useButtonPressed);
 #endif
-            GameManager.instance.PlayerMovement.disableMovement = true;
+            GameManager.instance.PlayerMovement.SetEnabled(true);
         }
 
         public override void OnTriggerEnter2D(PlayerFSM player, Collider2D collision)
@@ -52,7 +52,7 @@ namespace Core.Player.FSM.States
         private void useButtonPressed()
         {
             if (GameManager.instance.PlayerRenderer != null) GameManager.instance.PlayerRenderer.enabled = true;
-            GameManager.instance.PlayerMovement.disableMovement = false;
+            GameManager.instance.PlayerMovement.SetEnabled(false);
             GameManager.instance.PlayerComponent.UnhidePlayer();
             OnWindowExit.Invoke();
             OnWindowExit.RemoveAllListeners();

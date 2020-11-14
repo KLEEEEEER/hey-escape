@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Core.Player;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,9 +21,9 @@ public class CupboardRightSide : MonoBehaviour, IHidePlace
     {
         GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
         GameManager.instance.PlayerComponent.HidePlayer();
-        GameManager.instance.PlayerMovement.isVisibleRight = true;
+        GameManager.instance.PlayerComponent.visibility.SetVisibilityState(VisibilityState.State.VisibleRight);
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
-        GameManager.instance.PlayerMovement.disableMovement = true;
+        GameManager.instance.PlayerMovement.SetEnabled(true);
         GameManager.instance.PlayerRenderer.color = HideColor;
         isHidden = true;
     }
@@ -31,10 +32,10 @@ public class CupboardRightSide : MonoBehaviour, IHidePlace
     {
         GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.IdleState);
         GameManager.instance.PlayerComponent.UnhidePlayer();
-        GameManager.instance.PlayerMovement.isVisibleRight = false;
+        GameManager.instance.PlayerComponent.visibility.SetVisibilityState(VisibilityState.State.Visible);
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
-        GameManager.instance.PlayerMovement.disableMovement = false;
+        GameManager.instance.PlayerMovement.SetEnabled(false);
         GameManager.instance.PlayerRenderer.color = GameManager.instance.PlayerInitialColor;
         isHidden = false;
     }
