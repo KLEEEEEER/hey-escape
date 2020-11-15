@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,8 +27,9 @@ namespace Core.Detectors
             }
         }
 
-        public virtual bool InteractWithFoundColliders()
+        public virtual bool InteractWithFoundColliders(Action onInteractionAction = null)
         {
+            onInteractionAction();
             Debug.Log("Interacting with founded colliders");
             return false;
         }

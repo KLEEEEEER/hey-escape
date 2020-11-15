@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-interface IHidePlace
+public interface IHidePlace
 {
     void Hide();
     void Unhide();

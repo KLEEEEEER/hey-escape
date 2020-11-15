@@ -34,6 +34,8 @@ namespace Core.Player
 
         //List<IInteractable> interactables;
         Detector<IInteractable> interactableDetector = new InteractableDetector();
+        Detector<IHidePlace> hideplaceDetector = new HidePlaceDetector();
+        Detector<ISearchable> searchableDetector;
 
         List<ISearchable> searchables;
         List<IKillable> killables;
@@ -44,6 +46,8 @@ namespace Core.Player
 
         private void Start()
         {
+            searchableDetector = new SearchableDetector(Inventory.instance);
+
             //interactables = new List<IInteractable>();
             searchables = new List<ISearchable>();
             killables = new List<IKillable>();
@@ -167,17 +171,18 @@ namespace Core.Player
                     }
                 }
 
-                ISearchable searchable = collider.GetComponent<ISearchable>();
+                /*ISearchable searchable = collider.GetComponent<ISearchable>();
                 if (searchable != null)
                 {
                     searchables.Add(searchable);
-                }
+                }*/
             }
+
+            searchableDetector.CheckCollidersInArray(colliders);
 
             //colliders = Physics2D.OverlapCircleAll(transform.position, interactibleDetectionRadius);
             collidersFounded = Physics2D.OverlapCircleNonAlloc(transform.position, interactibleDetectionRadius, colliders);
             //foreach (Collider2D collider in colliders)
-
             interactableDetector.CheckCollidersInArray(colliders);
 
             for (int i = 0; i < collidersFounded; i++)
@@ -237,9 +242,13 @@ namespace Core.Player
         }
         public void UsingButtonPressed()
         {
-            if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver) return;
+            if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver) 
+            {
+                Debug.Log("!playerMovement.IsEnabled || GameManager.instance.IsGameOver");
+                return;
+            }
 
-            if (searchables.Count > 0)
+            /*if (searchables.Count > 0)
             {
                 animator.SetTrigger("Search");
 
@@ -254,7 +263,7 @@ namespace Core.Player
                         }
                     }
                 }
-            }
+            }*/
 
             /*if (interactables.Count > 0)
             {
@@ -266,6 +275,7 @@ namespace Core.Player
                     interactable.Interact();
                 }
             }*/
+            searchableDetector.InteractWithFoundColliders(() => { animator.SetTrigger("Search"); });
             interactableDetector.InteractWithFoundColliders();
         }
 

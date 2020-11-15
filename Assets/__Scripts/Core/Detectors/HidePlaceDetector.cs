@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Core.Detectors
 {
-    public class InteractableDetector : Detector<IInteractable>
+    public class HidePlaceDetector : Detector<IHidePlace>
     {
         public override void CheckCollidersInArray(Collider2D[] colliders)
         {
@@ -17,11 +17,9 @@ namespace Core.Detectors
             bool interacted = false;
             if (detectedColliders.Count > 0)
             {
-                foreach (IInteractable interactable in detectedColliders)
-                {
-                    interactable.Interact();
-                    interacted = true;
-                }
+
+
+                onInteractionAction?.Invoke();
             }
             return interacted;
         }
