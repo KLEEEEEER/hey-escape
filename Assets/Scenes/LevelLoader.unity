@@ -5181,6 +5181,7 @@ GameObject:
   - component: {fileID: 1443288896}
   - component: {fileID: 1443288901}
   - component: {fileID: 1443288903}
+  - component: {fileID: 1443288909}
   - component: {fileID: 1443288907}
   - component: {fileID: 1443288902}
   - component: {fileID: 1443288904}
@@ -5436,6 +5437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visibility: {fileID: 1443288907}
+  playerFSM: {fileID: 1443288895}
   interactibleDetectionRadius: 0.01
   enemyDetectionRadius: 0.52
   enemyDetectionPosition: {fileID: 832581505}
@@ -5444,6 +5446,7 @@ MonoBehaviour:
   eButton: {fileID: 1022563424}
   qButton: {fileID: 1493401414}
   isHidden: 0
+  playerHideHandle: {fileID: 1443288909}
 --- !u!114 &1443288904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5597,6 +5600,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   verticalSpeed: 5
+--- !u!114 &1443288909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443288893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9095ffeee4ee6af4991309a88808f233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerRenderer: {fileID: 1443288897}
+  playerFSM: {fileID: 1443288895}
+  visibilityState: {fileID: 1443288907}
+  SearchHidePlaceRadius: 1
 --- !u!1 &1456043579
 GameObject:
   m_ObjectHideFlags: 0

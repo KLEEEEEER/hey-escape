@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Player.FSM.States
+namespace HeyEscape.Core.Player.FSM.States
 {
     public class PlayerFSMJumpingState : PlayerFSMBaseState
     {

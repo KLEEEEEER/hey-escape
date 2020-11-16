@@ -74,6 +74,7 @@ MonoBehaviour:
   isHidden: 0
   currentVelocity: {x: 0, y: 0, z: 0}
   smoothTime: 0.1
+  hidePlaceInfoSO: {fileID: 11400000, guid: 93cff240b8446cf4784caf9878ea52c0, type: 2}
 --- !u!1 &5877445157843153282
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +124,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -230,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HideColor: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
   smoothTime: 0.1
+  hidePlaceInfoSO: {fileID: 11400000, guid: 9901d5fe87fc46d4bb09c69104c81132, type: 2}
 --- !u!1 &5877445159068385957
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isOpened: 0
   isHidden: 0
+  hidePlaceInfo: {fileID: 11400000, guid: dfd8a8358ed55fd4f9edb33662ba1d2c, type: 2}
   spriteRenderer: {fileID: 5877445157843153292}
   closed: {fileID: 21300000, guid: 7221f9d55f4a3404d99d8322a3306a66, type: 3}
   opened: {fileID: 21300000, guid: 6b3114195c7e5a6479ad29c8e2cf3fb7, type: 3}

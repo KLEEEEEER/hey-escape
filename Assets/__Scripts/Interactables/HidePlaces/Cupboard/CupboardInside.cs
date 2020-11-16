@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HeyEscape.Interactables.HidePlaces;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
 {
     [SerializeField] private bool isOpened = false;
     [SerializeField] private bool isHidden = false;
+    [SerializeField] private HidePlaceInfoSO hidePlaceInfo;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Sprite closed;
@@ -66,5 +68,11 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
     public bool IsAccessible()
     {
         return isOpened || Inventory.instance.HasItem(typeof(CupboardKey));
+    }
+
+    public HidePlaceInfoSO GetHidePlaceInfo()
+    {
+        hidePlaceInfo.transform = transform.position;
+        return hidePlaceInfo;
     }
 }

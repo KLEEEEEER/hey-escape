@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Core.Player.FSM;
-using Core.Player;
+using HeyEscape.Core.Player.FSM;
+using HeyEscape.Core.Player;
 
 public class GameManager : MonoBehaviour
 {

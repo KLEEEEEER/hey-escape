@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFootsteps : MonoBehaviour
+namespace HeyEscape.Core.Player
 {
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip[] footstepsSounds;
-
-    public void PlayFootstepSound()
+    public class PlayerFootsteps : MonoBehaviour
     {
-        int pickedFootstepId = Random.Range(0, footstepsSounds.Length);
-        AudioClip pickedFootstep = footstepsSounds[pickedFootstepId];
-        audioSource.PlayOneShot(pickedFootstep);
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip[] footstepsSounds;
+
+        public void PlayFootstepSound()
+        {
+            int pickedFootstepId = Random.Range(0, footstepsSounds.Length);
+            AudioClip pickedFootstep = footstepsSounds[pickedFootstepId];
+            audioSource.PlayOneShot(pickedFootstep);
+        }
     }
 }

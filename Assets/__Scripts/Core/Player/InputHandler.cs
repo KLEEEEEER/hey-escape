@@ -1,9 +1,8 @@
-﻿using Core.Player.FSM;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Player
+namespace HeyEscape.Core.Player
 {
     public class InputHandler : MonoBehaviour
     {

@@ -72,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HideColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   smoothTime: 0.1
+  hidePlaceInfoSO: {fileID: 11400000, guid: a190c0f4031f0e042aee04a23044c2ea, type: 2}
 --- !u!1 &5582157007819123265
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HideColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   smoothTime: 0.1
+  hidePlaceInfoSO: {fileID: 11400000, guid: fa4580f9a6ea4594da58704e9dc3787e, type: 2}
 --- !u!1 &6672424737521759945
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +194,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

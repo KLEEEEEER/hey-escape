@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Player.FSM.States
+namespace HeyEscape.Core.Player.FSM.States
 {
     public class PlayerFSMDisableState : PlayerFSMBaseState
     {
@@ -10,6 +10,13 @@ namespace Core.Player.FSM.States
         {
             player.Animator.SetBool("IsRunning", false);
             player.Animator.SetTrigger("Hide");
+            player.Rigidbody2D.velocity = Vector2.zero;
+            player.Rigidbody2D.isKinematic = true;
+        }
+
+        public override void ExitState(PlayerFSM player)
+        {
+            player.Rigidbody2D.isKinematic = false;
         }
 
         public override void FixedUpdate(PlayerFSM player)

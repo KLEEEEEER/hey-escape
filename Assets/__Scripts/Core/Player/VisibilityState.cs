@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Player
+namespace HeyEscape.Core.Player
 {
     public class VisibilityState : MonoBehaviour
     {
@@ -24,6 +24,17 @@ namespace Core.Player
         public void SetVisibilityState(State state)
         {
             currentState = state;
+        }
+
+        public bool CheckVisibility(params State[] visibleStates)
+        {
+            if (currentState == State.Visible) return true;
+
+            foreach (State visibleState in visibleStates)
+            {
+                if (currentState == visibleState) return true;
+            }
+            return false;
         }
     }
 }

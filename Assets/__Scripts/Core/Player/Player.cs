@@ -1,18 +1,18 @@
 ﻿using Core.Detectors;
-using Core.Player.FSM;
+using HeyEscape.Core.Player;
+using HeyEscape.Core.Player.FSM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Player
+namespace HeyEscape.Core.Player
 {
     [RequireComponent(typeof(Animator))]
-    [RequireComponent(typeof(InputHandler))]
     public class Player : MonoBehaviour
     {
         public VisibilityState visibility;
-        private PlayerFSM playerFSM;
+        [SerializeField] private PlayerFSM playerFSM;
 
 
         [SerializeField] float interactibleDetectionRadius = 0.4f;
@@ -35,6 +35,7 @@ namespace Core.Player
         //List<IInteractable> interactables;
         Detector<IInteractable> interactableDetector = new InteractableDetector();
         Detector<IHidePlace> hideplaceDetector = new HidePlaceDetector();
+        [SerializeField] PlayerHideHandle playerHideHandle;
         Detector<ISearchable> searchableDetector;
 
         List<ISearchable> searchables;
@@ -120,9 +121,11 @@ namespace Core.Player
 
 
 #if UNITY_ANDROID || UNITY_IPHONE
-            if (GameManager.instance.PlayerFSM.Vertical > 0.8f && !isHidden && hideplaces.Count > 0)
+            //if (GameManager.instance.PlayerFSM.Vertical > 0.8f && !isHidden && hideplaces.Count > 0)
+            if (GameManager.instance.PlayerFSM.Vertical > 0.8f && !playerHideHandle.IsHidden && hideplaceDetector.GetDetectedCollidersCount() > 0)
             {
-                animator.SetBool("IsJumping", false);
+                Debug.Log("Hiding");
+                /*animator.SetBool("IsJumping", false);
                 animator.SetBool("IsRunning", false);
                 animator.SetBool("IsGrounded", true);
                 if (hideplaces[0].IsAccessible())
@@ -130,13 +133,25 @@ namespace Core.Player
                     hideplaces[0].Hide();
                     currentHidePlace = hideplaces[0];
                     isHidden = true;
+                }*/
+                IHidePlace foundHidePlace = hideplaceDetector.GetFirstFoundObject();
+                if (foundHidePlace.IsAccessible())
+                {
+                    animator.SetBool("IsJumping", false);
+                    animator.SetBool("IsRunning", false);
+                    animator.SetBool("IsGrounded", true);
+                    playerHideHandle.Hide(foundHidePlace.GetHidePlaceInfo());
                 }
             }
-            if (GameManager.instance.PlayerFSM.Vertical < 0.8f && isHidden && currentHidePlace != null)
+            //if (GameManager.instance.PlayerFSM.Vertical < 0.8f && isHidden && currentHidePlace != null)
+            if (GameManager.instance.PlayerFSM.Vertical < 0.8f && playerHideHandle.IsHidden)
             {
-                currentHidePlace.Unhide();
+                Debug.Log("Unhiding");
+                playerHideHandle.Unhide();
+
+                /*currentHidePlace.Unhide();
                 currentHidePlace = null;
-                isHidden = false;
+                isHidden = false;*/
             }
 #endif
         }
@@ -184,6 +199,7 @@ namespace Core.Player
             collidersFounded = Physics2D.OverlapCircleNonAlloc(transform.position, interactibleDetectionRadius, colliders);
             //foreach (Collider2D collider in colliders)
             interactableDetector.CheckCollidersInArray(colliders);
+            hideplaceDetector.CheckCollidersInArray(colliders);
 
             for (int i = 0; i < collidersFounded; i++)
             {
@@ -197,33 +213,12 @@ namespace Core.Player
                     interactables.Add(interactable);
                 }*/
 
-                IHidePlace hideplace = collider.GetComponent<IHidePlace>();
+                /*IHidePlace hideplace = collider.GetComponent<IHidePlace>();
                 if (hideplace != null)
                 {
                     hideplaces.Add(hideplace);
-                }
+                }*/
             }
-
-            /*if (killables.Count > 0)
-            {
-                if (!qButton.activeSelf)
-                    qButton.SetActive(true);
-            }
-            else
-            {
-                qButton.SetActive(false);
-            }
-
-            if ((searchables.Count > 0) && !qButton.activeSelf)   // interactables.Count > 0 || 
-            {
-                if (!eButton.activeSelf)
-                    eButton.SetActive(true);
-            }
-            else
-            {
-                eButton.SetActive(false);
-            }*/
-
 
         }
 

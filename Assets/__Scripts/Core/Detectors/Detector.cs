@@ -33,5 +33,15 @@ namespace Core.Detectors
             Debug.Log("Interacting with founded colliders");
             return false;
         }
+
+        public virtual T GetFirstFoundObject()
+        {
+            return detectedColliders[0];
+        }
+
+        public int GetDetectedCollidersCount()
+        {
+            return detectedColliders.Count;
+        }
     }
 }

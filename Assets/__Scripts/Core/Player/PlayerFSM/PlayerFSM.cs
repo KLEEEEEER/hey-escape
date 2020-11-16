@@ -1,11 +1,11 @@
-﻿using Core.Player.FSM.States;
+﻿using HeyEscape.Core.Player.FSM.States;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace Core.Player.FSM
+namespace HeyEscape.Core.Player.FSM
 {
 
     [RequireComponent(typeof(Rigidbody2D))]
@@ -55,13 +55,13 @@ namespace Core.Player.FSM
             get => currentState;
         }
 
-        public readonly PlayerFSMIdleState IdleState = new PlayerFSMIdleState();
-        public readonly PlayerFSMJumpingState JumpingState = new PlayerFSMJumpingState();
-        public readonly PlayerFSMRunningState RunningState = new PlayerFSMRunningState();
-        public readonly PlayerFSMDuckingState DuckingState = new PlayerFSMDuckingState();
-        public readonly PlayerFSMDisableState DisableState = new PlayerFSMDisableState();
-        public readonly PlayerFSMOnLadderState LadderState = new PlayerFSMOnLadderState();
-        public readonly PlayerFSMInWindowState InWindowState = new PlayerFSMInWindowState();
+        public PlayerFSMIdleState     IdleState = new PlayerFSMIdleState();
+        public PlayerFSMJumpingState  JumpingState = new PlayerFSMJumpingState();
+        public PlayerFSMRunningState  RunningState = new PlayerFSMRunningState();
+        public PlayerFSMDuckingState  DuckingState = new PlayerFSMDuckingState();
+        public PlayerFSMDisableState  DisableState = new PlayerFSMDisableState();
+        public PlayerFSMOnLadderState LadderState = new PlayerFSMOnLadderState();
+        public PlayerFSMInWindowState InWindowState = new PlayerFSMInWindowState();
 
         private float horizontal;
         private float vertical;
@@ -73,6 +73,7 @@ namespace Core.Player.FSM
 
         public void TransitionToState(PlayerFSMBaseState state)
         {
+            currentState.ExitState(this);
             currentState = state;
             currentState.EnterState(this);
         }
@@ -91,6 +92,8 @@ namespace Core.Player.FSM
 
         private void Start()
         {
+            currentState = DisableState;
+
             rigidbody2D = GetComponent<Rigidbody2D>();
 
             DefaultGravityScale = rigidbody2D.gravityScale;
@@ -107,14 +110,14 @@ namespace Core.Player.FSM
         horizontal = Input.GetAxisRaw("Horizontal") * speed;
         vertical = Input.GetAxisRaw("Vertical") * speed;
 #endif
-            checkCharacterRotation();
+            CheckCharacterRotation();
 
             currentState.Update(this);
         }
 
         private void FixedUpdate()
         {
-            checkCharacterGrounded();
+            CheckCharacterGrounded();
             currentState.FixedUpdate(this);
         }
 
@@ -133,7 +136,7 @@ namespace Core.Player.FSM
             currentState.OnTriggerExit2D(this, collision);
         }
 
-        void checkCharacterRotation()
+        void CheckCharacterRotation()
         {
             if (isLookingRight && horizontal < 0)
             {
@@ -147,7 +150,7 @@ namespace Core.Player.FSM
             }
         }
 
-        void checkCharacterGrounded()
+        void CheckCharacterGrounded()
         {
             colliders = Physics2D.OverlapCircleAll(GroundCheck.position, GroundedRadius, GroundLayers);
             bool foundGround = false;

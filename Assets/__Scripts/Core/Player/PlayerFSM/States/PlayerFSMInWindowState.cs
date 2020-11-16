@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Core.Player.FSM.States
+namespace HeyEscape.Core.Player.FSM.States
 {
     public class PlayerFSMInWindowState : PlayerFSMBaseState
     {
