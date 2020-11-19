@@ -30,5 +30,10 @@ namespace HeyEscape.Core.Player
         //Vertical = Input.GetAxisRaw("Vertical") * climbingSpeed;
 #endif
         }
+
+        public Vector2 GetDirection()
+        {
+            return new Vector2(Horizontal, Vertical);
+        }
     }
 }

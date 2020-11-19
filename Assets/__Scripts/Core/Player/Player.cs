@@ -4,6 +4,7 @@ using HeyEscape.Core.Player.FSM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace HeyEscape.Core.Player
@@ -26,33 +27,20 @@ namespace HeyEscape.Core.Player
 
         [SerializeField] bool isHidden = false;
 
-        //Collider2D[] colliders;
         Collider2D[] colliders = new Collider2D[10];
+        int amount = 0;
 
-        //public bool nearHidePlace = false;
-        //private IHidePlace hidePlace;
-
-        //List<IInteractable> interactables;
         Detector<IInteractable> interactableDetector = new InteractableDetector();
         Detector<IHidePlace> hideplaceDetector = new HidePlaceDetector();
         [SerializeField] PlayerHideHandle playerHideHandle;
         Detector<ISearchable> searchableDetector;
-
-        List<ISearchable> searchables;
-        List<IKillable> killables;
-        List<IHidePlace> hideplaces;
-        IHidePlace currentHidePlace = null;
+        Detector<IKillable> killableDetector = new KillableDetector();
 
         public event Action<string> OnPlayerInteractEvent;
 
         private void Start()
         {
             searchableDetector = new SearchableDetector(Inventory.instance);
-
-            //interactables = new List<IInteractable>();
-            searchables = new List<ISearchable>();
-            killables = new List<IKillable>();
-            hideplaces = new List<IHidePlace>();
         }
 
         void Update()
@@ -121,19 +109,8 @@ namespace HeyEscape.Core.Player
 
 
 #if UNITY_ANDROID || UNITY_IPHONE
-            //if (GameManager.instance.PlayerFSM.Vertical > 0.8f && !isHidden && hideplaces.Count > 0)
-            if (GameManager.instance.PlayerFSM.Vertical > 0.8f && !playerHideHandle.IsHidden && hideplaceDetector.GetDetectedCollidersCount() > 0)
+            if (GameManager.instance.PlayerFSM.InputHandler.Vertical > 0.8f && !playerHideHandle.IsHidden && hideplaceDetector.GetDetectedCollidersCount() > 0)
             {
-                Debug.Log("Hiding");
-                /*animator.SetBool("IsJumping", false);
-                animator.SetBool("IsRunning", false);
-                animator.SetBool("IsGrounded", true);
-                if (hideplaces[0].IsAccessible())
-                {
-                    hideplaces[0].Hide();
-                    currentHidePlace = hideplaces[0];
-                    isHidden = true;
-                }*/
                 IHidePlace foundHidePlace = hideplaceDetector.GetFirstFoundObject();
                 if (foundHidePlace.IsAccessible())
                 {
@@ -143,97 +120,41 @@ namespace HeyEscape.Core.Player
                     playerHideHandle.Hide(foundHidePlace.GetHidePlaceInfo());
                 }
             }
-            //if (GameManager.instance.PlayerFSM.Vertical < 0.8f && isHidden && currentHidePlace != null)
-            if (GameManager.instance.PlayerFSM.Vertical < 0.8f && playerHideHandle.IsHidden)
+            if (GameManager.instance.PlayerFSM.InputHandler.Vertical < 0.8f && playerHideHandle.IsHidden)
             {
-                Debug.Log("Unhiding");
                 playerHideHandle.Unhide();
-
-                /*currentHidePlace.Unhide();
-                currentHidePlace = null;
-                isHidden = false;*/
             }
 #endif
         }
 
         private void FixedUpdate()
         {
-            killables.Clear();
-            searchables.Clear();
-            hideplaces.Clear();
-            int collidersFounded = 0;
-            //colliders = Physics2D.OverlapCircleAll(enemyDetectionPosition.position, enemyDetectionRadius);
-            collidersFounded = Physics2D.OverlapCircleNonAlloc(enemyDetectionPosition.position, enemyDetectionRadius, colliders);
-            //foreach (Collider2D collider in colliders)
-            for (int i = 0; i < collidersFounded; i++)
+            amount = Physics2D.OverlapCircleNonAlloc(enemyDetectionPosition.position, enemyDetectionRadius, colliders);
+            killableDetector.CheckCollidersInArray(colliders, amount);
+            searchableDetector.CheckCollidersInArray(colliders, amount);
+
+            amount = Physics2D.OverlapCircleNonAlloc(transform.position, interactibleDetectionRadius, colliders);
+            interactableDetector.CheckCollidersInArray(colliders, amount);
+            hideplaceDetector.CheckCollidersInArray(colliders, amount);
+        }
+
+        private void DebugColliders(Collider2D[] colliders)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (Collider2D collider in colliders)
             {
-                Collider2D collider = colliders[i];
-                //Debug.Log(collider.gameObject.name);
-                if (collider.gameObject == gameObject) continue;
-
-                IKillable killable = collider.GetComponent<IKillable>();
-                if (killable != null)
-                {
-                    Enemy enemy = collider.GetComponent<Enemy>();
-                    if (enemy != null)
-                    {
-                        if (!enemy.IsDead())
-                            killables.Add(killable);
-                    }
-                    else
-                    {
-                        killables.Add(killable);
-                    }
-                }
-
-                /*ISearchable searchable = collider.GetComponent<ISearchable>();
-                if (searchable != null)
-                {
-                    searchables.Add(searchable);
-                }*/
+                if (collider == null) continue;
+                stringBuilder.Append(collider.name);
+                stringBuilder.Append(" ");
             }
-
-            searchableDetector.CheckCollidersInArray(colliders);
-
-            //colliders = Physics2D.OverlapCircleAll(transform.position, interactibleDetectionRadius);
-            collidersFounded = Physics2D.OverlapCircleNonAlloc(transform.position, interactibleDetectionRadius, colliders);
-            //foreach (Collider2D collider in colliders)
-            interactableDetector.CheckCollidersInArray(colliders);
-            hideplaceDetector.CheckCollidersInArray(colliders);
-
-            for (int i = 0; i < collidersFounded; i++)
-            {
-                Collider2D collider = colliders[i];
-
-                if (collider.gameObject == gameObject) continue;
-
-                /*IInteractable interactable = collider.GetComponent<IInteractable>();
-                if (interactable != null)
-                {
-                    interactables.Add(interactable);
-                }*/
-
-                /*IHidePlace hideplace = collider.GetComponent<IHidePlace>();
-                if (hideplace != null)
-                {
-                    hideplaces.Add(hideplace);
-                }*/
-            }
-
+            Debug.Log(stringBuilder.ToString());
         }
 
         public void KillButtonPressed()
         {
             if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver) return;
 
-            if (killables.Count > 0)
-            {
-                foreach (IKillable killable in killables)
-                {
-                    animator.SetTrigger("Kill");
-                    killable.Kill();
-                }
-            }
+            killableDetector.InteractWithFoundColliders(() => { animator.SetTrigger("Kill"); });
         }
         public void UsingButtonPressed()
         {
@@ -242,34 +163,6 @@ namespace HeyEscape.Core.Player
                 Debug.Log("!playerMovement.IsEnabled || GameManager.instance.IsGameOver");
                 return;
             }
-
-            /*if (searchables.Count > 0)
-            {
-                animator.SetTrigger("Search");
-
-                foreach (ISearchable searchable in searchables)
-                {
-                    List<InventoryItem> enemyItems = searchable.Search();
-                    if (enemyItems.Count > 0)
-                    {
-                        foreach (InventoryItem item in enemyItems)
-                        {
-                            Inventory.instance.AddItem(item);
-                        }
-                    }
-                }
-            }*/
-
-            /*if (interactables.Count > 0)
-            {
-                foreach (IInteractable interactable in interactables)
-                {
-                    animator.SetBool("IsJumping", false);
-                    animator.SetBool("IsRunning", false);
-                    animator.SetBool("IsGrounded", true);
-                    interactable.Interact();
-                }
-            }*/
             searchableDetector.InteractWithFoundColliders(() => { animator.SetTrigger("Search"); });
             interactableDetector.InteractWithFoundColliders();
         }
@@ -296,23 +189,5 @@ namespace HeyEscape.Core.Player
 
             Gizmos.DrawWireSphere(transform.position, interactibleDetectionRadius);
         }
-
-        /*private void OnTriggerEnter2D(Collider2D collision)
-        {
-            enemyNear = isEnemyNearCheck(collision);
-        }
-
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            enemyNear = isEnemyNearCheck(collision);
-        }
-
-        private Enemy isEnemyNearCheck(Collider2D collision)
-        {
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null) Debug.Log("Enemy near");
-            else Debug.Log("Enemy left");
-            return (enemy != null) ? enemy : null;
-        }*/
     }
 }

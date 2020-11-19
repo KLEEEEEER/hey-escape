@@ -27,7 +27,7 @@ namespace HeyEscape.Core.Player
         public void MoveHorizontally(float horizontal, float multiplier = 1f)
         {
             if (!isEnabled) return;
-            rb.velocity = (new Vector2(horizontal, rb.velocity.y) * speed) * multiplier;
+            rb.velocity = new Vector2((horizontal * speed * multiplier), rb.velocity.y);
         }
 
         public void MoveVertically(float vertical, float multiplier = 1f)

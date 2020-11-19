@@ -9,17 +9,17 @@ namespace Core.Detectors
     {
         protected List<T> detectedColliders = new List<T>();
 
-        public virtual void CheckCollidersInArray(Collider2D[] colliders)
+        public virtual void CheckCollidersInArray(Collider2D[] colliders, int amount)
         {
             detectedColliders.Clear();
 
             if (colliders.Length == 0) return;
 
-            foreach (Collider2D collider in colliders)
+            //foreach (Collider2D collider in colliders)
+            for (int i = 0; i < amount; i++)
             {
-                if (collider == null) continue;
-
-                T foundCollider = collider.GetComponent<T>();
+                //if (colliders[i] == null) continue;
+                T foundCollider = colliders[i].GetComponent<T>();
                 if (foundCollider != null)
                 {
                     detectedColliders.Add(foundCollider);

@@ -9,7 +9,7 @@ namespace HeyEscape.Core.Player
 {
     public class PlayerHideHandle : MonoBehaviour
     {
-        [SerializeField] Renderer playerRenderer;
+        [SerializeField] SpriteRenderer playerRenderer;
         [SerializeField] PlayerFSM playerFSM;
         [SerializeField] VisibilityState visibilityState;
         [SerializeField] private float SearchHidePlaceRadius = 1f;
@@ -27,7 +27,7 @@ namespace HeyEscape.Core.Player
             playerFSM.TransitionToState(playerFSM.DisableState);
             transform.position = hidePlaceInfo.transform;
             transform.localScale = hidePlaceInfo.scale;
-            playerRenderer.material.color = hidePlaceInfo.color;
+            playerRenderer.color = hidePlaceInfo.color;
             visibilityState.SetVisibilityState(hidePlaceInfo.visibilityState);
 
             IsHidden = true;
@@ -38,7 +38,7 @@ namespace HeyEscape.Core.Player
             playerFSM.TransitionToState(playerFSM.IdleState);
             transform.position = initPosition;
             transform.localScale = initScale;
-            playerRenderer.material.color = initColor;
+            playerRenderer.color = initColor;
             visibilityState.SetVisibilityState(VisibilityState.State.Visible);
 
             IsHidden = false;
@@ -48,7 +48,7 @@ namespace HeyEscape.Core.Player
         {
             initPosition = transform.position;
             initScale = transform.localScale;
-            initColor = playerRenderer.material.color;
+            initColor = playerRenderer.color;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace HeyEscape.Core.Player.FSM.States
         private float delayGroundCheck = 0.5f;
         public override void EnterState(PlayerFSM player)
         {
+            Debug.Log("Jumping wat?");
             player.OnJumpEvent.Invoke();
             player.Animator.SetBool("IsJumping", true);
             timer = 0f;
@@ -20,7 +21,7 @@ namespace HeyEscape.Core.Player.FSM.States
         {
             if (player.airControl)
             {
-                Vector2 targetVelocity = new Vector2(player.Horizontal, player.Rigidbody2D.velocity.y);
+                Vector2 targetVelocity = new Vector2(player.InputHandler.Horizontal, player.Rigidbody2D.velocity.y);
                 player.Rigidbody2D.velocity = Vector2.SmoothDamp(player.Rigidbody2D.velocity, targetVelocity, ref player.currentVelocity, player.MovementSmoothing);
             }
 

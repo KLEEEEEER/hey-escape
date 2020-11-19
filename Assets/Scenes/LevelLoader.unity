@@ -5227,6 +5227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1c277381d11b04986b4c32684b83dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputHandler: {fileID: 1443288896}
+  playerMovement: {fileID: 1443288908}
   speed: 7
   ClimbingSpeedMultiplier: 5
   currentVelocity: {x: 0, y: 0}
@@ -5261,7 +5263,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isLookingRight: 1
-  arrow: {fileID: 0}
+  arrow: {fileID: 126386547}
 --- !u!114 &1443288896
 MonoBehaviour:
   m_ObjectHideFlags: 0

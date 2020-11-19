@@ -26,6 +26,7 @@ namespace HeyEscape.Core.Player
             currentState = state;
         }
 
+        /// <summary>Checking if current state is equals to given states. Returning true if current state is State.Visible</summary>
         public bool CheckVisibility(params State[] visibleStates)
         {
             if (currentState == State.Visible) return true;

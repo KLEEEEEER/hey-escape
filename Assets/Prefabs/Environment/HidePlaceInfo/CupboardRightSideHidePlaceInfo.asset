@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af37f87a75da6d14c94601f2e60c49de, type: 3}
   m_Name: CupboardRightSideHidePlaceInfo
   m_EditorClassIdentifier: 
-  transform: {x: 0, y: 0, z: 0}
+  transform: {x: -2.45, y: 0.955, z: 0}
   scale: {x: 0.9, y: 0.9, z: 0.9}
   color: {r: 0.59607846, g: 0.59607846, b: 0.59607846, a: 1}
   DiactivatePlayerOnHide: 0
+  visibilityState: 2

@@ -13,15 +13,13 @@ namespace Core.Detectors
             this.inventory = inventory;
         }
 
-        public override void CheckCollidersInArray(Collider2D[] colliders)
+        public override void CheckCollidersInArray(Collider2D[] colliders, int amount)
         {
-            base.CheckCollidersInArray(colliders);
+            base.CheckCollidersInArray(colliders, amount);
         }
 
         public override bool InteractWithFoundColliders(Action onInteractionAction = null)
         {
-            Debug.Log("Interacted with searchable");
-
             bool interacted = false;
             if (detectedColliders.Count > 0)
             {

@@ -11,6 +11,11 @@ namespace HeyEscape.Core.Player.FSM
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerFSM : MonoBehaviour
     {
+        [SerializeField] private InputHandler inputHandler;
+        public InputHandler InputHandler { get => inputHandler; set { inputHandler = value; } }
+        [SerializeField] private PlayerMovement playerMovement;
+        public PlayerMovement PlayerMovement { get => playerMovement; set { playerMovement = value; } }
+
         [Header("Character Attributes")]
         public float speed;
         public float ClimbingSpeedMultiplier;
@@ -55,18 +60,14 @@ namespace HeyEscape.Core.Player.FSM
             get => currentState;
         }
 
-        public PlayerFSMIdleState     IdleState = new PlayerFSMIdleState();
-        public PlayerFSMJumpingState  JumpingState = new PlayerFSMJumpingState();
-        public PlayerFSMRunningState  RunningState = new PlayerFSMRunningState();
-        public PlayerFSMDuckingState  DuckingState = new PlayerFSMDuckingState();
-        public PlayerFSMDisableState  DisableState = new PlayerFSMDisableState();
+        public PlayerFSMIdleState IdleState = new PlayerFSMIdleState();
+        public PlayerFSMJumpingState JumpingState = new PlayerFSMJumpingState();
+        public PlayerFSMRunningState RunningState = new PlayerFSMRunningState();
+        public PlayerFSMDuckingState DuckingState = new PlayerFSMDuckingState();
+        public PlayerFSMDisableState DisableState = new PlayerFSMDisableState();
         public PlayerFSMOnLadderState LadderState = new PlayerFSMOnLadderState();
         public PlayerFSMInWindowState InWindowState = new PlayerFSMInWindowState();
 
-        private float horizontal;
-        private float vertical;
-        public float Horizontal { get => horizontal; }
-        public float Vertical { get => vertical; }
         public bool isLookingRight = true;
 
         [SerializeField] public GameObject arrow;
@@ -103,13 +104,6 @@ namespace HeyEscape.Core.Player.FSM
 
         void Update()
         {
-#if UNITY_ANDROID || UNITY_IPHONE
-            horizontal = joystick.Horizontal * speed;
-            vertical = joystick.Vertical * climbingSpeed;
-#else
-        horizontal = Input.GetAxisRaw("Horizontal") * speed;
-        vertical = Input.GetAxisRaw("Vertical") * speed;
-#endif
             CheckCharacterRotation();
 
             currentState.Update(this);
@@ -138,12 +132,12 @@ namespace HeyEscape.Core.Player.FSM
 
         void CheckCharacterRotation()
         {
-            if (isLookingRight && horizontal < 0)
+            if (isLookingRight && InputHandler.Horizontal < 0)
             {
                 Flip();
                 isLookingRight = false;
             }
-            else if (!isLookingRight && horizontal > 0)
+            else if (!isLookingRight && InputHandler.Horizontal > 0)
             {
                 Flip();
                 isLookingRight = true;

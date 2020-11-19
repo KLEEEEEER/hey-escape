@@ -62,11 +62,12 @@ namespace HeyEscape.Core.Player.FSM.States
             player.Rigidbody2D.velocity = new Vector2(0, 0);
             if (!canControlHorizontal)
             {
-                player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + Mathf.Ceil(player.Vertical) * player.ClimbingSpeedMultiplier * Time.deltaTime);
+                //player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + Mathf.Ceil(player.InputHandler.Vertical) * player.ClimbingSpeedMultiplier * Time.deltaTime);
+                player.PlayerMovement.MoveVertically(player.InputHandler.Vertical);
             }
             else
             {
-                player.transform.position = new Vector2(player.transform.position.x + player.Horizontal * player.ClimbingSpeedMultiplier * Time.deltaTime, player.transform.position.y + Mathf.Ceil(player.Vertical) * player.ClimbingSpeedMultiplier * Time.deltaTime);
+                player.transform.position = new Vector2(player.transform.position.x + player.InputHandler.Horizontal * player.ClimbingSpeedMultiplier * Time.deltaTime, player.transform.position.y + Mathf.Ceil(player.InputHandler.Vertical) * player.ClimbingSpeedMultiplier * Time.deltaTime);
             }
             player.Animator.SetFloat("ClimbDirection", Mathf.Clamp(player.joystick.Vertical, -1f, 1f));
         }

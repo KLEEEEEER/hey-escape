@@ -50,13 +50,13 @@ namespace HeyEscape.Core.Player.FSM.States
                 return;
             }
 
-            if (player.Horizontal != 0)
+            if (player.InputHandler.Horizontal != 0)
             {
                 player.TransitionToState(player.RunningState);
                 return;
             }
 
-            player.Animator.SetFloat("Speed", Mathf.Abs(player.Horizontal));
+            player.Animator.SetFloat("Speed", Mathf.Abs(player.InputHandler.Horizontal));
             player.Rigidbody2D.velocity = new Vector2(0, player.Rigidbody2D.velocity.y);
         }
     }

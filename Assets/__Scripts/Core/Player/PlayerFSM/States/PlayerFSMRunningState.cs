@@ -27,19 +27,20 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void FixedUpdate(PlayerFSM player)
         {
-            if (player.Horizontal == 0)
+            if (player.InputHandler.Horizontal == 0)
             {
                 player.TransitionToState(player.IdleState);
                 return;
             }
 
-            player.Animator.SetFloat("Speed", Mathf.Abs(player.Horizontal));
+            player.Animator.SetFloat("Speed", Mathf.Abs(player.InputHandler.Horizontal));
 
             player.Animator.SetBool("IsRunning", (Mathf.Abs(player.Rigidbody2D.velocity.x) > 0));
 
-            Vector2 targetVelocity = new Vector2(player.Horizontal, player.Rigidbody2D.velocity.y);
+            /*Vector2 targetVelocity = new Vector2(player.InputHandler.Horizontal, player.Rigidbody2D.velocity.y);
             //player.Rigidbody2D.velocity = Vector2.SmoothDamp(player.Rigidbody2D.velocity, targetVelocity, ref player.currentVelocity, player.MovementSmoothing);
-            player.Rigidbody2D.velocity = targetVelocity;
+            player.Rigidbody2D.velocity = targetVelocity;*/
+            player.PlayerMovement.MoveHorizontally(player.InputHandler.Horizontal);
         }
 
         public override void Update(PlayerFSM player)
