@@ -320,9 +320,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1443288903}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: KillButtonPressed
+      - m_Target: {fileID: 1443288896}
+        m_TargetAssemblyTypeName: HeyEscape.Core.Player.InputHandler, Assembly-CSharp
+        m_MethodName: OnKill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3424,9 +3424,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1443288903}
-        m_TargetAssemblyTypeName: Core.Player.Player, Assembly-CSharp
-        m_MethodName: UsingButtonPressed
+      - m_Target: {fileID: 1443288896}
+        m_TargetAssemblyTypeName: HeyEscape.Core.Player.InputHandler, Assembly-CSharp
+        m_MethodName: OnUsing
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

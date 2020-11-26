@@ -35,22 +35,22 @@ namespace Core.Detectors
             hideplaceDetector.CheckCollidersInArray(colliders, amount);
         }
 
-        public void InteractKillable()
+        public void InteractKillable(Action onInteract = null)
         {
-
+            killableDetector.InteractWithFoundColliders(onInteract);
         }
 
-        public void InteractSearchable()
+        public void InteractSearchable(Action onInteract = null)
         {
-
+            searchableDetector.InteractWithFoundColliders(onInteract);
         }
 
-        public void InteractInteractable()
+        public void InteractInteractable(Action onInteract = null)
         {
-
+            interactableDetector.InteractWithFoundColliders(onInteract);
         }
 
-        public bool TryHideInHidePlace(Action onInteract)
+        public bool TryHideInHidePlace(Action onInteract = null)
         {
             if (playerHideHandle.IsHidden) return false;
             if (hideplaceDetector.GetDetectedCollidersCount() == 0) return false;
@@ -58,7 +58,7 @@ namespace Core.Detectors
             IHidePlace foundHidePlace = hideplaceDetector.GetFirstFoundObject();
             if (foundHidePlace.IsAccessible())
             {
-                onInteract();
+                onInteract?.Invoke();
                 playerHideHandle.Hide(foundHidePlace.GetHidePlaceInfo());
                 return true;
             }

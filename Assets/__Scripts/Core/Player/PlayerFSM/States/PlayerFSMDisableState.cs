@@ -6,42 +6,18 @@ namespace HeyEscape.Core.Player.FSM.States
 {
     public class PlayerFSMDisableState : PlayerFSMBaseState
     {
-        public override void EnterState(PlayerFSM player)
+        public PlayerFSMDisableState(PlayerFSM playerFSM) : base(playerFSM) { }
+        public override void EnterState()
         {
-            player.Animator.SetBool("IsRunning", false);
-            player.Animator.SetTrigger("Hide");
-            player.Rigidbody2D.velocity = Vector2.zero;
-            player.Rigidbody2D.isKinematic = true;
+            fsm.Animator.SetBool("IsRunning", false);
+            fsm.Animator.SetTrigger("Hide");
+            fsm.Rigidbody2D.velocity = Vector2.zero;
+            fsm.Rigidbody2D.isKinematic = true;
         }
 
-        public override void ExitState(PlayerFSM player)
+        public override void ExitState()
         {
-            player.Rigidbody2D.isKinematic = false;
-        }
-
-        public override void FixedUpdate(PlayerFSM player)
-        {
-
-        }
-
-        public override void LateUpdate(PlayerFSM player)
-        {
-
-        }
-
-        public override void OnTriggerEnter2D(PlayerFSM player, Collider2D collision)
-        {
-
-        }
-
-        public override void OnTriggerExit2D(PlayerFSM player, Collider2D collision)
-        {
-
-        }
-
-        public override void Update(PlayerFSM player)
-        {
-
+            fsm.Rigidbody2D.isKinematic = false;
         }
     }
 }

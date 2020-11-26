@@ -7,14 +7,20 @@ namespace HeyEscape.Core.Player.FSM.States
 {
     public class PlayerFSMBaseState
     {
+        protected PlayerFSM fsm;
+
         public static UnityEvent OnUseButtonPressed = new UnityEvent();
         public static UnityEvent OnJumpButtonPressed = new UnityEvent();
-        public virtual void EnterState(PlayerFSM player) { }
-        public virtual void ExitState(PlayerFSM player) { }
-        public virtual void Update(PlayerFSM player) { }
-        public virtual void OnTriggerEnter2D(PlayerFSM player, Collider2D collision) { }
-        public virtual void OnTriggerExit2D(PlayerFSM player, Collider2D collision) { }
-        public virtual void FixedUpdate(PlayerFSM player) { }
-        public virtual void LateUpdate(PlayerFSM player) { }
+
+        public PlayerFSMBaseState(PlayerFSM playerFSM) {
+            fsm = playerFSM;
+        }
+        public virtual void EnterState() { }
+        public virtual void ExitState() { }
+        public virtual void Update() { }
+        public virtual void OnTriggerEnter2D(Collider2D collision) { }
+        public virtual void OnTriggerExit2D(Collider2D collision) { }
+        public virtual void FixedUpdate() { }
+        public virtual void LateUpdate() { }
     }
 }

@@ -66,14 +66,14 @@ namespace HeyEscape.Core.Player.FSM
             get => currentState;
         }
 
-        public PlayerFSMIdleState IdleState = new PlayerFSMIdleState();
-        public PlayerFSMJumpingState JumpingState = new PlayerFSMJumpingState();
-        public PlayerFSMRunningState RunningState = new PlayerFSMRunningState();
-        public PlayerFSMDuckingState DuckingState = new PlayerFSMDuckingState();
-        public PlayerFSMDisableState DisableState = new PlayerFSMDisableState();
-        public PlayerFSMOnLadderState LadderState = new PlayerFSMOnLadderState();
-        public PlayerFSMInWindowState InWindowState = new PlayerFSMInWindowState();
-        public PlayerFSMHiddenState HiddenState = new PlayerFSMHiddenState();
+        public PlayerFSMIdleState IdleState;
+        public PlayerFSMJumpingState JumpingState;
+        public PlayerFSMRunningState RunningState;
+        public PlayerFSMDuckingState DuckingState;
+        public PlayerFSMDisableState DisableState;
+        public PlayerFSMOnLadderState LadderState;
+        public PlayerFSMInWindowState InWindowState;
+        public PlayerFSMHiddenState HiddenState;
 
         public bool isLookingRight = true;
 
@@ -81,9 +81,9 @@ namespace HeyEscape.Core.Player.FSM
 
         public void TransitionToState(PlayerFSMBaseState state)
         {
-            currentState.ExitState(this);
+            currentState.ExitState();
             currentState = state;
-            currentState.EnterState(this);
+            currentState.EnterState();
         }
 
         private void Awake()
@@ -100,6 +100,15 @@ namespace HeyEscape.Core.Player.FSM
 
         private void Start()
         {
+            IdleState = new PlayerFSMIdleState(this);
+            JumpingState = new PlayerFSMJumpingState(this);
+            RunningState = new PlayerFSMRunningState(this);
+            DuckingState = new PlayerFSMDuckingState(this);
+            DisableState = new PlayerFSMDisableState(this);
+            LadderState = new PlayerFSMOnLadderState(this);
+            InWindowState = new PlayerFSMInWindowState(this);
+            HiddenState = new PlayerFSMHiddenState(this);
+
             currentState = DisableState;
 
             rigidbody2D = GetComponent<Rigidbody2D>();
@@ -113,28 +122,28 @@ namespace HeyEscape.Core.Player.FSM
         {
             CheckCharacterRotation();
 
-            currentState.Update(this);
+            currentState.Update();
         }
 
         private void FixedUpdate()
         {
             CheckCharacterGrounded();
-            currentState.FixedUpdate(this);
+            currentState.FixedUpdate();
         }
 
         private void LateUpdate()
         {
-            currentState.LateUpdate(this);
+            currentState.LateUpdate();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            currentState.OnTriggerEnter2D(this, collision);
+            currentState.OnTriggerEnter2D(collision);
         }
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            currentState.OnTriggerExit2D(this, collision);
+            currentState.OnTriggerExit2D(collision);
         }
 
         void CheckCharacterRotation()
@@ -183,11 +192,6 @@ namespace HeyEscape.Core.Player.FSM
         public void OnGameOver()
         {
             TransitionToState(DisableState);
-        }
-
-        private void OnEnable()
-        {
-            //InputHandler.KillButtonPressed.AddListener();
         }
 
         public void OnMobileJumpButtonHold(BaseEventData data)

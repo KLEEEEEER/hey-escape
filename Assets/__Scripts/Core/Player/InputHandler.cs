@@ -40,25 +40,25 @@ namespace HeyEscape.Core.Player
         {
             return new Vector2(Horizontal, Vertical);
         }
-        /*public void OnKill()
+        public void OnKill()
         {
             KillButtonPressed?.Invoke();
 
-            if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver) return;
+            /*if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver) return;
 
-            killableDetector.InteractWithFoundColliders(() => { animator.SetTrigger("Kill"); });
+            killableDetector.InteractWithFoundColliders(() => { animator.SetTrigger("Kill"); });*/
         }
         public void OnUsing()
         {
             UsingButtonPressed?.Invoke();
 
-            if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver)
+            /*if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver)
             {
                 Debug.Log("!playerMovement.IsEnabled || GameManager.instance.IsGameOver");
                 return;
             }
             searchableDetector.InteractWithFoundColliders(() => { animator.SetTrigger("Search"); });
-            interactableDetector.InteractWithFoundColliders();
-        }*/
+            interactableDetector.InteractWithFoundColliders();*/
+        }
     }
 }

@@ -9,89 +9,60 @@ namespace HeyEscape.Core.Player.FSM.States
         Collider2D[] colliders;
         private float timer = 0f;
         private float delayGroundCheck = 0.5f;
-        public override void EnterState(PlayerFSM player)
+        public PlayerFSMJumpingState(PlayerFSM playerFSM) : base(playerFSM) { }
+        public override void EnterState()
         {
             Debug.Log("Jumping wat?");
-            player.OnJumpEvent.Invoke();
-            player.Animator.SetBool("IsJumping", true);
+            fsm.OnJumpEvent.Invoke();
+            fsm.Animator.SetBool("IsJumping", true);
             timer = 0f;
         }
 
-        public override void FixedUpdate(PlayerFSM player)
+        public override void FixedUpdate()
         {
-            if (player.airControl)
+            if (fsm.airControl)
             {
-                Vector2 targetVelocity = new Vector2(player.InputHandler.Horizontal, player.Rigidbody2D.velocity.y);
-                player.Rigidbody2D.velocity = Vector2.SmoothDamp(player.Rigidbody2D.velocity, targetVelocity, ref player.currentVelocity, player.MovementSmoothing);
+                Vector2 targetVelocity = new Vector2(fsm.InputHandler.Horizontal, fsm.Rigidbody2D.velocity.y);
+                fsm.Rigidbody2D.velocity = Vector2.SmoothDamp(fsm.Rigidbody2D.velocity, targetVelocity, ref fsm.currentVelocity, fsm.MovementSmoothing);
             }
 
-            if (player.Rigidbody2D.velocity.y < 0)
+            if (fsm.Rigidbody2D.velocity.y < 0)
             {
-                player.Animator.SetBool("IsJumping", false);
+                fsm.Animator.SetBool("IsJumping", false);
             }
         }
 
-        public override void LateUpdate(PlayerFSM player)
+        public override void LateUpdate()
         {
             if (timer > delayGroundCheck)
             {
-                if (player.IsGrounded)
+                if (fsm.IsGrounded)
                 {
-                    player.Animator.SetBool("IsJumping", false);
-                    if (Mathf.Abs(player.Rigidbody2D.velocity.x) > 0)
+                    fsm.Animator.SetBool("IsJumping", false);
+                    if (Mathf.Abs(fsm.Rigidbody2D.velocity.x) > 0)
                     {
-                        player.TransitionToState(player.RunningState);
+                        fsm.TransitionToState(fsm.RunningState);
                     }
                     else
                     {
-                        player.TransitionToState(player.IdleState);
+                        fsm.TransitionToState(fsm.IdleState);
                     }
                 }
             }
         }
 
-        public override void OnTriggerEnter2D(PlayerFSM player, Collider2D collision)
+        public override void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Climbable"))
             {
-                player.transform.position = new Vector2(collision.transform.position.x, player.transform.position.y);
-                player.TransitionToState(player.LadderState);
+                fsm.transform.position = new Vector2(collision.transform.position.x, fsm.transform.position.y);
+                fsm.TransitionToState(fsm.LadderState);
             }
         }
 
-        public override void Update(PlayerFSM player)
+        public override void Update()
         {
-            //player.Animator.SetFloat("Speed", 0);
-
-            // player.Animator.SetFloat("VerticalSpeed", Mathf.Abs(player.Rigidbody2D.velocity.y));
-
-            /*colliders = Physics2D.OverlapCircleAll(player.GroundCheck.position, player.GroundedRadius, player.GroundLayers);
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].gameObject != player.gameObject)
-                {
-                    player.OnLandEvent.Invoke();
-
-                    player.Animator.SetBool("IsJumping", false);
-                    player.Animator.SetBool("IsGrounded", true);
-
-                    if (player.Rigidbody2D.velocity.x > 0)
-                    {
-                        player.TransitionToState(player.RunningState);
-                    }
-                    else
-                    {
-                        player.TransitionToState(player.IdleState);
-                    }
-                    break;
-                }
-            }*/
-
             timer += Time.deltaTime;
-        }
-        public override void OnTriggerExit2D(PlayerFSM player, Collider2D collision)
-        {
-
         }
     }
 }

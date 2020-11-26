@@ -6,74 +6,80 @@ namespace HeyEscape.Core.Player.FSM.States
 {
     public class PlayerFSMIdleState : PlayerFSMBaseState
     {
-        public override void EnterState(PlayerFSM player)
+        public PlayerFSMIdleState(PlayerFSM playerFSM) : base(playerFSM) { }
+        public override void EnterState()
         {
-            player.Animator.SetBool("IsRunning", false);
-            player.Animator.SetBool("IsGrounded", true);
+            fsm.Animator.SetBool("IsRunning", false);
+            fsm.Animator.SetBool("IsGrounded", true);
+            fsm.InputHandler.KillButtonPressed.AddListener(OnKillButtonPressed);
+            fsm.InputHandler.UsingButtonPressed.AddListener(OnUsingButtonPressed);
         }
 
-        public override void FixedUpdate(PlayerFSM player)
-        {
-
-        }
-
-        public override void LateUpdate(PlayerFSM player)
-        {
-
-        }
-
-        public override void OnTriggerEnter2D(PlayerFSM player, Collider2D collision)
+        public override void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Climbable"))
             {
-                player.transform.position = new Vector2(collision.transform.position.x, player.transform.position.y);
-                player.TransitionToState(player.LadderState);
+                fsm.transform.position = new Vector2(collision.transform.position.x, fsm.transform.position.y);
+                fsm.TransitionToState(fsm.LadderState);
             }
         }
-        public override void OnTriggerExit2D(PlayerFSM player, Collider2D collision)
-        {
 
-        }
-
-        public override void Update(PlayerFSM player)
+        public override void Update()
         {
             if (GameManager.instance.IsGameOver) return;
 
-            if (player.InputHandler.Vertical > 0.8f && !player.DetectorHandler.IsHidden())
+            if (fsm.InputHandler.Vertical > 0.8f && !fsm.DetectorHandler.IsHidden())
             {
-                if (player.DetectorHandler.TryHideInHidePlace(() =>
+                if (fsm.DetectorHandler.TryHideInHidePlace(() =>
                     {
-                        player.Animator.SetBool("IsJumping", false);
-                        player.Animator.SetBool("IsRunning", false);
-                        player.Animator.SetBool("IsGrounded", true);
+                        fsm.Animator.SetBool("IsJumping", false);
+                        fsm.Animator.SetBool("IsRunning", false);
+                        fsm.Animator.SetBool("IsGrounded", true);
                         //player.TransitionToState(player.HiddenState);
                     }))
                 {
-                    player.TransitionToState(player.HiddenState);
+                    fsm.TransitionToState(fsm.HiddenState);
                     return;
                 }
             }
 
 
 #if UNITY_ANDROID || UNITY_IPHONE
-            if (player.IsMobileJumpPressed)
+            if (fsm.IsMobileJumpPressed)
 #else
         if (Input.GetKeyDown(KeyCode.Space))
 #endif
             {
-                player.Rigidbody2D.AddForce(new Vector2(0f, player.JumpForce));
-                player.TransitionToState(player.JumpingState);
+                fsm.Rigidbody2D.AddForce(new Vector2(0f, fsm.JumpForce));
+                fsm.TransitionToState(fsm.JumpingState);
                 return;
             }
 
-            if (player.InputHandler.Horizontal != 0)
+            if (fsm.InputHandler.Horizontal != 0)
             {
-                player.TransitionToState(player.RunningState);
+                fsm.TransitionToState(fsm.RunningState);
                 return;
             }
 
-            player.Animator.SetFloat("Speed", Mathf.Abs(player.InputHandler.Horizontal));
-            player.Rigidbody2D.velocity = new Vector2(0, player.Rigidbody2D.velocity.y);
+            fsm.Animator.SetFloat("Speed", Mathf.Abs(fsm.InputHandler.Horizontal));
+            fsm.Rigidbody2D.velocity = new Vector2(0, fsm.Rigidbody2D.velocity.y);
+        }
+
+        private void OnKillButtonPressed()
+        {
+            fsm.DetectorHandler.InteractKillable(() => { fsm.Animator.SetTrigger("Kill"); });
+        }
+
+        private void OnUsingButtonPressed()
+        {
+            fsm.DetectorHandler.InteractInteractable();
+            fsm.DetectorHandler.InteractSearchable();
+        }
+
+        public override void ExitState()
+        {
+            fsm.InputHandler.KillButtonPressed.RemoveListener(OnKillButtonPressed);
+            fsm.InputHandler.UsingButtonPressed.RemoveListener(OnUsingButtonPressed);
         }
     }
 }

@@ -6,74 +6,61 @@ namespace HeyEscape.Core.Player.FSM.States
 {
     public class PlayerFSMRunningState : PlayerFSMBaseState
     {
-        public override void EnterState(PlayerFSM player)
-        {
+        public PlayerFSMRunningState(PlayerFSM playerFSM) : base(playerFSM) { }
 
-        }
-
-        public override void OnTriggerEnter2D(PlayerFSM player, Collider2D collision)
+        public override void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Climbable"))
             {
-                player.transform.position = new Vector2(collision.transform.position.x, player.transform.position.y);
-                player.TransitionToState(player.LadderState);
+                fsm.transform.position = new Vector2(collision.transform.position.x, fsm.transform.position.y);
+                fsm.TransitionToState(fsm.LadderState);
             }
         }
 
-        public override void LateUpdate(PlayerFSM player)
+        public override void FixedUpdate()
         {
-
-        }
-
-        public override void FixedUpdate(PlayerFSM player)
-        {
-            if (player.InputHandler.Horizontal == 0)
+            if (fsm.InputHandler.Horizontal == 0)
             {
-                player.TransitionToState(player.IdleState);
+                fsm.TransitionToState(fsm.IdleState);
                 return;
             }
 
-            player.Animator.SetFloat("Speed", Mathf.Abs(player.InputHandler.Horizontal));
+            fsm.Animator.SetFloat("Speed", Mathf.Abs(fsm.InputHandler.Horizontal));
 
-            player.Animator.SetBool("IsRunning", (Mathf.Abs(player.Rigidbody2D.velocity.x) > 0));
+            fsm.Animator.SetBool("IsRunning", (Mathf.Abs(fsm.Rigidbody2D.velocity.x) > 0));
 
             /*Vector2 targetVelocity = new Vector2(player.InputHandler.Horizontal, player.Rigidbody2D.velocity.y);
             //player.Rigidbody2D.velocity = Vector2.SmoothDamp(player.Rigidbody2D.velocity, targetVelocity, ref player.currentVelocity, player.MovementSmoothing);
             player.Rigidbody2D.velocity = targetVelocity;*/
-            player.PlayerMovement.MoveHorizontally(player.InputHandler.Horizontal);
+            fsm.PlayerMovement.MoveHorizontally(fsm.InputHandler.Horizontal);
         }
 
-        public override void Update(PlayerFSM player)
+        public override void Update()
         {
 #if UNITY_ANDROID || UNITY_IPHONE
-            if (player.IsMobileJumpPressed)
+            if (fsm.IsMobileJumpPressed)
 #else
         if (Input.GetKeyDown(KeyCode.Space))
 #endif
             {
-                player.Rigidbody2D.AddForce(new Vector2(0f, player.JumpForce));
-                player.TransitionToState(player.JumpingState);
+                fsm.Rigidbody2D.AddForce(new Vector2(0f, fsm.JumpForce));
+                fsm.TransitionToState(fsm.JumpingState);
                 return;
             }
 
-            if (player.InputHandler.Vertical > 0.8f && !player.DetectorHandler.IsHidden())
+            if (fsm.InputHandler.Vertical > 0.8f && !fsm.DetectorHandler.IsHidden())
             {
-                if (player.DetectorHandler.TryHideInHidePlace(() =>
+                if (fsm.DetectorHandler.TryHideInHidePlace(() =>
                 {
-                    player.Animator.SetBool("IsJumping", false);
-                    player.Animator.SetBool("IsRunning", false);
-                    player.Animator.SetBool("IsGrounded", true);
-                    //player.TransitionToState(player.HiddenState);
+                    fsm.Animator.SetBool("IsJumping", false);
+                    fsm.Animator.SetBool("IsRunning", false);
+                    fsm.Animator.SetBool("IsGrounded", true);
                 }))
                 {
-                    player.TransitionToState(player.HiddenState);
+                    fsm.TransitionToState(fsm.HiddenState);
                     return;
                 }
             }
-        }
-        public override void OnTriggerExit2D(PlayerFSM player, Collider2D collision)
-        {
-
         }
     }
 }

@@ -11,18 +11,19 @@ namespace HeyEscape.Core.Player.FSM.States
         bool isGroundAhead = false;
 
 
-        public override void EnterState(PlayerFSM player)
+        public PlayerFSMOnLadderState(PlayerFSM playerFSM) : base(playerFSM) { }
+        public override void EnterState()
         {
 #if UNITY_ANDROID || UNITY_IPHONE
             OnUseButtonPressed.AddListener(useButtonPressed);
 #endif
-            player.Animator.SetBool("IsJumping", false);
-            player.Animator.SetBool("IsClimbing", true);
+            fsm.Animator.SetBool("IsJumping", false);
+            fsm.Animator.SetBool("IsClimbing", true);
             currentLadders = 1;
             canControlHorizontal = false;
         }
 
-        public override void OnTriggerEnter2D(PlayerFSM player, Collider2D collision)
+        public override void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Climbable"))
             {
@@ -30,60 +31,54 @@ namespace HeyEscape.Core.Player.FSM.States
             }
         }
 
-        public override void LateUpdate(PlayerFSM player)
-        {
-
-        }
-
-        public override void FixedUpdate(PlayerFSM player)
+        public override void FixedUpdate()
         {
             RaycastHit2D[] hits = Physics2D.RaycastAll(
-                player.CheckForGroundFeet.position,
-                (player.CheckForGroundHead.position - player.CheckForGroundFeet.position).normalized,
-                Vector2.Distance(player.CheckForGroundFeet.position, player.CheckForGroundHead.position),
-                player.GroundLayers
+                fsm.CheckForGroundFeet.position,
+                (fsm.CheckForGroundHead.position - fsm.CheckForGroundFeet.position).normalized,
+                Vector2.Distance(fsm.CheckForGroundFeet.position, fsm.CheckForGroundHead.position),
+                fsm.GroundLayers
             );
             isGroundAhead = (hits.Length > 0);
             if (isGroundAhead)
             {
-                if (player.arrow.activeSelf)
-                    player.arrow.SetActive(false);
+                if (fsm.arrow.activeSelf)
+                    fsm.arrow.SetActive(false);
             }
             else
             {
-                if (!player.arrow.activeSelf)
-                    player.arrow.SetActive(true);
+                if (!fsm.arrow.activeSelf)
+                    fsm.arrow.SetActive(true);
             }
         }
 
-        public override void Update(PlayerFSM player)
+        public override void Update()
         {
-            player.Rigidbody2D.gravityScale = 0f;
-            player.Rigidbody2D.velocity = new Vector2(0, 0);
+            fsm.Rigidbody2D.gravityScale = 0f;
+            fsm.Rigidbody2D.velocity = new Vector2(0, 0);
             if (!canControlHorizontal)
             {
-                //player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + Mathf.Ceil(player.InputHandler.Vertical) * player.ClimbingSpeedMultiplier * Time.deltaTime);
-                player.PlayerMovement.MoveVertically(player.InputHandler.Vertical);
+                fsm.PlayerMovement.MoveVertically(fsm.InputHandler.Vertical);
             }
             else
             {
-                player.transform.position = new Vector2(player.transform.position.x + player.InputHandler.Horizontal * player.ClimbingSpeedMultiplier * Time.deltaTime, player.transform.position.y + Mathf.Ceil(player.InputHandler.Vertical) * player.ClimbingSpeedMultiplier * Time.deltaTime);
+                fsm.transform.position = new Vector2(fsm.transform.position.x + fsm.InputHandler.Horizontal * fsm.ClimbingSpeedMultiplier * Time.deltaTime, fsm.transform.position.y + Mathf.Ceil(fsm.InputHandler.Vertical) * fsm.ClimbingSpeedMultiplier * Time.deltaTime);
             }
-            player.Animator.SetFloat("ClimbDirection", Mathf.Clamp(player.joystick.Vertical, -1f, 1f));
+            fsm.Animator.SetFloat("ClimbDirection", Mathf.Clamp(fsm.joystick.Vertical, -1f, 1f));
         }
-        public override void OnTriggerExit2D(PlayerFSM player, Collider2D collision)
+        public override void OnTriggerExit2D(Collider2D collision)
         {
-            player.Rigidbody2D.gravityScale = player.DefaultGravityScale;
+            fsm.Rigidbody2D.gravityScale = fsm.DefaultGravityScale;
             if (collision.CompareTag("Climbable"))
             {
                 currentLadders--;
                 if (currentLadders <= 0)
                 {
                     OnUseButtonPressed.RemoveListener(useButtonPressed);
-                    player.Animator.SetBool("IsClimbing", false);
-                    player.Animator.speed = 1f;
-                    player.arrow.SetActive(false);
-                    player.TransitionToState(player.IdleState);
+                    fsm.Animator.SetBool("IsClimbing", false);
+                    fsm.Animator.speed = 1f;
+                    fsm.arrow.SetActive(false);
+                    fsm.TransitionToState(fsm.IdleState);
                 }
             }
         }
