@@ -39,6 +39,22 @@ namespace HeyEscape.Core.Player.FSM.States
         {
             if (GameManager.instance.IsGameOver) return;
 
+            if (player.InputHandler.Vertical > 0.8f && !player.DetectorHandler.IsHidden())
+            {
+                if (player.DetectorHandler.TryHideInHidePlace(() =>
+                    {
+                        player.Animator.SetBool("IsJumping", false);
+                        player.Animator.SetBool("IsRunning", false);
+                        player.Animator.SetBool("IsGrounded", true);
+                        //player.TransitionToState(player.HiddenState);
+                    }))
+                {
+                    player.TransitionToState(player.HiddenState);
+                    return;
+                }
+            }
+
+
 #if UNITY_ANDROID || UNITY_IPHONE
             if (player.IsMobileJumpPressed)
 #else

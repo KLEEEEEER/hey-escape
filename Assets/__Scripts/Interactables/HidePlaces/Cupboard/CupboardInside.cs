@@ -30,7 +30,6 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
     {
         Interact();
         GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
-        GameManager.instance.PlayerComponent.HidePlayer();
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.SetEnabled(true);
@@ -56,7 +55,6 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
     public void Unhide()
     {
         GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.IdleState);
-        GameManager.instance.PlayerComponent.UnhidePlayer();
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.SetEnabled(false);

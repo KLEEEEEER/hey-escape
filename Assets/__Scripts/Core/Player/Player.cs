@@ -13,35 +13,10 @@ namespace HeyEscape.Core.Player
     public class Player : MonoBehaviour
     {
         public VisibilityState visibility;
-        [SerializeField] private PlayerFSM playerFSM;
-
-
-        [SerializeField] float interactibleDetectionRadius = 0.4f;
-        [SerializeField] private float enemyDetectionRadius = 1;
-        [SerializeField] private Transform enemyDetectionPosition;
-        [SerializeField] private PlayerMovement playerMovement;
+        [SerializeField] private DetectorHandler detectorHandler;
         [SerializeField] private Animator animator;
 
-        [SerializeField] private GameObject eButton;
-        [SerializeField] private GameObject qButton;
-
-        [SerializeField] bool isHidden = false;
-
-        Collider2D[] colliders = new Collider2D[10];
-        int amount = 0;
-
-        Detector<IInteractable> interactableDetector = new InteractableDetector();
-        Detector<IHidePlace> hideplaceDetector = new HidePlaceDetector();
-        [SerializeField] PlayerHideHandle playerHideHandle;
-        Detector<ISearchable> searchableDetector;
-        Detector<IKillable> killableDetector = new KillableDetector();
-
         public event Action<string> OnPlayerInteractEvent;
-
-        private void Start()
-        {
-            searchableDetector = new SearchableDetector(Inventory.instance);
-        }
 
         void Update()
         {
@@ -87,7 +62,7 @@ namespace HeyEscape.Core.Player
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.W) && !isHidden && hideplaces.Count > 0)
+        if (Input.GetKeyDown(KeyCode.W) && hideplaces.Count > 0)
         {
             animator.SetBool("IsJumping", false);
             animator.SetBool("IsRunning", false);
@@ -96,98 +71,31 @@ namespace HeyEscape.Core.Player
             {
                 hideplaces[0].Hide();
                 currentHidePlace = hideplaces[0];
-                isHidden = true;
             }
         }
-        if (Input.GetKeyDown(KeyCode.S) && isHidden && currentHidePlace != null)
+        if (Input.GetKeyDown(KeyCode.S) && currentHidePlace != null)
         {
             currentHidePlace.Unhide();
             currentHidePlace = null;
-            isHidden = false;
         }
 #endif
 
 
 #if UNITY_ANDROID || UNITY_IPHONE
-            if (GameManager.instance.PlayerFSM.InputHandler.Vertical > 0.8f && !playerHideHandle.IsHidden && hideplaceDetector.GetDetectedCollidersCount() > 0)
+            /*if (GameManager.instance.PlayerFSM.InputHandler.Vertical > 0.8f && !detectorHandler.IsHidden())
             {
-                IHidePlace foundHidePlace = hideplaceDetector.GetFirstFoundObject();
-                if (foundHidePlace.IsAccessible())
+                detectorHandler.TryHideInHidePlace(() => 
                 {
                     animator.SetBool("IsJumping", false);
                     animator.SetBool("IsRunning", false);
                     animator.SetBool("IsGrounded", true);
-                    playerHideHandle.Hide(foundHidePlace.GetHidePlaceInfo());
-                }
-            }
-            if (GameManager.instance.PlayerFSM.InputHandler.Vertical < 0.8f && playerHideHandle.IsHidden)
+                });
+            } 
+            else if (GameManager.instance.PlayerFSM.InputHandler.Vertical < 0.8f && detectorHandler.IsHidden())
             {
-                playerHideHandle.Unhide();
-            }
+                detectorHandler.UnhideFromHidePlace();
+            }*/
 #endif
-        }
-
-        private void FixedUpdate()
-        {
-            amount = Physics2D.OverlapCircleNonAlloc(enemyDetectionPosition.position, enemyDetectionRadius, colliders);
-            killableDetector.CheckCollidersInArray(colliders, amount);
-            searchableDetector.CheckCollidersInArray(colliders, amount);
-
-            amount = Physics2D.OverlapCircleNonAlloc(transform.position, interactibleDetectionRadius, colliders);
-            interactableDetector.CheckCollidersInArray(colliders, amount);
-            hideplaceDetector.CheckCollidersInArray(colliders, amount);
-        }
-
-        private void DebugColliders(Collider2D[] colliders)
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (Collider2D collider in colliders)
-            {
-                if (collider == null) continue;
-                stringBuilder.Append(collider.name);
-                stringBuilder.Append(" ");
-            }
-            Debug.Log(stringBuilder.ToString());
-        }
-
-        public void KillButtonPressed()
-        {
-            if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver) return;
-
-            killableDetector.InteractWithFoundColliders(() => { animator.SetTrigger("Kill"); });
-        }
-        public void UsingButtonPressed()
-        {
-            if (!playerMovement.IsEnabled || GameManager.instance.IsGameOver) 
-            {
-                Debug.Log("!playerMovement.IsEnabled || GameManager.instance.IsGameOver");
-                return;
-            }
-            searchableDetector.InteractWithFoundColliders(() => { animator.SetTrigger("Search"); });
-            interactableDetector.InteractWithFoundColliders();
-        }
-
-        public void HidePlayer()
-        {
-            isHidden = true;
-        }
-
-        public void UnhidePlayer()
-        {
-            isHidden = false;
-        }
-
-        public bool isPlayerHidden()
-        {
-            return isHidden;
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(enemyDetectionPosition.position, enemyDetectionRadius);
-
-            Gizmos.DrawWireSphere(transform.position, interactibleDetectionRadius);
         }
     }
 }

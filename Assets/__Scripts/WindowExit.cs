@@ -50,7 +50,6 @@ public class WindowExit : MonoBehaviour, IInteractable
         GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
         SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
         GameManager.instance.PlayerMovement.SetEnabled(true);
-        GameManager.instance.PlayerComponent.HidePlayer();
 
         if (spriteRenderer != null) spriteRenderer.enabled = false;
 

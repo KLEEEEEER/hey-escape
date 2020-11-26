@@ -5181,6 +5181,7 @@ GameObject:
   - component: {fileID: 1443288896}
   - component: {fileID: 1443288901}
   - component: {fileID: 1443288903}
+  - component: {fileID: 1443288910}
   - component: {fileID: 1443288909}
   - component: {fileID: 1443288907}
   - component: {fileID: 1443288902}
@@ -5229,6 +5230,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputHandler: {fileID: 1443288896}
   playerMovement: {fileID: 1443288908}
+  detectorHandler: {fileID: 1443288910}
+  animator: {fileID: 1443288901}
   speed: 7
   ClimbingSpeedMultiplier: 5
   currentVelocity: {x: 0, y: 0}
@@ -5252,7 +5255,6 @@ MonoBehaviour:
   jumpFromLadderForce: 1000
   CheckForGroundHead: {fileID: 1276828580}
   CheckForGroundFeet: {fileID: 1116689273}
-  Animator: {fileID: 1443288901}
   OnJumpEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5276,6 +5278,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ade4766363198014db7fc96029e33ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KillButtonPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  UsingButtonPressed:
+    m_PersistentCalls:
+      m_Calls: []
   joystick: {fileID: 1597213855}
 --- !u!212 &1443288897
 SpriteRenderer:
@@ -5439,16 +5447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visibility: {fileID: 1443288907}
-  playerFSM: {fileID: 1443288895}
-  interactibleDetectionRadius: 0.01
-  enemyDetectionRadius: 0.52
-  enemyDetectionPosition: {fileID: 832581505}
-  playerMovement: {fileID: 1443288908}
+  detectorHandler: {fileID: 1443288910}
   animator: {fileID: 1443288901}
-  eButton: {fileID: 1022563424}
-  qButton: {fileID: 1493401414}
-  isHidden: 0
-  playerHideHandle: {fileID: 1443288909}
 --- !u!114 &1443288904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5618,6 +5618,22 @@ MonoBehaviour:
   playerFSM: {fileID: 1443288895}
   visibilityState: {fileID: 1443288907}
   SearchHidePlaceRadius: 1
+--- !u!114 &1443288910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443288893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0534d1ceb81792a48b50eaa7d00b69a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactibleDetectionRadius: 0.4
+  enemyDetectionRadius: 1
+  enemyDetectionPosition: {fileID: 832581505}
+  playerHideHandle: {fileID: 1443288909}
 --- !u!1 &1456043579
 GameObject:
   m_ObjectHideFlags: 0

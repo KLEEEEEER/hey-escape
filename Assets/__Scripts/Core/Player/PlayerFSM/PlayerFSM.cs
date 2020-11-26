@@ -1,4 +1,5 @@
-﻿using HeyEscape.Core.Player.FSM.States;
+﻿using Core.Detectors;
+using HeyEscape.Core.Player.FSM.States;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,19 @@ namespace HeyEscape.Core.Player.FSM
     {
         [SerializeField] private InputHandler inputHandler;
         public InputHandler InputHandler { get => inputHandler; set { inputHandler = value; } }
+
         [SerializeField] private PlayerMovement playerMovement;
         public PlayerMovement PlayerMovement { get => playerMovement; set { playerMovement = value; } }
+
+        [SerializeField] private DetectorHandler detectorHandler;
+        public DetectorHandler DetectorHandler { get => detectorHandler; set { detectorHandler = value; } }
+
+        [Header("Components")]
+        private Rigidbody2D rigidbody2D;
+        public Rigidbody2D Rigidbody2D { get => rigidbody2D; }
+
+        [SerializeField] private Animator animator;
+        public Animator Animator { get => animator; set { animator = value; } }
 
         [Header("Character Attributes")]
         public float speed;
@@ -40,12 +52,6 @@ namespace HeyEscape.Core.Player.FSM
         public Transform CheckForGroundHead;
         public Transform CheckForGroundFeet;
 
-
-        [Header("Components")]
-        private Rigidbody2D rigidbody2D;
-        public Rigidbody2D Rigidbody2D { get => rigidbody2D; }
-        public Animator Animator;
-
         [Header("Events")]
         public UnityEvent OnJumpEvent;
         public UnityEvent OnLandEvent;
@@ -67,6 +73,7 @@ namespace HeyEscape.Core.Player.FSM
         public PlayerFSMDisableState DisableState = new PlayerFSMDisableState();
         public PlayerFSMOnLadderState LadderState = new PlayerFSMOnLadderState();
         public PlayerFSMInWindowState InWindowState = new PlayerFSMInWindowState();
+        public PlayerFSMHiddenState HiddenState = new PlayerFSMHiddenState();
 
         public bool isLookingRight = true;
 
@@ -176,6 +183,11 @@ namespace HeyEscape.Core.Player.FSM
         public void OnGameOver()
         {
             TransitionToState(DisableState);
+        }
+
+        private void OnEnable()
+        {
+            //InputHandler.KillButtonPressed.AddListener();
         }
 
         public void OnMobileJumpButtonHold(BaseEventData data)

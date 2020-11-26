@@ -53,7 +53,6 @@ namespace HeyEscape.Core.Player.FSM.States
         {
             if (GameManager.instance.PlayerRenderer != null) GameManager.instance.PlayerRenderer.enabled = true;
             GameManager.instance.PlayerMovement.SetEnabled(false);
-            GameManager.instance.PlayerComponent.UnhidePlayer();
             OnWindowExit.Invoke();
             OnWindowExit.RemoveAllListeners();
             OnUseButtonPressed.RemoveListener(useButtonPressed);

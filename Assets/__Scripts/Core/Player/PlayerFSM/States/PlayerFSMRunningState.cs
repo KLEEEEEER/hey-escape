@@ -53,6 +53,22 @@ namespace HeyEscape.Core.Player.FSM.States
             {
                 player.Rigidbody2D.AddForce(new Vector2(0f, player.JumpForce));
                 player.TransitionToState(player.JumpingState);
+                return;
+            }
+
+            if (player.InputHandler.Vertical > 0.8f && !player.DetectorHandler.IsHidden())
+            {
+                if (player.DetectorHandler.TryHideInHidePlace(() =>
+                {
+                    player.Animator.SetBool("IsJumping", false);
+                    player.Animator.SetBool("IsRunning", false);
+                    player.Animator.SetBool("IsGrounded", true);
+                    //player.TransitionToState(player.HiddenState);
+                }))
+                {
+                    player.TransitionToState(player.HiddenState);
+                    return;
+                }
             }
         }
         public override void OnTriggerExit2D(PlayerFSM player, Collider2D collision)
