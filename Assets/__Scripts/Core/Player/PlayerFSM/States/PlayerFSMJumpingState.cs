@@ -20,10 +20,10 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void FixedUpdate()
         {
-            if (fsm.airControl)
+            if (fsm.PlayerAttributes.AirControl)
             {
                 Vector2 targetVelocity = new Vector2(fsm.InputHandler.Horizontal, fsm.Rigidbody2D.velocity.y);
-                fsm.Rigidbody2D.velocity = Vector2.SmoothDamp(fsm.Rigidbody2D.velocity, targetVelocity, ref fsm.currentVelocity, fsm.MovementSmoothing);
+                fsm.Rigidbody2D.velocity = Vector2.SmoothDamp(fsm.Rigidbody2D.velocity, targetVelocity, ref fsm.currentVelocity, fsm.PlayerAttributes.MovementSmoothing);
             }
 
             if (fsm.Rigidbody2D.velocity.y < 0)
@@ -36,7 +36,7 @@ namespace HeyEscape.Core.Player.FSM.States
         {
             if (timer > delayGroundCheck)
             {
-                if (fsm.IsGrounded)
+                if (fsm.Grounded.IsTrue)
                 {
                     fsm.Animator.SetBool("IsJumping", false);
                     if (Mathf.Abs(fsm.Rigidbody2D.velocity.x) > 0)

@@ -1,4 +1,5 @@
 ﻿using Core.Detectors;
+using HeyEscape.Core.Helpers;
 using HeyEscape.Core.Player.FSM.States;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,26 +29,22 @@ namespace HeyEscape.Core.Player.FSM
         [SerializeField] private Animator animator;
         public Animator Animator { get => animator; set { animator = value; } }
 
+        [SerializeField] PlayerAttributesSO playerAttributes;
+        public PlayerAttributesSO PlayerAttributes { get => playerAttributes; }
+
         [Header("Character Attributes")]
-        public float speed;
-        public float ClimbingSpeedMultiplier;
+        public CircleColliderChecker Grounded;
+
         public Vector2 currentVelocity;
-        public float MovementSmoothing;
-        public float JumpForce;
-        public bool airControl = true;
         public Transform GroundCheck;
         public float GroundedRadius = .2f;
         public LayerMask GroundLayers;
         public Transform CeilingCheck;
         public float CeilingRadius = .25f;
         [HideInInspector] public bool IsGrounded = true;
-        public float HorizontalMove = 10f;
-        public float VerticalMove = 5f;
         [HideInInspector] public float DefaultGravityScale;
         public Joystick joystick;
-        public float climbingSpeed = 10;
         public bool IsMobileJumpPressed = false;
-        public float jumpFromLadderForce = 1000f;
 
         public Transform CheckForGroundHead;
         public Transform CheckForGroundFeet;
@@ -127,7 +124,9 @@ namespace HeyEscape.Core.Player.FSM
 
         private void FixedUpdate()
         {
-            CheckCharacterGrounded();
+            Grounded.Check();
+            Animator.SetBool("IsGrounded", Grounded.IsTrue);
+            //CheckCharacterGrounded();
             currentState.FixedUpdate();
         }
 

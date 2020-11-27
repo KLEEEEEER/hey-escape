@@ -50,7 +50,7 @@ namespace HeyEscape.Core.Player.FSM.States
         if (Input.GetKeyDown(KeyCode.Space))
 #endif
             {
-                fsm.Rigidbody2D.AddForce(new Vector2(0f, fsm.JumpForce));
+                fsm.Rigidbody2D.AddForce(new Vector2(0f, fsm.PlayerAttributes.JumpForce));
                 fsm.TransitionToState(fsm.JumpingState);
                 return;
             }

@@ -869,6 +869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 177253004}
+  - component: {fileID: 177253005}
   m_Layer: 0
   m_Name: CheckGround
   m_TagString: Untagged
@@ -890,6 +891,23 @@ Transform:
   m_Father: {fileID: 1443288898}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &177253005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177253003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d221052475f9f234290bbc37fc2d9169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkPoint: {fileID: 177253004}
+  radius: 0.2
+  checkLayers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &182079679
 GameObject:
   m_ObjectHideFlags: 0
@@ -5232,12 +5250,9 @@ MonoBehaviour:
   playerMovement: {fileID: 1443288908}
   detectorHandler: {fileID: 1443288910}
   animator: {fileID: 1443288901}
-  speed: 7
-  ClimbingSpeedMultiplier: 5
+  playerAttributes: {fileID: 11400000, guid: 0a2cfcb1e5853274088ceeaca409e7ed, type: 2}
+  Grounded: {fileID: 177253005}
   currentVelocity: {x: 0, y: 0}
-  MovementSmoothing: 0
-  JumpForce: 10
-  airControl: 1
   GroundCheck: {fileID: 177253004}
   GroundedRadius: 0.2
   GroundLayers:
@@ -5246,13 +5261,9 @@ MonoBehaviour:
   CeilingCheck: {fileID: 1022182343}
   CeilingRadius: 0.25
   IsGrounded: 1
-  HorizontalMove: 10
-  VerticalMove: 5
   DefaultGravityScale: 0
   joystick: {fileID: 1597213855}
-  climbingSpeed: 10
   IsMobileJumpPressed: 0
-  jumpFromLadderForce: 1000
   CheckForGroundHead: {fileID: 1276828580}
   CheckForGroundFeet: {fileID: 1116689273}
   OnJumpEvent:

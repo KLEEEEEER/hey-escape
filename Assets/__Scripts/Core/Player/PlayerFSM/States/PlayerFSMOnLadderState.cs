@@ -62,7 +62,7 @@ namespace HeyEscape.Core.Player.FSM.States
             }
             else
             {
-                fsm.transform.position = new Vector2(fsm.transform.position.x + fsm.InputHandler.Horizontal * fsm.ClimbingSpeedMultiplier * Time.deltaTime, fsm.transform.position.y + Mathf.Ceil(fsm.InputHandler.Vertical) * fsm.ClimbingSpeedMultiplier * Time.deltaTime);
+                fsm.transform.position = new Vector2(fsm.transform.position.x + fsm.InputHandler.Horizontal * fsm.PlayerAttributes.ClimbingSpeedMultiplier * Time.deltaTime, fsm.transform.position.y + Mathf.Ceil(fsm.InputHandler.Vertical) * fsm.PlayerAttributes.ClimbingSpeedMultiplier * Time.deltaTime);
             }
             fsm.Animator.SetFloat("ClimbDirection", Mathf.Clamp(fsm.joystick.Vertical, -1f, 1f));
         }
@@ -99,7 +99,7 @@ namespace HeyEscape.Core.Player.FSM.States
             if (!IsGroundAhead())
             {
                 PlayerFSM player = GameManager.instance.PlayerFSM;
-                float forceFromLadder = (player.isLookingRight) ? player.jumpFromLadderForce : (player.jumpFromLadderForce * -1f);
+                float forceFromLadder = (player.isLookingRight) ? player.PlayerAttributes.JumpFromLadderForce : (player.PlayerAttributes.JumpFromLadderForce * -1f);
                 player.Rigidbody2D.AddForce(new Vector2(forceFromLadder, 0f));
             }
         }
