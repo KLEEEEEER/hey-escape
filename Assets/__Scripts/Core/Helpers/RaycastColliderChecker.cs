@@ -9,6 +9,7 @@ namespace HeyEscape.Core.Helpers
         [SerializeField] Transform raycastStartPoint;
         [SerializeField] Transform raycastEndPoint;
         [SerializeField] LayerMask checkLayers;
+        [SerializeField] bool showGizmos = false;
         RaycastHit2D[] hits = new RaycastHit2D[10];
 
         bool isTrue = false;
@@ -28,5 +29,11 @@ namespace HeyEscape.Core.Helpers
         }
 
         public bool IsTrue => isTrue;
+
+        private void OnDrawGizmos()
+        {   
+            if (showGizmos)
+                Gizmos.DrawLine(raycastStartPoint.position, raycastEndPoint.position);
+        }
     }
 }

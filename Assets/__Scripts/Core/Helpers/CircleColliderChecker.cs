@@ -9,6 +9,8 @@ namespace HeyEscape.Core.Helpers
         [SerializeField] Transform checkPoint;
         [SerializeField] float radius;
         [SerializeField] LayerMask checkLayers;
+        [SerializeField] bool showGizmos = false;
+
         Collider2D[] colliders;
 
         bool isTrue = false;
@@ -30,5 +32,11 @@ namespace HeyEscape.Core.Helpers
         }
 
         public bool IsTrue => isTrue;
+
+        private void OnDrawGizmos()
+        {
+            if (showGizmos)
+                Gizmos.DrawWireSphere(checkPoint.position, radius);
+        }
     }
 }

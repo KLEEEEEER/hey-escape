@@ -45,9 +45,6 @@ namespace HeyEscape.Core.Player.FSM
         public Joystick joystick;
         public bool IsMobileJumpPressed = false;
 
-        public Transform CheckForGroundHead;
-        public Transform CheckForGroundFeet;
-
         [Header("Events")]
         public UnityEvent OnJumpEvent;
         public UnityEvent OnLandEvent;
@@ -166,8 +163,6 @@ namespace HeyEscape.Core.Player.FSM
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(CeilingCheck.position, CeilingRadius);
-            //Gizmos.DrawWireSphere(GroundCheck.position, GroundedRadius);
-            Gizmos.DrawLine(CheckForGroundFeet.position, CheckForGroundHead.position);
         }
 
         public void OnGameOver()
