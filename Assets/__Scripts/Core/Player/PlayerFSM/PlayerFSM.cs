@@ -32,16 +32,15 @@ namespace HeyEscape.Core.Player.FSM
         [SerializeField] PlayerAttributesSO playerAttributes;
         public PlayerAttributesSO PlayerAttributes { get => playerAttributes; }
 
-        [Header("Character Attributes")]
-        public CircleColliderChecker Grounded;
+        [SerializeField] RaycastColliderChecker groundAhead;
+        public RaycastColliderChecker GroundAhead { get => groundAhead; }
+
+        [SerializeField] CircleColliderChecker grounded;
+        public CircleColliderChecker Grounded { get => grounded; }
 
         public Vector2 currentVelocity;
-        public Transform GroundCheck;
-        public float GroundedRadius = .2f;
-        public LayerMask GroundLayers;
         public Transform CeilingCheck;
         public float CeilingRadius = .25f;
-        [HideInInspector] public bool IsGrounded = true;
         [HideInInspector] public float DefaultGravityScale;
         public Joystick joystick;
         public bool IsMobileJumpPressed = false;
@@ -159,23 +158,6 @@ namespace HeyEscape.Core.Player.FSM
             }
         }
 
-        void CheckCharacterGrounded()
-        {
-            colliders = Physics2D.OverlapCircleAll(GroundCheck.position, GroundedRadius, GroundLayers);
-            bool foundGround = false;
-            for (int i = 0; i < colliders.Length; i++)
-            {
-                if (colliders[i].gameObject != gameObject)
-                {
-                    OnLandEvent.Invoke();
-                    foundGround = true;
-                    break;
-                }
-            }
-            Animator.SetBool("IsGrounded", foundGround);
-            IsGrounded = foundGround;
-        }
-
         void Flip()
         {
             transform.Rotate(0f, 180f, 0f);
@@ -184,7 +166,7 @@ namespace HeyEscape.Core.Player.FSM
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(CeilingCheck.position, CeilingRadius);
-            Gizmos.DrawWireSphere(GroundCheck.position, GroundedRadius);
+            //Gizmos.DrawWireSphere(GroundCheck.position, GroundedRadius);
             Gizmos.DrawLine(CheckForGroundFeet.position, CheckForGroundHead.position);
         }
 

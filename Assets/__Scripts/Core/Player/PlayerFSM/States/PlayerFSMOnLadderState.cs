@@ -33,18 +33,11 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void FixedUpdate()
         {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(
-                fsm.CheckForGroundFeet.position,
-                (fsm.CheckForGroundHead.position - fsm.CheckForGroundFeet.position).normalized,
-                Vector2.Distance(fsm.CheckForGroundFeet.position, fsm.CheckForGroundHead.position),
-                fsm.GroundLayers
-            );
-            isGroundAhead = (hits.Length > 0);
-            if (isGroundAhead)
+            if (fsm.GroundAhead.Check())
             {
                 if (fsm.arrow.activeSelf)
                     fsm.arrow.SetActive(false);
-            }
+            } 
             else
             {
                 if (!fsm.arrow.activeSelf)
