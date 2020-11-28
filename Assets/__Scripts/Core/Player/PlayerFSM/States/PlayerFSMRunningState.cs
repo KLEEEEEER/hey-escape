@@ -8,6 +8,12 @@ namespace HeyEscape.Core.Player.FSM.States
     {
         public PlayerFSMRunningState(PlayerFSM playerFSM) : base(playerFSM) { }
 
+        public override void EnterState()
+        {
+            fsm.InputHandler.KillButtonPressed.AddListener(OnKillButtonPressed);
+            fsm.InputHandler.UsingButtonPressed.AddListener(OnUsingButtonPressed);
+            fsm.InputHandler.JumpButtonPressed.AddListener(OnJumpButtonPressed);
+        }
         public override void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Climbable"))
@@ -61,6 +67,30 @@ namespace HeyEscape.Core.Player.FSM.States
                     return;
                 }
             }
+        }
+
+        private void OnKillButtonPressed()
+        {
+            fsm.DetectorHandler.InteractKillable(() => { fsm.Animator.SetTrigger("Kill"); });
+        }
+
+        private void OnUsingButtonPressed()
+        {
+            fsm.DetectorHandler.InteractInteractable();
+            fsm.DetectorHandler.InteractSearchable();
+        }
+
+        private void OnJumpButtonPressed()
+        {
+            fsm.Rigidbody2D.AddForce(new Vector2(0f, fsm.PlayerAttributes.JumpForce));
+            fsm.TransitionToState(fsm.JumpingState);
+        }
+
+        public override void ExitState()
+        {
+            fsm.InputHandler.KillButtonPressed.RemoveListener(OnKillButtonPressed);
+            fsm.InputHandler.UsingButtonPressed.RemoveListener(OnUsingButtonPressed);
+            fsm.InputHandler.JumpButtonPressed.RemoveListener(OnJumpButtonPressed);
         }
     }
 }

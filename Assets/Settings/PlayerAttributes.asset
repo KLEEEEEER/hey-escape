@@ -15,7 +15,7 @@ MonoBehaviour:
   speed: 7
   climbingSpeedMultiplier: 5
   movementSmoothing: 0
-  jumpForce: 10
+  jumpForce: 100
   airControl: 1
   climbingSpeed: 10
   jumpFromLadderForce: 1000

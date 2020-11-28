@@ -908,6 +908,7 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 256
+  showGizmos: 1
 --- !u!1 &182079679
 GameObject:
   m_ObjectHideFlags: 0
@@ -4642,9 +4643,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1443288903}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: KillButtonPressed
+      - m_Target: {fileID: 1443288896}
+        m_TargetAssemblyTypeName: HeyEscape.Core.Player.InputHandler, Assembly-CSharp
+        m_MethodName: OnJump
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5252,15 +5253,13 @@ MonoBehaviour:
   animator: {fileID: 1443288901}
   playerAttributes: {fileID: 11400000, guid: 0a2cfcb1e5853274088ceeaca409e7ed, type: 2}
   groundAhead: {fileID: 1896688452}
-  Grounded: {fileID: 177253005}
+  grounded: {fileID: 177253005}
   currentVelocity: {x: 0, y: 0}
   CeilingCheck: {fileID: 1022182343}
   CeilingRadius: 0.25
   DefaultGravityScale: 0
   joystick: {fileID: 1597213855}
   IsMobileJumpPressed: 0
-  CheckForGroundHead: {fileID: 1276828580}
-  CheckForGroundFeet: {fileID: 1116689273}
   OnJumpEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -5270,7 +5269,6 @@ MonoBehaviour:
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
-  isLookingRight: 1
   arrow: {fileID: 126386547}
 --- !u!114 &1443288896
 MonoBehaviour:
@@ -5288,6 +5286,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   UsingButtonPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  JumpButtonPressed:
     m_PersistentCalls:
       m_Calls: []
   joystick: {fileID: 1597213855}
@@ -6926,8 +6927,8 @@ MonoBehaviour:
   OnGameOverEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1443288896}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1443288895}
+        m_TargetAssemblyTypeName: HeyEscape.Core.Player.FSM.PlayerFSM, Assembly-CSharp
         m_MethodName: OnGameOver
         m_Mode: 1
         m_Arguments:
@@ -7647,6 +7648,7 @@ MonoBehaviour:
   checkLayers:
     serializedVersion: 2
     m_Bits: 256
+  showGizmos: 1
 --- !u!1 &1904109855
 GameObject:
   m_ObjectHideFlags: 0

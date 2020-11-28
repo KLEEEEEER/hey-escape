@@ -9,9 +9,6 @@ namespace HeyEscape.Core.Player.FSM.States
     {
         protected PlayerFSM fsm;
 
-        public static UnityEvent OnUseButtonPressed = new UnityEvent();
-        public static UnityEvent OnJumpButtonPressed = new UnityEvent();
-
         public PlayerFSMBaseState(PlayerFSM playerFSM) {
             fsm = playerFSM;
         }

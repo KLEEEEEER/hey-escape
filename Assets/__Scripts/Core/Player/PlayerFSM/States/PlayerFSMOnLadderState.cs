@@ -14,13 +14,12 @@ namespace HeyEscape.Core.Player.FSM.States
         public PlayerFSMOnLadderState(PlayerFSM playerFSM) : base(playerFSM) { }
         public override void EnterState()
         {
-#if UNITY_ANDROID || UNITY_IPHONE
-            OnUseButtonPressed.AddListener(useButtonPressed);
-#endif
             fsm.Animator.SetBool("IsJumping", false);
             fsm.Animator.SetBool("IsClimbing", true);
             currentLadders = 1;
             canControlHorizontal = false;
+            fsm.InputHandler.UsingButtonPressed.AddListener(OnJumpFromLadderPressed);
+            fsm.InputHandler.JumpButtonPressed.AddListener(OnJumpFromLadderPressed);
         }
 
         public override void OnTriggerEnter2D(Collider2D collision)
@@ -51,14 +50,22 @@ namespace HeyEscape.Core.Player.FSM.States
             fsm.Rigidbody2D.velocity = new Vector2(0, 0);
             if (!canControlHorizontal)
             {
-                fsm.PlayerMovement.MoveVertically(fsm.InputHandler.Vertical);
+                fsm.PlayerMovement.MoveVertically(fsm.InputHandler.Vertical, fsm.InputHandler.Horizontal);
             }
             else
             {
                 fsm.transform.position = new Vector2(fsm.transform.position.x + fsm.InputHandler.Horizontal * fsm.PlayerAttributes.ClimbingSpeedMultiplier * Time.deltaTime, fsm.transform.position.y + Mathf.Ceil(fsm.InputHandler.Vertical) * fsm.PlayerAttributes.ClimbingSpeedMultiplier * Time.deltaTime);
             }
-            fsm.Animator.SetFloat("ClimbDirection", Mathf.Clamp(fsm.joystick.Vertical, -1f, 1f));
+            fsm.Animator.SetFloat("ClimbDirection", Mathf.Clamp(fsm.InputHandler.Vertical, -1f, 1f));
         }
+
+        public override void ExitState()
+        {
+            fsm.Animator.SetFloat("ClimbDirection", 0f);
+            fsm.InputHandler.UsingButtonPressed.RemoveListener(OnJumpFromLadderPressed);
+            fsm.InputHandler.JumpButtonPressed.RemoveListener(OnJumpFromLadderPressed);
+        }
+
         public override void OnTriggerExit2D(Collider2D collision)
         {
             fsm.Rigidbody2D.gravityScale = fsm.DefaultGravityScale;
@@ -67,7 +74,6 @@ namespace HeyEscape.Core.Player.FSM.States
                 currentLadders--;
                 if (currentLadders <= 0)
                 {
-                    OnUseButtonPressed.RemoveListener(useButtonPressed);
                     fsm.Animator.SetBool("IsClimbing", false);
                     fsm.Animator.speed = 1f;
                     fsm.arrow.SetActive(false);
@@ -87,13 +93,12 @@ namespace HeyEscape.Core.Player.FSM.States
         }
 
 #if UNITY_ANDROID || UNITY_IPHONE
-        private void useButtonPressed()
+        private void OnJumpFromLadderPressed()
         {
             if (!IsGroundAhead())
             {
-                PlayerFSM player = GameManager.instance.PlayerFSM;
-                float forceFromLadder = (player.isLookingRight) ? player.PlayerAttributes.JumpFromLadderForce : (player.PlayerAttributes.JumpFromLadderForce * -1f);
-                player.Rigidbody2D.AddForce(new Vector2(forceFromLadder, 0f));
+                float forceFromLadder = (fsm.PlayerMovement.IsLookingRight) ? fsm.PlayerAttributes.JumpFromLadderForce : (fsm.PlayerAttributes.JumpFromLadderForce * -1f);
+                fsm.Rigidbody2D.AddForce(new Vector2(forceFromLadder, 0f));
             }
         }
 #endif

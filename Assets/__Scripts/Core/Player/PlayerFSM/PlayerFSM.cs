@@ -11,6 +11,8 @@ namespace HeyEscape.Core.Player.FSM
 {
 
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(InputHandler))]
+    [RequireComponent(typeof(PlayerMovement))]
     public class PlayerFSM : MonoBehaviour
     {
         [SerializeField] private InputHandler inputHandler;
@@ -68,8 +70,6 @@ namespace HeyEscape.Core.Player.FSM
         public PlayerFSMInWindowState InWindowState;
         public PlayerFSMHiddenState HiddenState;
 
-        public bool isLookingRight = true;
-
         [SerializeField] public GameObject arrow;
 
         public void TransitionToState(PlayerFSMBaseState state)
@@ -113,16 +113,12 @@ namespace HeyEscape.Core.Player.FSM
 
         void Update()
         {
-            CheckCharacterRotation();
-
             currentState.Update();
         }
 
         private void FixedUpdate()
         {
-            Grounded.Check();
-            Animator.SetBool("IsGrounded", Grounded.IsTrue);
-            //CheckCharacterGrounded();
+            Animator.SetBool("IsGrounded", Grounded.Check());
             currentState.FixedUpdate();
         }
 
@@ -141,24 +137,6 @@ namespace HeyEscape.Core.Player.FSM
             currentState.OnTriggerExit2D(collision);
         }
 
-        void CheckCharacterRotation()
-        {
-            if (isLookingRight && InputHandler.Horizontal < 0)
-            {
-                Flip();
-                isLookingRight = false;
-            }
-            else if (!isLookingRight && InputHandler.Horizontal > 0)
-            {
-                Flip();
-                isLookingRight = true;
-            }
-        }
-
-        void Flip()
-        {
-            transform.Rotate(0f, 180f, 0f);
-        }
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
@@ -177,10 +155,6 @@ namespace HeyEscape.Core.Player.FSM
         public void OnMobileJumpButtonRelease(BaseEventData data)
         {
             IsMobileJumpPressed = false;
-        }
-        public void OnMobileUseButtonClicked(BaseEventData data)
-        {
-            PlayerFSMBaseState.OnUseButtonPressed.Invoke();
         }
     }
 }

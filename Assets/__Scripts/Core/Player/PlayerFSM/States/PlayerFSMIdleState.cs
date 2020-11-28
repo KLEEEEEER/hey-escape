@@ -13,6 +13,7 @@ namespace HeyEscape.Core.Player.FSM.States
             fsm.Animator.SetBool("IsGrounded", true);
             fsm.InputHandler.KillButtonPressed.AddListener(OnKillButtonPressed);
             fsm.InputHandler.UsingButtonPressed.AddListener(OnUsingButtonPressed);
+            fsm.InputHandler.JumpButtonPressed.AddListener(OnJumpButtonPressed);
         }
 
         public override void OnTriggerEnter2D(Collider2D collision)
@@ -43,18 +44,6 @@ namespace HeyEscape.Core.Player.FSM.States
                 }
             }
 
-
-#if UNITY_ANDROID || UNITY_IPHONE
-            if (fsm.IsMobileJumpPressed)
-#else
-        if (Input.GetKeyDown(KeyCode.Space))
-#endif
-            {
-                fsm.Rigidbody2D.AddForce(new Vector2(0f, fsm.PlayerAttributes.JumpForce));
-                fsm.TransitionToState(fsm.JumpingState);
-                return;
-            }
-
             if (fsm.InputHandler.Horizontal != 0)
             {
                 fsm.TransitionToState(fsm.RunningState);
@@ -76,10 +65,17 @@ namespace HeyEscape.Core.Player.FSM.States
             fsm.DetectorHandler.InteractSearchable();
         }
 
+        private void OnJumpButtonPressed()
+        {
+            fsm.Rigidbody2D.AddForce(new Vector2(0f, fsm.PlayerAttributes.JumpForce));
+            fsm.TransitionToState(fsm.JumpingState);
+        }
+
         public override void ExitState()
         {
             fsm.InputHandler.KillButtonPressed.RemoveListener(OnKillButtonPressed);
             fsm.InputHandler.UsingButtonPressed.RemoveListener(OnUsingButtonPressed);
+            fsm.InputHandler.JumpButtonPressed.RemoveListener(OnJumpButtonPressed);
         }
     }
 }
