@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeyEscape.Core.Player.FSM;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,12 @@ namespace Core.Detectors
     public class Detector<T>
     {
         protected List<T> detectedColliders = new List<T>();
+        protected PlayerFSM player;
+
+        public Detector(PlayerFSM player = null)
+        {
+            this.player = player;
+        }
 
         public virtual void CheckCollidersInArray(Collider2D[] colliders, int amount)
         {

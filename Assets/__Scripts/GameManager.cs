@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     public void StartCountdown()
     {
         currentState = State.GameOver;
+        PlayerMovement.SetEnabled(false);
         StartCoroutine(StartingCountdown());
         isCountdownCalled = true;
     }

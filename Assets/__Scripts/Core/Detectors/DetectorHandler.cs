@@ -1,4 +1,5 @@
 ﻿using HeyEscape.Core.Player;
+using HeyEscape.Core.Player.FSM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,19 +14,35 @@ namespace Core.Detectors
         [SerializeField] private Transform enemyDetectionPosition;
         [SerializeField] PlayerHideHandle playerHideHandle;
 
+        PlayerFSM player;
+
         Collider2D[] colliders = new Collider2D[10];
         int amount = 0;
 
-        Detector<IInteractable> interactableDetector = new InteractableDetector();
-        Detector<IHidePlace> hideplaceDetector = new HidePlaceDetector();
+        Detector<IInteractable> interactableDetector;
+        Detector<IHidePlace> hideplaceDetector;
         Detector<ISearchable> searchableDetector;
-        Detector<IKillable> killableDetector = new KillableDetector();
-        private void Start()
+        Detector<IKillable> killableDetector;
+
+        private bool initialized = false;
+
+        public void Initialize(PlayerFSM player)
         {
-            searchableDetector = new SearchableDetector(Inventory.instance);
+            if (initialized) return;
+
+            this.player = player;
+
+            interactableDetector = new InteractableDetector(this.player);
+            searchableDetector = new SearchableDetector(this.player.Inventory);
+            hideplaceDetector = new HidePlaceDetector();
+            killableDetector = new KillableDetector();
+
+            initialized = true;
         }
         private void FixedUpdate()
         {
+            if (!initialized) return;
+
             amount = Physics2D.OverlapCircleNonAlloc(enemyDetectionPosition.position, enemyDetectionRadius, colliders);
             killableDetector.CheckCollidersInArray(colliders, amount);
             searchableDetector.CheckCollidersInArray(colliders, amount);

@@ -1,4 +1,5 @@
-﻿using HeyEscape.Interactables.HidePlaces;
+﻿using HeyEscape.Core.Player.FSM;
+using HeyEscape.Interactables.HidePlaces;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
     }
     public void Hide()
     {
-        Interact();
+        //Interact();
         GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
@@ -38,7 +39,7 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
         isHidden = true;
     }
 
-    public void Interact()
+    public void Interact(PlayerFSM player)
     {
         if (!isOpened)
         {

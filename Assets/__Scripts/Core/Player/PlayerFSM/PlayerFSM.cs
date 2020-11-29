@@ -16,20 +16,20 @@ namespace HeyEscape.Core.Player.FSM
     public class PlayerFSM : MonoBehaviour
     {
         [SerializeField] private InputHandler inputHandler;
-        public InputHandler InputHandler { get => inputHandler; set { inputHandler = value; } }
+        public InputHandler InputHandler { get => inputHandler; }
 
         [SerializeField] private PlayerMovement playerMovement;
-        public PlayerMovement PlayerMovement { get => playerMovement; set { playerMovement = value; } }
+        public PlayerMovement PlayerMovement { get => playerMovement; }
 
         [SerializeField] private DetectorHandler detectorHandler;
-        public DetectorHandler DetectorHandler { get => detectorHandler; set { detectorHandler = value; } }
+        public DetectorHandler DetectorHandler { get => detectorHandler; }
 
         [Header("Components")]
         private Rigidbody2D rigidbody2D;
         public Rigidbody2D Rigidbody2D { get => rigidbody2D; }
 
         [SerializeField] private Animator animator;
-        public Animator Animator { get => animator; set { animator = value; } }
+        public Animator Animator { get => animator; }
 
         [SerializeField] PlayerAttributesSO playerAttributes;
         public PlayerAttributesSO PlayerAttributes { get => playerAttributes; }
@@ -39,6 +39,12 @@ namespace HeyEscape.Core.Player.FSM
 
         [SerializeField] CircleColliderChecker grounded;
         public CircleColliderChecker Grounded { get => grounded; }
+
+        [SerializeField] VisibilityState visibility;
+        public VisibilityState Visibility { get => visibility; }
+
+        [SerializeField] Inventory inventory;
+        public Inventory Inventory { get => inventory; }
 
         public Vector2 currentVelocity;
         public Transform CeilingCheck;
@@ -101,6 +107,8 @@ namespace HeyEscape.Core.Player.FSM
             LadderState = new PlayerFSMOnLadderState(this);
             InWindowState = new PlayerFSMInWindowState(this);
             HiddenState = new PlayerFSMHiddenState(this);
+
+            detectorHandler.Initialize(this);
 
             currentState = DisableState;
 

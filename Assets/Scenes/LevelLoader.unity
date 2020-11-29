@@ -5254,6 +5254,8 @@ MonoBehaviour:
   playerAttributes: {fileID: 11400000, guid: 0a2cfcb1e5853274088ceeaca409e7ed, type: 2}
   groundAhead: {fileID: 1896688452}
   grounded: {fileID: 177253005}
+  visibility: {fileID: 1443288907}
+  inventory: {fileID: 935586491}
   currentVelocity: {x: 0, y: 0}
   CeilingCheck: {fileID: 1022182343}
   CeilingRadius: 0.25
@@ -6978,9 +6980,9 @@ MonoBehaviour:
   OnGameWonEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1443288896}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnGameWon
+      - m_Target: {fileID: 1443288895}
+        m_TargetAssemblyTypeName: HeyEscape.Core.Player.FSM.PlayerFSM, Assembly-CSharp
+        m_MethodName: OnGameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7058,7 +7060,7 @@ MonoBehaviour:
   tutorialLevels:
   - {fileID: 723563582897465662, guid: 0c48c11e7bc2cb741a54b4faedb8bd6f, type: 3}
   levels:
-  - {fileID: 723563582897465662, guid: fd5b75411d1573d4c82dfaa1a8dc6157, type: 3}
+  - {fileID: 723563582897465662, guid: 6d2a0f9f48e735049904335ec223b4de, type: 3}
   - {fileID: 723563582897465662, guid: 52eb3c4645561dd459161d5fb4cc4de2, type: 3}
   - {fileID: 723563582897465662, guid: 1abef4170d1817c4ca88392328c8a5e4, type: 3}
   - {fileID: 723563582897465662, guid: e2fa00d4fde15384c8cad19a7d35cc24, type: 3}

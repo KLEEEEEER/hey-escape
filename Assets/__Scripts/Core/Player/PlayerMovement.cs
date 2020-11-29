@@ -10,7 +10,7 @@ namespace HeyEscape.Core.Player
         [SerializeField] float speed = 7f;
         [SerializeField] float verticalSpeed = 5f;
         Rigidbody2D rb;
-        private bool isEnabled = false;
+        private bool isEnabled = true;
         public bool IsEnabled { get => isEnabled; }
 
         private bool isLookingRight = true;

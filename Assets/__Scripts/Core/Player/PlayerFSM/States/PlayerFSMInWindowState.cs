@@ -11,18 +11,24 @@ namespace HeyEscape.Core.Player.FSM.States
         public PlayerFSMInWindowState(PlayerFSM playerFSM) : base(playerFSM) { }
         public override void EnterState()
         {
-            GameManager.instance.PlayerMovement.SetEnabled(true);
+            fsm.Visibility.SetVisibilityState(VisibilityState.State.Hidden);
+            fsm.PlayerMovement.SetEnabled(false);
+            fsm.InputHandler.UsingButtonPressed.AddListener(OnUsingButtonPressed);
         }
 
-#if UNITY_ANDROID || UNITY_IPHONE
-        private void useButtonPressed()
+        private void OnUsingButtonPressed()
         {
             if (GameManager.instance.PlayerRenderer != null) GameManager.instance.PlayerRenderer.enabled = true;
-            GameManager.instance.PlayerMovement.SetEnabled(false);
             OnWindowExit.Invoke();
             OnWindowExit.RemoveAllListeners();
-            GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.IdleState);
+            fsm.TransitionToState(fsm.IdleState);
         }
-#endif
+
+        public override void ExitState()
+        {
+            fsm.Visibility.SetVisibilityState(VisibilityState.State.Visible);
+            fsm.InputHandler.UsingButtonPressed.RemoveListener(OnUsingButtonPressed);
+            fsm.PlayerMovement.SetEnabled(true);
+        }
     }
 }

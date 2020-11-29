@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HeyEscape.Core.Player.FSM;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -73,7 +74,7 @@ public class WindowExit : MonoBehaviour, IInteractable
         currentWindowExitState = WindowExitState.OpenedWithRope;
     }
 
-    public void Interact()
+    public void Interact(PlayerFSM player)
     {
         switch (currentWindowExitState)
         {

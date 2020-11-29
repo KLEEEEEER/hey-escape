@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HeyEscape.Core.Player.FSM;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -38,21 +39,21 @@ public class WindowEnter : MonoBehaviour, IInteractable
         }
     }
 
-    IEnumerator EnterWindowAnimation()
+    IEnumerator EnterWindowAnimation(PlayerFSM player)
     {
-        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
+        player.TransitionToState(player.DisableState);
         SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
-        GameManager.instance.PlayerMovement.SetEnabled(true);
+        player.PlayerMovement.SetEnabled(true);
 
         if (spriteRenderer != null) spriteRenderer.enabled = false;
 
-        GameManager.instance.Player.position = transform.position;
-        GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
+        player.transform.position = transform.position;
+        player.Rigidbody2D.velocity = new Vector2(0, 0);
 
         yield return delay;
 
-        GameManager.instance.Player.position = windowExit.GetExitPointPosition();
-        GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
+        player.transform.position = windowExit.GetExitPointPosition();
+        player.Rigidbody2D.velocity = new Vector2(0, 0);
 
         yield return delay;
 
@@ -60,7 +61,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
         yield return delay;
 
-        GameManager.instance.PlayerMovement.SetEnabled(false);
+        player.PlayerMovement.SetEnabled(false);
         windowExit.PlayerWait();
     }
 
@@ -70,9 +71,13 @@ public class WindowEnter : MonoBehaviour, IInteractable
         openingSound.Play();
     }
 
-    void SetRope()
+    void SetRope(PlayerFSM player = null)
     {
-        Inventory.instance.UseItem(typeof(Rope));
+        if (player != null)
+        {
+            player.Inventory.UseItem(typeof(Rope));
+        }
+
         spriteRenderer.sprite = openedWithRopeSprite;
         windowExit.DropRope();
         if (windowsExitToDropRope.Length > 0)
@@ -84,7 +89,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
         }
     }
 
-    public void Interact()
+    public void Interact(PlayerFSM player)
     {
         switch (windowEnterState)
         {
@@ -93,9 +98,9 @@ public class WindowEnter : MonoBehaviour, IInteractable
                 windowEnterState = WindowEnterState.Opened;
                 break;
             case WindowEnterState.Opened:
-                if (Inventory.instance.HasItem(typeof(Rope)) && windowExit != null)
+                if (player.Inventory.HasItem(typeof(Rope)) && windowExit != null)
                 {
-                    SetRope();
+                    SetRope(player);
                     windowEnterState = WindowEnterState.OpenedWithRope;
                 }
                 break;
@@ -103,7 +108,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
                 break;
             case WindowEnterState.OpenedWithRope:
                 if (windowExit != null)
-                    StartCoroutine(EnterWindowAnimation());
+                    StartCoroutine(EnterWindowAnimation(player));
                 break;
         }
     }

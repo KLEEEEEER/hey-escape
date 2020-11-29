@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using HeyEscape.Core.Player.FSM;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public interface IInteractable
 {
-    void Interact();
+    void Interact(PlayerFSM player);
 }

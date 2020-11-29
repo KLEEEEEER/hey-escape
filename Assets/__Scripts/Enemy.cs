@@ -214,7 +214,9 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
                 items_string.Append(item.name);
                 items_string.Append("\n");
             }
+#if UNITY_EDITOR
             Handles.Label(gizmoItemPosition.position, items_string.ToString());
+#endif
         }
     }
 }

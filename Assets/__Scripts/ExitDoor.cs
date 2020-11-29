@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HeyEscape.Core.Player.FSM;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ public class ExitDoor : MonoBehaviour, IInteractable
     [SerializeField] private AudioClip doorOpen;
     [SerializeField] private AudioClip doorClosed;
 
-    public void Interact()
+    public void Interact(PlayerFSM player)
     {
         if (isClosed && Inventory.instance.HasItem(typeof(ExitKey)))
         {
