@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 namespace HeyEscape.Core.Player
 {
@@ -11,6 +12,7 @@ namespace HeyEscape.Core.Player
         public UnityEvent KillButtonPressed = new UnityEvent();
         public UnityEvent UsingButtonPressed = new UnityEvent();
         public UnityEvent JumpButtonPressed = new UnityEvent();
+        public TouchRayEvent ScreenTouched = new TouchRayEvent();
 
         public float Horizontal { get; private set; }
         public float Vertical { get; private set; }
@@ -35,6 +37,24 @@ namespace HeyEscape.Core.Player
         //Horizontal = Input.GetAxisRaw("Horizontal") * speed;
         //Vertical = Input.GetAxisRaw("Vertical") * climbingSpeed;
 #endif
+            if (Input.touchCount > 0)
+            {
+                if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                    RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+                    ScreenTouched?.Invoke(hit);
+                }
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (!EventSystem.current.IsPointerOverGameObject())
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+                    ScreenTouched?.Invoke(hit);
+                }
+            }
         }
 
         public Vector2 GetDirection()
@@ -54,4 +74,6 @@ namespace HeyEscape.Core.Player
             UsingButtonPressed?.Invoke();
         }
     }
+
+    [System.Serializable] public class TouchRayEvent : UnityEvent<RaycastHit2D> { }
 }

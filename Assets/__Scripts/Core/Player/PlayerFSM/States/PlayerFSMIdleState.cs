@@ -14,6 +14,7 @@ namespace HeyEscape.Core.Player.FSM.States
             fsm.InputHandler.KillButtonPressed.AddListener(OnKillButtonPressed);
             fsm.InputHandler.UsingButtonPressed.AddListener(OnUsingButtonPressed);
             fsm.InputHandler.JumpButtonPressed.AddListener(OnJumpButtonPressed);
+            fsm.InputHandler.ScreenTouched.AddListener(OnScreenTouched);
         }
 
         public override void OnTriggerEnter2D(Collider2D collision)
@@ -76,6 +77,19 @@ namespace HeyEscape.Core.Player.FSM.States
             fsm.InputHandler.KillButtonPressed.RemoveListener(OnKillButtonPressed);
             fsm.InputHandler.UsingButtonPressed.RemoveListener(OnUsingButtonPressed);
             fsm.InputHandler.JumpButtonPressed.RemoveListener(OnJumpButtonPressed);
+            fsm.InputHandler.ScreenTouched.RemoveListener(OnScreenTouched);
+        }
+
+        private void OnScreenTouched(RaycastHit2D hit)
+        {
+            ISearchable searchable = hit.transform.gameObject.GetComponent<ISearchable>();
+            if (searchable != null)
+            {
+                searchable.Search();
+            }
+
+            Inventory.instance.ShowInventoryMessage($"hit.collider.name = {hit.collider.name}");
+            //Debug.Log($"hit.collider.name = {hit.collider.name}");
         }
     }
 }

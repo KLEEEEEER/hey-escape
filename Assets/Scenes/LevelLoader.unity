@@ -5293,6 +5293,9 @@ MonoBehaviour:
   JumpButtonPressed:
     m_PersistentCalls:
       m_Calls: []
+  ScreenTouched:
+    m_PersistentCalls:
+      m_Calls: []
   joystick: {fileID: 1597213855}
 --- !u!212 &1443288897
 SpriteRenderer:
