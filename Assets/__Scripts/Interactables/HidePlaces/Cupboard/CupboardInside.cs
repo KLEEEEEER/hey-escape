@@ -30,13 +30,13 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
     public void Hide()
     {
         //Interact();
-        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
+        /*GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.SetEnabled(true);
         GameManager.instance.PlayerRenderer.enabled = false;
         spriteRenderer.sprite = openedWithPlayer;
-        isHidden = true;
+        isHidden = true;*/
     }
 
     public void Interact(PlayerFSM player)
@@ -55,13 +55,13 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
 
     public void Unhide()
     {
-        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.IdleState);
+        /*GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.IdleState);
         GameManager.instance.Player.gameObject.transform.position = transform.position;
         GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
         GameManager.instance.PlayerMovement.SetEnabled(false);
         GameManager.instance.PlayerRenderer.enabled = true;
         spriteRenderer.sprite = opened;
-        isHidden = false;
+        isHidden = false;*/
     }
 
     public bool IsAccessible()

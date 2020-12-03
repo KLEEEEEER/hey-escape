@@ -13,11 +13,13 @@ namespace HeyEscape.Core.Player.FSM.States
             fsm.Animator.SetTrigger("Hide");
             fsm.Rigidbody2D.velocity = Vector2.zero;
             fsm.Rigidbody2D.isKinematic = true;
+            fsm.SetEnableColliders(false);
         }
 
         public override void ExitState()
         {
             fsm.Rigidbody2D.isKinematic = false;
+            fsm.SetEnableColliders(true);
         }
 
         public override void Update()

@@ -7,7 +7,7 @@ namespace HeyEscape.Core.Player.FSM.States
 {
     public class PlayerFSMInWindowState : PlayerFSMBaseState
     {
-        public UnityEvent OnWindowExit = new UnityEvent();
+        public UnityEvent<PlayerFSM> OnWindowExit = new UnityEvent<PlayerFSM>();
         public PlayerFSMInWindowState(PlayerFSM playerFSM) : base(playerFSM) { }
         public override void EnterState()
         {
@@ -18,8 +18,8 @@ namespace HeyEscape.Core.Player.FSM.States
 
         private void OnUsingButtonPressed()
         {
-            if (GameManager.instance.PlayerRenderer != null) GameManager.instance.PlayerRenderer.enabled = true;
-            OnWindowExit.Invoke();
+            if (fsm.Renderer != null) fsm.Renderer.enabled = true;
+            OnWindowExit.Invoke(fsm);
             OnWindowExit.RemoveAllListeners();
             fsm.TransitionToState(fsm.IdleState);
         }

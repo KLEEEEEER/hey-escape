@@ -30,7 +30,7 @@ namespace HeyEscape.Core.Player.FSM.States
         {
             if (GameManager.instance.IsGameOver) return;
 
-            if (fsm.InputHandler.Vertical > 0.7f && !fsm.DetectorHandler.IsHidden())
+            if (fsm.InputHandler.Vertical > 0.8f && !fsm.DetectorHandler.IsHidden())
             {
                 if (fsm.DetectorHandler.TryHideInHidePlace(() =>
                     {

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public PlayerMovement PlayerMovement;
     public PlayerFSM PlayerFSM;
     public Player PlayerComponent;
-    public SpriteRenderer PlayerRenderer;
+    //public SpriteRenderer PlayerRenderer;
     public Rigidbody2D PlayerRigidbody;
     public Vector3 PlayerInitialScale;
     public Color PlayerInitialColor;
@@ -48,9 +48,9 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         PlayerInitialScale = Player.localScale;
-        PlayerRenderer = Player.GetComponent<SpriteRenderer>();
+        //PlayerRenderer = Player.GetComponent<SpriteRenderer>();
         PlayerRigidbody = Player.GetComponent<Rigidbody2D>();
-        PlayerInitialColor = PlayerRenderer.color;
+        //PlayerInitialColor = PlayerRenderer.color;
 
         if (OnGameOverEvent == null)
             OnGameOverEvent = new UnityEvent();

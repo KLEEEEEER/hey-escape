@@ -42,10 +42,10 @@ public class WindowEnter : MonoBehaviour, IInteractable
     IEnumerator EnterWindowAnimation(PlayerFSM player)
     {
         player.TransitionToState(player.DisableState);
-        SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
+        player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Hidden);
         player.PlayerMovement.SetEnabled(true);
 
-        if (spriteRenderer != null) spriteRenderer.enabled = false;
+        if (player.Renderer != null) player.Renderer.enabled = false;
 
         player.transform.position = transform.position;
         player.Rigidbody2D.velocity = new Vector2(0, 0);
@@ -62,7 +62,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
         yield return delay;
 
         player.PlayerMovement.SetEnabled(false);
-        windowExit.PlayerWait();
+        windowExit.PlayerWait(player);
     }
 
     void OpenWindow()
@@ -113,18 +113,19 @@ public class WindowEnter : MonoBehaviour, IInteractable
         }
     }
 
-    public void PlayerWait()
+    public void PlayerWait(PlayerFSM player)
     {
-        GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.InWindowState);
+        player.TransitionToState(player.InWindowState);
         spriteRenderer.sprite = openedWithRopeAndPlayerSprite;
         windowEnterState = WindowEnterState.PlayerInside;
-        GameManager.instance.PlayerFSM.InWindowState.OnWindowExit.AddListener(ExitWindow);
+        player.InWindowState.OnWindowExit.AddListener(ExitWindow);
     }
 
-    public void ExitWindow()
+    public void ExitWindow(PlayerFSM player)
     {
         windowEnterState = WindowEnterState.OpenedWithRope;
         spriteRenderer.sprite = openedWithRopeSprite;
+        player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Visible);
     }
 
     public Vector3 GetExitPointPosition() => ExitPoint.position;

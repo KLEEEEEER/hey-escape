@@ -27,6 +27,7 @@ namespace HeyEscape.Core.Player
         public void Hide(HidePlaceInfoSO hidePlaceInfo)
         {
             SaveInitialPlayerParams();
+            isMoving = false;
 
             playerFSM.TransitionToState(playerFSM.DisableState);
             //transform.position = hidePlaceInfo.transform;
@@ -40,10 +41,11 @@ namespace HeyEscape.Core.Player
 
         public void Unhide()
         {
+            isMoving = false;
             playerFSM.TransitionToState(playerFSM.IdleState);
             //transform.position = initPosition;
-            //transform.localScale = initScale;
-            StartCoroutine(SmoothMovingToInitPosition());
+            transform.localScale = initScale;
+            //StartCoroutine(SmoothMovingToInitPosition());
             playerRenderer.color = initColor;
             visibilityState.SetVisibilityState(VisibilityState.State.Visible);
 
@@ -53,10 +55,12 @@ namespace HeyEscape.Core.Player
         IEnumerator SmoothMovingToHidePosition(HidePlaceInfoSO hidePlaceInfo)
         {
             isMoving = true;
-            while (transform.position != hidePlaceInfo.transform && transform.localScale != hidePlaceInfo.scale && isMoving)
+            while (transform.position != hidePlaceInfo.transform && transform.localScale != hidePlaceInfo.scale)
             {
-                transform.position = Vector3.SmoothDamp(transform.position, hidePlaceInfo.transform, ref currentVelocityPosition, 1f);
-                transform.localScale = Vector3.SmoothDamp(transform.localScale, hidePlaceInfo.scale, ref currentVelocityScale, 1f);
+                if (!isMoving) break;
+
+                transform.position = Vector3.SmoothDamp(transform.position, hidePlaceInfo.transform, ref currentVelocityPosition, .15f);
+                transform.localScale = Vector3.SmoothDamp(transform.localScale, hidePlaceInfo.scale, ref currentVelocityScale, .15f);
                 yield return null;
             }
             isMoving = false;
@@ -64,8 +68,10 @@ namespace HeyEscape.Core.Player
         IEnumerator SmoothMovingToInitPosition()
         {
             isMoving = true;
-            while (transform.position != initPosition && transform.localScale != initScale && isMoving)
+            while (transform.position != initPosition && transform.localScale != initScale)
             {
+                if (!isMoving) break;
+
                 transform.position = Vector3.SmoothDamp(transform.position, initPosition, ref currentVelocityPosition, 1f);
                 transform.localScale = Vector3.SmoothDamp(transform.localScale, initScale, ref currentVelocityScale, 1f);
                 yield return null;

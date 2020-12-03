@@ -31,13 +31,14 @@ namespace HeyEscape.Core.Player
         private void Update()
         {
 #if UNITY_ANDROID || UNITY_IPHONE
-            Horizontal = joystick.Horizontal;
-            Vertical = joystick.Vertical;
+            Horizontal = Mathf.Clamp(joystick.Horizontal * 2.5f, -1f, 1f);
+            Vertical = Mathf.Clamp(joystick.Vertical * 2.5f, -1f, 1f);
 #else
         //Horizontal = Input.GetAxisRaw("Horizontal") * speed;
         //Vertical = Input.GetAxisRaw("Vertical") * climbingSpeed;
 #endif
-            if (Input.touchCount > 0)
+
+            /*if (Input.touchCount > 0)
             {
                 if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
                 {
@@ -54,7 +55,8 @@ namespace HeyEscape.Core.Player
                     RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
                     ScreenTouched?.Invoke(hit);
                 }
-            }
+            }*/
+
         }
 
         public Vector2 GetDirection()

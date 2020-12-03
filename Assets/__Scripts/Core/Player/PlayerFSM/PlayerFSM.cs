@@ -46,6 +46,12 @@ namespace HeyEscape.Core.Player.FSM
         [SerializeField] Inventory inventory;
         public Inventory Inventory { get => inventory; }
 
+        [SerializeField] SpriteRenderer renderer;
+        public SpriteRenderer Renderer { get => renderer; }
+
+        [SerializeField] Collider2D[] collidersToDisable;
+        public Collider2D[] CollidersToDisable { get => collidersToDisable; }
+
         public Vector2 currentVelocity;
         public Transform CeilingCheck;
         public float CeilingRadius = .25f;
@@ -58,7 +64,6 @@ namespace HeyEscape.Core.Player.FSM
         public UnityEvent OnLandEvent;
         [System.Serializable] public class BoolEvent : UnityEvent<bool> { }
         [SerializeField] private BoolEvent OnCrouchEvent;
-        Collider2D[] colliders;
 
         private PlayerFSMBaseState currentState;
 
@@ -149,6 +154,14 @@ namespace HeyEscape.Core.Player.FSM
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(CeilingCheck.position, CeilingRadius);
+        }
+
+        public void SetEnableColliders(bool enabled)
+        {
+            foreach (Collider2D collider in CollidersToDisable)
+            {
+                collider.enabled = enabled;
+            }
         }
 
         public void OnGameOver()
