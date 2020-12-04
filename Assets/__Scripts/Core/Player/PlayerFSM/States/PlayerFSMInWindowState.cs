@@ -14,6 +14,8 @@ namespace HeyEscape.Core.Player.FSM.States
             fsm.Visibility.SetVisibilityState(VisibilityState.State.Hidden);
             fsm.PlayerMovement.SetEnabled(false);
             fsm.InputHandler.UsingButtonPressed.AddListener(OnUsingButtonPressed);
+            fsm.Rigidbody2D.isKinematic = true;
+            fsm.SetEnableColliders(false);
         }
 
         private void OnUsingButtonPressed()
@@ -29,6 +31,8 @@ namespace HeyEscape.Core.Player.FSM.States
             fsm.Visibility.SetVisibilityState(VisibilityState.State.Visible);
             fsm.InputHandler.UsingButtonPressed.RemoveListener(OnUsingButtonPressed);
             fsm.PlayerMovement.SetEnabled(true);
+            fsm.Rigidbody2D.isKinematic = false;
+            fsm.SetEnableColliders(true);
         }
     }
 }

@@ -30,12 +30,21 @@ namespace HeyEscape.Core.Player
 
         private void Update()
         {
-#if UNITY_ANDROID || UNITY_IPHONE
+#if UNITY_EDITOR
+            Horizontal = Input.GetAxisRaw("Horizontal");
+            Vertical = Input.GetAxisRaw("Vertical");
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                KillButtonPressed?.Invoke();
+                UsingButtonPressed?.Invoke();
+            }
+#elif UNITY_ANDROID || UNITY_IPHONE
             Horizontal = Mathf.Clamp(joystick.Horizontal * 2.5f, -1f, 1f);
             Vertical = Mathf.Clamp(joystick.Vertical * 2.5f, -1f, 1f);
 #else
-        //Horizontal = Input.GetAxisRaw("Horizontal") * speed;
-        //Vertical = Input.GetAxisRaw("Vertical") * climbingSpeed;
+            Horizontal = Input.GetAxisRaw("Horizontal");
+            Vertical = Input.GetAxisRaw("Vertical");
 #endif
 
             /*if (Input.touchCount > 0)
