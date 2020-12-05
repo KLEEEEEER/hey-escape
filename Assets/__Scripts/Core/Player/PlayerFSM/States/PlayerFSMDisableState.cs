@@ -18,6 +18,7 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void ExitState()
         {
+            fsm.Animator.SetTrigger("Unhide");
             fsm.Rigidbody2D.isKinematic = false;
             fsm.SetEnableColliders(true);
         }

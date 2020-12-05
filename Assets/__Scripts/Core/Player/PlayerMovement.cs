@@ -52,16 +52,15 @@ namespace HeyEscape.Core.Player
             if (isLookingRight && horizontal < 0)
             {
                 Flip();
-                isLookingRight = false;
             }
             else if (!isLookingRight && horizontal > 0)
             {
                 Flip();
-                isLookingRight = true;
             }
         }
-        void Flip()
+        public void Flip()
         {
+            isLookingRight = !isLookingRight;
             transform.Rotate(0f, 180f, 0f);
         }
     }

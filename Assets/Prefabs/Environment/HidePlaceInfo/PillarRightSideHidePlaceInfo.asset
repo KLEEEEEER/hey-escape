@@ -16,3 +16,5 @@ MonoBehaviour:
   scale: {x: 0.9, y: 0.9, z: 0.9}
   color: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   DiactivatePlayerOnHide: 0
+  visibilityState: 3
+  playerHidingSprite: 3

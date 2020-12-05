@@ -15,4 +15,6 @@ MonoBehaviour:
   transform: {x: 0, y: 0, z: 0}
   scale: {x: 1, y: 1, z: 1}
   color: {r: 0, g: 0, b: 0, a: 0}
-  DiactivatePlayerOnHide: 0
+  DiactivatePlayerOnHide: 1
+  visibilityState: 3
+  playerHidingSprite: 0

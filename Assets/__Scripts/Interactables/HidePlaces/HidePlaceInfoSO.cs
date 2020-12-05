@@ -13,5 +13,8 @@ namespace HeyEscape.Interactables.HidePlaces
         public Color color;
         public bool DiactivatePlayerOnHide = false;
         public VisibilityState.State visibilityState = VisibilityState.State.Hidden;
+
+        [SerializeField] private PlayerHidingSpriteType playerHidingSprite = PlayerHidingSpriteType.CenterStand;
+        public PlayerHidingSpriteType PlayerHidingSprite { get => playerHidingSprite; }
     }
 }

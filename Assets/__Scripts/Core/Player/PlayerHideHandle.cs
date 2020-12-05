@@ -29,7 +29,13 @@ namespace HeyEscape.Core.Player
             SaveInitialPlayerParams();
             isMoving = false;
 
-            playerFSM.TransitionToState(playerFSM.DisableState);
+            if (!playerFSM.PlayerMovement.IsLookingRight)
+            {
+                playerFSM.PlayerMovement.Flip();
+            }
+            playerFSM.Animator.SetFloat("HideType", (float)hidePlaceInfo.PlayerHidingSprite);
+
+            //playerFSM.TransitionToState(playerFSM.DisableState);
             //transform.position = hidePlaceInfo.transform;
             //transform.localScale = hidePlaceInfo.scale;
             StartCoroutine(SmoothMovingToHidePosition(hidePlaceInfo));

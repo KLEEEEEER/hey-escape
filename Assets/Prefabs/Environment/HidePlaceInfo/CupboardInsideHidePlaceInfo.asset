@@ -17,3 +17,4 @@ MonoBehaviour:
   color: {r: 0, g: 0, b: 0, a: 0}
   DiactivatePlayerOnHide: 1
   visibilityState: 3
+  playerHidingSprite: 0
