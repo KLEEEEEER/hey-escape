@@ -6870,6 +6870,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  joystick: {fileID: 1765230523}
 --- !u!4 &1709150769
 Transform:
   m_ObjectHideFlags: 0

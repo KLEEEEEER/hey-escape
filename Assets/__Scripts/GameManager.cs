@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
     public bool IsCountdownCalled { get => isCountdownCalled; }
 
     private WaitForSeconds secondDelay = new WaitForSeconds(1f);
+
+    [SerializeField] Joystick joystick;
     private void Start()
     {
         Time.timeScale = 1;
@@ -114,12 +116,14 @@ public class GameManager : MonoBehaviour
 
         if (currentState == State.Paused)
         {
+            joystick.gameObject.SetActive(true);
             pauseScreen.SetActive(false);
             currentState = State.Playing;
             Time.timeScale = 1;
         }
         else
         {
+            joystick.gameObject.SetActive(false);
             pauseScreen.SetActive(true);
             currentState = State.Paused;
             Time.timeScale = 0;
@@ -148,6 +152,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         currentTimeText.gameObject.SetActive(false);
         OnGameOverEvent.Invoke();
+        joystick.gameObject.SetActive(false);
     }
 
     public void GameWon()
