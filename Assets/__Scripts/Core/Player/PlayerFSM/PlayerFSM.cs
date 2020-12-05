@@ -1,5 +1,6 @@
 ﻿using Core.Detectors;
 using HeyEscape.Core.Helpers;
+using HeyEscape.Core.Player.FSM.Commands;
 using HeyEscape.Core.Player.FSM.States;
 using System.Collections;
 using System.Collections.Generic;
@@ -82,6 +83,16 @@ namespace HeyEscape.Core.Player.FSM
         public PlayerFSMHiddenState HiddenState;
 
         [SerializeField] public GameObject arrow;
+
+        // Commands
+        private Command jumpCommand = new JumpCommand();
+        public Command JumpCommand { get => jumpCommand; }
+        private Command useCommand = new UseCommand();
+        public Command UseCommand { get => useCommand; }
+        private Command killCommand = new KillCommand();
+        public Command KillCommand { get => killCommand; }
+        private Command hideCommand = new HideCommand();
+        public Command HideCommand { get => hideCommand; }
 
         public void TransitionToState(PlayerFSMBaseState state)
         {

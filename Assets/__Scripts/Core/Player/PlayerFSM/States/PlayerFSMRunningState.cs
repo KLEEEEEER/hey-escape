@@ -57,34 +57,23 @@ namespace HeyEscape.Core.Player.FSM.States
 
             if (fsm.InputHandler.Vertical > 0.8f && !fsm.DetectorHandler.IsHidden())
             {
-                if (fsm.DetectorHandler.TryHideInHidePlace(() =>
-                {
-                    fsm.Animator.SetBool("IsJumping", false);
-                    fsm.Animator.SetBool("IsRunning", false);
-                    fsm.Animator.SetBool("IsGrounded", true);
-                }))
-                {
-                    fsm.TransitionToState(fsm.HiddenState);
-                    return;
-                }
+                fsm.HideCommand.Execute(fsm);
             }
         }
 
         private void OnKillButtonPressed()
         {
-            fsm.DetectorHandler.InteractKillable(() => { fsm.Animator.SetTrigger("Kill"); });
+            fsm.KillCommand.Execute(fsm);
         }
 
         private void OnUsingButtonPressed()
         {
-            fsm.DetectorHandler.InteractInteractable();
-            fsm.DetectorHandler.InteractSearchable();
+            fsm.UseCommand.Execute(fsm);
         }
 
         private void OnJumpButtonPressed()
         {
-            fsm.Rigidbody2D.AddForce(new Vector2(0f, fsm.PlayerAttributes.JumpForce));
-            fsm.TransitionToState(fsm.JumpingState);
+            fsm.JumpCommand.Execute(fsm);
         }
 
         public override void ExitState()
