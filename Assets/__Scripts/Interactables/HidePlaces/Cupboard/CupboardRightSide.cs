@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace HeyEscape.Interactables.HidePlaces
 {
@@ -12,35 +13,8 @@ namespace HeyEscape.Interactables.HidePlaces
         [SerializeField] private bool isHidden = false;
         [SerializeField] private Vector3 currentVelocity;
         [SerializeField] private float smoothTime;
-        /*private void Update()
-        {
-            if (isHidden && GameManager.instance.Player.gameObject != null && GameManager.instance.Player.gameObject.transform.position != transform.position)
-            {
-                GameManager.instance.Player.gameObject.transform.position = Vector3.SmoothDamp(GameManager.instance.Player.gameObject.transform.position, transform.position, ref currentVelocity, smoothTime);
-            }
-        }
-        public void Hide()
-        {
-            GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
-            GameManager.instance.PlayerComponent.HidePlayer();
-            GameManager.instance.PlayerComponent.visibility.SetVisibilityState(VisibilityState.State.VisibleRight);
-            GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
-            GameManager.instance.PlayerMovement.SetEnabled(true);
-            GameManager.instance.PlayerRenderer.color = HideColor;
-            isHidden = true;
-        }
+        [SerializeField] private ShadowCaster2D shadowCaster;
 
-        public void Unhide()
-        {
-            GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.IdleState);
-            GameManager.instance.PlayerComponent.UnhidePlayer();
-            GameManager.instance.PlayerComponent.visibility.SetVisibilityState(VisibilityState.State.Visible);
-            GameManager.instance.Player.gameObject.transform.position = transform.position;
-            GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
-            GameManager.instance.PlayerMovement.SetEnabled(false);
-            GameManager.instance.PlayerRenderer.color = GameManager.instance.PlayerInitialColor;
-            isHidden = false;
-        }*/
         public bool IsAccessible()
         {
             return true;
@@ -51,6 +25,16 @@ namespace HeyEscape.Interactables.HidePlaces
         {
             hidePlaceInfoSO.transform = transform.position;
             return hidePlaceInfoSO;
+        }
+
+        public void OnHide()
+        {
+            shadowCaster.gameObject.SetActive(true);
+        }
+
+        public void OnUnhide()
+        {
+            shadowCaster.gameObject.SetActive(false);
         }
     }
 }

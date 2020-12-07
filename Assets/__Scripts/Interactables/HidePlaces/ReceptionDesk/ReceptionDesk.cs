@@ -54,5 +54,13 @@ namespace HeyEscape.Interactables.HidePlaces
             hidePlaceInfoSO.transform = transform.position;
             return hidePlaceInfoSO;
         }
+
+        public void OnHide()
+        {
+        }
+
+        public void OnUnhide()
+        {
+        }
     }
 }

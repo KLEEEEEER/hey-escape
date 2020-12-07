@@ -5,8 +5,8 @@ using UnityEngine;
 
 public interface IHidePlace
 {
-    /*void Hide();
-    void Unhide();*/
+    void OnHide();
+    void OnUnhide();
     bool IsAccessible();
     HidePlaceInfoSO GetHidePlaceInfo();
 }

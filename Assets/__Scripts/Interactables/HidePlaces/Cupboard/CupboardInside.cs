@@ -27,17 +27,6 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
             GameManager.instance.Player.gameObject.transform.position = transform.position;
         }
     }
-    public void Hide()
-    {
-        //Interact();
-        /*GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.DisableState);
-        GameManager.instance.Player.gameObject.transform.position = transform.position;
-        GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
-        GameManager.instance.PlayerMovement.SetEnabled(true);
-        GameManager.instance.PlayerRenderer.enabled = false;
-        spriteRenderer.sprite = openedWithPlayer;
-        isHidden = true;*/
-    }
 
     public void Interact(PlayerFSM player)
     {
@@ -53,17 +42,6 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
         }
     }
 
-    public void Unhide()
-    {
-        /*GameManager.instance.PlayerFSM.TransitionToState(GameManager.instance.PlayerFSM.IdleState);
-        GameManager.instance.Player.gameObject.transform.position = transform.position;
-        GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
-        GameManager.instance.PlayerMovement.SetEnabled(false);
-        GameManager.instance.PlayerRenderer.enabled = true;
-        spriteRenderer.sprite = opened;
-        isHidden = false;*/
-    }
-
     public bool IsAccessible()
     {
         return isOpened || Inventory.instance.HasItem(typeof(CupboardKey));
@@ -73,5 +51,13 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
     {
         hidePlaceInfo.transform = transform.position;
         return hidePlaceInfo;
+    }
+
+    public void OnHide()
+    {
+    }
+
+    public void OnUnhide()
+    {
     }
 }

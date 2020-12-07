@@ -25,6 +25,7 @@ namespace Core.Detectors
         Detector<IKillable> killableDetector;
 
         private bool initialized = false;
+        private IHidePlace foundHidePlace;
 
         public void Initialize(PlayerFSM player)
         {
@@ -72,10 +73,11 @@ namespace Core.Detectors
             if (playerHideHandle.IsHidden) return false;
             if (hideplaceDetector.GetDetectedCollidersCount() == 0) return false;
 
-            IHidePlace foundHidePlace = hideplaceDetector.GetFirstFoundObject();
+            foundHidePlace = hideplaceDetector.GetFirstFoundObject();
             if (foundHidePlace.IsAccessible())
             {
                 onInteract?.Invoke();
+                foundHidePlace.OnHide();
                 playerHideHandle.Hide(foundHidePlace.GetHidePlaceInfo());
                 return true;
             }
@@ -85,6 +87,11 @@ namespace Core.Detectors
 
         public void UnhideFromHidePlace()
         {
+            if (foundHidePlace != null)
+            {
+                foundHidePlace.OnUnhide();
+                foundHidePlace = null;
+            }
             playerHideHandle.Unhide();
         }
 
