@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using HeyEscape.Core.Player.FSM;
+using HeyEscape.Core.Player;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,9 +14,9 @@ public class GameManager : MonoBehaviour
 
     public Transform Player;
     public PlayerMovement PlayerMovement;
-    public CharacterController2D CharacterController2D;
+    public PlayerFSM PlayerFSM;
     public Player PlayerComponent;
-    public SpriteRenderer PlayerRenderer;
+    //public SpriteRenderer PlayerRenderer;
     public Rigidbody2D PlayerRigidbody;
     public Vector3 PlayerInitialScale;
     public Color PlayerInitialColor;
@@ -42,13 +44,15 @@ public class GameManager : MonoBehaviour
     public bool IsCountdownCalled { get => isCountdownCalled; }
 
     private WaitForSeconds secondDelay = new WaitForSeconds(1f);
+
+    [SerializeField] Joystick joystick;
     private void Start()
     {
         Time.timeScale = 1;
         PlayerInitialScale = Player.localScale;
-        PlayerRenderer = Player.GetComponent<SpriteRenderer>();
+        //PlayerRenderer = Player.GetComponent<SpriteRenderer>();
         PlayerRigidbody = Player.GetComponent<Rigidbody2D>();
-        PlayerInitialColor = PlayerRenderer.color;
+        //PlayerInitialColor = PlayerRenderer.color;
 
         if (OnGameOverEvent == null)
             OnGameOverEvent = new UnityEvent();
@@ -64,6 +68,7 @@ public class GameManager : MonoBehaviour
     public void StartCountdown()
     {
         currentState = State.GameOver;
+        PlayerMovement.SetEnabled(false);
         StartCoroutine(StartingCountdown());
         isCountdownCalled = true;
     }
@@ -80,6 +85,7 @@ public class GameManager : MonoBehaviour
         CountDownTimer.gameObject.SetActive(false);
         isGameOver = false;
         currentState = State.Playing;
+        PlayerMovement.SetEnabled(true);
         startTimer();
     }
 
@@ -110,12 +116,14 @@ public class GameManager : MonoBehaviour
 
         if (currentState == State.Paused)
         {
+            joystick.gameObject.SetActive(true);
             pauseScreen.SetActive(false);
             currentState = State.Playing;
             Time.timeScale = 1;
         }
         else
         {
+            joystick.gameObject.SetActive(false);
             pauseScreen.SetActive(true);
             currentState = State.Paused;
             Time.timeScale = 0;
@@ -144,6 +152,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         currentTimeText.gameObject.SetActive(false);
         OnGameOverEvent.Invoke();
+        joystick.gameObject.SetActive(false);
     }
 
     public void GameWon()

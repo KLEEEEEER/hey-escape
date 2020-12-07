@@ -48,6 +48,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -99,6 +100,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1854065356546490445}
   withoutPlayer: {fileID: 21300000, guid: 8ea8f8de7a728af43ba96f1cb2955d44, type: 3}
   withPlayer: {fileID: 21300000, guid: 73b1d4b8c3015374bb426427ef1d09d5, type: 3}
+  hidePlaceInfoSO: {fileID: 11400000, guid: e36089932f070dd4abbd93f5bbca9524, type: 2}
 --- !u!61 &1813182182162277975
 BoxCollider2D:
   m_ObjectHideFlags: 0

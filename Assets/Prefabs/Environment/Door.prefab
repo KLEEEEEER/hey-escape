@@ -48,6 +48,7 @@ MonoBehaviour:
   PlayerHideScale: {x: 0.9, y: 0.9, z: 0.9}
   HideColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   smoothTime: 0.1
+  hidePlaceInfoSO: {fileID: 11400000, guid: 4adf6edaf83c2b5428829ccc3166d71c, type: 2}
 --- !u!61 &587084739819053076
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -89,6 +90,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

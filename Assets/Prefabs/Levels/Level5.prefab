@@ -1553,6 +1553,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1675,6 +1676,7 @@ GameObject:
   - component: {fileID: 723563583480419894}
   - component: {fileID: 723563583480419897}
   - component: {fileID: 723563583480419896}
+  - component: {fileID: 4167403114806416876}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -2601,6 +2603,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2692,6 +2695,58 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &4167403114806416876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723563583480419898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000095c78fc9
+  m_ShapePath:
+  - {x: -11.812451, y: 3.0000935, z: 0}
+  - {x: 5.8125052, y: 3.0000155, z: 0}
+  - {x: 6, y: 4, z: 0}
+  - {x: -12, y: 4, z: 0}
+  - {x: -12, y: -9, z: 0}
+  - {x: 6, y: -9, z: 0}
+  - {x: 6, y: 4, z: 0}
+  - {x: 5.81251, y: 3.0000212, z: 0}
+  - {x: 5.812499, y: -0.81250674, z: 0}
+  - {x: 4.0852423, y: -0.8124406, z: 0}
+  - {x: 4.0038, y: -0.007411778, z: 0}
+  - {x: 4, y: -1, z: 0}
+  - {x: 5.8125215, y: -0.9999825, z: 0}
+  - {x: 5.8125834, y: -4.812377, z: 0}
+  - {x: 4.122795, y: -4.812505, z: 0}
+  - {x: 4, y: -4, z: 0}
+  - {x: 4, y: -5, z: 0}
+  - {x: 5.814666, y: -4.997191, z: 0}
+  - {x: 5.8125434, y: -8.812577, z: 0}
+  - {x: -11.81229, y: -8.812933, z: 0}
+  - {x: -11.812453, y: -4.999967, z: 0}
+  - {x: 3, y: -5, z: 0}
+  - {x: 2.9993868, y: -4.0026646, z: 0}
+  - {x: 2.8932104, y: -4.8124614, z: 0}
+  - {x: -11.812494, y: -4.812496, z: 0}
+  - {x: -11.812492, y: -0.99999297, z: 0}
+  - {x: 2.9977627, y: -0.9989417, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: 2.8860466, y: -0.81229013, z: 0}
+  - {x: -11.812502, y: -0.81252104, z: 0}
+  m_ShapePathHash: -510741406
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 148068
 --- !u!1 &4877806556023951883
 GameObject:
   m_ObjectHideFlags: 0

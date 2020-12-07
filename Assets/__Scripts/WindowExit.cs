@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HeyEscape.Core.Player.FSM;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,10 +33,10 @@ public class WindowExit : MonoBehaviour, IInteractable
         }
     }
 
-    public void PlayerWait()
+    public void PlayerWait(PlayerFSM player)
     {
-        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.InWindowState);
-        GameManager.instance.CharacterController2D.InWindowState.OnWindowExit.AddListener(ExitWindow);
+        player.TransitionToState(player.InWindowState);
+        player.InWindowState.OnWindowExit.AddListener(ExitWindow);
         spriteRenderer.sprite = openedWithRopeWithPlayerSprite;
         currentWindowExitState = WindowExitState.PlayerInside;
     }
@@ -45,36 +46,36 @@ public class WindowExit : MonoBehaviour, IInteractable
         return ExitPoint.position;
     }
 
-    IEnumerator EnterWindowAnimation()
+    IEnumerator EnterWindowAnimation(PlayerFSM player)
     {
-        GameManager.instance.CharacterController2D.TransitionToState(GameManager.instance.CharacterController2D.DisableState);
-        SpriteRenderer spriteRenderer = GameManager.instance.PlayerRenderer;
-        GameManager.instance.PlayerMovement.disableMovement = true;
-        GameManager.instance.PlayerComponent.HidePlayer();
+        player.TransitionToState(player.DisableState);
+        player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Hidden);
+        player.PlayerMovement.SetEnabled(true);
 
-        if (spriteRenderer != null) spriteRenderer.enabled = false;
+        if (player.Renderer != null) player.Renderer.enabled = false;
 
-        GameManager.instance.Player.position = transform.position;
-        GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
-
-        yield return delay;
-
-        GameManager.instance.Player.position = windowEnter.GetExitPointPosition();
-        GameManager.instance.PlayerRigidbody.velocity = new Vector2(0, 0);
+        player.transform.position = transform.position;
+        player.Rigidbody2D.velocity = new Vector2(0, 0);
 
         yield return delay;
 
-        GameManager.instance.PlayerMovement.disableMovement = false;
-        windowEnter.PlayerWait();
+        player.transform.position = windowEnter.GetExitPointPosition();
+        player.Rigidbody2D.velocity = new Vector2(0, 0);
+
+        yield return delay;
+
+        player.PlayerMovement.SetEnabled(false);
+        windowEnter.PlayerWait(player);
     }
 
-    public void ExitWindow()
+    public void ExitWindow(PlayerFSM player)
     {
         spriteRenderer.sprite = openedWithRopeSprite;
         currentWindowExitState = WindowExitState.OpenedWithRope;
+        player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Visible);
     }
 
-    public void Interact()
+    public void Interact(PlayerFSM player)
     {
         switch (currentWindowExitState)
         {
@@ -83,7 +84,7 @@ public class WindowExit : MonoBehaviour, IInteractable
             case WindowExitState.PlayerInside:
                 break;
             case WindowExitState.OpenedWithRope:
-                StartCoroutine(EnterWindowAnimation());
+                StartCoroutine(EnterWindowAnimation(player));
                 break;
         }
     }

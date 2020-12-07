@@ -1337,6 +1337,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1458,6 +1459,7 @@ GameObject:
   - component: {fileID: 723563583480419894}
   - component: {fileID: 723563583480419897}
   - component: {fileID: 723563583480419896}
+  - component: {fileID: 7209528107503292035}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -2402,6 +2404,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2493,6 +2496,42 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &7209528107503292035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723563583480419898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000095c78fc9
+  m_ShapePath:
+  - {x: -12, y: -5, z: 0}
+  - {x: 14, y: -5, z: 0}
+  - {x: 14, y: 4, z: 0}
+  - {x: -12, y: 4, z: 0}
+  - {x: -12, y: 3, z: 0}
+  - {x: 13.812503, y: 3.0000021, z: 0}
+  - {x: 13.812503, y: -0.8125165, z: 0}
+  - {x: -11.812486, y: -0.8124966, z: 0}
+  - {x: -11.812409, y: -0.9999838, z: 0}
+  - {x: 13.812503, y: -0.9999945, z: 0}
+  - {x: 13.812501, y: -4.8124986, z: 0}
+  - {x: -11.812493, y: -4.8124766, z: 0}
+  - {x: -11.812495, y: 3.0000138, z: 0}
+  - {x: -11.998295, y: 4.0022545, z: 0}
+  m_ShapePathHash: -1829587367
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 144656
 --- !u!1 &4877806556023951883
 GameObject:
   m_ObjectHideFlags: 0
@@ -3891,12 +3930,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b0ac9b85e559f1468e13ed17c38fc86, type: 3}
---- !u!4 &2191366522868256859 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5079186862057490050, guid: 8b0ac9b85e559f1468e13ed17c38fc86,
-    type: 3}
-  m_PrefabInstance: {fileID: 6347165841833481945}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &436686748837222031 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6780949877672788054, guid: 8b0ac9b85e559f1468e13ed17c38fc86,
@@ -3909,6 +3942,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e49cb43f40fb0449590bab5be5ce73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &2191366522868256859 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5079186862057490050, guid: 8b0ac9b85e559f1468e13ed17c38fc86,
+    type: 3}
+  m_PrefabInstance: {fileID: 6347165841833481945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6880982534219296170
 PrefabInstance:
   m_ObjectHideFlags: 0

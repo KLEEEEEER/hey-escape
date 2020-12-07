@@ -1823,6 +1823,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1947,6 +1948,7 @@ GameObject:
   - component: {fileID: 723563583480419894}
   - component: {fileID: 723563583480419897}
   - component: {fileID: 723563583480419896}
+  - component: {fileID: 7046147054073547581}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -1964,7 +1966,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8774877149144541840}
   m_Father: {fileID: 723563582897465660}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3008,6 +3011,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3099,6 +3103,118 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &7046147054073547581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723563583480419898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000095c78fc9
+  m_ShapePath:
+  - {x: -12, y: -9, z: 0}
+  - {x: 10, y: -9, z: 0}
+  - {x: 10, y: 4, z: 0}
+  - {x: 9, y: 3, z: 0}
+  - {x: 9.812503, y: 3.0000005, z: 0}
+  - {x: 9.8125, y: -0.81250024, z: 0}
+  - {x: 3.1739, y: -0.8125002, z: 0}
+  - {x: 3, y: 0, z: 0}
+  - {x: 3, y: -1, z: 0}
+  - {x: 9.812503, y: -0.9999996, z: 0}
+  - {x: 9.8125, y: -4.8125, z: 0}
+  - {x: 9.166459, y: -4.8125, z: 0}
+  - {x: 9, y: -4, z: 0}
+  - {x: 9, y: -5, z: 0}
+  - {x: 9.812503, y: -5, z: 0}
+  - {x: 9.8125, y: -8.8125, z: 0}
+  - {x: -11.812495, y: -8.8125, z: 0}
+  - {x: -11.812495, y: -5, z: 0}
+  - {x: -11, y: -5, z: 0}
+  - {x: -11, y: -4, z: 0}
+  - {x: -11.115881, y: -4.8125, z: 0}
+  - {x: -11.812495, y: -4.8125, z: 0}
+  - {x: -11.812495, y: -1, z: 0}
+  - {x: 2, y: -1, z: 0}
+  - {x: 2, y: 0, z: 0}
+  - {x: 1.8919755, y: -0.81250036, z: 0}
+  - {x: -11.812495, y: -0.8124999, z: 0}
+  - {x: -11.812495, y: 3.0000002, z: 0}
+  - {x: 9, y: 3, z: 0}
+  - {x: 10, y: 4, z: 0}
+  - {x: -12, y: 4, z: 0}
+  m_ShapePathHash: 124569695
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -1703284
+--- !u!1 &3479005127032181777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8774877149144541840}
+  - component: {fileID: 4039880551961994208}
+  m_Layer: 8
+  m_Name: PlatformShadow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8774877149144541840
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3479005127032181777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 723563583480419899}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4039880551961994208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3479005127032181777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000095c78fc9
+  m_ShapePath:
+  - {x: -10, y: -5, z: 0}
+  - {x: 8, y: -5, z: 0}
+  - {x: 8, y: -4, z: 0}
+  - {x: 7.87, y: -4.8125, z: 0}
+  - {x: -9.843513, y: -4.8125, z: 0}
+  - {x: -10, y: -4, z: 0}
+  m_ShapePathHash: -44848898
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -1880898
 --- !u!1 &4877806556023951883
 GameObject:
   m_ObjectHideFlags: 0
