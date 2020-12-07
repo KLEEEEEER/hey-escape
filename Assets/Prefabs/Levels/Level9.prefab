@@ -1297,6 +1297,7 @@ GameObject:
   - component: {fileID: 723563583480419894}
   - component: {fileID: 723563583480419897}
   - component: {fileID: 723563583480419896}
+  - component: {fileID: 1320162280144532820}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -2387,6 +2388,57 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &1320162280144532820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723563583480419898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000095c78fc9
+  m_ShapePath:
+  - {x: -12, y: -1, z: 0}
+  - {x: 9, y: -1, z: 0}
+  - {x: 9, y: -9, z: 0}
+  - {x: 25, y: -9, z: 0}
+  - {x: 25, y: -4, z: 0}
+  - {x: 12, y: -4, z: 0}
+  - {x: 12, y: 4, z: 0}
+  - {x: 11.812503, y: 3, z: 0}
+  - {x: 11.812485, y: -0.8125972, z: 0}
+  - {x: 11.126367, y: -0.81254345, z: 0}
+  - {x: 11, y: 0, z: 0}
+  - {x: 11, y: -1, z: 0}
+  - {x: 11.812496, y: -0.9999889, z: 0}
+  - {x: 11.812502, y: -4.8125014, z: 0}
+  - {x: 11.096771, y: -4.812546, z: 0}
+  - {x: 11, y: -4, z: 0}
+  - {x: 11, y: -5, z: 0}
+  - {x: 24.812534, y: -4.9999976, z: 0}
+  - {x: 24.812498, y: -8.812507, z: 0}
+  - {x: 9.187507, y: -8.8125105, z: 0}
+  - {x: 9.187486, y: -0.9999774, z: 0}
+  - {x: 10, y: -1, z: 0}
+  - {x: 10, y: 0, z: 0}
+  - {x: 9.866378, y: -0.8125339, z: 0}
+  - {x: -11.812499, y: -0.8124999, z: 0}
+  - {x: -11.812498, y: 2.999999, z: 0}
+  - {x: 11.812503, y: 3, z: 0}
+  - {x: 12, y: 4, z: 0}
+  - {x: -12, y: 4, z: 0}
+  m_ShapePathHash: 545256145
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -1193712
 --- !u!1 &4877806556023951883
 GameObject:
   m_ObjectHideFlags: 0

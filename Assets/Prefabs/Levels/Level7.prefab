@@ -1787,6 +1787,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1912,6 +1913,7 @@ GameObject:
   - component: {fileID: 723563583480419894}
   - component: {fileID: 723563583480419897}
   - component: {fileID: 723563583480419896}
+  - component: {fileID: 2222725663273559980}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -3045,6 +3047,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3136,6 +3139,72 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &2222725663273559980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723563583480419898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000095c78fc9
+  m_ShapePath:
+  - {x: -11.812555, y: 0.000003941823, z: 0}
+  - {x: -11.831766, y: 3.0163975, z: 0}
+  - {x: 5.812976, y: 3.0002735, z: 0}
+  - {x: 5.8105383, y: 0.004389912, z: 0}
+  - {x: 5.8122973, y: -0.81241465, z: 0}
+  - {x: 5.0597615, y: -0.81093943, z: 0}
+  - {x: 5.0022373, y: 0.0021931082, z: 0}
+  - {x: 5.000178, y: -0.99921644, z: 0}
+  - {x: 5.8127933, y: -0.9997242, z: 0}
+  - {x: 5.8121734, y: -4.8126116, z: 0}
+  - {x: -9.907654, y: -4.8108854, z: 0}
+  - {x: -9.999911, y: -3.9999795, z: 0}
+  - {x: -9.999995, y: -4.999984, z: 0}
+  - {x: 5.8126216, y: -4.999946, z: 0}
+  - {x: 5.8123717, y: -8.8089075, z: 0}
+  - {x: 5.058593, y: -8.813903, z: 0}
+  - {x: 5.0005755, y: -7.9995832, z: 0}
+  - {x: 5.0002284, y: -8.998156, z: 0}
+  - {x: 5.8126316, y: -8.999506, z: 0}
+  - {x: 5.8124933, y: -12.841352, z: 0}
+  - {x: -11.81301, y: -12.821951, z: 0}
+  - {x: -11.812858, y: -8.999885, z: 0}
+  - {x: 3.9999669, y: -8.999999, z: 0}
+  - {x: 3.9999871, y: -8.000021, z: 0}
+  - {x: 3.8950002, y: -8.815584, z: 0}
+  - {x: -11.812643, y: -8.81363, z: 0}
+  - {x: -11.812508, y: -4.999922, z: 0}
+  - {x: -11.00009, y: -4.9999566, z: 0}
+  - {x: -11.000009, y: -4.0000963, z: 0}
+  - {x: -11.094882, y: -4.816921, z: 0}
+  - {x: -11.811921, y: -4.8133793, z: 0}
+  - {x: -11.812506, y: -4.0000005, z: 0}
+  - {x: -11.812498, y: -1.0000001, z: 0}
+  - {x: 3.9999533, y: -0.99988455, z: 0}
+  - {x: 3.9999516, y: -0.00004968373, z: 0}
+  - {x: 3.8945746, y: -0.8088839, z: 0}
+  - {x: -11.813329, y: -0.8124642, z: 0}
+  - {x: -11.812533, y: 0.00001163641, z: 0}
+  - {x: -12.000023, y: -0.00000204565, z: 0}
+  - {x: -11.997311, y: -12.998713, z: 0}
+  - {x: 6.0009465, y: -12.997115, z: 0}
+  - {x: 5.999875, y: 4.0021987, z: 0}
+  - {x: -12.045578, y: 3.7083793, z: 0}
+  - {x: -12.000014, y: 0.000012868084, z: 0}
+  m_ShapePathHash: -2006781610
+  m_Mesh: {fileID: 0}
+  m_InstanceId: -644674
 --- !u!1 &4877806556023951883
 GameObject:
   m_ObjectHideFlags: 0
@@ -5356,12 +5425,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 810348da2107c3d458d325bedd33f450, type: 3}
---- !u!224 &944780575697792031 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7059795466824873006, guid: 810348da2107c3d458d325bedd33f450,
-    type: 3}
-  m_PrefabInstance: {fileID: 7846931359269754929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1264301110797393996 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9038255331914840189, guid: 810348da2107c3d458d325bedd33f450,
@@ -5374,6 +5437,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d26319226c33e488e70f0baf64516b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &944780575697792031 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7059795466824873006, guid: 810348da2107c3d458d325bedd33f450,
+    type: 3}
+  m_PrefabInstance: {fileID: 7846931359269754929}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8055551256431066307
 PrefabInstance:
   m_ObjectHideFlags: 0

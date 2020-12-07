@@ -770,6 +770,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -883,6 +884,7 @@ GameObject:
   - component: {fileID: 723563583480419894}
   - component: {fileID: 723563583480419897}
   - component: {fileID: 723563583480419896}
+  - component: {fileID: 2343158800514737065}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -1467,6 +1469,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1558,6 +1561,38 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &2343158800514737065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723563583480419898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000095c78fc9
+  m_ShapePath:
+  - {x: -11.812507, y: -0.8125086, z: 0}
+  - {x: -11.831766, y: 3.0163975, z: 0}
+  - {x: 9.831111, y: 3.010898, z: 0}
+  - {x: 9.812501, y: -0.81249875, z: 0}
+  - {x: 10, y: -0.9999998, z: 0}
+  - {x: 9.988961, y: 3.9693446, z: 0}
+  - {x: -12.005246, y: 3.990703, z: 0}
+  - {x: -11.992126, y: -0.9457152, z: 0}
+  - {x: 10, y: -0.99999976, z: 0}
+  - {x: 9.8125, y: -0.8124991, z: 0}
+  m_ShapePathHash: 1197300916
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 117236
 --- !u!1 &4877806556023951883
 GameObject:
   m_ObjectHideFlags: 0

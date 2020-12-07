@@ -177,6 +177,7 @@ namespace HeyEscape.Core.Player.FSM
 
         public void OnGameOver()
         {
+            Animator.SetTrigger("Caught");
             TransitionToState(DisableState);
         }
 

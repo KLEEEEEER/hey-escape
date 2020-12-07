@@ -491,6 +491,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -601,6 +602,7 @@ GameObject:
   - component: {fileID: 723563583480419894}
   - component: {fileID: 723563583480419897}
   - component: {fileID: 723563583480419896}
+  - component: {fileID: 8640859726802074876}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
@@ -1005,6 +1007,7 @@ TilemapRenderer:
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1096,6 +1099,38 @@ CompositeCollider2D:
     m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &8640859726802074876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723563583480419898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 0
+  m_CastsShadows: 1
+  m_SelfShadows: 1
+  m_ApplyToSortingLayers: 0000000095c78fc9
+  m_ShapePath:
+  - {x: -12, y: -1, z: 0}
+  - {x: 0, y: -1, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: -0.18749914, y: 2.9999907, z: 0}
+  - {x: -0.18749872, y: -0.8125009, z: 0}
+  - {x: -11.812529, y: -0.8125443, z: 0}
+  - {x: -11.812552, y: 2.9999948, z: 0}
+  - {x: 0, y: 3, z: 0}
+  - {x: 0, y: 4, z: 0}
+  - {x: -12, y: 4, z: 0}
+  m_ShapePathHash: 38654570
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 181998
 --- !u!1 &3055435907000086539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,6 +1203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HideColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   smoothTime: 0.1
+  hidePlaceInfoSO: {fileID: 0}
 --- !u!1 &3269607035884600846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,6 +1276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HideColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   smoothTime: 0.1
+  hidePlaceInfoSO: {fileID: 0}
 --- !u!1 &4290221870851157123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,6 +1325,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1704,15 +1742,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6454d8c2e0e1248469ffa10d7d577dc5, type: 3}
---- !u!4 &4841358010117600298 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8942760133759567771, guid: 6454d8c2e0e1248469ffa10d7d577dc5,
-    type: 3}
-  m_PrefabInstance: {fileID: 4554517462637261745}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5909212293981481638 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7869293530234853655, guid: 6454d8c2e0e1248469ffa10d7d577dc5,
+    type: 3}
+  m_PrefabInstance: {fileID: 4554517462637261745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4841358010117600298 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8942760133759567771, guid: 6454d8c2e0e1248469ffa10d7d577dc5,
     type: 3}
   m_PrefabInstance: {fileID: 4554517462637261745}
   m_PrefabAsset: {fileID: 0}
