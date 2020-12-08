@@ -23,7 +23,7 @@ namespace HeyEscape.Core.Player
             int rayCount = 70;
             float angle = 0f;
             float angleIncrease = fov / rayCount;
-            float viewDistance = 6f;
+            float viewDistance = 5f;
             Vector3 origin = playerTransform.position;
 
             Vector3[] vertices = new Vector3[rayCount + 1 + 1];

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flashlight : MonoBehaviour
+public class EnemyFlashlight : MonoBehaviour
 {
     [SerializeField] Enemy enemy;
     [SerializeField] Transform pointARectTrigger;
