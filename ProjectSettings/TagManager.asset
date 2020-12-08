@@ -45,3 +45,6 @@ TagManager:
   - name: Walls
     uniqueID: 3381643157
     locked: 0
+  - name: FoV
+    uniqueID: 4079783863
+    locked: 0

@@ -13,38 +13,35 @@ MonoBehaviour:
   m_Name: New 2D Renderer Data
   m_EditorClassIdentifier: 
   m_RendererFeatures: []
+  m_RendererFeatureMap: 
   m_TransparencySortMode: 0
   m_TransparencySortAxis: {x: 0, y: 1, z: 0}
   m_HDREmulationScale: 1
   m_LightBlendStyles:
-  - enabled: 1
-    name: Default
+  - name: Default
     maskTextureChannel: 0
-    renderTextureScale: 0.683
+    renderTextureScale: 0.71
     blendMode: 1
     customBlendFactors:
       multiplicative: 0
       additive: 0
-  - enabled: 0
-    name: Blend Style 1
+  - name: Blend Style 1
     maskTextureChannel: 0
     renderTextureScale: 1
     blendMode: 1
     customBlendFactors:
       multiplicative: 0
       additive: 0
-  - enabled: 0
-    name: Blend Style 2
+  - name: Blend Style 2
     maskTextureChannel: 0
     renderTextureScale: 1
     blendMode: 1
     customBlendFactors:
       multiplicative: 0
       additive: 0
-  - enabled: 0
-    name: Blend Style 3
+  - name: Blend Style 3
     maskTextureChannel: 0
-    renderTextureScale: 1
+    renderTextureScale: 0.36
     blendMode: 1
     customBlendFactors:
       multiplicative: 0
