@@ -10,7 +10,6 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void EnterState()
         {
-            Debug.Log("Running state");
             fsm.InputHandler.KillButtonPressed.AddListener(OnKillButtonPressed);
             fsm.InputHandler.UsingButtonPressed.AddListener(OnUsingButtonPressed);
             fsm.InputHandler.JumpButtonPressed.AddListener(OnJumpButtonPressed);

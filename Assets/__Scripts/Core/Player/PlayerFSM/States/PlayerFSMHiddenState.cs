@@ -9,7 +9,6 @@ namespace HeyEscape.Core.Player.FSM.States
         public PlayerFSMHiddenState(PlayerFSM playerFSM) : base(playerFSM) { }
         public override void EnterState()
         {
-            Debug.Log("Enter Hidden state");
             fsm.Animator.SetBool("IsRunning", false);
             fsm.Animator.SetTrigger("Hide");
             fsm.Rigidbody2D.velocity = Vector2.zero;
@@ -19,7 +18,6 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void ExitState()
         {
-            Debug.Log("Exit Hidden state");
             fsm.Animator.SetTrigger("Unhide");
             fsm.Rigidbody2D.isKinematic = false;
             fsm.SetEnableColliders(true);

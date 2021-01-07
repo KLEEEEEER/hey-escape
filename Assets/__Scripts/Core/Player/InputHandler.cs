@@ -31,8 +31,11 @@ namespace HeyEscape.Core.Player
         private void Update()
         {
 #if UNITY_EDITOR
-            Horizontal = Input.GetAxisRaw("Horizontal");
-            Vertical = Input.GetAxisRaw("Vertical");
+            //Horizontal = Input.GetAxisRaw("Horizontal");
+            //Vertical = Input.GetAxisRaw("Vertical");
+
+            Horizontal = Mathf.Clamp(joystick.Horizontal * 2.5f, -1f, 1f);
+            Vertical = Mathf.Clamp(joystick.Vertical * 2.5f, -1f, 1f);
 
             if (Input.GetKeyDown(KeyCode.E))
             {

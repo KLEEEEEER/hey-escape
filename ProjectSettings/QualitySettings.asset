@@ -19,14 +19,14 @@ QualitySettings:
     shadowCascade4Split: {x: 0.06666667, y: 0.2, z: 0.46666667}
     shadowmaskMode: 0
     skinWeights: 1
-    textureQuality: 2
+    textureQuality: 3
     anisotropicTextures: 0
     antiAliasing: 0
     softParticles: 0
     softVegetation: 0
     realtimeReflectionProbes: 0
     billboardsFaceCameraPosition: 0
-    vSyncCount: 2
+    vSyncCount: 1
     lodBias: 0.3
     maximumLODLevel: 0
     streamingMipmapsActive: 0
@@ -232,7 +232,7 @@ QualitySettings:
     PSM: 5
     PSP2: 2
     Stadia: 5
-    Standalone: 5
+    Standalone: 0
     Tizen: 2
     WebGL: 3
     WiiU: 5

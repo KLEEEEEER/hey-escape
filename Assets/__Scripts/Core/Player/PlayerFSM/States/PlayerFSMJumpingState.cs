@@ -12,7 +12,6 @@ namespace HeyEscape.Core.Player.FSM.States
         public PlayerFSMJumpingState(PlayerFSM playerFSM) : base(playerFSM) { }
         public override void EnterState()
         {
-            Debug.Log("Jumping wat?");
             fsm.OnJumpEvent.Invoke();
             fsm.Animator.SetBool("IsJumping", true);
             timer = 0f;
