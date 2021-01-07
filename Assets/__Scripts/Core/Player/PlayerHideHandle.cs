@@ -35,9 +35,6 @@ namespace HeyEscape.Core.Player
             }
             playerFSM.Animator.SetFloat("HideType", (float)hidePlaceInfo.PlayerHidingSprite);
 
-            //playerFSM.TransitionToState(playerFSM.DisableState);
-            //transform.position = hidePlaceInfo.transform;
-            //transform.localScale = hidePlaceInfo.scale;
             StartCoroutine(SmoothMovingToHidePosition(hidePlaceInfo));
             playerRenderer.color = hidePlaceInfo.color;
             visibilityState.SetVisibilityState(hidePlaceInfo.visibilityState);
@@ -48,10 +45,7 @@ namespace HeyEscape.Core.Player
         public void Unhide()
         {
             isMoving = false;
-            playerFSM.TransitionToState(playerFSM.IdleState);
-            //transform.position = initPosition;
             transform.localScale = initScale;
-            //StartCoroutine(SmoothMovingToInitPosition());
             playerRenderer.color = initColor;
             visibilityState.SetVisibilityState(VisibilityState.State.Visible);
 
