@@ -35,11 +35,11 @@ namespace HeyEscape.Core.Player
             }
             playerFSM.Animator.SetFloat("HideType", (float)hidePlaceInfo.PlayerHidingSprite);
 
+            IsHidden = true;
+
             StartCoroutine(SmoothMovingToHidePosition(hidePlaceInfo));
             playerRenderer.color = hidePlaceInfo.color;
             visibilityState.SetVisibilityState(hidePlaceInfo.visibilityState);
-
-            IsHidden = true;
         }
 
         public void Unhide()

@@ -135,6 +135,7 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
     public void OnGameOver()
     {
+        Debug.Log("Enemy oNgameover");
         heySound.PlayHeySound();
         caughtPlayer = true;
         animator.SetBool("IsWalking", false);

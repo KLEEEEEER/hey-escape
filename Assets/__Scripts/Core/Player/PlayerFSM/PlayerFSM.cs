@@ -4,6 +4,7 @@ using HeyEscape.Core.Player.FSM.Commands;
 using HeyEscape.Core.Player.FSM.States;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -165,6 +166,11 @@ namespace HeyEscape.Core.Player.FSM
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(CeilingCheck.position, CeilingRadius);
+
+#if UNITY_EDITOR
+            Handles.Label(transform.position + new Vector3(0f, 1f, 0f), currentState.ToString());
+            Handles.Label(transform.position + new Vector3(0f, 2f, 0f), Visibility.currentState.ToString());
+#endif
         }
 
         public void SetEnableColliders(bool enabled)
@@ -193,7 +199,8 @@ namespace HeyEscape.Core.Player.FSM
         public void OnGameOver()
         {
             Animator.SetTrigger("Caught");
-            StopCoroutine(disablingCoroutine);
+            if (disablingCoroutine != null)
+                StopCoroutine(disablingCoroutine);
             TransitionToState(DisableState);
         }
 
