@@ -97,6 +97,8 @@ namespace HeyEscape.Core.Player.FSM
 
         public void TransitionToState(PlayerFSMBaseState state)
         {
+            //Debug.Log($"Transitioning from {currentState.ToString()} to {state.ToString()}");
+
             currentState.ExitState();
             currentState = state;
             currentState.EnterState();

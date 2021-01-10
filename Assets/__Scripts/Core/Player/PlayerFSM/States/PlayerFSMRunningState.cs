@@ -54,7 +54,7 @@ namespace HeyEscape.Core.Player.FSM.States
                 return;
             }
 
-            if (fsm.InputHandler.Vertical > 0.8f && !fsm.DetectorHandler.IsHidden())
+            if (fsm.InputHandler.Vertical >= 0.8f && !fsm.DetectorHandler.IsHidden())
             {
                 fsm.HideCommand.Execute(fsm);
             }

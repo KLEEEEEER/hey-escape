@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeyEscape.Core.Helpers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -67,7 +68,7 @@ namespace HeyEscape.Core.Player
                     ScreenTouched?.Invoke(hit);
                 }
             }*/
-
+            //Debug.Log($"Vertical = {Vertical}");
         }
 
         public Vector2 GetDirection()
@@ -77,14 +78,17 @@ namespace HeyEscape.Core.Player
         public void OnJump()
         {
             JumpButtonPressed?.Invoke();
+            Vibration.Vibrate(20);
         }
         public void OnKill()
         {
             KillButtonPressed?.Invoke();
+            Vibration.Vibrate(20);
         }
         public void OnUsing()
         {
             UsingButtonPressed?.Invoke();
+            Vibration.Vibrate(20);
         }
     }
 

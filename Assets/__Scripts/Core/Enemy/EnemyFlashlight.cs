@@ -14,10 +14,6 @@ public class EnemyFlashlight : MonoBehaviour
     private void FixedUpdate()
     {
         colliders = Physics2D.OverlapAreaAll(pointARectTrigger.position, pointBRectTrigger.position);
-    }
-
-    private void LateUpdate()
-    {
         foreach (Collider2D collider in colliders)
         {
             if (collider.gameObject == gameObject) continue;

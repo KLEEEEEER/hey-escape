@@ -24,6 +24,8 @@ namespace HeyEscape.Core.Player
         private Vector3 currentVelocityScale;
         private bool isMoving = false;
 
+        private IEnumerator SmoothMovingToHidePositionCoroutine;
+
         public void Hide(HidePlaceInfoSO hidePlaceInfo)
         {
             SaveInitialPlayerParams();
@@ -37,13 +39,23 @@ namespace HeyEscape.Core.Player
 
             IsHidden = true;
 
-            StartCoroutine(SmoothMovingToHidePosition(hidePlaceInfo));
+            if (SmoothMovingToHidePositionCoroutine != null)
+            {
+                StopCoroutine(SmoothMovingToHidePositionCoroutine);
+            }
+
+            SmoothMovingToHidePositionCoroutine = SmoothMovingToHidePosition(hidePlaceInfo);
+            StartCoroutine(SmoothMovingToHidePositionCoroutine);
             playerRenderer.color = hidePlaceInfo.color;
             visibilityState.SetVisibilityState(hidePlaceInfo.visibilityState);
         }
 
         public void Unhide()
         {
+            if (SmoothMovingToHidePositionCoroutine != null)
+            {
+                StopCoroutine(SmoothMovingToHidePositionCoroutine);
+            }
             isMoving = false;
             transform.localScale = initScale;
             playerRenderer.color = initColor;

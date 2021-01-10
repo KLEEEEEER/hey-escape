@@ -6,10 +6,12 @@ namespace HeyEscape.Core.Player.FSM.States
 {
     public class PlayerFSMHiddenState : PlayerFSMBaseState
     {
+        private bool currentlyExiting = false;
+
         public PlayerFSMHiddenState(PlayerFSM playerFSM) : base(playerFSM) { }
         public override void EnterState()
         {
-            Debug.Log("PlayerFSMHiddenState");
+            currentlyExiting = false;
             fsm.Animator.SetBool("IsRunning", false);
             fsm.Animator.ResetTrigger("Unhide");
             fsm.Animator.SetTrigger("Hide");
@@ -20,7 +22,6 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void ExitState()
         {
-            Debug.Log("ExitState PlayerFSMHiddenState");
             fsm.Animator.SetTrigger("Unhide");
             fsm.Rigidbody2D.isKinematic = false;
             fsm.SetEnableColliders(true);
@@ -28,8 +29,11 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void Update()
         {
-            if (fsm.InputHandler.Vertical < 0.8f && fsm.DetectorHandler.IsHidden())
+            if (currentlyExiting) return;
+
+            if (fsm.InputHandler.Vertical < 0.8f && fsm.DetectorHandler.IsHidden() && fsm.CurrentState == fsm.HiddenState)
             {
+                currentlyExiting = true;
                 fsm.DetectorHandler.UnhideFromHidePlace();
                 fsm.TransitionToState(fsm.IdleState);
             }
