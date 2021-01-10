@@ -44,6 +44,9 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
     float timer = 0f;
 
+    private bool isSearched = false;
+    public bool IsSearched => isSearched;
+
     void Start()
     {
         if (items.Length > 0 && items[0].Icon != null)
@@ -198,6 +201,8 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
         itemSpriteRenderer.sprite = null;
         items = null;
+        isSearched = true;
+
         return tempItems;
     }
 

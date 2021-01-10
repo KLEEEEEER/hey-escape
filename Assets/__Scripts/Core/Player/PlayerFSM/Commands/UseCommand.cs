@@ -11,7 +11,7 @@ namespace HeyEscape.Core.Player.FSM.Commands
         {
             player.DetectorHandler.InteractInteractable();
             player.DetectorHandler.InteractSearchable(() => {
-                player.PlayerMovement.DisableForTime(0.5f);
+                player.DisableForTime(0.7f);
                 player.Animator.SetTrigger("Search"); 
             });
         }

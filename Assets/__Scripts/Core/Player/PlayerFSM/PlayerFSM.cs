@@ -174,10 +174,26 @@ namespace HeyEscape.Core.Player.FSM
                 collider.enabled = enabled;
             }
         }
+        IEnumerator disablingCoroutine;
+        public void DisableForTime(float seconds)
+        {
+            Rigidbody2D.velocity = Vector2.zero;
+            if (seconds < 0.001f) return;
+            disablingCoroutine = DisableCoroutine(seconds);
+            StartCoroutine(disablingCoroutine);
+        }
+
+        IEnumerator DisableCoroutine(float seconds)
+        {
+            TransitionToState(DisableState);
+            yield return new WaitForSeconds(seconds);
+            TransitionToState(IdleState);
+        }
 
         public void OnGameOver()
         {
             Animator.SetTrigger("Caught");
+            StopCoroutine(disablingCoroutine);
             TransitionToState(DisableState);
         }
 

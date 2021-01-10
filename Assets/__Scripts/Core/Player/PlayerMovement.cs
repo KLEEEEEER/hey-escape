@@ -63,18 +63,5 @@ namespace HeyEscape.Core.Player
             isLookingRight = !isLookingRight;
             transform.Rotate(0f, 180f, 0f);
         }
-
-        public void DisableForTime(float seconds)
-        {
-            if (seconds < 0.001f) return;
-            StartCoroutine(DisableCoroutine(seconds));
-        }
-
-        IEnumerator DisableCoroutine(float seconds)
-        {
-            SetEnabled(false);
-            yield return new WaitForSeconds(seconds);
-            SetEnabled(true);
-        }
     }
 }

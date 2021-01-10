@@ -24,9 +24,11 @@ namespace Core.Detectors
             if (detectedColliders.Count > 0)
             {
                 //animator.SetTrigger("Search");
-
+                bool searchHappened = false;
                 foreach (ISearchable searchable in detectedColliders)
                 {
+                    if (searchable.IsSearched) continue;
+
                     List<InventoryItem> enemyItems = searchable.Search();
                     if (enemyItems.Count > 0)
                     {
@@ -34,10 +36,12 @@ namespace Core.Detectors
                         {
                             inventory.AddItem(item);
                         }
+                        searchHappened = true;
                     }
                 }
                 interacted = true;
-                onInteractionAction?.Invoke();
+                if (searchHappened)
+                    onInteractionAction?.Invoke();
             }
             return interacted;
         }
