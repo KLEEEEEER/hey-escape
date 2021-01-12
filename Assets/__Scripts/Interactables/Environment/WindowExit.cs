@@ -1,4 +1,5 @@
-﻿using HeyEscape.Core.Player.FSM;
+﻿using Cinemachine;
+using HeyEscape.Core.Player.FSM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class WindowExit : MonoBehaviour, IInteractable
     [SerializeField] AudioSource openingSound;
     bool isClosed = true;
     WindowExitState currentWindowExitState = WindowExitState.Closed;
+
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
 
     private WaitForSeconds delay = new WaitForSeconds(0.5f);
     enum WindowExitState { Closed, OpenedWithRope, PlayerInside }
@@ -48,9 +51,14 @@ public class WindowExit : MonoBehaviour, IInteractable
 
     IEnumerator EnterWindowAnimation(PlayerFSM player)
     {
+        SetVirtualCameraPriority(11);
+        windowEnter.SetVirtualCameraPriority(12);
+
         player.TransitionToState(player.DisableState);
         player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Hidden);
         player.PlayerMovement.SetEnabled(true);
+        windowEnter.SetEnabledVirtualCamera(true);
+        player.VirtualCamera.gameObject.SetActive(false);
 
         if (player.Renderer != null) player.Renderer.enabled = false;
 
@@ -73,6 +81,9 @@ public class WindowExit : MonoBehaviour, IInteractable
         spriteRenderer.sprite = openedWithRopeSprite;
         currentWindowExitState = WindowExitState.OpenedWithRope;
         player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Visible);
+        player.VirtualCamera.gameObject.SetActive(true);
+        windowEnter.SetEnabledVirtualCamera(false);
+        SetEnabledVirtualCamera(false);
     }
 
     public void Interact(PlayerFSM player)
@@ -87,5 +98,14 @@ public class WindowExit : MonoBehaviour, IInteractable
                 StartCoroutine(EnterWindowAnimation(player));
                 break;
         }
+    }
+
+    public void SetEnabledVirtualCamera(bool enabled)
+    {
+        virtualCamera.gameObject.SetActive(enabled);
+    }
+    public void SetVirtualCameraPriority(int priority)
+    {
+        virtualCamera.Priority = priority;
     }
 }

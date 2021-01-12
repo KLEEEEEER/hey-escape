@@ -1,4 +1,5 @@
-﻿using HeyEscape.Core.Player.FSM;
+﻿using Cinemachine;
+using HeyEscape.Core.Player.FSM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Transform ExitPoint;
     [SerializeField] AudioSource openingSound;
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
 
     private WaitForSeconds delay = new WaitForSeconds(0.5f);
 
@@ -41,9 +43,14 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
     IEnumerator EnterWindowAnimation(PlayerFSM player)
     {
+        SetVirtualCameraPriority(11);
+        windowExit.SetVirtualCameraPriority(12);
+
         player.TransitionToState(player.DisableState);
         player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Hidden);
         player.PlayerMovement.SetEnabled(true);
+        windowExit.SetEnabledVirtualCamera(true);
+        player.VirtualCamera.gameObject.SetActive(false);
 
         if (player.Renderer != null) player.Renderer.enabled = false;
 
@@ -126,7 +133,19 @@ public class WindowEnter : MonoBehaviour, IInteractable
         windowEnterState = WindowEnterState.OpenedWithRope;
         spriteRenderer.sprite = openedWithRopeSprite;
         player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Visible);
+        player.VirtualCamera.gameObject.SetActive(true);
+        windowExit.SetEnabledVirtualCamera(false);
+        SetEnabledVirtualCamera(false);
     }
 
     public Vector3 GetExitPointPosition() => ExitPoint.position;
+
+    public void SetEnabledVirtualCamera(bool enabled)
+    {
+        virtualCamera.gameObject.SetActive(enabled);
+    }
+    public void SetVirtualCameraPriority(int priority)
+    {
+        virtualCamera.Priority = priority;
+    }
 }

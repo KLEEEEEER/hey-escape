@@ -1,4 +1,5 @@
-﻿using Core.Detectors;
+﻿using Cinemachine;
+using Core.Detectors;
 using HeyEscape.Core.Helpers;
 using HeyEscape.Core.Player.FSM.Commands;
 using HeyEscape.Core.Player.FSM.States;
@@ -53,6 +54,9 @@ namespace HeyEscape.Core.Player.FSM
 
         [SerializeField] Collider2D[] collidersToDisable;
         public Collider2D[] CollidersToDisable { get => collidersToDisable; }
+
+        [SerializeField] CinemachineVirtualCamera virtualCamera;
+        public CinemachineVirtualCamera VirtualCamera { get => virtualCamera; }
 
         public Vector2 currentVelocity;
         public Transform CeilingCheck;

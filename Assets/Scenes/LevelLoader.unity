@@ -2195,7 +2195,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 0.5
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -5336,6 +5336,7 @@ MonoBehaviour:
   collidersToDisable:
   - {fileID: 1443288900}
   - {fileID: 1443288899}
+  virtualCamera: {fileID: 1995561442}
   currentVelocity: {x: 0, y: 0}
   CeilingCheck: {fileID: 1022182343}
   CeilingRadius: 0.25
