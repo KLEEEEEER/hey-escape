@@ -13,6 +13,13 @@ public class WindowExit : MonoBehaviour, IInteractable
     [SerializeField] Sprite openedWithRopeWithPlayerSprite;
     [SerializeField] Transform ExitPoint;
     [SerializeField] AudioSource openingSound;
+
+    [SerializeField] Transform climbPoint;
+
+    [SerializeField] Transform playerFallSprite;
+    [SerializeField] Transform playerFallStartPosition;
+    [SerializeField] Transform playerFallEndPosition;
+
     bool isClosed = true;
     WindowExitState currentWindowExitState = WindowExitState.Closed;
 
@@ -60,12 +67,14 @@ public class WindowExit : MonoBehaviour, IInteractable
         windowEnter.SetEnabledVirtualCamera(true);
         player.VirtualCamera.gameObject.SetActive(false);
 
-        if (player.Renderer != null) player.Renderer.enabled = false;
-
-        player.transform.position = transform.position;
+        player.transform.position = climbPoint.position;
         player.Rigidbody2D.velocity = new Vector2(0, 0);
 
+        player.Animator.SetTrigger("WindowClimbing");
+
         yield return delay;
+
+        if (player.Renderer != null) player.Renderer.enabled = false;
 
         player.transform.position = windowEnter.GetExitPointPosition();
         player.Rigidbody2D.velocity = new Vector2(0, 0);
@@ -107,5 +116,29 @@ public class WindowExit : MonoBehaviour, IInteractable
     public void SetVirtualCameraPriority(int priority)
     {
         virtualCamera.Priority = priority;
+    }
+
+    public void PlayerFallAnimation(float seconds)
+    {
+        StartCoroutine(PlayerFallAnimationCoroutine(seconds));
+    }
+
+    IEnumerator PlayerFallAnimationCoroutine(float time)
+    {
+        playerFallSprite.gameObject.SetActive(true);
+        playerFallSprite.position = playerFallStartPosition.position;
+        float speed = Vector3.Distance(playerFallStartPosition.position, playerFallEndPosition.position) / time;
+
+        float currentTime = 0f;
+        while(true)
+        {
+            if (currentTime >= time) break;
+
+            float step = speed * Time.deltaTime;
+            playerFallSprite.position = Vector3.MoveTowards(playerFallSprite.position, playerFallEndPosition.position, step);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+        playerFallSprite.gameObject.SetActive(false);
     }
 }

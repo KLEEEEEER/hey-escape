@@ -19,6 +19,8 @@ public class WindowEnter : MonoBehaviour, IInteractable
     [SerializeField] AudioSource openingSound;
     [SerializeField] CinemachineVirtualCamera virtualCamera;
 
+    [SerializeField] Transform climbPoint;
+
     private WaitForSeconds delay = new WaitForSeconds(0.5f);
 
     //[SerializeField] Player playerNear;
@@ -52,13 +54,15 @@ public class WindowEnter : MonoBehaviour, IInteractable
         windowExit.SetEnabledVirtualCamera(true);
         player.VirtualCamera.gameObject.SetActive(false);
 
-        if (player.Renderer != null) player.Renderer.enabled = false;
-
-        player.transform.position = transform.position;
+        player.transform.position = climbPoint.position;
         player.Rigidbody2D.velocity = new Vector2(0, 0);
+
+        player.Animator.SetTrigger("WindowClimbing");
 
         yield return delay;
 
+        windowExit.PlayerFallAnimation(0.5f);
+        if (player.Renderer != null) player.Renderer.enabled = false;
         player.transform.position = windowExit.GetExitPointPosition();
         player.Rigidbody2D.velocity = new Vector2(0, 0);
 

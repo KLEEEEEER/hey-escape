@@ -67,6 +67,36 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 7649357787063350873}
+--- !u!1 &8869420975675613549
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2344616374847527627}
+  m_Layer: 0
+  m_Name: ClimbPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2344616374847527627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8869420975675613549}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.56, y: -0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5079186862057490050}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8899822053467590308
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +160,7 @@ Transform:
   m_Children:
   - {fileID: 959652209218802845}
   - {fileID: 7316388344251704322}
+  - {fileID: 2344616374847527627}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -207,6 +238,7 @@ MonoBehaviour:
   ExitPoint: {fileID: 959652209218802845}
   openingSound: {fileID: 8240404735448745168}
   virtualCamera: {fileID: 5330164850033455870}
+  climbPoint: {fileID: 2344616374847527627}
   windowEnterState: 0
 --- !u!61 &2043289584627921991
 BoxCollider2D:
