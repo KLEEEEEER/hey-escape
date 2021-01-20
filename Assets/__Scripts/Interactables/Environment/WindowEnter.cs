@@ -9,6 +9,7 @@ using UnityEngine.Events;
 
 public class WindowEnter : MonoBehaviour, IInteractable
 {
+    [SerializeField] bool canBeOpened = true;
     [SerializeField] WindowExit windowExit;
     [SerializeField] WindowExit[] windowsExitToDropRope;
     [SerializeField] Sprite openedSprite;
@@ -58,13 +59,18 @@ public class WindowEnter : MonoBehaviour, IInteractable
         player.Rigidbody2D.velocity = new Vector2(0, 0);
 
         player.Animator.SetTrigger("WindowClimbing");
+        player.LightVision.SetVisionState(HeyEscape.Core.Player.PlayerLightVision.VisionState.InDoor);
+
+        yield return delay;
+
+
+        if (player.Renderer != null) player.Renderer.enabled = false;
+        player.transform.position = windowExit.GetExitPointPosition();
+        player.Rigidbody2D.velocity = new Vector2(0, 0);
 
         yield return delay;
 
         windowExit.PlayerFallAnimation(0.5f);
-        if (player.Renderer != null) player.Renderer.enabled = false;
-        player.transform.position = windowExit.GetExitPointPosition();
-        player.Rigidbody2D.velocity = new Vector2(0, 0);
 
         yield return delay;
 
@@ -72,6 +78,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
         yield return delay;
 
+        player.LightVision.SetVisionState(HeyEscape.Core.Player.PlayerLightVision.VisionState.Full);
         player.PlayerMovement.SetEnabled(false);
         windowExit.PlayerWait(player);
     }
@@ -102,6 +109,8 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
     public void Interact(PlayerFSM player)
     {
+        if (!canBeOpened) return;
+
         switch (windowEnterState)
         {
             case WindowEnterState.Closed:

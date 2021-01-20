@@ -71,6 +71,7 @@ public class WindowExit : MonoBehaviour, IInteractable
         player.Rigidbody2D.velocity = new Vector2(0, 0);
 
         player.Animator.SetTrigger("WindowClimbing");
+        player.LightVision.SetVisionState(HeyEscape.Core.Player.PlayerLightVision.VisionState.InDoor);
 
         yield return delay;
 
@@ -80,6 +81,7 @@ public class WindowExit : MonoBehaviour, IInteractable
         player.Rigidbody2D.velocity = new Vector2(0, 0);
 
         yield return delay;
+        player.LightVision.SetVisionState(HeyEscape.Core.Player.PlayerLightVision.VisionState.Full);
 
         player.PlayerMovement.SetEnabled(false);
         windowEnter.PlayerWait(player);

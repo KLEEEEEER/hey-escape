@@ -77,7 +77,7 @@ namespace Core.Detectors
             if (foundHidePlace.IsAccessible())
             {
                 onInteract?.Invoke();
-                foundHidePlace.OnHide();
+                foundHidePlace.OnHide(player);
                 playerHideHandle.Hide(foundHidePlace.GetHidePlaceInfo());
                 return true;
             }
@@ -89,7 +89,7 @@ namespace Core.Detectors
         {
             if (foundHidePlace != null)
             {
-                foundHidePlace.OnUnhide();
+                foundHidePlace.OnUnhide(player);
                 foundHidePlace = null;
             }
             playerHideHandle.Unhide();

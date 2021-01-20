@@ -58,6 +58,9 @@ namespace HeyEscape.Core.Player.FSM
         [SerializeField] CinemachineVirtualCamera virtualCamera;
         public CinemachineVirtualCamera VirtualCamera { get => virtualCamera; }
 
+        [SerializeField] PlayerLightVision lightVision;
+        public PlayerLightVision LightVision { get => lightVision; }
+
         public Vector2 currentVelocity;
         public Transform CeilingCheck;
         public float CeilingRadius = .25f;

@@ -53,11 +53,11 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
         return hidePlaceInfo;
     }
 
-    public void OnHide()
+    public void OnHide(PlayerFSM player)
     {
     }
 
-    public void OnUnhide()
+    public void OnUnhide(PlayerFSM player)
     {
     }
 }

@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af37f87a75da6d14c94601f2e60c49de, type: 3}
   m_Name: ReceptionDeskHidePlaceInfo
   m_EditorClassIdentifier: 
-  transform: {x: 0, y: 0, z: 0}
+  transform: {x: -5.77, y: 0.58, z: 0}
   scale: {x: 1, y: 1, z: 1}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  DiactivatePlayerOnHide: 1
+  color: {r: 1, g: 1, b: 1, a: 1}
+  DiactivatePlayerOnHide: 0
   visibilityState: 3
-  playerHidingSprite: 0
+  lightVisionState: 0
+  playerHidingSprite: 2
+  hidePlayerSpriteAfterTime: 0
+  delayBeforeHiddingPlayerSprite: 0

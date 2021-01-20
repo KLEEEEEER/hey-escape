@@ -1594,7 +1594,7 @@ MonoBehaviour:
   - {x: 9.8125, y: -0.8124991, z: 0}
   m_ShapePathHash: 1197300916
   m_Mesh: {fileID: 0}
-  m_InstanceId: 28638
+  m_InstanceId: 70044
 --- !u!1 &4877806556023951883
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,6 +2190,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6780949877672788054, guid: 8b0ac9b85e559f1468e13ed17c38fc86,
+        type: 3}
+      propertyPath: canBeOpened
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9049929236018351445, guid: 8b0ac9b85e559f1468e13ed17c38fc86,
         type: 3}
       propertyPath: m_Name
@@ -2504,6 +2509,11 @@ PrefabInstance:
     - target: {fileID: 5079186862057490050, guid: 8b0ac9b85e559f1468e13ed17c38fc86,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6780949877672788054, guid: 8b0ac9b85e559f1468e13ed17c38fc86,
+        type: 3}
+      propertyPath: canBeOpened
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9049929236018351445, guid: 8b0ac9b85e559f1468e13ed17c38fc86,

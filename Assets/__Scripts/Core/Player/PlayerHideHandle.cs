@@ -25,11 +25,14 @@ namespace HeyEscape.Core.Player
         private bool isMoving = false;
 
         private IEnumerator SmoothMovingToHidePositionCoroutine;
+        private IEnumerator hidePlayerAfterAnimation;
 
         public void Hide(HidePlaceInfoSO hidePlaceInfo)
         {
             SaveInitialPlayerParams();
             isMoving = false;
+
+            playerFSM.LightVision.SetVisionState(hidePlaceInfo.lightVisionState);
 
             if (!playerFSM.PlayerMovement.IsLookingRight)
             {
@@ -44,10 +47,22 @@ namespace HeyEscape.Core.Player
                 StopCoroutine(SmoothMovingToHidePositionCoroutine);
             }
 
+            if (hidePlaceInfo.hidePlayerSpriteAfterTime)
+            {
+                hidePlayerAfterAnimation = hidePlayerAfterAnimationCoroutine(hidePlaceInfo);
+                StartCoroutine(hidePlayerAfterAnimation);
+            }
+
             SmoothMovingToHidePositionCoroutine = SmoothMovingToHidePosition(hidePlaceInfo);
             StartCoroutine(SmoothMovingToHidePositionCoroutine);
             playerRenderer.color = hidePlaceInfo.color;
             visibilityState.SetVisibilityState(hidePlaceInfo.visibilityState);
+        }
+
+        IEnumerator hidePlayerAfterAnimationCoroutine(HidePlaceInfoSO hidePlaceInfo)
+        {
+            yield return new WaitForSeconds(hidePlaceInfo.delayBeforeHiddingPlayerSprite);
+            playerRenderer.enabled = false;
         }
 
         public void Unhide()
@@ -56,11 +71,19 @@ namespace HeyEscape.Core.Player
             {
                 StopCoroutine(SmoothMovingToHidePositionCoroutine);
             }
+
+            if (hidePlayerAfterAnimation != null)
+            {
+                StopCoroutine(hidePlayerAfterAnimation);
+            }
+
+            playerRenderer.enabled = true;
+
             isMoving = false;
             transform.localScale = initScale;
             playerRenderer.color = initColor;
             visibilityState.SetVisibilityState(VisibilityState.State.Visible);
-
+            playerFSM.LightVision.SetVisionState(PlayerLightVision.VisionState.Full);
             IsHidden = false;
         }
 

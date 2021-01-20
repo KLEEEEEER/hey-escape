@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HeyEscape.Core.Player.FSM;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -56,11 +57,11 @@ namespace HeyEscape.Interactables.HidePlaces
             return hidePlaceInfoSO;
         }
 
-        public void OnHide()
+        public void OnHide(PlayerFSM player)
         {
         }
 
-        public void OnUnhide()
+        public void OnUnhide(PlayerFSM player)
         {
         }
     }

@@ -2679,8 +2679,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a61dd3fb25b0fc8488fe1f6f52f7dd84, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3085,8 +3085,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a61dd3fb25b0fc8488fe1f6f52f7dd84, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5337,6 +5337,7 @@ MonoBehaviour:
   - {fileID: 1443288900}
   - {fileID: 1443288899}
   virtualCamera: {fileID: 1995561442}
+  lightVision: {fileID: 1954136947}
   currentVelocity: {x: 0, y: 0}
   CeilingCheck: {fileID: 1022182343}
   CeilingRadius: 0.25
@@ -5733,7 +5734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1456043580
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6717,8 +6718,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a61dd3fb25b0fc8488fe1f6f52f7dd84, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7068,7 +7069,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3553485087904968575, guid: ed681f4768558344882be89ca14fd730,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: f85dc3e62ed931d4498a43d024e9b5c5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: deba9dac0df55ac40915512ca3594875, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.813
   m_Pitch: 1
@@ -7958,6 +7959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1954136945}
   - component: {fileID: 1954136946}
+  - component: {fileID: 1954136947}
   m_Layer: 0
   m_Name: Point Light 2D (1)
   m_TagString: Untagged
@@ -8002,12 +8004,12 @@ MonoBehaviour:
   m_UseNormalMap: 0
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_ShadowIntensity: 0.87
+  m_ShadowIntensity: 1
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 4.896193
+  m_PointLightOuterRadius: 1.87
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -8020,6 +8022,19 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1954136947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954136944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ef750827626af439c5d2972433cc81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullVisionRadius: 4.9
 --- !u!1 &1992759988
 GameObject:
   m_ObjectHideFlags: 0
@@ -8610,8 +8625,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a61dd3fb25b0fc8488fe1f6f52f7dd84, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

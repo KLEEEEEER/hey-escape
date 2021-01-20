@@ -1,4 +1,5 @@
 ﻿using HeyEscape.Core.Player;
+using HeyEscape.Core.Player.FSM;
 using HeyEscape.Interactables.HidePlaces;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,12 +29,12 @@ namespace HeyEscape.Interactables.HidePlaces
             return hidePlaceInfoSO;
         }
 
-        public void OnHide()
+        public void OnHide(PlayerFSM player)
         {
             shadowCaster.gameObject.SetActive(true);
         }
 
-        public void OnUnhide()
+        public void OnUnhide(PlayerFSM player)
         {
             shadowCaster.gameObject.SetActive(false);
         }
