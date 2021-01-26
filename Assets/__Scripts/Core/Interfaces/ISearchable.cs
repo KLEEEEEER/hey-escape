@@ -5,4 +5,5 @@ using UnityEngine;
 public interface ISearchable 
 {
     List<InventoryItem> Search();
+    bool IsSearched { get; }
 }

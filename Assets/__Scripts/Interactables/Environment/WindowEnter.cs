@@ -1,4 +1,5 @@
-﻿using HeyEscape.Core.Player.FSM;
+﻿using Cinemachine;
+using HeyEscape.Core.Player.FSM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.Events;
 
 public class WindowEnter : MonoBehaviour, IInteractable
 {
+    [SerializeField] bool canBeOpened = true;
     [SerializeField] WindowExit windowExit;
     [SerializeField] WindowExit[] windowsExitToDropRope;
     [SerializeField] Sprite openedSprite;
@@ -16,6 +18,9 @@ public class WindowEnter : MonoBehaviour, IInteractable
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Transform ExitPoint;
     [SerializeField] AudioSource openingSound;
+    [SerializeField] CinemachineVirtualCamera virtualCamera;
+
+    [SerializeField] Transform climbPoint;
 
     private WaitForSeconds delay = new WaitForSeconds(0.5f);
 
@@ -41,19 +46,31 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
     IEnumerator EnterWindowAnimation(PlayerFSM player)
     {
+        SetVirtualCameraPriority(11);
+        windowExit.SetVirtualCameraPriority(12);
+
         player.TransitionToState(player.DisableState);
         player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Hidden);
         player.PlayerMovement.SetEnabled(true);
+        windowExit.SetEnabledVirtualCamera(true);
+        player.VirtualCamera.gameObject.SetActive(false);
+
+        player.transform.position = climbPoint.position;
+        player.Rigidbody2D.velocity = new Vector2(0, 0);
+
+        player.Animator.SetTrigger("WindowClimbing");
+        player.LightVision.SetVisionState(HeyEscape.Core.Player.PlayerLightVision.VisionState.InDoor);
+
+        yield return delay;
+
 
         if (player.Renderer != null) player.Renderer.enabled = false;
-
-        player.transform.position = transform.position;
+        player.transform.position = windowExit.GetExitPointPosition();
         player.Rigidbody2D.velocity = new Vector2(0, 0);
 
         yield return delay;
 
-        player.transform.position = windowExit.GetExitPointPosition();
-        player.Rigidbody2D.velocity = new Vector2(0, 0);
+        windowExit.PlayerFallAnimation(0.5f);
 
         yield return delay;
 
@@ -61,6 +78,7 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
         yield return delay;
 
+        player.LightVision.SetVisionState(HeyEscape.Core.Player.PlayerLightVision.VisionState.Full);
         player.PlayerMovement.SetEnabled(false);
         windowExit.PlayerWait(player);
     }
@@ -91,6 +109,8 @@ public class WindowEnter : MonoBehaviour, IInteractable
 
     public void Interact(PlayerFSM player)
     {
+        if (!canBeOpened) return;
+
         switch (windowEnterState)
         {
             case WindowEnterState.Closed:
@@ -126,7 +146,19 @@ public class WindowEnter : MonoBehaviour, IInteractable
         windowEnterState = WindowEnterState.OpenedWithRope;
         spriteRenderer.sprite = openedWithRopeSprite;
         player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Visible);
+        player.VirtualCamera.gameObject.SetActive(true);
+        windowExit.SetEnabledVirtualCamera(false);
+        SetEnabledVirtualCamera(false);
     }
 
     public Vector3 GetExitPointPosition() => ExitPoint.position;
+
+    public void SetEnabledVirtualCamera(bool enabled)
+    {
+        virtualCamera.gameObject.SetActive(enabled);
+    }
+    public void SetVirtualCameraPriority(int priority)
+    {
+        virtualCamera.Priority = priority;
+    }
 }

@@ -11,8 +11,6 @@ public class EnemyFlashlight : MonoBehaviour
     Collider2D[] colliders;
     InputHandler playerMovement;
 
-
-
     private void FixedUpdate()
     {
         colliders = Physics2D.OverlapAreaAll(pointARectTrigger.position, pointBRectTrigger.position);

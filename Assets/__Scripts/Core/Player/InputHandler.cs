@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HeyEscape.Core.Helpers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,20 +32,22 @@ namespace HeyEscape.Core.Player
         private void Update()
         {
 #if UNITY_EDITOR
-            Horizontal = Input.GetAxisRaw("Horizontal");
-            Vertical = Input.GetAxisRaw("Vertical");
+            float HorizontalKeyboard = Input.GetAxisRaw("Horizontal");
+            float VerticalKeyboard = Input.GetAxisRaw("Vertical");
+            float HorizontalJoystick = Mathf.Clamp(joystick.Horizontal * 2.5f, -1f, 1f);
+            float VerticalJoystick = Mathf.Clamp(joystick.Vertical * 2.5f, -1f, 1f);
+
+            Horizontal = (HorizontalJoystick != 0) ? HorizontalJoystick : HorizontalKeyboard;
+            Vertical = (VerticalJoystick != 0) ? VerticalJoystick : VerticalKeyboard;
 
             if (Input.GetKeyDown(KeyCode.E))
             {
                 KillButtonPressed?.Invoke();
                 UsingButtonPressed?.Invoke();
             }
-#elif UNITY_ANDROID || UNITY_IPHONE
+#else
             Horizontal = Mathf.Clamp(joystick.Horizontal * 2.5f, -1f, 1f);
             Vertical = Mathf.Clamp(joystick.Vertical * 2.5f, -1f, 1f);
-#else
-            Horizontal = Input.GetAxisRaw("Horizontal");
-            Vertical = Input.GetAxisRaw("Vertical");
 #endif
 
             /*if (Input.touchCount > 0)
@@ -65,7 +68,7 @@ namespace HeyEscape.Core.Player
                     ScreenTouched?.Invoke(hit);
                 }
             }*/
-
+            //Debug.Log($"Vertical = {Vertical}");
         }
 
         public Vector2 GetDirection()
@@ -75,14 +78,17 @@ namespace HeyEscape.Core.Player
         public void OnJump()
         {
             JumpButtonPressed?.Invoke();
+            Vibration.Vibrate(20);
         }
         public void OnKill()
         {
             KillButtonPressed?.Invoke();
+            Vibration.Vibrate(20);
         }
         public void OnUsing()
         {
             UsingButtonPressed?.Invoke();
+            Vibration.Vibrate(20);
         }
     }
 

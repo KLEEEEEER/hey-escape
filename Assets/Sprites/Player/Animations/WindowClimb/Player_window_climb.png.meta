@@ -1,0 +1,382 @@
+fileFormatVersion: 2
+guid: e5320b1c633fc94468ee488240e70aa5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2788767222160899801
+    second: Player_window_climb_0
+  - first:
+      213: 3395006150084841865
+    second: Player_window_climb_1
+  - first:
+      213: -2792444491002652239
+    second: Player_window_climb_2
+  - first:
+      213: -5574477389333649097
+    second: Player_window_climb_3
+  - first:
+      213: -8484550060209612693
+    second: Player_window_climb_4
+  - first:
+      213: 7411235765116072483
+    second: Player_window_climb_5
+  - first:
+      213: -2543027147087979572
+    second: Player_window_climb_6
+  - first:
+      213: -3378324763387472025
+    second: Player_window_climb_7
+  - first:
+      213: -6724044097666228618
+    second: Player_window_climb_8
+  - first:
+      213: 360907419898437895
+    second: Player_window_climb_9
+  - first:
+      213: 825720439970171444
+    second: Player_window_climb_10
+  - first:
+      213: -3333733940369857948
+    second: Player_window_climb_11
+  - first:
+      213: -7486241458614738182
+    second: Player_window_climb_12
+  - first:
+      213: 5941272073177279728
+    second: Player_window_climb_13
+  - first:
+      213: -101022579436351809
+    second: Player_window_climb_14
+  - first:
+      213: -5991626937915993732
+    second: Player_window_climb_15
+  - first:
+      213: 8332327418205153035
+    second: Player_window_climb_16
+  - first:
+      213: 3829701824029908973
+    second: Player_window_climb_17
+  - first:
+      213: 3561001389116425479
+    second: Player_window_climb_18
+  - first:
+      213: 7816027700138804938
+    second: Player_window_climb_19
+  - first:
+      213: 6661139865359789065
+    second: Player_window_climb_20
+  - first:
+      213: -7844108738191410097
+    second: Player_window_climb_21
+  - first:
+      213: 8479665853636127494
+    second: Player_window_climb_22
+  - first:
+      213: -7955546243221087661
+    second: Player_window_climb_23
+  - first:
+      213: 1615582270445703725
+    second: Player_window_climb_24
+  - first:
+      213: 2904174349354736123
+    second: Player_window_climb_25
+  - first:
+      213: -9181009548946490927
+    second: Player_window_climb_26
+  - first:
+      213: -5629944319588262908
+    second: Player_window_climb_27
+  - first:
+      213: -969614082352069288
+    second: Player_window_climb_28
+  - first:
+      213: 5534758852720200724
+    second: Player_window_climb_29
+  - first:
+      213: 939781120794750323
+    second: Player_window_climb_30
+  - first:
+      213: -1902791090119607931
+    second: Player_window_climb_31
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Player_window_climb_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9de37265301b3b620800000000000000
+      internalID: 2788767222160899801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_window_climb_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 981d2122b1c7d1f20800000000000000
+      internalID: 3395006150084841865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_window_climb_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b95acac78e3f39d0800000000000000
+      internalID: -2792444491002652239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_window_climb_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7392258695a73a2b0800000000000000
+      internalID: -5574477389333649097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_window_climb_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b68df2e5ca2d04a80800000000000000
+      internalID: -8484550060209612693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_window_climb_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 322f96679aff9d660800000000000000
+      internalID: 7411235765116072483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_window_climb_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccb55a3884a55bcd0800000000000000
+      internalID: -2543027147087979572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_window_climb_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 767526ed687cd11d0800000000000000
+      internalID: -3378324763387472025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

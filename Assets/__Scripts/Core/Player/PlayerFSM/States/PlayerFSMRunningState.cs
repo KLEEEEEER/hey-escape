@@ -10,7 +10,6 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void EnterState()
         {
-            Debug.Log("Running state");
             fsm.InputHandler.KillButtonPressed.AddListener(OnKillButtonPressed);
             fsm.InputHandler.UsingButtonPressed.AddListener(OnUsingButtonPressed);
             fsm.InputHandler.JumpButtonPressed.AddListener(OnJumpButtonPressed);
@@ -55,7 +54,7 @@ namespace HeyEscape.Core.Player.FSM.States
                 return;
             }
 
-            if (fsm.InputHandler.Vertical > 0.8f && !fsm.DetectorHandler.IsHidden())
+            if (fsm.InputHandler.Vertical >= 0.8f && !fsm.DetectorHandler.IsHidden())
             {
                 fsm.HideCommand.Execute(fsm);
             }

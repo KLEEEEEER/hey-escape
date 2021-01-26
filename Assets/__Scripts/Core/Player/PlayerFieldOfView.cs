@@ -10,25 +10,34 @@ namespace HeyEscape.Core.Player
     {
         [SerializeField] private Transform playerTransform;
         [SerializeField] private LayerMask layerMask;
+        [SerializeField] private float raycastHitAdditionalDistance = 0.2f;
+        [SerializeField] private float viewDistance = 5f;
+        float fov = 360f;
+        private RaycastHit2D[] results = new RaycastHit2D[20];
+
+        [SerializeField] private int rayCount = 60;
+
         Mesh mesh;
+        Vector3[] vertices;
+        Vector2[] uv;
+        int[] triangles;
+        Vector3 origin;
+
         private void Start()
         {
-            Debug.Log($"transform.position = {transform.position}");
             mesh = new Mesh();
             GetComponent<MeshFilter>().mesh = mesh;
+
+            vertices = new Vector3[rayCount + 1 + 1];
+            uv = new Vector2[vertices.Length];
+            triangles = new int[rayCount * 3];
         }
         private void Update() 
         { 
-            float fov = 360f;
-            int rayCount = 70;
             float angle = 0f;
             float angleIncrease = fov / rayCount;
-            float viewDistance = 5f;
-            Vector3 origin = playerTransform.position;
 
-            Vector3[] vertices = new Vector3[rayCount + 1 + 1];
-            Vector2[] uv = new Vector2[vertices.Length];
-            int[] triangles = new int[rayCount * 3];
+            origin = playerTransform.position;
 
             vertices[0] = origin;
 
@@ -37,17 +46,16 @@ namespace HeyEscape.Core.Player
             for (int i = 0; i <= rayCount; i++)
             {
                 Vector3 vertex;
-                RaycastHit2D raycastHit2D = Physics2D.Raycast(origin, GetVectorFromAngle(angle), viewDistance, layerMask);
-                //Debug.DrawLine(origin, GetVectorFromAngle(angle) * viewDistance, Color.white, 5f);
-                //Debug.Log($"RaycastHit2D  origin = {origin} direction = {GetVectorFromAngle(angle)} distance = {viewDistance}");
-                if (raycastHit2D.collider == null)
+                Vector3 vectorFromAngle = GetVectorFromAngle(angle);
+
+                int hits = Physics2D.RaycastNonAlloc(origin, vectorFromAngle, results, viewDistance, layerMask);
+                if (hits == 0 || results[0].collider == null)
                 {
-                    vertex = origin + GetVectorFromAngle(angle) * viewDistance;
+                    vertex = origin + vectorFromAngle * viewDistance;
                 }
                 else
                 {
-                    //Debug.Log($"Hit something = {raycastHit2D.point}");
-                    vertex = raycastHit2D.point;
+                    vertex = results[0].point - (results[0].normal * raycastHitAdditionalDistance);
                 }
 
                 vertices[vertexIndex] = vertex;

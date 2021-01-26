@@ -37,7 +37,6 @@ namespace Core.Detectors
         public virtual bool InteractWithFoundColliders(Action onInteractionAction = null)
         {
             onInteractionAction();
-            Debug.Log("Interacting with founded colliders");
             return false;
         }
 

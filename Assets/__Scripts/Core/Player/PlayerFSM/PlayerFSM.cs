@@ -1,9 +1,11 @@
-﻿using Core.Detectors;
+﻿using Cinemachine;
+using Core.Detectors;
 using HeyEscape.Core.Helpers;
 using HeyEscape.Core.Player.FSM.Commands;
 using HeyEscape.Core.Player.FSM.States;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -53,6 +55,12 @@ namespace HeyEscape.Core.Player.FSM
         [SerializeField] Collider2D[] collidersToDisable;
         public Collider2D[] CollidersToDisable { get => collidersToDisable; }
 
+        [SerializeField] CinemachineVirtualCamera virtualCamera;
+        public CinemachineVirtualCamera VirtualCamera { get => virtualCamera; }
+
+        [SerializeField] PlayerLightVision lightVision;
+        public PlayerLightVision LightVision { get => lightVision; }
+
         public Vector2 currentVelocity;
         public Transform CeilingCheck;
         public float CeilingRadius = .25f;
@@ -96,6 +104,8 @@ namespace HeyEscape.Core.Player.FSM
 
         public void TransitionToState(PlayerFSMBaseState state)
         {
+            //Debug.Log($"Transitioning from {currentState.ToString()} to {state.ToString()}");
+
             currentState.ExitState();
             currentState = state;
             currentState.EnterState();
@@ -165,6 +175,11 @@ namespace HeyEscape.Core.Player.FSM
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(CeilingCheck.position, CeilingRadius);
+
+#if UNITY_EDITOR
+            Handles.Label(transform.position + new Vector3(0f, 1f, 0f), currentState.ToString());
+            Handles.Label(transform.position + new Vector3(0f, 2f, 0f), Visibility.currentState.ToString());
+#endif
         }
 
         public void SetEnableColliders(bool enabled)
@@ -174,10 +189,27 @@ namespace HeyEscape.Core.Player.FSM
                 collider.enabled = enabled;
             }
         }
+        IEnumerator disablingCoroutine;
+        public void DisableForTime(float seconds)
+        {
+            Rigidbody2D.velocity = Vector2.zero;
+            if (seconds < 0.001f) return;
+            disablingCoroutine = DisableCoroutine(seconds);
+            StartCoroutine(disablingCoroutine);
+        }
+
+        IEnumerator DisableCoroutine(float seconds)
+        {
+            TransitionToState(DisableState);
+            yield return new WaitForSeconds(seconds);
+            TransitionToState(IdleState);
+        }
 
         public void OnGameOver()
         {
             Animator.SetTrigger("Caught");
+            if (disablingCoroutine != null)
+                StopCoroutine(disablingCoroutine);
             TransitionToState(DisableState);
         }
 

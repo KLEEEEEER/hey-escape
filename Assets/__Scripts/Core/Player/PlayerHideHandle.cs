@@ -24,10 +24,15 @@ namespace HeyEscape.Core.Player
         private Vector3 currentVelocityScale;
         private bool isMoving = false;
 
+        private IEnumerator SmoothMovingToHidePositionCoroutine;
+        private IEnumerator hidePlayerAfterAnimation;
+
         public void Hide(HidePlaceInfoSO hidePlaceInfo)
         {
             SaveInitialPlayerParams();
             isMoving = false;
+
+            playerFSM.LightVision.SetVisionState(hidePlaceInfo.lightVisionState);
 
             if (!playerFSM.PlayerMovement.IsLookingRight)
             {
@@ -35,26 +40,50 @@ namespace HeyEscape.Core.Player
             }
             playerFSM.Animator.SetFloat("HideType", (float)hidePlaceInfo.PlayerHidingSprite);
 
-            //playerFSM.TransitionToState(playerFSM.DisableState);
-            //transform.position = hidePlaceInfo.transform;
-            //transform.localScale = hidePlaceInfo.scale;
-            StartCoroutine(SmoothMovingToHidePosition(hidePlaceInfo));
+            IsHidden = true;
+
+            if (SmoothMovingToHidePositionCoroutine != null)
+            {
+                StopCoroutine(SmoothMovingToHidePositionCoroutine);
+            }
+
+            if (hidePlaceInfo.hidePlayerSpriteAfterTime)
+            {
+                hidePlayerAfterAnimation = hidePlayerAfterAnimationCoroutine(hidePlaceInfo);
+                StartCoroutine(hidePlayerAfterAnimation);
+            }
+
+            SmoothMovingToHidePositionCoroutine = SmoothMovingToHidePosition(hidePlaceInfo);
+            StartCoroutine(SmoothMovingToHidePositionCoroutine);
             playerRenderer.color = hidePlaceInfo.color;
             visibilityState.SetVisibilityState(hidePlaceInfo.visibilityState);
+        }
 
-            IsHidden = true;
+        IEnumerator hidePlayerAfterAnimationCoroutine(HidePlaceInfoSO hidePlaceInfo)
+        {
+            yield return new WaitForSeconds(hidePlaceInfo.delayBeforeHiddingPlayerSprite);
+            playerRenderer.enabled = false;
         }
 
         public void Unhide()
         {
+            if (SmoothMovingToHidePositionCoroutine != null)
+            {
+                StopCoroutine(SmoothMovingToHidePositionCoroutine);
+            }
+
+            if (hidePlayerAfterAnimation != null)
+            {
+                StopCoroutine(hidePlayerAfterAnimation);
+            }
+
+            playerRenderer.enabled = true;
+
             isMoving = false;
-            playerFSM.TransitionToState(playerFSM.IdleState);
-            //transform.position = initPosition;
             transform.localScale = initScale;
-            //StartCoroutine(SmoothMovingToInitPosition());
             playerRenderer.color = initColor;
             visibilityState.SetVisibilityState(VisibilityState.State.Visible);
-
+            playerFSM.LightVision.SetVisionState(PlayerLightVision.VisionState.Full);
             IsHidden = false;
         }
 

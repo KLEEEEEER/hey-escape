@@ -10,7 +10,10 @@ namespace HeyEscape.Core.Player.FSM.Commands
         public override void Execute(PlayerFSM player)
         {
             player.DetectorHandler.InteractInteractable();
-            player.DetectorHandler.InteractSearchable();
+            player.DetectorHandler.InteractSearchable(() => {
+                player.DisableForTime(0.7f);
+                player.Animator.SetTrigger("Search"); 
+            });
         }
     }
 }
