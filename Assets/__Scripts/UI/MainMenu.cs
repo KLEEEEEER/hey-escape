@@ -1,75 +1,78 @@
-﻿using KleeeeeerUI;
+﻿using HeyEscape.Core.Loaders;
+using KleeeeeerUI;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MenuPageChanger
+namespace HeyEscape.UI
 {
-    [SerializeField] private SettingsBehaviour settingsBehaviour;
-    [SerializeField] private GameObject startWithTutorialButton;
-
-    private WaitForSeconds delayBeforeLocalization = new WaitForSeconds(0.5f);
-    private WaitForSeconds delayFadeOut = new WaitForSeconds(1f);
-    IEnumerator Start()
+    public class MainMenu : MenuPageChanger
     {
-        yield return LocalizationSettings.InitializationOperation;
+        [SerializeField] private SettingsBehaviour settingsBehaviour;
+        [SerializeField] private GameObject startWithTutorialButton;
 
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("language_index", 0)];
-
-        yield return delayBeforeLocalization;
-
-        if (PlayerPrefs.GetInt("tutorial", 1) == 0)
+        private WaitForSeconds delayBeforeLocalization = new WaitForSeconds(0.5f);
+        private WaitForSeconds delayFadeOut = new WaitForSeconds(1f);
+        IEnumerator Start()
         {
-            startWithTutorialButton.SetActive(true);
+            yield return LocalizationSettings.InitializationOperation;
+
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[PlayerPrefs.GetInt("language_index", 0)];
+
+            yield return delayBeforeLocalization;
+
+            if (PlayerPrefs.GetInt("tutorial", 1) == 0)
+            {
+                startWithTutorialButton.SetActive(true);
+            }
+            else
+            {
+                startWithTutorialButton.SetActive(false);
+            }
+
+            StartupObject.SetSettings();
+
+            LevelFader.instance.FadeIn();
+            settingsBehaviour.setStartMixerPosition();
         }
-        else
+
+        public void LoadLevelLoader()
         {
-            startWithTutorialButton.SetActive(false);
+            StartCoroutine(LoadLevelLoaderCoroutine());
         }
 
-        StartupObject.SetSettings();
+        public void LoadLevelLoaderWithTutorial()
+        {
+            PlayerPrefs.SetInt("tutorial", 1);
+            StartCoroutine(LoadLevelLoaderCoroutine());
+        }
 
-        LevelFader.instance.FadeIn();
-        settingsBehaviour.setStartMixerPosition();
-    }
+        IEnumerator LoadLevelLoaderCoroutine()
+        {
+            LevelFader.instance.FadeOut();
+            yield return delayFadeOut;
+            SceneManager.LoadScene("LevelLoader");
+        }
 
-    public void LoadLevelLoader()
-    {
-        StartCoroutine(LoadLevelLoaderCoroutine());
-    }
+        public void Exit()
+        {
+            Application.Quit();
+        }
 
-    public void LoadLevelLoaderWithTutorial()
-    {
-        PlayerPrefs.SetInt("tutorial", 1);
-        StartCoroutine(LoadLevelLoaderCoroutine());
-    }
+        public void OpenGithub()
+        {
+            Application.OpenURL("https://github.com/KLEEEEEER");
+        }
 
-    IEnumerator LoadLevelLoaderCoroutine()
-    {
-        LevelFader.instance.FadeOut();
-        yield return delayFadeOut;
-        SceneManager.LoadScene("LevelLoader");
-    }
+        public void OpenItchio()
+        {
+            Application.OpenURL("https://maxnitals.itch.io/");
+        }
 
-    public void Exit() 
-    {
-        Application.Quit();
-    }
-
-    public void OpenGithub()
-    {
-        Application.OpenURL("https://github.com/KLEEEEEER");
-    }
-
-    public void OpenItchio()
-    {
-        Application.OpenURL("https://maxnitals.itch.io/");
-    }
-
-    public void OpenSoundcloud()
-    {
-        Application.OpenURL("https://soundcloud.com/maxnitals");
+        public void OpenSoundcloud()
+        {
+            Application.OpenURL("https://soundcloud.com/maxnitals");
+        }
     }
 }

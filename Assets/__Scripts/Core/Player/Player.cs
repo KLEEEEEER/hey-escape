@@ -1,4 +1,4 @@
-﻿using Core.Detectors;
+﻿using HeyEscape.Core.Detectors;
 using HeyEscape.Core.Player;
 using HeyEscape.Core.Player.FSM;
 using System;

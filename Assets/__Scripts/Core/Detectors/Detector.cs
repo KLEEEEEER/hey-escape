@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Detectors
+namespace HeyEscape.Core.Detectors
 {
     public class Detector<T>
     {
@@ -22,10 +22,8 @@ namespace Core.Detectors
 
             if (colliders.Length == 0) return;
 
-            //foreach (Collider2D collider in colliders)
             for (int i = 0; i < amount; i++)
             {
-                //if (colliders[i] == null) continue;
                 T foundCollider = colliders[i].GetComponent<T>();
                 if (foundCollider != null)
                 {

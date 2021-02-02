@@ -1,11 +1,10 @@
 ﻿using HeyEscape.Core.Player.FSM;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HeyEscape.Interactables.HidePlaces
 {
-    public class ReceptionDesk : MonoBehaviour, IHidePlace // IInteractable,
+    public class ReceptionDesk : MonoBehaviour, IHidePlace
     {
         [SerializeField] private bool isHidden = false;
 
@@ -19,27 +18,6 @@ namespace HeyEscape.Interactables.HidePlaces
         private WaitForSeconds delay = new WaitForSeconds(0.5f);
 
         IEnumerator hideCoroutine;
-
-        /*public void Interact(PlayerFSM player)
-        {
-            StartCoroutine(hideCoroutine(player));
-        }
-
-        IEnumerator hideCoroutine(PlayerFSM player)
-        {
-            player.TransitionToState(player.DisableState);
-            player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Hidden);
-            //player.PlayerMovement.SetEnabled(true);
-
-            player.transform.position = climbPoint.position;
-            player.Rigidbody2D.velocity = new Vector2(0, 0);
-            player.Animator.SetTrigger("WindowClimbing");
-            player.LightVision.SetVisionState(HeyEscape.Core.Player.PlayerLightVision.VisionState.InDoor);
-
-            yield return delay;
-
-            player.Renderer.enabled = false;
-        }*/
 
         public bool IsAccessible()
         {

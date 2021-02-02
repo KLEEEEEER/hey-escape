@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FloatingButton : MonoBehaviour
+namespace HeyEscape.Core.Player
 {
-    Vector3 posOffset;
-    Vector3 tempPos;
-    [SerializeField] float amplitude = 0.5f;
-    [SerializeField] float frequency = 1f;
-    [SerializeField] Vector3 offsetPosition = new Vector3(0, 1.2f, 0);
-    [SerializeField] Transform player;
-
-    private void Start()
+    public class FloatingButton : MonoBehaviour
     {
-        //posOffset = player.position;
-    }
+        Vector3 posOffset;
+        Vector3 tempPos;
+        [SerializeField] float amplitude = 0.5f;
+        [SerializeField] float frequency = 1f;
+        [SerializeField] Vector3 offsetPosition = new Vector3(0, 1.2f, 0);
+        [SerializeField] Transform player;
 
-    private void Update()
-    {
-        tempPos = player.position + offsetPosition;
-        tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
-        transform.position = tempPos;
+        private void Start()
+        {
+            //posOffset = player.position;
+        }
+
+        private void Update()
+        {
+            tempPos = player.position + offsetPosition;
+            tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
+            transform.position = tempPos;
+        }
     }
 }

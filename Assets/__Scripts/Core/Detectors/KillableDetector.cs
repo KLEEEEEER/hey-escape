@@ -1,9 +1,12 @@
-﻿using System;
+﻿using HeyEscape.Core.Detectors;
+using HeyEscape.Core.Interfaces;
+using HeyEscape.Core.Enemy;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Detectors
+namespace HeyEscape.Core.Detectors
 {
     public class KillableDetector : Detector<IKillable>
     {
@@ -13,14 +16,12 @@ namespace Core.Detectors
 
             if (colliders.Length == 0) return;
 
-            //foreach (Collider2D collider in colliders)
             for (int i = 0; i < amount; i++)
             {
-                //if (collider == null) continue;
                 IKillable foundCollider = colliders[i].GetComponent<IKillable>();
                 if (foundCollider != null)
                 {
-                    Enemy enemy = colliders[i].GetComponent<Enemy>();
+                    Enemy.Enemy enemy = colliders[i].GetComponent<Enemy.Enemy>();
                     if (enemy != null && !enemy.IsDead())
                     {
                         detectedColliders.Add(foundCollider);

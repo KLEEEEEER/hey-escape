@@ -3,21 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ladder : MonoBehaviour
+namespace HeyEscape.Interactables.Environment
 {
-    [SerializeField]private float speed = 5;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class Ladder : MonoBehaviour
     {
-        PlayerFSM characterController2D = collision.GetComponent<PlayerFSM>();
-        if (characterController2D == null) return;
-        //characterController2D.isOnLadder = true;
-    }
+        [SerializeField] private float speed = 5;
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        PlayerFSM characterController2D = collision.GetComponent<PlayerFSM>();
-        if (characterController2D == null) return;
-        //characterController2D.isOnLadder = false;
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            PlayerFSM characterController2D = collision.GetComponent<PlayerFSM>();
+            if (characterController2D == null) return;
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            PlayerFSM characterController2D = collision.GetComponent<PlayerFSM>();
+            if (characterController2D == null) return;
+        }
     }
 }

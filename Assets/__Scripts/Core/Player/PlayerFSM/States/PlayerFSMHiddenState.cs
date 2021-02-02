@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace HeyEscape.Core.Player.FSM.States
 {
@@ -13,8 +11,7 @@ namespace HeyEscape.Core.Player.FSM.States
         {
             currentlyExiting = false;
             fsm.Animator.SetBool("IsRunning", false);
-            fsm.Animator.ResetTrigger("Unhide");
-            fsm.Animator.SetTrigger("Hide");
+            //fsm.Animator.SetBool("IsHidden", true);
             fsm.Rigidbody2D.velocity = Vector2.zero;
             fsm.Rigidbody2D.isKinematic = true;
             fsm.SetEnableColliders(false);
@@ -22,7 +19,7 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void ExitState()
         {
-            fsm.Animator.SetTrigger("Unhide");
+            //fsm.Animator.SetBool("IsHidden", false);
             fsm.Rigidbody2D.isKinematic = false;
             fsm.SetEnableColliders(true);
         }

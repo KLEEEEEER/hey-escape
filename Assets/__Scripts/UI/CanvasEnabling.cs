@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CanvasEnabling : MonoBehaviour
+namespace HeyEscape.UI
 {
-    [SerializeField] private Transform CanvasPosition;
-    private void OnEnable()
+    public class CanvasEnabling : MonoBehaviour
     {
-        transform.position = CanvasPosition.position;
+        [SerializeField] private Transform CanvasPosition;
+        private void OnEnable()
+        {
+            transform.position = CanvasPosition.position;
+        }
     }
 }

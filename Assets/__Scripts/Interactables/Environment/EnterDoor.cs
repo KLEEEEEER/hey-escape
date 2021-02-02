@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class EnterDoor : MonoBehaviour
+namespace HeyEscape.Interactables.Environment
 {
-    [SerializeField] Transform startPosition;
-
-    void Start()
+    public class EnterDoor : MonoBehaviour
     {
-        //GameManager.instance.PlayerComponent.HidePlayer();
-        //GameManager.instance.Player.position = startPosition.position;
-        //GameManager.instance.PlayerComponent.UnhidePlayer();
+        [SerializeField] Transform startPosition;
     }
 }

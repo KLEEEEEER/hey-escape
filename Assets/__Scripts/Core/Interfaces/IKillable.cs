@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IKillable
+﻿namespace HeyEscape.Core.Interfaces
 {
-    void Kill();
+    public interface IKillable
+    {
+        void Kill();
+    }
 }

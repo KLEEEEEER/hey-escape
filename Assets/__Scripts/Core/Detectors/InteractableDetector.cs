@@ -1,10 +1,11 @@
-﻿using HeyEscape.Core.Player.FSM;
+﻿using HeyEscape.Core.Interfaces;
+using HeyEscape.Core.Player.FSM;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Detectors
+namespace HeyEscape.Core.Detectors
 {
     public class InteractableDetector : Detector<IInteractable>
     {

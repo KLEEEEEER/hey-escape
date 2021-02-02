@@ -1,22 +1,29 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using HeyEscape.Core.Loaders;
+using UnityEngine;
 
-public class FloorsPassedText : MonoBehaviour
+namespace HeyEscape.UI
 {
-    public int current_floor_number { get 
+    public class FloorsPassedText : MonoBehaviour
+    {
+        public int current_floor_number
         {
-            if (LevelLoader.instance != null)
-                return LevelLoader.instance.GetCurrentLevelNumber();
-            else
-                return 0;
-        } 
-    }
-    public int floors_number { get
+            get
+            {
+                if (LevelLoader.instance != null)
+                    return LevelLoader.instance.GetCurrentLevelNumber();
+                else
+                    return 0;
+            }
+        }
+        public int floors_number
         {
-            if (LevelLoader.instance != null)
-                return LevelLoader.instance.GetLevelsCount();
-            else
-                return 0;
+            get
+            {
+                if (LevelLoader.instance != null)
+                    return LevelLoader.instance.GetLevelsCount();
+                else
+                    return 0;
+            }
         }
     }
 }

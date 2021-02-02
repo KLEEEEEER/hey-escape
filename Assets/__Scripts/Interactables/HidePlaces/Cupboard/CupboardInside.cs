@@ -1,63 +1,58 @@
-﻿using HeyEscape.Core.Player.FSM;
-using HeyEscape.Interactables.HidePlaces;
-using System.Collections;
-using System.Collections.Generic;
+﻿using HeyEscape.Core.Interfaces;
+using HeyEscape.Core.Inventory;
+using HeyEscape.Core.Player.FSM;
+using HeyEscape.Interactables.GameItems;
 using UnityEngine;
 
-public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
+namespace HeyEscape.Interactables.HidePlaces
 {
-    [SerializeField] private bool isOpened = false;
-    [SerializeField] private bool isHidden = false;
-    [SerializeField] private HidePlaceInfoSO hidePlaceInfo;
-
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite closed;
-    [SerializeField] private Sprite opened;
-    [SerializeField] private Sprite openedWithPlayer;
-
-    private void Start()
+    public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
     {
-        spriteRenderer.sprite = (isOpened) ? opened : closed;
-    }
+        [SerializeField] private bool isOpened = false;
+        [SerializeField] private bool isHidden = false;
+        [SerializeField] private HidePlaceInfoSO hidePlaceInfo;
 
-    private void Update()
-    {
-        /*if (isHidden && GameManager.instance.Player.gameObject != null && GameManager.instance.Player.gameObject.transform.position != transform.position)
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private Sprite closed;
+        [SerializeField] private Sprite opened;
+        [SerializeField] private Sprite openedWithPlayer;
+
+        private void Start()
         {
-            GameManager.instance.Player.gameObject.transform.position = transform.position;
-        }*/
-    }
-
-    public void Interact(PlayerFSM player)
-    {
-        if (!isOpened)
-        {
-            if (Inventory.instance.HasItem(typeof(CupboardKey)))
-            {
-                Inventory.instance.UseItem(typeof(CupboardKey));
-                isOpened = true;
-                spriteRenderer.sprite = opened;
-            }
-            return;
+            spriteRenderer.sprite = (isOpened) ? opened : closed;
         }
-    }
 
-    public bool IsAccessible()
-    {
-        return isOpened || Inventory.instance.HasItem(typeof(CupboardKey));
-    }
+        public void Interact(PlayerFSM player)
+        {
+            if (!isOpened)
+            {
+                if (Inventory.instance.HasItem(typeof(CupboardKey)))
+                {
+                    Inventory.instance.UseItem(typeof(CupboardKey));
+                    isOpened = true;
+                    spriteRenderer.sprite = opened;
+                }
+                return;
+            }
+        }
 
-    public HidePlaceInfoSO GetHidePlaceInfo()
-    {
-        hidePlaceInfo.transform = transform.position;
-        return hidePlaceInfo;
-    }
+        public bool IsAccessible()
+        {
+            return isOpened || Inventory.instance.HasItem(typeof(CupboardKey));
+        }
 
-    public void OnHide(PlayerFSM player)
-    {
-    }
+        public HidePlaceInfoSO GetHidePlaceInfo()
+        {
+            hidePlaceInfo.transform = transform.position;
+            return hidePlaceInfo;
+        }
 
-    public void OnUnhide(PlayerFSM player)
-    {
+        public void OnHide(PlayerFSM player)
+        {
+        }
+
+        public void OnUnhide(PlayerFSM player)
+        {
+        }
     }
 }

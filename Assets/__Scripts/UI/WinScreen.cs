@@ -1,6 +1,4 @@
 ﻿using HeyEscape.Core.Helpers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +9,6 @@ namespace HeyEscape.UI
         [SerializeField] private Stopwatch stopwatch;
         [SerializeField] private Text timeSpentText;
         [SerializeField] private Text highscoreText;
-
-        /*private void OnEnable()
-        {
-            timeSpentText.text = stopwatch.GetCurrentValue().ToString("f3");
-        }*/
 
         public void OnVictory()
         {

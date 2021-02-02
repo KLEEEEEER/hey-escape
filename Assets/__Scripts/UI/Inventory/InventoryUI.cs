@@ -1,92 +1,97 @@
-﻿using System.Collections;
+﻿using HeyEscape.Core.Inventory;
+using HeyEscape.Interactables.GameItems;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryUI : MonoBehaviour
+namespace HeyEscape.UI
 {
-    [SerializeField] GameObject InventoryContent;
-    [SerializeField] GameObject InventoryItemUIPrefab;
-
-    Vector3 hidingPosition;
-    [SerializeField] float showingNewItemsTime = 2f;
-    [SerializeField] float smoothHiding;
-    [SerializeField] Transform defaultPosition;
-    bool isHidden = true;
-
-    private WaitForSeconds delayShowingNewItems;
-    private void Start()
+    public class InventoryUI : MonoBehaviour
     {
-        hidingPosition = transform.position;
-        delayShowingNewItems = new WaitForSeconds(showingNewItemsTime);
-    }
+        [SerializeField] GameObject InventoryContent;
+        [SerializeField] GameObject InventoryItemUIPrefab;
 
-    private void OnEnable()
-    {
-        Inventory.instance.OnInventoryChanged += UpdateUI;
-    }
-    private void OnDisable()
-    {
-        if (Inventory.instance != null)
-            Inventory.instance.OnInventoryChanged -= UpdateUI;
-    }
+        Vector3 hidingPosition;
+        [SerializeField] float showingNewItemsTime = 2f;
+        [SerializeField] float smoothHiding;
+        [SerializeField] Transform defaultPosition;
+        bool isHidden = true;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        private WaitForSeconds delayShowingNewItems;
+        private void Start()
         {
-            isHidden = !isHidden;
+            hidingPosition = transform.position;
+            delayShowingNewItems = new WaitForSeconds(showingNewItemsTime);
         }
 
-        if (isHidden)
+        private void OnEnable()
         {
-            transform.position = Vector3.Lerp(transform.position, hidingPosition, smoothHiding * Time.deltaTime);
+            Inventory.instance.OnInventoryChanged += UpdateUI;
         }
-        else
+        private void OnDisable()
         {
-            transform.position = Vector3.Lerp(transform.position, defaultPosition.position, smoothHiding * Time.deltaTime);
+            if (Inventory.instance != null)
+                Inventory.instance.OnInventoryChanged -= UpdateUI;
         }
-    }
 
-    void UpdateUI(string text)
-    {
-        RemoveAllInventoryItems();
-
-        List<InventoryItem> items = Inventory.instance.GetItemsList();
-        foreach (InventoryItem item in items)
+        private void Update()
         {
-            GameObject itemUI = Instantiate(InventoryItemUIPrefab, InventoryContent.transform);
-            InventoryItemUI inventoryItemUI = itemUI.GetComponent<InventoryItemUI>();
-            if (inventoryItemUI != null)
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
-                inventoryItemUI.SetInfo(item.Icon, item.nameString);
+                isHidden = !isHidden;
+            }
+
+            if (isHidden)
+            {
+                transform.position = Vector3.Lerp(transform.position, hidingPosition, smoothHiding * Time.deltaTime);
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, defaultPosition.position, smoothHiding * Time.deltaTime);
             }
         }
 
-        if (isHidden)
+        void UpdateUI(string text)
         {
-            StartCoroutine(ShowNewItems());
+            RemoveAllInventoryItems();
+
+            List<InventoryItem> items = Inventory.instance.GetItemsList();
+            foreach (InventoryItem item in items)
+            {
+                GameObject itemUI = Instantiate(InventoryItemUIPrefab, InventoryContent.transform);
+                InventoryItemUI inventoryItemUI = itemUI.GetComponent<InventoryItemUI>();
+                if (inventoryItemUI != null)
+                {
+                    inventoryItemUI.SetInfo(item.Icon, item.nameString);
+                }
+            }
+
+            if (isHidden)
+            {
+                StartCoroutine(ShowNewItems());
+            }
         }
-    }
 
-    IEnumerator ShowNewItems()
-    {
-        isHidden = false;
-        yield return delayShowingNewItems;
-        isHidden = true;
-    }
-
-
-
-    void RemoveAllInventoryItems()
-    {
-        foreach (Transform t in InventoryContent.transform)
+        IEnumerator ShowNewItems()
         {
-            Destroy(t.gameObject);
+            isHidden = false;
+            yield return delayShowingNewItems;
+            isHidden = true;
         }
-    }
 
-    public void OnGameOver()
-    {
-        gameObject.SetActive(false);
+
+
+        void RemoveAllInventoryItems()
+        {
+            foreach (Transform t in InventoryContent.transform)
+            {
+                Destroy(t.gameObject);
+            }
+        }
+
+        public void OnGameOver()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -1,7 +1,4 @@
-﻿using HeyEscape.Core.Player;
-using HeyEscape.Core.Player.FSM;
-using System.Collections;
-using System.Collections.Generic;
+﻿using HeyEscape.Core.Player.FSM;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 

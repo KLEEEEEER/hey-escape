@@ -1,6 +1,4 @@
 ﻿using HeyEscape.Core.Helpers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HeyEscape.Core.Player.FSM.Commands

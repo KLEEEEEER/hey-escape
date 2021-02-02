@@ -1,14 +1,18 @@
-﻿using System;
+﻿using HeyEscape.Core.Detectors;
+using HeyEscape.Core.Interfaces;
+using HeyEscape.Core.Inventory;
+using HeyEscape.Interactables.GameItems;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Detectors
+namespace HeyEscape.Core.Detectors
 {
     public class SearchableDetector : Detector<ISearchable>
     {
-        Inventory inventory;
-        public SearchableDetector(Inventory inventory)
+        Inventory.Inventory inventory;
+        public SearchableDetector(Inventory.Inventory inventory)
         {
             this.inventory = inventory;
         }
@@ -23,7 +27,6 @@ namespace Core.Detectors
             bool interacted = false;
             if (detectedColliders.Count > 0)
             {
-                //animator.SetTrigger("Search");
                 bool searchHappened = false;
                 foreach (ISearchable searchable in detectedColliders)
                 {

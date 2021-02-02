@@ -1,10 +1,10 @@
 ﻿using Cinemachine;
-using Core.Detectors;
+using HeyEscape.Core.Detectors;
 using HeyEscape.Core.Helpers;
+using HeyEscape.Core.Inventory;
 using HeyEscape.Core.Player.FSM.Commands;
 using HeyEscape.Core.Player.FSM.States;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -46,8 +46,8 @@ namespace HeyEscape.Core.Player.FSM
         [SerializeField] VisibilityState visibility;
         public VisibilityState Visibility { get => visibility; }
 
-        [SerializeField] Inventory inventory;
-        public Inventory Inventory { get => inventory; }
+        [SerializeField] Inventory.Inventory inventory;
+        public Inventory.Inventory Inventory { get => inventory; }
 
         [SerializeField] SpriteRenderer renderer;
         public SpriteRenderer Renderer { get => renderer; }

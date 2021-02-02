@@ -1,37 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowFPS : MonoBehaviour
+namespace HeyEscape.Core.Debug
 {
-    public int count;
-    public int samples = 100;
-    public float totalTime;
-    public Text fpsText;
-
-    public void Start()
+    public class ShowFPS : MonoBehaviour
     {
-        count = samples;
-        totalTime = 0f;
-    }
+        public int count;
+        public int samples = 100;
+        public float totalTime;
+        public Text fpsText;
 
-    public void Update()
-    {
-        count -= 1;
-        totalTime += Time.deltaTime;
-
-        if (count <= 0)
+        public void Start()
         {
-            float fps = samples / totalTime;
-            displayFPS(fps); // your way of displaying number. Log it, put it to text object…
-            totalTime = 0f;
             count = samples;
+            totalTime = 0f;
         }
-    }
 
-    private void displayFPS(float value)
-    {
-        fpsText.text = value.ToString();
+        public void Update()
+        {
+            count -= 1;
+            totalTime += Time.deltaTime;
+
+            if (count <= 0)
+            {
+                float fps = samples / totalTime;
+                displayFPS(fps);
+                totalTime = 0f;
+                count = samples;
+            }
+        }
+
+        private void displayFPS(float value)
+        {
+            fpsText.text = value.ToString();
+        }
     }
 }

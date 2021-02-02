@@ -1,8 +1,6 @@
-﻿using Core.Detectors;
-using HeyEscape.Core.Player.FSM;
+﻿using HeyEscape.Core.Player.FSM;
 using HeyEscape.Interactables.HidePlaces;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HeyEscape.Core.Player
@@ -39,6 +37,11 @@ namespace HeyEscape.Core.Player
                 playerFSM.PlayerMovement.Flip();
             }
             playerFSM.Animator.SetFloat("HideType", (float)hidePlaceInfo.PlayerHidingSprite);
+
+            if (hidePlaceInfo.PlayerHidingSprite != PlayerHidingSpriteType.WithAnimation)
+            {
+                playerFSM.Animator.SetBool("IsHidden", true);
+            }
 
             IsHidden = true;
 
@@ -78,6 +81,8 @@ namespace HeyEscape.Core.Player
             }
 
             playerRenderer.enabled = true;
+
+            playerFSM.Animator.SetBool("IsHidden", false);
 
             isMoving = false;
             transform.localScale = initScale;

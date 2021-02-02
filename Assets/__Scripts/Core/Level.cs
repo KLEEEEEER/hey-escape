@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level : MonoBehaviour
+namespace HeyEscape.Core.Player
 {
-    public Transform startPlayerPosition;
+    public class Level : MonoBehaviour
+    {
+        public Transform startPlayerPosition;
+    }
 }

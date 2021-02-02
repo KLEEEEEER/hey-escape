@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rope : InventoryItem
+namespace HeyEscape.Interactables.GameItems
 {
+    public class Rope : InventoryItem
+    {
+    }
 }

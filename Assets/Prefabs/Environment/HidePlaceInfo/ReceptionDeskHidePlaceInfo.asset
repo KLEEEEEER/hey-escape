@@ -18,6 +18,6 @@ MonoBehaviour:
   DiactivatePlayerOnHide: 0
   visibilityState: 3
   lightVisionState: 0
-  playerHidingSprite: 2
+  playerHidingSprite: 4
   hidePlayerSpriteAfterTime: 1
   delayBeforeHiddingPlayerSprite: 0.5

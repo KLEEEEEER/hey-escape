@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CupboardKey : InventoryItem
+namespace HeyEscape.Interactables.GameItems
 {
+    public class CupboardKey : InventoryItem
+    {
+    }
 }

@@ -1,11 +1,13 @@
-﻿using HeyEscape.Core.Player;
+﻿using HeyEscape.Core.Interfaces;
+using HeyEscape.Core.Player;
 using HeyEscape.Core.Player.FSM;
+using HeyEscape.Interactables.HidePlaces;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Detectors
+namespace HeyEscape.Core.Detectors
 {
     public class DetectorHandler : MonoBehaviour
     {

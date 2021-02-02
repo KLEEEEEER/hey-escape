@@ -30,7 +30,7 @@ namespace HeyEscape.Core.Game
             }
             else
             {
-                Debug.LogError("GameStateChanger already in a scene.");
+                UnityEngine.Debug.LogError("GameStateChanger already in a scene.");
             }
 
             if (OnGameOverEvent == null)
@@ -51,8 +51,6 @@ namespace HeyEscape.Core.Game
 
         public void SetState(GameState state)
         {
-            //Debug.Log($"Setting state {state.ToString()}");
-
             currentState = state;
             OnGameStateChangedEvent.Invoke();
 

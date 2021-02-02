@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using HeyEscape.Interactables.GameItems;
 using System.Collections.Generic;
-using UnityEngine;
 
-public interface ISearchable 
+namespace HeyEscape.Core.Interfaces
 {
-    List<InventoryItem> Search();
-    bool IsSearched { get; }
+    public interface ISearchable
+    {
+        List<InventoryItem> Search();
+        bool IsSearched { get; }
+    }
 }
