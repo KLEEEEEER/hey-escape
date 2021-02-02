@@ -550,6 +550,7 @@ GameObject:
   - component: {fileID: 105881704}
   - component: {fileID: 105881703}
   - component: {fileID: 105881702}
+  - component: {fileID: 105881706}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -647,6 +648,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &105881706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 105881701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 607a606a11f7fde439bf1b9b350f71ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverScreen: {fileID: 591887539}
+  youWonScreen: {fileID: 227901172}
+  pauseScreen: {fileID: 1627760404}
+  HighscoreText: {fileID: 1663692191}
+  stopwatch: {fileID: 560781702}
 --- !u!1 &126386547
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,6 +977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 227901173}
   - component: {fileID: 227901174}
+  - component: {fileID: 227901175}
   m_Layer: 5
   m_Name: GameWinScreen
   m_TagString: Untagged
@@ -1005,6 +1024,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &227901175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227901172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef9f6d76e988c74e9a2a3e632a2e6f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatch: {fileID: 560781702}
+  timeSpentText: {fileID: 1004401599}
+  highscoreText: {fileID: 1663692191}
 --- !u!1 &241778638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,6 +2517,49 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &560781701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 560781703}
+  - component: {fileID: 560781702}
+  m_Layer: 0
+  m_Name: Stopwatch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &560781702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560781701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac7f1f20eeface843bab35ce27acee85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &560781703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560781701}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1709150769}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &571461645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,6 +2784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 591887540}
   - component: {fileID: 591887541}
+  - component: {fileID: 591887542}
   m_Layer: 5
   m_Name: GameOverScreen
   m_TagString: Untagged
@@ -2753,6 +2831,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &591887542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591887539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c046366389bcc64ba7bc761d5b00a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatch: {fileID: 560781702}
+  timeSpentText: {fileID: 1181933363}
 --- !u!1 &716655386
 GameObject:
   m_ObjectHideFlags: 0
@@ -5375,6 +5467,21 @@ MonoBehaviour:
   JumpButtonPressed:
     m_PersistentCalls:
       m_Calls: []
+  PauseButtonPressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 105881706}
+        m_TargetAssemblyTypeName: HeyEscape.UI.PlaymodeMenu, Assembly-CSharp
+        m_MethodName: TogglePauseMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ScreenTouched:
     m_PersistentCalls:
       m_Calls: []
@@ -5540,9 +5647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03f45433977cc014ea6abf55279cdfab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visibility: {fileID: 1443288907}
-  detectorHandler: {fileID: 1443288910}
-  animator: {fileID: 1443288901}
 --- !u!114 &1443288905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6870,7 +6974,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1709150769}
-  - component: {fileID: 1709150768}
+  - component: {fileID: 1709150772}
+  - component: {fileID: 1709150773}
   - component: {fileID: 1709150770}
   - component: {fileID: 1709150771}
   m_Layer: 0
@@ -6880,139 +6985,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1709150768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709150767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4922ecae9400a5408ab7d9f684d4f46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 1443288898}
-  PlayerMovement: {fileID: 1443288908}
-  PlayerFSM: {fileID: 1443288895}
-  PlayerComponent: {fileID: 1443288903}
-  PlayerRigidbody: {fileID: 1443288894}
-  PlayerInitialScale: {x: 0, y: 0, z: 0}
-  PlayerInitialColor: {r: 0, g: 0, b: 0, a: 0}
-  MainCamera: {fileID: 519420031}
-  gameOverScreen: {fileID: 591887539}
-  youWonScreen: {fileID: 227901172}
-  pauseScreen: {fileID: 1627760404}
-  currentTimeText: {fileID: 2101378413}
-  CountDownTimer: {fileID: 1797907824}
-  HighscoreText: {fileID: 1663692191}
-  startCountdownTime: 3
-  OnGameOverEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1443288895}
-        m_TargetAssemblyTypeName: HeyEscape.Core.Player.FSM.PlayerFSM, Assembly-CSharp
-        m_MethodName: OnGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1796959301}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 737453260}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnGameWonEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1443288895}
-        m_TargetAssemblyTypeName: HeyEscape.Core.Player.FSM.PlayerFSM, Assembly-CSharp
-        m_MethodName: OnGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 737453260}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1796959301}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: OnGameOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnGameManagerLoaded:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1709150770}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: StartLoading
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  joystick: {fileID: 1765230523}
 --- !u!4 &1709150769
 Transform:
   m_ObjectHideFlags: 0
@@ -7023,7 +6995,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.85256, y: -2.0353682, z: -8.450847}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 560781703}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7058,6 +7031,13 @@ MonoBehaviour:
   - {fileID: 723563582897465662, guid: 01a94b93aac37ea45993708b402eac2e, type: 3}
   - {fileID: 723563582897465662, guid: 5e3e9f68479363f4b988aced774b24d2, type: 3}
   currentLevel: {fileID: 292688507}
+  player: {fileID: 1443288895}
+  startingLevel: 1
+  useCountdown: 1
+  countdownTime: 1
+  gameStateChanger: {fileID: 1709150772}
+  beforePlayTimer: {fileID: 1709150773}
+  stopwatch: {fileID: 560781702}
 --- !u!82 &1709150771
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7155,6 +7135,206 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1709150772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709150767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93899465c6f70d6478f09b957fa80098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnGameOverEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1443288895}
+        m_TargetAssemblyTypeName: HeyEscape.Core.Player.FSM.PlayerFSM, Assembly-CSharp
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1796959301}
+        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 737453260}
+        m_TargetAssemblyTypeName: InfoUI, Assembly-CSharp
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 105881706}
+        m_TargetAssemblyTypeName: HeyEscape.UI.PlaymodeMenu, Assembly-CSharp
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 591887542}
+        m_TargetAssemblyTypeName: HeyEscape.UI.GameOverScreen, Assembly-CSharp
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGameWonEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1443288895}
+        m_TargetAssemblyTypeName: HeyEscape.Core.Player.FSM.PlayerFSM, Assembly-CSharp
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 737453260}
+        m_TargetAssemblyTypeName: InfoUI, Assembly-CSharp
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1796959301}
+        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
+        m_MethodName: OnGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 105881706}
+        m_TargetAssemblyTypeName: HeyEscape.UI.PlaymodeMenu, Assembly-CSharp
+        m_MethodName: OnWin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 227901175}
+        m_TargetAssemblyTypeName: HeyEscape.UI.WinScreen, Assembly-CSharp
+        m_MethodName: OnVictory
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGamePlayingEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 105881706}
+        m_TargetAssemblyTypeName: HeyEscape.UI.PlaymodeMenu, Assembly-CSharp
+        m_MethodName: OnPlaying
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGamePausedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 105881706}
+        m_TargetAssemblyTypeName: HeyEscape.UI.PlaymodeMenu, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGameBeforePlayEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1709150770}
+        m_TargetAssemblyTypeName: LevelLoader, Assembly-CSharp
+        m_MethodName: StartLoading
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnGameStateChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  inputHandler: {fileID: 1443288896}
+--- !u!114 &1709150773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709150767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112d3a8a04659864a834d2d251ccc477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countDownTimer: {fileID: 1797907824}
 --- !u!1 &1712858293
 GameObject:
   m_ObjectHideFlags: 0
@@ -8593,9 +8773,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1709150768}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: TogglePauseMenu
+      - m_Target: {fileID: 1443288896}
+        m_TargetAssemblyTypeName: HeyEscape.Core.Player.InputHandler, Assembly-CSharp
+        m_MethodName: OnPause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8885,9 +9065,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1709150768}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: TogglePauseMenu
+      - m_Target: {fileID: 1443288896}
+        m_TargetAssemblyTypeName: HeyEscape.Core.Player.InputHandler, Assembly-CSharp
+        m_MethodName: OnPause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

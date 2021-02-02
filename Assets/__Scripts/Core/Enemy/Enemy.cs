@@ -37,10 +37,7 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
     [SerializeField] private Transform gizmoItemPosition;
 
-    int delaySeconds;
-    //WaitForSeconds delay;
-    //WaitForSeconds delayBeforeStartWalking;
-    //WaitForSeconds delayBetweenWaypoints;
+    [SerializeField] int delaySeconds = 2;
 
     float timer = 0f;
 
@@ -59,50 +56,10 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
 
         hasNoItemsStringLocalized.RegisterChangeHandler(UpdateHasNoItemsString);
 
-        delaySeconds = (GameManager.instance != null) ? GameManager.instance.GetStartCountdownTime() : 0;
-        //delay = new WaitForSeconds(delaySeconds);
-        //delayBeforeStartWalking = new WaitForSeconds(timeBeforeStartWalking);
-        //delayBetweenWaypoints = new WaitForSeconds(timeBetweenWaypoints);
-
         timer = timeBeforeStartWalking;
     }
 
     private void UpdateHasNoItemsString(string s) { hasNoItemsString = s; }
-
-    /*IEnumerator Move()
-    {
-        if (GameManager.instance != null && GameManager.instance.IsGameOver)
-        {
-            yield return delay;
-        }
-
-        yield return delayBeforeStartWalking;
-        while (!isDead && !caughtPlayer)
-        {
-            if (waypoints.Length > 0)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, waypoints[waypointIndex].transform.position, speed * Time.deltaTime);
-
-                if (transform.position.x < waypoints[waypointIndex].transform.position.x && !facingRight) Flip();
-                if (transform.position.x > waypoints[waypointIndex].transform.position.x && facingRight) Flip();
-
-                animator.SetBool("IsWalking", transform.position != waypoints[waypointIndex].transform.position);
-
-                if (transform.position == waypoints[waypointIndex].transform.position)
-                {
-                    waypointIndex++;
-
-                    if (waypointIndex > waypoints.Length - 1)
-                    {
-                        waypointIndex = 0;
-                    }
-                    yield return delayBetweenWaypoints;
-                }
-            }
-
-            yield return null;
-        }
-    }*/
 
     private void Update()
     {
@@ -161,13 +118,8 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
     public void Kill()
     {
         isDead = true;
-        //Destroy(parentObject);
         rigidbody2D.velocity = new Vector2(0, 0);
         rigidbody2D.isKinematic = true;
-        /*foreach (Collider2D collider in collidersToDisable)
-        {
-            collider.isTrigger = true;
-        }*/
         aliveCollider.enabled = false;
         deadCollider.enabled = true;
 
@@ -211,7 +163,6 @@ public class Enemy : MonoBehaviour, IKillable, ISearchable
     {
         if (items != null && items.Length > 0 && items[0].Icon != null)
         {
-           // Debug.Log("InventoryItems\\" + items[0].GetType().ToString() + ".png");
             Gizmos.DrawIcon(gizmoItemPosition.position, "InventoryItems\\" + items[0].GetType().ToString() + ".png", true);
             
             StringBuilder items_string = new StringBuilder();

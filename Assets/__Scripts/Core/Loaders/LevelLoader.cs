@@ -1,13 +1,27 @@
-﻿using System.Collections;
+﻿using HeyEscape.Core.Game;
+using HeyEscape.Core.Helpers;
+using HeyEscape.Core.Player.FSM;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
+    [Header("Attributes")]
     [SerializeField] private GameObject[] tutorialLevels;
     [SerializeField] private GameObject[] levels;
     [SerializeField] private GameObject currentLevel;
+    [SerializeField] private PlayerFSM player;
+    [SerializeField] private int startingLevel = 1;
+    [SerializeField] private bool useCountdown = true;
+    [SerializeField] private int countdownTime = 3;
+
+    [Header("Components")]
+    [SerializeField] private GameStateChanger gameStateChanger;
+    [SerializeField] private BeforePlayTimer beforePlayTimer;
+    [SerializeField] private Stopwatch stopwatch;
+
 
     private int currentLevelIndex = 0;
     private int tutorialLevelIndex = 0;
@@ -17,6 +31,8 @@ public class LevelLoader : MonoBehaviour
     private bool isTutorialApproved = true;
     private bool inTutorial = false;
     private bool cameFromTutorial = false;
+
+    private bool countdownRaised = false;
 
     public static LevelLoader instance
     {
@@ -44,7 +60,11 @@ public class LevelLoader : MonoBehaviour
 
     public void StartLoading()
     {
+        currentLevelIndex = startingLevel - 1;
+        if (levels[currentLevelIndex] == null) currentLevelIndex = 0;
+
         isTutorialApproved = (PlayerPrefs.GetInt("tutorial", 1) == 1);
+        
         LoadLevel();
     }
 
@@ -52,7 +72,8 @@ public class LevelLoader : MonoBehaviour
     {
         if (currentLevelIndex + 1 >= levels.Length)
         {
-            GameManager.instance.GameWon();
+            GameStateChanger.Instance.SetState(GameStateChanger.GameState.GameWon);
+            //GameManager.instance.GameWon();
             return; 
         }
         LoadLevel();
@@ -89,12 +110,27 @@ public class LevelLoader : MonoBehaviour
                 PlayerPrefs.SetInt("tutorial", 0);
                 cameFromTutorial = false;
             }
+
+            if (!countdownRaised && useCountdown)
+            {
+                countdownRaised = true;
+                beforePlayTimer.StartCountdown(countdownTime, () =>
+                {
+                    gameStateChanger.SetState(GameStateChanger.GameState.Playing);
+                    stopwatch.StartCounting();
+                });
+            }
+            else
+            {
+                gameStateChanger.SetState(GameStateChanger.GameState.Playing);
+            }
+
             inTutorial = false;
             InstantiateCurrentLevel(levels, currentLevelIndex);
             currentLevelIndex++;
         }
 
-        if (!inTutorial && !GameManager.instance.IsCountdownCalled) GameManager.instance.StartCountdown();
+        //if (!inTutorial && !GameManager.instance.IsCountdownCalled) GameManager.instance.StartCountdown();
 
         LevelFader.instance.FadeIn();
     }
@@ -105,11 +141,11 @@ public class LevelLoader : MonoBehaviour
         if (levelComponent != null)
         {
             Instantiate(levelsSource[levelIndex], currentLevel.transform);
-            if (GameManager.instance.Player != null)
+            if (player != null)
             {
-                GameManager.instance.Player.gameObject.SetActive(false);
-                GameManager.instance.Player.position = levelComponent.startPlayerPosition.position;
-                GameManager.instance.Player.gameObject.SetActive(true);
+                player.gameObject.SetActive(false);
+                player.transform.position = levelComponent.startPlayerPosition.position;
+                player.gameObject.SetActive(true);
             }
         }
     }

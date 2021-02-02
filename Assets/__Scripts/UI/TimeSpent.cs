@@ -7,8 +7,9 @@ public class TimeSpent : MonoBehaviour
 {
     private void OnEnable()
     {
-        Text text = GetComponent<Text>();
+        Debug.Log("Delete this later");
+        /*Text text = GetComponent<Text>();
         if (text != null)
-            text.text = GameManager.instance.GetCurrentTimeString();
+            text.text = GameManager.instance.GetCurrentTimeString();*/
     }
 }

@@ -13,12 +13,16 @@ namespace HeyEscape.Core.Player
         public UnityEvent KillButtonPressed = new UnityEvent();
         public UnityEvent UsingButtonPressed = new UnityEvent();
         public UnityEvent JumpButtonPressed = new UnityEvent();
+        public UnityEvent PauseButtonPressed = new UnityEvent();
         public TouchRayEvent ScreenTouched = new TouchRayEvent();
 
         public float Horizontal { get; private set; }
         public float Vertical { get; private set; }
 
         [SerializeField] Joystick joystick;
+
+        private bool isEnabled = true;
+        private bool isEnabledPauseButton = true;
 
         void Start()
         {
@@ -31,6 +35,8 @@ namespace HeyEscape.Core.Player
 
         private void Update()
         {
+            if (!isEnabled) return;
+
 #if UNITY_EDITOR
             float HorizontalKeyboard = Input.GetAxisRaw("Horizontal");
             float VerticalKeyboard = Input.GetAxisRaw("Vertical");
@@ -77,18 +83,42 @@ namespace HeyEscape.Core.Player
         }
         public void OnJump()
         {
+            if (!isEnabled) return;
+
             JumpButtonPressed?.Invoke();
             Vibration.Vibrate(20);
         }
         public void OnKill()
         {
+            if (!isEnabled) return;
+
             KillButtonPressed?.Invoke();
             Vibration.Vibrate(20);
         }
         public void OnUsing()
         {
+            if (!isEnabled) return;
+
             UsingButtonPressed?.Invoke();
             Vibration.Vibrate(20);
+        }
+
+        public void OnPause()
+        {
+            if (!isEnabledPauseButton) return;
+
+            PauseButtonPressed?.Invoke();
+            Vibration.Vibrate(20);
+        }
+
+        public void SetEnabled(bool enabled)
+        {
+            isEnabled = enabled;
+        }
+
+        public void SetEnabledPauseButton(bool enabled)
+        {
+            isEnabledPauseButton = enabled;
         }
     }
 

@@ -33,7 +33,6 @@ public class InfoUI : MonoBehaviour
     {
         Inventory.instance.OnInventoryChanged += AppearText;
         Inventory.instance.OnInventoryUIText += AppearText;
-        GameManager.instance.PlayerComponent.OnPlayerInteractEvent += AppearText;
     }
 
     private void OnDisable()
@@ -42,10 +41,6 @@ public class InfoUI : MonoBehaviour
         {
             Inventory.instance.OnInventoryChanged -= AppearText;
             Inventory.instance.OnInventoryUIText -= AppearText;
-        }
-        if (GameManager.instance != null)
-        {
-            GameManager.instance.PlayerComponent.OnPlayerInteractEvent -= AppearText;
         }
     }
 
