@@ -12,7 +12,7 @@ namespace HeyEscape.Core.Player
     [RequireComponent(typeof(Animator))]
     public class Player : MonoBehaviour
     {
-        public VisibilityState visibility;
+        /*public VisibilityState visibility;
         [SerializeField] private DetectorHandler detectorHandler;
         [SerializeField] private Animator animator;
 
@@ -82,7 +82,7 @@ namespace HeyEscape.Core.Player
 
 
 #if UNITY_ANDROID || UNITY_IPHONE
-            /*if (GameManager.instance.PlayerFSM.InputHandler.Vertical > 0.8f && !detectorHandler.IsHidden())
+            *//*if (GameManager.instance.PlayerFSM.InputHandler.Vertical > 0.8f && !detectorHandler.IsHidden())
             {
                 detectorHandler.TryHideInHidePlace(() => 
                 {
@@ -94,8 +94,8 @@ namespace HeyEscape.Core.Player
             else if (GameManager.instance.PlayerFSM.InputHandler.Vertical < 0.8f && detectorHandler.IsHidden())
             {
                 detectorHandler.UnhideFromHidePlace();
-            }*/
+            }*//*
 #endif
-        }
+        }*/
     }
 }

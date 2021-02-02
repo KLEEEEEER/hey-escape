@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using HeyEscape.Core.Game;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +29,7 @@ namespace HeyEscape.Core.Player.FSM.States
 
         public override void Update()
         {
-            if (GameManager.instance.IsGameOver) return;
+            if (GameStateChanger.Instance.CompareState(GameStateChanger.GameState.GameOver)) return;
 
             if (fsm.InputHandler.Vertical >= 0.8f && !fsm.DetectorHandler.IsHidden())
             {

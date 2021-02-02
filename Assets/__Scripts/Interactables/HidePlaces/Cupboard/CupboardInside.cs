@@ -22,10 +22,10 @@ public class CupboardInside : MonoBehaviour, IHidePlace, IInteractable
 
     private void Update()
     {
-        if (isHidden && GameManager.instance.Player.gameObject != null && GameManager.instance.Player.gameObject.transform.position != transform.position)
+        /*if (isHidden && GameManager.instance.Player.gameObject != null && GameManager.instance.Player.gameObject.transform.position != transform.position)
         {
             GameManager.instance.Player.gameObject.transform.position = transform.position;
-        }
+        }*/
     }
 
     public void Interact(PlayerFSM player)
