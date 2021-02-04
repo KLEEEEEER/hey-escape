@@ -25,6 +25,7 @@ namespace HeyEscape.Core.Player.FSM.States
         {
             if (fsm.InputHandler.Horizontal == 0)
             {
+                fsm.PlayerMovement.MoveHorizontally(0f);
                 fsm.TransitionToState(fsm.IdleState);
                 return;
             }

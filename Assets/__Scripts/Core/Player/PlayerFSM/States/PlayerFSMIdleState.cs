@@ -31,15 +31,15 @@ namespace HeyEscape.Core.Player.FSM.States
         {
             if (GameStateChanger.Instance.CompareState(GameStateChanger.GameState.GameOver)) return;
 
-            if (fsm.InputHandler.Vertical >= 0.8f && !fsm.DetectorHandler.IsHidden())
-            {
-                fsm.HideCommand.Execute(fsm);
-                return;
-            }
-
             if (fsm.InputHandler.Horizontal != 0)
             {
                 fsm.TransitionToState(fsm.RunningState);
+                return;
+            }
+
+            if (fsm.InputHandler.Vertical >= 0.8f && !fsm.DetectorHandler.IsHidden())
+            {
+                fsm.HideCommand.Execute(fsm);
                 return;
             }
 
