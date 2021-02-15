@@ -89,6 +89,9 @@ namespace HeyEscape.Core.Player.FSM
         public PlayerFSMOnLadderState LadderState;
         public PlayerFSMInWindowState InWindowState;
         public PlayerFSMHiddenState HiddenState;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        public PlayerFSMGodModeState GodModeState;
+#endif
 
         [SerializeField] public GameObject arrow;
 
@@ -133,6 +136,9 @@ namespace HeyEscape.Core.Player.FSM
             LadderState = new PlayerFSMOnLadderState(this);
             InWindowState = new PlayerFSMInWindowState(this);
             HiddenState = new PlayerFSMHiddenState(this);
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            GodModeState = new PlayerFSMGodModeState(this);
+#endif
 
             detectorHandler.Initialize(this);
 
@@ -175,11 +181,6 @@ namespace HeyEscape.Core.Player.FSM
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(CeilingCheck.position, CeilingRadius);
-
-#if UNITY_EDITOR
-            Handles.Label(transform.position + new Vector3(0f, 1f, 0f), currentState.ToString());
-            Handles.Label(transform.position + new Vector3(0f, 2f, 0f), Visibility.currentState.ToString());
-#endif
         }
 
         public void SetEnableColliders(bool enabled)
@@ -221,5 +222,19 @@ namespace HeyEscape.Core.Player.FSM
         {
             IsMobileJumpPressed = false;
         }
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        public void ToggleGodMode()
+        {
+            if (currentState != GodModeState)
+            {
+                TransitionToState(GodModeState);
+            }
+            else
+            {
+                TransitionToState(IdleState);
+            }
+        }
+#endif
     }
 }

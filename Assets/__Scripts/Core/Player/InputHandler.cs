@@ -10,6 +10,11 @@ namespace HeyEscape.Core.Player
         public UnityEvent UsingButtonPressed = new UnityEvent();
         public UnityEvent JumpButtonPressed = new UnityEvent();
         public UnityEvent PauseButtonPressed = new UnityEvent();
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        public UnityEvent GodModButtonPressed = new UnityEvent();
+#endif
+
         public TouchRayEvent ScreenTouched = new TouchRayEvent();
 
         public float Horizontal { get; private set; }
@@ -31,6 +36,17 @@ namespace HeyEscape.Core.Player
 
         private void Update()
         {
+            #region Cheats
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                GodModButtonPressed?.Invoke();
+            }
+#endif
+            #endregion
+
+
+
             if (!isEnabled) return;
 
 #if UNITY_EDITOR

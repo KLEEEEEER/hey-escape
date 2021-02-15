@@ -16,5 +16,10 @@ namespace HeyEscape.Core.Player.FSM.States
         public virtual void OnTriggerExit2D(Collider2D collision) { }
         public virtual void FixedUpdate() { }
         public virtual void LateUpdate() { }
+
+        public override string ToString()
+        {
+            return GetType().Name;
+        }
     }
 }

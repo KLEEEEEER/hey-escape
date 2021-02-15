@@ -3,6 +3,7 @@ using HeyEscape.Core.Helpers;
 using HeyEscape.Core.Player;
 using HeyEscape.Core.Player.FSM;
 using HeyEscape.UI;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -163,5 +164,21 @@ namespace HeyEscape.Core.Loaders
         {
             return levels.Length;
         }
+
+
+        #region Cheats
+#if UNITY_EDITOR
+        [MenuItem("Cheats/Levels/Load next level")]
+        private static void ToNextLevel()
+        {
+            if (!Application.isPlaying)
+            {
+                UnityEngine.Debug.Log("You are not playing right now!");
+                return;
+            }
+            instance.LoadNextLevel();
+        }
+#endif
+        #endregion
     }
 }
