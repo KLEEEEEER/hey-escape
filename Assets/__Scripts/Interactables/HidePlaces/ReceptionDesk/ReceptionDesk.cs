@@ -40,6 +40,7 @@ namespace HeyEscape.Interactables.HidePlaces
         IEnumerator onHideCoroutine(PlayerFSM player)
         {
             player.transform.position = climbPoint.position;
+            player.Animator.ResetTrigger("FromAnyToIdle");
             player.Animator.ResetTrigger("WindowClimbing");
             player.Animator.SetTrigger("WindowClimbing");
             yield return new WaitForSeconds(hidePlaceInfoSO.delayBeforeHiddingPlayerSprite);

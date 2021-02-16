@@ -5048,7 +5048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 169.4, y: -38.36}
+  m_AnchoredPosition: {x: 169.3999, y: -38.360107}
   m_SizeDelta: {x: 294.5, y: 40.91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1299578746
@@ -5582,7 +5582,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1443288893}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 00240e9711f16544d8609a6708921e9c, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

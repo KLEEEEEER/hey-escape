@@ -31,6 +31,7 @@ namespace HeyEscape.Core.Player
             if (!isEnabled) return;
             CheckRotation(horizontal);
             rb.velocity = new Vector2((horizontal * speed * multiplier), rb.velocity.y);
+            //rb.AddForce(new Vector2((horizontal * speed * multiplier), 0f), ForceMode2D.Force);
         }
 
         public void MoveVertically(float vertical, float horizontal, float multiplier = 1f)

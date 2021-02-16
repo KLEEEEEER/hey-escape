@@ -178,6 +178,15 @@ namespace HeyEscape.Core.Loaders
             }
             instance.LoadNextLevel();
         }
+
+        public void KillAllEnemies()
+        {
+            Enemy.Enemy[] enemies = FindObjectsOfType<Enemy.Enemy>();
+            foreach (Enemy.Enemy enemy in enemies)
+            {
+                enemy.Kill();
+            }
+        }
 #endif
         #endregion
     }
