@@ -29,6 +29,7 @@ namespace HeyEscape.Interactables.Environment
         [SerializeField] CinemachineVirtualCamera virtualCamera;
 
         private WaitForSeconds delay = new WaitForSeconds(0.5f);
+        private Vector3 currentVelocity;
         enum WindowExitState { Closed, OpenedWithRope, PlayerInside }
         public void DropRope()
         {
@@ -67,10 +68,15 @@ namespace HeyEscape.Interactables.Environment
             player.TransitionToState(player.DisableState);
             player.Visibility.SetVisibilityState(HeyEscape.Core.Player.VisibilityState.State.Hidden);
             player.PlayerMovement.SetEnabled(true);
+
+            while ((player.transform.position - climbPoint.position).sqrMagnitude > 0.2f * 0.2f)
+            {
+                player.transform.position = Vector3.SmoothDamp(player.transform.position, climbPoint.position, ref currentVelocity, 0.1f);
+                yield return null;
+            }
             windowEnter.SetEnabledVirtualCamera(true);
             player.VirtualCamera.gameObject.SetActive(false);
 
-            player.transform.position = climbPoint.position;
             player.Rigidbody2D.velocity = new Vector2(0, 0);
 
             player.Animator.SetTrigger("WindowClimbing");
