@@ -14,8 +14,8 @@ namespace HeyEscape.Interactables.HidePlaces
 
         [SerializeField] private Transform climbPoint;
 
-
         private WaitForSeconds delay = new WaitForSeconds(0.5f);
+        private Vector3 currentVelocity;
 
         IEnumerator hideCoroutine;
 
@@ -39,7 +39,12 @@ namespace HeyEscape.Interactables.HidePlaces
 
         IEnumerator onHideCoroutine(PlayerFSM player)
         {
-            player.transform.position = climbPoint.position;
+            while ((player.transform.position - climbPoint.position).sqrMagnitude > 0.2f*0.2f)
+            {
+                player.transform.position = Vector3.SmoothDamp(player.transform.position, climbPoint.position, ref currentVelocity, 0.1f);
+                yield return null;
+            }
+            //player.transform.position = climbPoint.position;
             player.Animator.ResetTrigger("FromAnyToIdle");
             player.Animator.ResetTrigger("WindowClimbing");
             player.Animator.SetTrigger("WindowClimbing");
