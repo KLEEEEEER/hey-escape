@@ -7047,9 +7047,9 @@ MonoBehaviour:
   - {fileID: 723563582897465662, guid: 5e3e9f68479363f4b988aced774b24d2, type: 3}
   currentLevel: {fileID: 292688507}
   player: {fileID: 1443288895}
-  startingLevel: 4
+  startingLevel: 1
   useCountdown: 1
-  countdownTime: 1
+  countdownTime: 3
   gameStateChanger: {fileID: 1709150772}
   beforePlayTimer: {fileID: 1709150773}
   stopwatch: {fileID: 560781702}

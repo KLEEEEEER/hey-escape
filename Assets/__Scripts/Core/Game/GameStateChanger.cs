@@ -8,7 +8,7 @@ namespace HeyEscape.Core.Game
 {
     public class GameStateChanger : MonoBehaviour
     {
-        public enum GameState { GameOver, Playing, Paused, GameWon, BeforePlay }
+        public enum GameState { GameOver, Playing, Paused, GameWon, BeforePlay, Waiting }
         GameState currentState = GameState.BeforePlay;
 
         public UnityEvent OnGameOverEvent;
@@ -80,6 +80,10 @@ namespace HeyEscape.Core.Game
                     inputHandler.SetEnabled(false);
                     inputHandler.SetEnabledPauseButton(false);
                     OnGameBeforePlayEvent.Invoke();
+                    break;
+                case GameState.Waiting:
+                    inputHandler.SetEnabled(false);
+                    inputHandler.SetEnabledPauseButton(false);
                     break;
             }
         }

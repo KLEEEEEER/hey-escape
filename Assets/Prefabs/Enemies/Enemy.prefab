@@ -571,6 +571,7 @@ GameObject:
   - component: {fileID: 2320078474005282316}
   - component: {fileID: 191473363858007275}
   - component: {fileID: 2149445889822599012}
+  - component: {fileID: 2822605481708881155}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -686,6 +687,7 @@ MonoBehaviour:
       m_KeyId: 32
       m_Key: 
   gizmoItemPosition: {fileID: 7427824162632008879}
+  delaySeconds: 2
 --- !u!61 &4489188544918607404
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -800,7 +802,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 3.5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -835,7 +837,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1005,6 +1007,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2822605481708881155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489188544918607440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75225c946b9024d478ebd488d04c8df2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 8250701736257422629}
+  footstepsSounds:
+  - {fileID: 8300000, guid: b189e5275ba655a4797edf83cd7790ce, type: 3}
+  - {fileID: 8300000, guid: a488ca0ee36716b49864825352808c2a, type: 3}
+  - {fileID: 8300000, guid: bed05db0e08f53b4faa067670df6927d, type: 3}
+  - {fileID: 8300000, guid: e667fdf4fb3c9224a86011ebf63afe48, type: 3}
 --- !u!1 &4489188545214914880
 GameObject:
   m_ObjectHideFlags: 0

@@ -94,6 +94,7 @@ namespace HeyEscape.Core.Loaders
 
             if (isTutorialApproved && tutorialLevels.Length > 0 && tutorialLevelIndex < tutorialLevels.Length)
             {
+                gameStateChanger.SetState(GameStateChanger.GameState.Playing);
                 inTutorial = true;
                 cameFromTutorial = true;
                 InstantiateCurrentLevel(tutorialLevels, tutorialLevelIndex);
@@ -109,6 +110,7 @@ namespace HeyEscape.Core.Loaders
 
                 if (!countdownRaised && useCountdown)
                 {
+                    gameStateChanger.SetState(GameStateChanger.GameState.Waiting);
                     countdownRaised = true;
                     beforePlayTimer.StartCountdown(countdownTime, () =>
                     {
